@@ -1,0 +1,9 @@
+{
+	"if框架":{
+		"prefix":"if",
+		"body":[
+			"if($0)"
+		],
+		"description":"if"
+	}
+}

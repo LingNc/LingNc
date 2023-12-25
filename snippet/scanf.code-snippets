@@ -1,0 +1,9 @@
+{
+	"scanf框架":{
+		"prefix":"scanf",
+		"body":[
+			"scanf(\"%$0\",&);"
+		],
+		"description":"scanf"
+	}
+}

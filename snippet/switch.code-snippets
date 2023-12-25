@@ -1,0 +1,19 @@
+{
+	"switch循环框架":{
+		"prefix":"switch",
+		"body":[
+			"switch($1){"
+			"	case 1:"
+			"		"
+			"		break;"
+			"	case 2:"
+			"		"
+			"		break;"
+			"	default:"
+			"		"
+			"		break;"
+			"}"
+		],
+		"description":"switch"
+	}
+}

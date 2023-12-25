@@ -1,0 +1,93 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# C/C++ files
+[*.c,*.cpp,*.h,*.hpp]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# vcFormat options
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = do_not_ignore
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
+
+cpp_indent_braces = false
+cpp_indent_multi_line_relative_to = innermost_parenthesis
+cpp_indent_within_parentheses = indent
+cpp_indent_preserve_within_parentheses = true
+cpp_indent_case_contents = true
+cpp_indent_case_labels = false
+cpp_indent_case_contents_when_block = false
+cpp_indent_lambda_braces_when_parameter = true
+cpp_indent_goto_labels = one_left
+cpp_indent_preprocessor = leftmost_column
+cpp_indent_access_specifiers = false
+cpp_indent_namespace_contents = true
+cpp_indent_preserve_comments = false
+
+cpp_new_line_before_open_brace_namespace = ignore
+cpp_new_line_before_open_brace_type = ignore
+cpp_new_line_before_open_brace_function = ignore
+cpp_new_line_before_open_brace_block = ignore
+cpp_new_line_before_open_brace_lambda = ignore
+
+cpp_new_line_scope_braces_on_separate_lines = false
+cpp_new_line_close_brace_same_line_empty_type = true
+cpp_new_line_close_brace_same_line_empty_function = true
+
+cpp_new_line_before_catch = false
+cpp_new_line_before_else = false
+cpp_new_line_before_while_in_do_while = false
+
+cpp_space_before_function_open_parenthesis = remove
+
+cpp_space_within_parameter_list_parentheses = false
+
+cpp_space_between_empty_function_call_parentheses = false
+
+cpp_space_after_keywords_in_control_flow_statements = true
+
+cpp_space_within_control_flow_statement_parentheses = remove
+
+cpp_space_before_lambda_open_parenthesis= remove
+
+cpp_space_within_cast_parentheses= remove
+
+cpp_space_after_cast_close_parenthesis= remove
+
+cpp_space_within_expression_parentheses= remove
+
+cpp_space_before_block_open_brace= one
+
+cpp_space_between_empty_braces= remove
+
+cpp_space_before_initializer_list_open_brace= one
+
+cpp_space_within_initializer_list_braces= remove
+
+cpp_space_preserve_in_initializer_list= true
+
+cpp_space_before_open_square_bracket= remove
+
+cpp_space_within_square_brackets= remove
+
+cpp_space_before_empty_square_brackets= remove
+
+# clang-format options (only used when vcFormat engine is not selected)
+clang_format_fallback_style= "{BasedOnStyle: LLVM, IndentWidth: 4, ColumnLimit: 0}"
+clang_format_style= "file"

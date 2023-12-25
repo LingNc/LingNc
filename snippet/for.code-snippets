@@ -1,0 +1,11 @@
+{
+	"for循环框架":{
+		"prefix":"for",
+		"body":[
+			"for(int i=1;i<=$0;i++){",
+			"	",
+			"}",
+		],
+		"description":"for"
+	}
+}

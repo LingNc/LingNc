@@ -1,0 +1,24 @@
+{
+	"sum_time":{
+		"prefix":"/time",
+		"body":[
+			"#include<stdio.h>",
+			"#include<time.h>",
+			"int main(){",
+    		"	clock_t start_time,end_time;",
+    		"	start_time=clock();//获取开始执行时间",
+			"",
+    		"	//过程main",
+			"	$0",
+			"",
+    		"	main();"
+    		"	end_time=clock();//获取结束时间",
+    		"	double Times=(double)(end_time-start_time)/CLOCKS_PER_SEC;",
+    		"	printf(\"\\nThis time: %.3lfms\",Times*1000);",
+			"",
+    		"	return 0;",
+			"}",
+		],
+		"description":"C"
+	}
+}

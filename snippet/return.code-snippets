@@ -1,0 +1,9 @@
+{
+	"return框架":{
+		"prefix":"return",
+		"body":[
+			"return $0;"
+		],
+		"description":"return"
+	}
+}

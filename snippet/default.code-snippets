@@ -1,0 +1,11 @@
+{
+	"default框架":{
+		"prefix":"default",
+		"body":[
+			"default:"
+			"	$0"
+			"	break;"
+		],
+		"description":"default"
+	}
+}

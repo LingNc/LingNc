@@ -1,0 +1,7 @@
+#include<stdio.h>
+int main(){
+    char in[12];
+    scanf("%s",&in);
+    
+    return 0;
+}

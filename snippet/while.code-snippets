@@ -1,0 +1,11 @@
+{
+	"while循环框架":{
+		"prefix":"while",
+		"body":[
+			"while($0){",
+			"	",
+			"}",
+		],
+		"description":"while"
+	}
+}

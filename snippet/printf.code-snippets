@@ -1,0 +1,9 @@
+{
+	"iprintf框架":{
+		"prefix":"printf",
+		"body":[
+			"printf(\"%$0\",);"
+		],
+		"description":"printf"
+	}
+}

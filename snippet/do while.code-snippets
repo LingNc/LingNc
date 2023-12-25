@@ -1,0 +1,11 @@
+{
+	"do while循环框架":{
+		"prefix":"do",
+		"body":[
+			"do{",
+			"	$0",
+			"}while(1)",
+		],
+		"description":"do while"
+	}
+}

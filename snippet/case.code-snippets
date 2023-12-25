@@ -1,0 +1,11 @@
+{
+	"case框架":{
+		"prefix":"case",
+		"body":[
+			"case $0:"
+			"	"
+			"	break;"
+		],
+		"description":"case"
+	}
+}
