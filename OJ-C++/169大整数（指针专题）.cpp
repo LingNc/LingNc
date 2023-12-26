@@ -27,6 +27,6 @@ int cmp(char* a,char* b){
         return cmp(a+1,b+1);
     }
 }
-bool m_cmp(char* a,char *b){
+bool m_cmp(char* a,char* b){
     return -cmp(a,b);
 }
