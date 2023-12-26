@@ -80,7 +80,8 @@
     "istream": "c",
     "functional": "c",
     "tuple": "c",
-    "utility": "c"
+    "utility": "c",
+    "ratio": "cpp"
   },
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
