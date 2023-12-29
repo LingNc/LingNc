@@ -81,7 +81,8 @@
     "functional": "c",
     "tuple": "c",
     "utility": "c",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "string": "cpp"
   },
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
