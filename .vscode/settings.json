@@ -87,5 +87,6 @@
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "cmake.configureOnOpen": true,
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "afterDelay",
+  "markdownShiki.theme": "dark_vs"
 }

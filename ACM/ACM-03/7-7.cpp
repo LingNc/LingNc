@@ -3,11 +3,12 @@
 #include<cstring>
 #include<string>
 #include<cstdio>
+#include<cmath>
 using namespace std;
 void del(char *str,int k,int n);
 int check(char* str,char* result);
 int main(){
-    double a,b,c,d;
+    double a=0,b=0,c=0,d=0;
     char str[1001]={0};
     scanf("%[^\n]%*c",str);
     int len=strlen(str);
@@ -21,8 +22,17 @@ int main(){
     string s1=str;
     s1.insert(s1.length(),1,'+');
     s1.insert(0,1,'+');
-    s1.insert(s1.find('='),1,'+');
-    s1.erase(s1.find('='),1);
+    s1.replace(s1.find('='),1,1,'+');
+    for(int i=0;i<=s1.length()-2;i++){
+        if(s1[i]=='+'&&s1[i+1]=='x'){
+            s1.insert(i+1,1,'1');
+            i++;
+        }
+        if(s1[i]!='+'&&s1[i+1]=='-'){
+            s1.insert(i+1,1,'+');
+            i++;
+        }
+    }
     memset(str,0,1001*sizeof(char));
     len=s1.length();
     for(int i=0;i<=len-1;i++){
@@ -40,7 +50,7 @@ int main(){
             sscanf(num,"%lf",&a);
         else if(flag==2)
             sscanf(num,"%lf",&b);
-        else
+        else if(flag==3)
             sscanf(num,"%lf",&c);
         memset(num,0,sizeof(num));
     }
@@ -48,8 +58,8 @@ int main(){
     sscanf(num,"%lf",&d);
     c=c-d;
     double delta=sqrt(b*b-4*a*c);
-    double r_1=(-b+delta)/2,r_2=(-b-delta)/2;
-    cout<<r_1<<' '<<r_2;
+    double r_1=(-b+delta)/(2*a),r_2=(-b-delta)/(2*a);
+    printf("%.6lf %.6lf\n",r_1,r_2);
     return 0;
 }
 int check(char* str,char* result){
@@ -61,7 +71,7 @@ int check(char* str,char* result){
     else if(str[len-2]=='^'){
         flag=1;
     }
-    else{
+    else if(str[len-1]>='0'&&str[len-1]<='9'){
         flag=3;
     }
     strcat(result,str);
