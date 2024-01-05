@@ -2,6 +2,9 @@
 int main(){
     int a[5] = {1,2,3,4,5}; // 定义一个数组
     char* p =(char*)&a[0];
+    //一个int是4个字节,一个char是1个字节
+    //把一个int看作char a[4],那么这里的a就是一整个int(同时也指char a[4]的首地址)
+    //可以用char指针来访问int里面4个字节都存那些东西了
     *p=*p<<1;
     for(int i=0;i<=3;i++){
         printf("%d ",*(p+i));
