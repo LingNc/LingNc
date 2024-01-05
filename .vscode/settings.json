@@ -82,7 +82,9 @@
     "tuple": "c",
     "utility": "c",
     "ratio": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "c(m,n).h": "c",
+    "idea.h": "c"
   },
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,

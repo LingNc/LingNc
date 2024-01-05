@@ -19,3 +19,31 @@ int main(){
     */
     return 0;
 }
+//p[i]=*(p+i)
+//p[i][j]=(p[i])[j]=*(p[i]+j)=*(*(p+i)+j)
+//p[i]=*(p+i) &p[i]=p+i &*(p+i)=p+i
+//&p[i][j]=&((p[i])[j])=&*(*(p+i)+j)=*(p+i)+j
+    /*
+    int *a=(int*)malloc(m*n*sizeof(int));
+    memset(a,0,sizeof(int));
+    int **a=(int**)malloc(m*sizeof(int*));
+    for(int i=0;i<=m-1;i++){
+        *(a+i)=*
+    }
+    */
+    /*
+    int **p=(int**)malloc(m*sizeof(int*));
+    for(int i=0;i<=m-1;i++){
+        *(p+i)=(int*)malloc(n*sizeof(int));
+    }
+    */
+    //int p[m][n];
+    //memset(p,0,sizeof(int));
+    /*
+    int **p=NULL;
+    *p=(int*)malloc(m*n*sizeof(int));
+    p=*p;
+    for(int i=0;i<=n-1;i++){
+        *(p+i)=*p+i;
+    }
+    */
