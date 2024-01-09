@@ -84,7 +84,8 @@
     "ratio": "cpp",
     "string": "cpp",
     "c(m,n).h": "c",
-    "idea.h": "c"
+    "idea.h": "c",
+    "valarray": "c"
   },
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
