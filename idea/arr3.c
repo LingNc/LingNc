@@ -15,11 +15,12 @@ int main(){
     //char ptr[m][n];
     //memset(ptr,0,sizeof(ptr));
 
-    //
-    //char **arr=(char**)malloc(m*sizeof(char*));
-    //for(int i=0;i<=m-1;i++){
-    //    arr[i]=(char*)malloc(n*sizeof(char));
-    //}
+
+    char **arr=(char**)malloc(m*sizeof(char*));
+    for(int i=0;i<=m-1;i++){
+        arr[i]=(char*)malloc(n*sizeof(char));
+    }
+
     /*
     char *p=&str[0][0];
     for(int i=0;i<=m*n-1;i++){
@@ -29,7 +30,7 @@ int main(){
     //(char (*)[n]);
     char *p=&str[0][0];
     for(int i=0;i<=n*m-1;i++){
-        scanf("%c",p);
+        scanf("%c",&p[i]);
     }
     printf("%c",**(str+1));
     printf("%c",str[1][0]);
