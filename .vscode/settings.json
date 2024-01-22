@@ -85,7 +85,8 @@
     "string": "cpp",
     "c(m,n).h": "c",
     "idea.h": "c",
-    "valarray": "c"
+    "valarray": "c",
+    "cmath": "cpp"
   },
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
