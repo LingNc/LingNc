@@ -13,7 +13,7 @@ int main(){
     }
     int l=-1,r=L+1,mid;
     while(l+1!=r){
-            mid=(l+r)>>1;
+        mid=(l+r)>>1;
         if(check(mid))
             l=mid;
         else
