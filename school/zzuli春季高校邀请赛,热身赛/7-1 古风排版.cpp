@@ -26,13 +26,13 @@ int main(){
         }
         map[i][j]=ch;
     }
-    end:
+end:
     char map2[N][251];
     memset(map2,0,sizeof(map2));
     foe(j,0,N-1){
         for(int i=k;i>=0;i--){
             if()
-            map2[j][i]=map[i][j];
+                map2[j][i]=map[i][j];
         }
     }
     return 0;
