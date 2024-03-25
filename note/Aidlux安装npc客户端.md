@@ -1,4 +1,4 @@
-4## Termux安装 npc客户端 实现ssh远程访问
+## Termux安装 npc客户端 实现ssh远程访问
 
 ### 配置termux安装npc
 打开termux，挂梯子，更新源
