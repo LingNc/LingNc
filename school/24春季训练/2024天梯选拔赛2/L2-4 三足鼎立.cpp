@@ -24,13 +24,20 @@ int main(){
     foe(i,1,n){
         cin>>p[i];
     }
-    int num=0;
+    //大模拟
+    /*
     foe(j,1,n-1)
         foe(k,j+1,n){
             if(p[j]+p[k]>p[0]&&p[0]+p[j]>p[k]&&p[0]+p[k]>p[j]){
                 num++;
             }
         }
+    */
+    int num=0;
+    sort(p.begin(),p.end());
+    foe(i,1,n){
+        
+    }
     cout<<num<<endl;
     return 0;
 }

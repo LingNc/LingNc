@@ -16,13 +16,18 @@
 using namespace std;
 
 int main(){
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     int num,max,S;
     cin>>num>>max>>S;
     getchar();
-    string F[num];
+    queue<char> F[num];
+    char ch;
     foe(i,0,num-1){
-        cin>>F[i];
+        foe(j,1,max){
+            cin>>ch;
+            F[i].push(ch);
+        }
+        getchar();
     }
     stack<char> Stk;
     int number=0;
@@ -35,9 +40,8 @@ int main(){
                 cout<<Stk.top();
                 Stk.pop();
             }
-            auto it=F[number-1].begin();
-            Stk.push(*it);
-            F[number-1].erase(it);
+            Stk.push(F[number-1].front());
+            F[number-1].pop();
         }
         else{
             if(Stk.empty()==true) continue;
