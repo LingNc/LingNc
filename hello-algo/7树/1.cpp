@@ -6,18 +6,20 @@
 #define endl '\n'
 #include<vector>
 using namespace std;
-
-struct Tree{
-    int val;
-    Tree *left,*right;
-    Tree(int x):val(x),left(NULL),right(NULL){}
+template<typename T> struct Node{
+    struct T val;
+    Node *left,*right;
+    template<typename T> Node(T x):val(x),left(NULL),right(NULL){}
 };
 
 int main(){
     
     return 0;
 }
-Tree* Creat(){
-    Tree* root;
+Node* Creat(){
+    Node* root=;
     
+}
+template<typename T> Node* new_node(T x){
+    Node* node=new Node(x);
 }

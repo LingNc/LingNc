@@ -16,12 +16,11 @@
 using namespace std;
 
 int main(){
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    int n,P;
+    //ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    ll n,P;
     cin>>n>>P;
-    vector<int> p(n+1,0);
-    p[0]=P;
-    foe(i,1,n){
+    vector<ll> p(n,0);
+    foe(i,0,n-1){
         cin>>p[i];
     }
     //大模拟
@@ -33,10 +32,13 @@ int main(){
             }
         }
     */
-    int num=0;
+    ll num=0;
     sort(p.begin(),p.end());
-    foe(i,1,n){
-        
+    //vector<ll>::iterator l,r;
+    foe(i,0,n-1){
+        auto l=upper_bound(p.begin()+i+1,p.end(),abs(p[i]-P));
+        auto r=lower_bound(p.begin()+i+1,p.end(),p[i]+P);
+        num+=r-l;
     }
     cout<<num<<endl;
     return 0;
