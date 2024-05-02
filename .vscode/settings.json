@@ -158,7 +158,10 @@
     "thread": "cpp",
     "typeindex": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "expected": "cpp",
+    "spanstream": "cpp",
+    "stacktrace": "cpp"
   },
   "editor.fontFamily": "'Noto Sans Mono'",
   "editor.fontLigatures": true,
@@ -166,5 +169,8 @@
   "files.autoSave": "onFocusChange",
   "markdownShiki.theme": "dark_vs",
   "terminal.integrated.fontFamily": "",
-  "editor.fontSize": 17
+  "editor.fontSize": 17,
+  "editor.tabCompletion": "on",
+  "C_Cpp.formatting": "vcFormat",
+  "C_Cpp.suggestSnippets": false
 }
