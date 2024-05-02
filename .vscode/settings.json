@@ -160,9 +160,11 @@
     "typeinfo": "cpp",
     "variant": "cpp"
   },
-  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Noto Sans Mono'",
   "editor.fontLigatures": true,
   "cmake.configureOnOpen": true,
-  "files.autoSave": "afterDelay",
-  "markdownShiki.theme": "dark_vs"
+  "files.autoSave": "onFocusChange",
+  "markdownShiki.theme": "dark_vs",
+  "terminal.integrated.fontFamily": "",
+  "editor.fontSize": 17
 }
