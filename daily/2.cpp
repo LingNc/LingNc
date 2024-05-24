@@ -5,7 +5,13 @@
 #define ll long long
 #define endl '\n'
 
+using namespace std;
 int main(){
-	
+	int a=257;
+	int *ptr=&a;
+	char *p=(char *)ptr;
+	foe(i,0,3){
+		cout<<*(p+i)<<endl;
+	}
 	return 0;
 }
