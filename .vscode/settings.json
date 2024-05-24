@@ -172,5 +172,12 @@
   "editor.fontSize": 17,
   "editor.tabCompletion": "on",
   "C_Cpp.formatting": "vcFormat",
-  "C_Cpp.suggestSnippets": false
+  "C_Cpp.suggestSnippets": false,
+  "editor.parameterHints.enabled": true,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "livePreview.defaultPreviewPath": "/learn-web/RedBook/RedBook.html"
 }

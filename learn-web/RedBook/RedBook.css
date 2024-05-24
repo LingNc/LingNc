@@ -1,0 +1,91 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    background-color: #ffffff;
+}
+section,div,ul,li{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+.top {
+    display: flex;
+    background-color: blue;
+}
+.top-img {
+    display: flex;
+    flex: 2;
+}
+
+.top .top-img img {
+    height: 25px;
+    margin: auto;
+}
+.top div {
+    display: flex;
+    padding: 0px 10px;
+    margin: 10px;
+    height: 40px;
+    flex: 1;
+    background-color: aqua;
+    clip-path: inset(0 round 13px);
+}
+.top .search {
+    flex: 4;
+    display: flex;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.search input {
+    border: 0px;
+    padding: 0px;
+    background-color: blanchedalmond;
+}
+.search .in {
+    flex: 4;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+}
+.search .sub {
+    flex: 1;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+.mid {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-page {
+    flex: 1;
+    flex-direction: column;
+    width: 100px;
+}
+
+.left-page ul{
+    background-color: rgb(169, 169, 170);
+}
+.left-page ul li {
+    list-style-type: none;
+    text-align: center;
+    padding: 10px 0px ;
+    margin: 7px 0px;
+    background-color: bisque;
+    clip-path: inset(0 round 20px);
+}
+.left-page ul li:hover{
+    background-color: rgb(186, 192, 197);
+}
+.left-page ul .login{
+    background-color: red;
+}
+.left-page ul .text{
+    background-color: aliceblue;
+    font-size: 12px;
+    height: 100px;
+}
+.box {
+    flex: 5;
+}
