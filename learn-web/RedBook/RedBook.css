@@ -11,56 +11,68 @@ section,div,ul,li{
 }
 .top {
     display: flex;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+
+    justify-content: space-between;
     background-color: blue;
 }
 .top-img {
     display: flex;
-    flex: 2;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 4 1 auto;
 }
-
 .top .top-img img {
+    margin-left: 5%;
     height: 25px;
-    margin: auto;
 }
 .top div {
     display: flex;
     padding: 0px 10px;
-    margin: 10px;
-    height: 40px;
+    margin: 10px 5px;
+    height: 34px;
     flex: 1;
     background-color: aqua;
-    clip-path: inset(0 round 13px);
 }
 .top .search {
+    display: flex;
+    align-items: center;
+}
+.top .search-input {
     flex: 4;
     display: flex;
+    align-items: stretch;
+    max-width: 300px;
     padding-right: 0px;
     padding-left: 0px;
 }
-.search input {
-    border: 0px;
-    padding: 0px;
-    background-color: blanchedalmond;
-}
 .search .in {
-    flex: 4;
+    flex: 4 1 auto;
     border-top-left-radius: 13px;
     border-bottom-left-radius: 13px;
+    outline: none;
+    border: 0px;
 }
 .search .sub {
-    flex: 1;
+    flex: 1.2 1 auto;
     border-top-right-radius: 13px;
     border-bottom-right-radius: 13px;
+    background-color: #ffffff;
 }
-
-.mid {
-    display: flex;
-    flex-direction: row;
+.top .业务 {
+    flex: 1 3 auto;
 }
-
 .left-page {
-    flex: 1;
+    display: flex;
     flex-direction: column;
+    position: sticky;
+    bottom: 0px;
+    height: 100%;
+    flex: 1.2 1 auto;
+    justify-content: space-between;
+    align-items: center;
     width: 100px;
 }
 
@@ -87,5 +99,5 @@ section,div,ul,li{
     height: 100px;
 }
 .box {
-    flex: 5;
+    flex: 4;
 }
