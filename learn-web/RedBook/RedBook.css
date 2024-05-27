@@ -36,6 +36,8 @@ section,div,ul,li{
     flex: 1;
     background-color: aqua;
 }
+
+
 .top .search {
     display: flex;
     align-items: center;
