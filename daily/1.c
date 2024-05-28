@@ -10,6 +10,5 @@ int main(){
             printf("%c",',');
         printf("%c",num[i]);
     }
-
     return 0;
 }
