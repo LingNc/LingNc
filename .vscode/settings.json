@@ -161,7 +161,8 @@
     "variant": "cpp",
     "expected": "cpp",
     "spanstream": "cpp",
-    "stacktrace": "cpp"
+    "stacktrace": "cpp",
+    "climits": "cpp"
   },
   "editor.fontFamily": "'Noto Sans Mono'",
   "editor.fontLigatures": true,
