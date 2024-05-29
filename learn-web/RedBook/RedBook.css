@@ -165,49 +165,92 @@ li {
 }
 
 .left-page ul {
-    padding-top: 15px;
-    background-color: rgb(169, 169, 170);
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.left-page ul li {
-    width:  12vw;
-    min-width: 110px;
+.left-page ul li,
+.left-page .bottom,
+.left-page .text {
+    width:  15vw;
+    min-width: 220px;
     list-style-type: none;
     text-align: left;
-    padding: 10px 0px;
-    padding-left: 3vw;
-    margin: 7px 0px;
-    font-weight: bold;
-    background-color: bisque;
-    clip-path: inset(0 round 20px);
-}
 
-.left-page ul li:hover {
+    padding: 14px 0px;
+    
+    margin: 4px 0px;
+    font-weight: bold;
+    font-size: 17px;
+    background-color: bisque;
+    border-radius: 20px;
+}
+.left-page ul li span,
+.left-page .bottom span {
+    margin-left: calc(15px + 2vw);
+    
+}
+.left-page ul li:hover,
+.left-page .bottom:hover {
     background-color: rgb(186, 192, 197);
 }
 
 .left-page ul .login {
     background-color: red;
+    display: flex;
+    align-items: center;
 }
 
 .left-page ul .text {
     background-color: aliceblue;
-    font-size: 12px;
+    font-size: 14px;
     height: 100px;
 }
 
 .left-page .text {
     margin-top: 20px;
-    border: 2px;
-    border-color: black;
+    padding: 18px 0px;
+    border: solid 1px;
+    border-color: rgba(0, 0, 0, 0.09);
+    border-radius: 15px;
+    background-color: hsla(0, 0%, 100%, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    justify-content: left;
 
+}
+.left-page svg {
+    height: 18px;
+    width: 18px;
+}
+.left-page span {
+    margin-left: 7px;
+}
+.left-page .text-title {
+    margin-bottom: 8px;
+    margin-left: 18px;
+}
+.left-page .text div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.45);
+}
+.left-page .text div span {
+    font-size: 14px;   
+}
+.left-page .container {
+    margin-bottom: 7px;
+    margin-left: 18px;
 }
 .left-page .bottom {
     position: absolute;
     bottom: 0;
+    background-color: gray;
+    margin-bottom: 3vh;
 }
 
 .box {
