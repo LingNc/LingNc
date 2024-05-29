@@ -27,3 +27,4 @@ int prime(int n){
     }
     return 1;
 }
+//二分搜索

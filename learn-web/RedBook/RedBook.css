@@ -2,7 +2,9 @@
     -color-web: hsla(0, 0%, 100%, 0.98);
     -color-bg-gray: rgba(0, 0, 0, 0.03);
 }
+
 body {
+    min-height: 100vh;
     margin: 0px;
     padding: 0px;
     list-style: none;
@@ -20,7 +22,8 @@ li {
 
 .top {
     display: flex;
-    position: sticky;
+    position: relative;
+
     top: 0px;
     left: 0px;
 
@@ -76,7 +79,7 @@ li {
     caret-color: red;
     padding-left: 20px;
     /* 左上圆角 */
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 18px 0px 0px 18px;
 }
 
 .search .in::placeholder {
@@ -89,20 +92,24 @@ li {
     border-radius: 15px;
     max-width: 60px;
     /* 右边圆角 */
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px 18px 18px 0px;
 }
+
 .sub {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .sub img {
     display: block;
     height: 25px;
 }
+
 .sub:hover img {
     filter: brightness(70%);
 }
+
 .top .work {
     max-width: 200px;
     margin-left: 60px;
@@ -112,6 +119,7 @@ li {
     justify-content: center;
     background-color: -color-web;
 }
+
 .top .work div {
     display: flex;
     align-items: center;
@@ -122,32 +130,42 @@ li {
     min-width: 100px;
     border-radius: 18px;
 }
+
 .top .work a {
     text-decoration: none;
     color: black;
 }
+
 .top .work div:hover {
     background-color: rgba(0, 0, 0, 0.03);
 }
-/* 超链接未点击时 */ 
+
+/* 超链接未点击时 */
 .top .work a:link {
     /* 字体灰色 */
     color: rgb(128, 128, 128);
 }
 
-.left-page {
+.main-page {
     display: flex;
+    flex-wrap: nowrap;
+}
+
+.left-page {
+    height: calc(100vh - 72px);
+    display: flex;
+    flex: 1 0 auto;
     flex-direction: column;
-    position: sticky;
-    bottom: 0px;
-    height: 100%;
-    flex: 1.2 1 auto;
-    justify-content: space-between;
     align-items: center;
-    width: 100px;
+    margin-top: 72px;
+    margin-left: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .left-page ul {
+    padding-top: 15px;
     background-color: rgb(169, 169, 170);
     display: flex;
     flex-direction: column;
@@ -155,10 +173,14 @@ li {
 }
 
 .left-page ul li {
+    width:  12vw;
+    min-width: 110px;
     list-style-type: none;
-    text-align: center;
+    text-align: left;
     padding: 10px 0px;
+    padding-left: 3vw;
     margin: 7px 0px;
+    font-weight: bold;
     background-color: bisque;
     clip-path: inset(0 round 20px);
 }
@@ -177,6 +199,18 @@ li {
     height: 100px;
 }
 
+.left-page .text {
+    margin-top: 20px;
+    border: 2px;
+    border-color: black;
+
+}
+.left-page .bottom {
+    position: absolute;
+    bottom: 0;
+}
+
 .box {
-    flex: 4;
+    flex: 4 0 auto;
+    display: flex;
 }
