@@ -8,7 +8,7 @@ body {
     margin: 0px;
     padding: 0px;
     list-style: none;
-    background-color: #ffffff;
+    background-color: hsla(0, 0%, 100%, 0.98);
 }
 
 section,
@@ -22,13 +22,13 @@ li {
 
 .top {
     display: flex;
-    position: relative;
+    position: fixed;
 
+    width: 100vw;
     top: 0px;
     left: 0px;
 
     justify-content: space-between;
-    background-color: hsla(0, 0%, 100%, 0.98);
 }
 
 .top .top-list {
@@ -37,7 +37,6 @@ li {
     margin: 20px 5px 30px 5px;
     height: 40px;
     flex: 1;
-    background-color: hsla(0, 0%, 100%, 0.98);
 }
 
 .top-img {
@@ -153,19 +152,25 @@ li {
 
 .left-page {
     height: calc(100vh - 72px);
+    width: calc(-18px + 25vw);
+
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
     align-items: center;
     margin-top: 72px;
-    margin-left: 15px;
+    margin-left: 12px;
+
+    padding-top: 16px;
     position: fixed;
     top: 0;
     left: 0;
+
+    flex: 1;
 }
 
 .left-page ul {
-    padding-top: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -174,18 +179,17 @@ li {
 .left-page ul li,
 .left-page .bottom,
 .left-page .text {
-    width:  15vw;
-    min-width: 220px;
+    width:  100%;
     list-style-type: none;
     text-align: left;
 
     padding: 14px 0px;
     
-    margin: 4px 0px;
+    margin-bottom: 8px;
     font-weight: bold;
     font-size: 17px;
     background-color: bisque;
-    border-radius: 20px;
+    border-radius: 23px;
 }
 .left-page ul li span,
 .left-page .bottom span {
@@ -210,7 +214,6 @@ li {
 }
 
 .left-page .text {
-    margin-top: 20px;
     padding: 18px 0px;
     border: solid 1px;
     border-color: rgba(0, 0, 0, 0.09);
@@ -218,7 +221,7 @@ li {
     background-color: hsla(0, 0%, 100%, 0.98);
     display: flex;
     flex-direction: column;
-    align-content: start;
+    align-content: center;
     justify-content: left;
 
 }
@@ -230,7 +233,7 @@ li {
     margin-left: 7px;
 }
 .left-page .text-title {
-    margin-bottom: 8px;
+    margin-bottom: 0px;
     margin-left: 18px;
 }
 .left-page .text div {
@@ -243,7 +246,7 @@ li {
     font-size: 14px;   
 }
 .left-page .container {
-    margin-bottom: 7px;
+    margin-top: 7px;
     margin-left: 18px;
 }
 .left-page .bottom {
@@ -253,7 +256,44 @@ li {
     margin-bottom: 3vh;
 }
 
-.box {
-    flex: 4 0 auto;
+.large-box {
+    padding-left: calc(-6px + 25vw);
+    flex: 5 1 auto;
+}
+.large-box .main-box {
+    padding: 24px;
+    padding-top: 72px;
+    overflow-y: scroll;
+
     display: flex;
+    flex-direction: column;
+}
+.large-box .main-box .box-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    background-color: yellow;
+
+    height: 72px;
+    width: calc(75vw + 52px);
+    overflow-x: scroll;
+}
+.large-box .main-box .box-header li {
+    list-style-type: none;
+
+    height: 40px;
+    width: 64px;
+
+    margin: 0px 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    background-color: antiquewhite;
+    border-radius: 20px;
 }
