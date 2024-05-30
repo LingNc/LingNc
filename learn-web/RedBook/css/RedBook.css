@@ -1,6 +1,8 @@
 :root {
-    -color-web: hsla(0, 0%, 100%, 0.98);
-    -color-bg-gray: rgba(0, 0, 0, 0.03);
+    --color-web: hsla(0, 0%, 100%, 0.98);
+    --color-bg-gray: rgba(0, 0, 0, 0.03);
+    --left-page-width: calc(15vw - 18px);
+    --hover-color-gary: rgba(0, 0, 0, 0.03);
 }
 
 body {
@@ -8,7 +10,7 @@ body {
     margin: 0px;
     padding: 0px;
     list-style: none;
-    background-color: hsla(0, 0%, 100%, 0.98);
+    background-color: var(--color-web);
 }
 
 section,
@@ -29,6 +31,8 @@ li {
     left: 0px;
 
     justify-content: space-between;
+
+    background-color: hsla(0, 0%, 100%, 1);
 }
 
 .top .top-list {
@@ -48,6 +52,7 @@ li {
 }
 
 .top .top-img img {
+    display: block;
     margin-left: 5%;
     height: 34px;
 }
@@ -67,7 +72,7 @@ li {
     max-width: 600px;
     margin: 0px;
     padding: 0px;
-    background-color: hsla(0, 0%, 100%, 0.98);
+    background-color: var(--color-web);
 }
 
 .search .in {
@@ -116,7 +121,7 @@ li {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    background-color: -color-web;
+    background-color: var(--color-web);
 }
 
 .top .work div {
@@ -125,7 +130,7 @@ li {
     justify-content: center;
     margin: 0px;
     padding: 0px;
-    background-color: -color-web;
+    background-color: var(--color-web);
     min-width: 100px;
     border-radius: 18px;
 }
@@ -136,7 +141,7 @@ li {
 }
 
 .top .work div:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: var(--hover-color-gary);
 }
 
 /* 超链接未点击时 */
@@ -152,7 +157,8 @@ li {
 
 .left-page {
     height: calc(100vh - 72px);
-    width: calc(-18px + 25vw);
+    width: var(--left-page-width);
+    min-width: 150px;
 
     display: flex;
     flex: 1 0 auto;
@@ -184,7 +190,7 @@ li {
     text-align: left;
 
     padding: 14px 0px;
-    
+
     margin-bottom: 8px;
     font-weight: bold;
     font-size: 17px;
@@ -194,11 +200,11 @@ li {
 .left-page ul li span,
 .left-page .bottom span {
     margin-left: calc(15px + 2vw);
-    
+
 }
 .left-page ul li:hover,
 .left-page .bottom:hover {
-    background-color: rgb(186, 192, 197);
+    background-color: var(--hover-color-gary);
 }
 
 .left-page ul .login {
@@ -213,24 +219,24 @@ li {
     height: 100px;
 }
 
+.left-page svg {
+    min-width: 18px;
+    max-width: 18px;
+}
+.left-page span {
+    margin-left: 7px;
+}
 .left-page .text {
     padding: 18px 0px;
     border: solid 1px;
     border-color: rgba(0, 0, 0, 0.09);
     border-radius: 15px;
-    background-color: hsla(0, 0%, 100%, 0.98);
+    background-color: var(--color-web);
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: left;
 
-}
-.left-page svg {
-    height: 18px;
-    width: 18px;
-}
-.left-page span {
-    margin-left: 7px;
 }
 .left-page .text-title {
     margin-bottom: 0px;
@@ -243,51 +249,56 @@ li {
     color: rgba(0, 0, 0, 0.45);
 }
 .left-page .text div span {
-    font-size: 14px;   
+    font-size: 14px;
 }
 .left-page .container {
-    margin-top: 7px;
-    margin-left: 18px;
+    margin: 7px 18px 0px 18px;
 }
 .left-page .bottom {
     position: absolute;
     bottom: 0;
     background-color: gray;
     margin-bottom: 3vh;
+
+    margin-bottom: 40px;
 }
 
 .large-box {
-    padding-left: calc(-6px + 25vw);
+    padding-left: calc(var(--left-page-width) + 12px);
     flex: 5 1 auto;
 }
 .large-box .main-box {
     padding: 24px;
     padding-top: 72px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
     display: flex;
     flex-direction: column;
+    align-items: stretch;
 }
 .large-box .main-box .box-header {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-content: center;
     align-items: center;
 
     background-color: yellow;
 
     height: 72px;
-    width: calc(75vw + 52px);
-    overflow-x: scroll;
+    width: 100%;
+    /* overflow-x: scroll; */
 }
 .large-box .main-box .box-header li {
     list-style-type: none;
 
     height: 40px;
     width: 64px;
+    min-width: 64px;
 
-    margin: 0px 4px;
+    overflow: hidden;
+
+    margin: 0px;
 
     display: flex;
     align-items: center;
@@ -296,4 +307,55 @@ li {
 
     background-color: antiquewhite;
     border-radius: 20px;
+}
+.large-box .main-box .box-header li:hover {
+    background-color: var(--hover-color-gary);
+}
+.large-box  .main-box .box-header li:nth-child(2) {
+    width: 115px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+
+    padding-left: 11px;
+}
+.large-box .main-box .box-header li:nth-child(2):hover {
+    background-color: #edffed;
+}
+.park img {
+    height: 80%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 15vw;
+    max-width: 15vw;
+}
+
+.card .card-img {
+    width: calc(15vw);
+
+    border-radius: 20px;
+}
+.card .user-head {
+    width: 20px;
+
+    border-radius: 10px;
+}
+
+.card .card-user {
+    display: flex;
+    flex-direction: row;
+}
+
+.card .card-user .good {
+    display: flex;
+    flex-direction: row;
+}
+.card .red-heart {
+    width: 19px;
 }

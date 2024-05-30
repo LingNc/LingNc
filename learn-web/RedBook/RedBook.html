@@ -4,8 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="RedBook.css">
-  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/RedBook.css">
+  <link rel="stylesheet" href="css/top-header.css">
+  <link rel="stylesheet" href="css/left-page.css">
+  <link rel="stylesheet" href="css/large-box.css">
   <title>小红书</title>
 </head>
 
@@ -20,7 +23,7 @@
       <div class="search-input">
         <input class="in" type="text" placeholder="登陆搜索更多内容" />
         <a class="sub" href="bing.com">
-          <img src="search.svg" alt="搜索">
+          <img src="img/search.svg" alt="搜索">
         </a>
       </div>
     </div>
@@ -56,7 +59,6 @@
           <span>刷到更懂你的优质内容</span>
         </div>
         <div class="container">
-          <img src="" alt="">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M10.26 4.651c-.881-.827-2.195-1.309-3.375-1.52a7.912 7.912 0 00-1.767-.123c-.539.028-1.091.128-1.543.357a.937.937 0 00-.485.642c-.154.714-.114 1.684.15 2.674a7.159 7.159 0 001.656 3.033c1.016 1.09 2.455 1.578 3.718 1.781.702.113 1.393.145 2 .127-.584 3.615.353 6.998.699 8.245.05.18.087.317.106.402.112.508.593.824 1.075.706s.781-.626.67-1.134c-.031-.138-.082-.327-.145-.561-.367-1.367-1.143-4.256-.645-7.324.71.117 1.61.182 2.54.108 1.274-.101 2.744-.472 3.836-1.477a7.083 7.083 0 001.87-2.891c.335-.965.445-1.93.344-2.653a.947.947 0 00-.438-.68c-.434-.265-.978-.409-1.513-.48a7.906 7.906 0 00-1.77-.019c-1.193.115-2.537.49-3.475 1.244a8.097 8.097 0 00-1.747 1.955A8.137 8.137 0 0010.26 4.65zM4.962 6.17a4.88 4.88 0 01-.172-1.23c.119-.02.257-.035.415-.043a6.22 6.22 0 011.38.099c1.02.182 1.957.574 2.483 1.068.835.784 1.739 2.08 1.808 3.656a9.101 9.101 0 01-1.993-.092C7.79 9.451 6.797 9.06 6.174 8.39a5.242 5.242 0 01-1.21-2.22zM19.2 5.835a4.857 4.857 0 01-.261 1.212 5.185 5.185 0 01-1.367 2.116c-.67.618-1.688.93-2.792 1.017a9.103 9.103 0 01-1.994-.07c.183-1.565 1.178-2.785 2.067-3.499.56-.45 1.523-.766 2.552-.865.5-.048.98-.042 1.385.012.156.02.293.047.41.077z"
@@ -94,6 +96,7 @@
             </span>
           </li>
           <li class="park">
+            <img src="img/电子公园.svg" alt="电子公园">
             <span>
               电子公园
             </span>
@@ -150,15 +153,22 @@
           </li>
         </ul>
         <div class="card">
-          <a href="">
-            <img src="" alt="内容">
+          <a class="card-a" href="">
+            <img class="card-img" src="img/示例.webp" alt="主图片">
           </a>
-          <div>
-            <a href="">
-              <span></span>
+          <div class="card-bottom">
+            <a class="card-brief" href="">
+              <span>我是内容</span>
             </a>
-            <div>
-
+            <div class="card-user">
+              <a class="user" href="">
+                <img class="user-head" src="img/头像.jpg" alt="">
+                <span class="user-name">绫袅</span>
+              </a>
+              <div class="good">
+                <img class="red-heart" src="img/小红心.svg" alt="">
+                <span class="numbers">123+</span>
+              </div>
             </div>
           </div>
         </div>
