@@ -1,8 +1,9 @@
 :root {
     --color-web: hsla(0, 0%, 100%, 0.98);
     --color-bg-gray: rgba(0, 0, 0, 0.03);
-    --left-page-width: calc(15vw - 18px);
+    --left-page-width: calc(14vw - 18px);
     --hover-color-gary: rgba(0, 0, 0, 0.03);
+    --color--label: #333;
 }
 
 body {
@@ -22,11 +23,17 @@ li {
     border: 0px;
 }
 
+.global {
+    width: 100vw;
+    max-width: 1728px;
+
+    margin: 0px auto;
+}
 .top {
     display: flex;
     position: fixed;
 
-    width: 100vw;
+    width: 100%;
     top: 0px;
     left: 0px;
 
@@ -327,35 +334,102 @@ li {
     height: 80%;
 }
 
+.box-cards {
+width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 .card {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 
-    width: 15vw;
-    max-width: 15vw;
+    max-width: 12vw;
+    min-width: 170px;
 }
 
 .card .card-img {
-    width: calc(15vw);
+    width: 100%;
 
     border-radius: 20px;
+}
+
+.card .card-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px;
+
+    color: var(--color--label);
+}
+.card .card-brief {
+    margin-bottom: 8px;
+    width: 100%;
+    color: var(--color--label);
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.card a {
+    text-decoration: none;
+}
+.card a:hover {
+    text-decoration: none;
+}
+.card .user {
+    color: var(--color--label);
+}
+.card .card-user {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: baseline;
+}
+.card .card-user .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 12px;
 }
 .card .user-head {
     width: 20px;
 
     border-radius: 10px;
 }
-
-.card .card-user {
-    display: flex;
-    flex-direction: row;
+.card .user-name {
+    margin-left: 8px;
 }
-
 .card .card-user .good {
     display: flex;
     flex-direction: row;
+    align-content: center;
+    align-items: center;
+    font-size: 12px;
 }
 .card .red-heart {
-    width: 19px;
+    width: 16px;
+
+}
+.card .card-brief span {
+    color: inherit;
+
+    overflow: hidden;
+
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.card .card-user .good span {
+    margin-left: 4px;
 }

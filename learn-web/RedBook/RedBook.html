@@ -6,176 +6,306 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/RedBook.css">
-  <link rel="stylesheet" href="css/top-header.css">
-  <link rel="stylesheet" href="css/left-page.css">
-  <link rel="stylesheet" href="css/large-box.css">
+  <script src="js/RedBook.js"></script>
   <title>小红书</title>
 </head>
 
-<body>
-  <div class="top">
-    <div class="top-list top-img">
-      <img
-        src="data:image/png;base64,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"
-        alt="小红书">
-    </div>
-    <div class="top-list search">
-      <div class="search-input">
-        <input class="in" type="text" placeholder="登陆搜索更多内容" />
-        <a class="sub" href="bing.com">
-          <img src="img/search.svg" alt="搜索">
-        </a>
-      </div>
-    </div>
-    <div class="top-list work">
-      <div><a href="">业务中心</a></div>
-      <div><a href="">业务合作</a></div>
-    </div>
-  </div>
-  <div class="main-page">
-    <div class="left-page">
-      <ul>
-        <li>
-          <span>发现</span>
-        </li>
-        <li>
-          <span>发布</span>
-        </li>
-        <li>
-          <span>通知</span>
-        </li>
-        <li class="login">
-          <span>登陆</span>
-        </li>
-      </ul>
-      <div class="text">
-        <span class="text-title">马上登录即可</span>
-        <div class="container">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M11.319 5.135l-.002.018c0 .01 0 .022-.002.039l-.002.06c-.016.436-.134 1.727-1.04 2.858C9.264 9.373 8.25 9.721 7.38 9.983c-.307.092-.542.389-.542.813v7.537a1.1 1.1 0 001.1 1.1H17.1a2.1 2.1 0 002.007-1.484l1.499-4.877a2.1 2.1 0 00-2.008-2.717h-5.62l.275-1.116c.309-1.251.526-2.45.318-3.944l-.012-.088a1.038 1.038 0 00-.232-.536c-.129-.15-.403-.371-1.06-.371-.413 0-.6.153-.713.296-.143.18-.21.408-.235.539zm-1.175-1.657c.43-.543 1.122-.978 2.123-.978 1.144 0 1.93.422 2.425.997a2.836 2.836 0 01.662 1.55c.186 1.334.088 2.472-.107 3.508h3.351c2.624 0 4.499 2.538 3.728 5.045l-1.498 4.878a3.9 3.9 0 01-3.728 2.755H7.938a2.9 2.9 0 01-2.9-2.9v-7.537c0-1.113.66-2.187 1.824-2.537.727-.219 1.329-.428 2.006-1.274.55-.686.636-1.512.646-1.797l.001-.02c.002-.07.007-.22.036-.37.05-.262.192-.816.593-1.32zM2.898 8.555a.9.9 0 01.9.9v10.793a.9.9 0 11-1.8 0V9.455a.9.9 0 01.9-.9z"
-              fill="currentColor"></path>
-          </svg>
-          <span>刷到更懂你的优质内容</span>
-        </div>
-        <div class="container">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10.26 4.651c-.881-.827-2.195-1.309-3.375-1.52a7.912 7.912 0 00-1.767-.123c-.539.028-1.091.128-1.543.357a.937.937 0 00-.485.642c-.154.714-.114 1.684.15 2.674a7.159 7.159 0 001.656 3.033c1.016 1.09 2.455 1.578 3.718 1.781.702.113 1.393.145 2 .127-.584 3.615.353 6.998.699 8.245.05.18.087.317.106.402.112.508.593.824 1.075.706s.781-.626.67-1.134c-.031-.138-.082-.327-.145-.561-.367-1.367-1.143-4.256-.645-7.324.71.117 1.61.182 2.54.108 1.274-.101 2.744-.472 3.836-1.477a7.083 7.083 0 001.87-2.891c.335-.965.445-1.93.344-2.653a.947.947 0 00-.438-.68c-.434-.265-.978-.409-1.513-.48a7.906 7.906 0 00-1.77-.019c-1.193.115-2.537.49-3.475 1.244a8.097 8.097 0 00-1.747 1.955A8.137 8.137 0 0010.26 4.65zM4.962 6.17a4.88 4.88 0 01-.172-1.23c.119-.02.257-.035.415-.043a6.22 6.22 0 011.38.099c1.02.182 1.957.574 2.483 1.068.835.784 1.739 2.08 1.808 3.656a9.101 9.101 0 01-1.993-.092C7.79 9.451 6.797 9.06 6.174 8.39a5.242 5.242 0 01-1.21-2.22zM19.2 5.835a4.857 4.857 0 01-.261 1.212 5.185 5.185 0 01-1.367 2.116c-.67.618-1.688.93-2.792 1.017a9.103 9.103 0 01-1.994-.07c.183-1.565 1.178-2.785 2.067-3.499.56-.45 1.523-.766 2.552-.865.5-.048.98-.042 1.385.012.156.02.293.047.41.077z"
-              fill="currentColor"></path>
-          </svg>
-          <span>搜索最新种草、拔草信息</span>
-        </div>
-        <div class="container">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M18.865 19.503a1.81 1.81 0 01-.737 1.649 1.823 1.823 0 01-1.8.196L12.2 19.546a.5.5 0 00-.4 0l-4.127 1.802a1.823 1.823 0 01-1.801-.196 1.81 1.81 0 01-.737-1.65l.452-4.384a.5.5 0 00-.127-.386l-2.994-3.32a1.808 1.808 0 01-.377-1.77c.2-.615.713-1.077 1.347-1.213l4.404-.945a.5.5 0 00.326-.235l2.265-3.853a1.82 1.82 0 013.138 0l2.265 3.853a.5.5 0 00.326.235l4.404.945a1.808 1.808 0 01.97 2.984l-2.994 3.319a.5.5 0 00-.127.386l.452 4.385zm-1.662-5.977l2.994-3.32c.003-.002.003-.005.003-.007-.001-.003-.005-.008-.013-.01l-4.404-.945a2.3 2.3 0 01-1.5-1.083l-2.266-3.853c-.002-.003-.008-.008-.017-.008-.01 0-.015.005-.017.008L9.718 8.161a2.3 2.3 0 01-1.5 1.083l-4.405.945c-.008.002-.012.007-.013.01 0 .002 0 .005.003.008l2.994 3.32a2.3 2.3 0 01.58 1.776l-.452 4.384s0 .005.005.01a.021.021 0 00.01.003h.002c.004 0 .007 0 .01-.002l4.128-1.801a2.3 2.3 0 011.84 0l4.127 1.801a.023.023 0 00.012.002.021.021 0 00.01-.004c.006-.004.006-.009.006-.009l-.452-4.384a2.3 2.3 0 01.58-1.777z"
-              fill="currentColor"></path>
-          </svg>
-          <span>查看收藏、点赞的笔记</span>
-        </div>
-        <div class="container">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-              d="M3.925 17.006l1.528-.95c.308.496.389 1.11.199 1.681L5.09 19.42l.237-.044c.44-.08.903-.162 1.299-.223.337-.053.784-.118 1.098-.118.459 0 .968.138 1.255.216l.077.02c.7.187 1.61.429 2.943.429 4.234 0 7.7-3.45 7.7-7.7a7.7 7.7 0 10-14.247 4.056l-1.528.95zM2.917 20.25a.95.95 0 00.882 1.25c.013 0 .023 0 .036-.003.252-.051 3.3-.662 3.89-.662.208 0 .492.076.868.176.739.197 1.833.489 3.407.489 5.225 0 9.5-4.253 9.5-9.5a9.5 9.5 0 10-17.576 5.006c.03.049.038.108.02.162L2.917 20.25z"
-              fill="currentColor"></path>
-          </svg>
-          <span>与他人更好的互动、交流</span>
-        </div>
-      </div>
-      <div class="bottom">
-        <span>更多</span>
-      </div>
-    </div>
-    <div class="large-box">
-      <div class="main-box">
-        <ul class="box-header">
-          <li class="recommend">
-            <span>
-              推荐
-            </span>
-          </li>
-          <li class="park">
-            <img src="img/电子公园.svg" alt="电子公园">
-            <span>
-              电子公园
-            </span>
-          </li>
-          <li class="education">
-            <span>
-              教育
-            </span>
-          </li>
-          <li class="fashion">
-            <span>
-              穿搭
-            </span>
-          </li>
-          <li class="food">
-            <span>
-              美食
-            </span>
-          </li>
-          <li class="makeup">
-            <span>
-              彩妆
-            </span>
-          </li>
-          <li class="movie">
-            <span>
-              影视
-            </span>
-          </li>
-          <li class="work">
-            <span>
-              职场
-            </span>
-          </li>
-          <li class="home">
-            <span>
-              家居
-            </span>
-          </li>
-          <li class="game">
-            <span>
-              游戏
-            </span>
-          </li>
-          <li class="travel">
-            <span>
-              旅行
-            </span>
-          </li>
-          <li class="fitness">
-            <span>
-              健身
-            </span>
-          </li>
-        </ul>
-        <div class="card">
-          <a class="card-a" href="">
-            <img class="card-img" src="img/示例.webp" alt="主图片">
-          </a>
-          <div class="card-bottom">
-            <a class="card-brief" href="">
-              <span>我是内容</span>
-            </a>
-            <div class="card-user">
-              <a class="user" href="">
-                <img class="user-head" src="img/头像.jpg" alt="">
-                <span class="user-name">绫袅</span>
+<body o>
+  <div class="app">
+    <div class="global" id="global">
+      <div class="top-container">
+        <div class="top" id="top">
+          <div class="top-list top-img">
+            <img
+              src="data:image/png;base64,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"
+              alt="小红书">
+          </div>
+          <div class="top-list search">
+            <div class="search-input">
+              <input class="in" type="text" placeholder="登陆搜索更多内容" />
+              <a class="sub" href="bing.com">
+                <img src="img/search.svg" alt="搜索">
               </a>
-              <div class="good">
-                <img class="red-heart" src="img/小红心.svg" alt="">
-                <span class="numbers">123+</span>
-              </div>
             </div>
+          </div>
+          <div class="top-list work">
+            <div><a href="">业务中心</a></div>
+            <div><a href="">业务合作</a></div>
           </div>
         </div>
       </div>
+      <div class="main-container">
+        <div class="main-page">
+          <div class="left-page" id="left-page">
+            <ul>
+              <li>
+                <span>发现</span>
+              </li>
+              <li>
+                <span>发布</span>
+              </li>
+              <li>
+                <span>通知</span>
+              </li>
+              <li class="login">
+                <span>登陆</span>
+              </li>
+            </ul>
+            <div class="text">
+              <span class="text-title">马上登录即可</span>
+              <div class="container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.319 5.135l-.002.018c0 .01 0 .022-.002.039l-.002.06c-.016.436-.134 1.727-1.04 2.858C9.264 9.373 8.25 9.721 7.38 9.983c-.307.092-.542.389-.542.813v7.537a1.1 1.1 0 001.1 1.1H17.1a2.1 2.1 0 002.007-1.484l1.499-4.877a2.1 2.1 0 00-2.008-2.717h-5.62l.275-1.116c.309-1.251.526-2.45.318-3.944l-.012-.088a1.038 1.038 0 00-.232-.536c-.129-.15-.403-.371-1.06-.371-.413 0-.6.153-.713.296-.143.18-.21.408-.235.539zm-1.175-1.657c.43-.543 1.122-.978 2.123-.978 1.144 0 1.93.422 2.425.997a2.836 2.836 0 01.662 1.55c.186 1.334.088 2.472-.107 3.508h3.351c2.624 0 4.499 2.538 3.728 5.045l-1.498 4.878a3.9 3.9 0 01-3.728 2.755H7.938a2.9 2.9 0 01-2.9-2.9v-7.537c0-1.113.66-2.187 1.824-2.537.727-.219 1.329-.428 2.006-1.274.55-.686.636-1.512.646-1.797l.001-.02c.002-.07.007-.22.036-.37.05-.262.192-.816.593-1.32zM2.898 8.555a.9.9 0 01.9.9v10.793a.9.9 0 11-1.8 0V9.455a.9.9 0 01.9-.9z"
+                    fill="currentColor"></path>
+                </svg>
+                <span>刷到更懂你的优质内容</span>
+              </div>
+              <div class="container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.26 4.651c-.881-.827-2.195-1.309-3.375-1.52a7.912 7.912 0 00-1.767-.123c-.539.028-1.091.128-1.543.357a.937.937 0 00-.485.642c-.154.714-.114 1.684.15 2.674a7.159 7.159 0 001.656 3.033c1.016 1.09 2.455 1.578 3.718 1.781.702.113 1.393.145 2 .127-.584 3.615.353 6.998.699 8.245.05.18.087.317.106.402.112.508.593.824 1.075.706s.781-.626.67-1.134c-.031-.138-.082-.327-.145-.561-.367-1.367-1.143-4.256-.645-7.324.71.117 1.61.182 2.54.108 1.274-.101 2.744-.472 3.836-1.477a7.083 7.083 0 001.87-2.891c.335-.965.445-1.93.344-2.653a.947.947 0 00-.438-.68c-.434-.265-.978-.409-1.513-.48a7.906 7.906 0 00-1.77-.019c-1.193.115-2.537.49-3.475 1.244a8.097 8.097 0 00-1.747 1.955A8.137 8.137 0 0010.26 4.65zM4.962 6.17a4.88 4.88 0 01-.172-1.23c.119-.02.257-.035.415-.043a6.22 6.22 0 011.38.099c1.02.182 1.957.574 2.483 1.068.835.784 1.739 2.08 1.808 3.656a9.101 9.101 0 01-1.993-.092C7.79 9.451 6.797 9.06 6.174 8.39a5.242 5.242 0 01-1.21-2.22zM19.2 5.835a4.857 4.857 0 01-.261 1.212 5.185 5.185 0 01-1.367 2.116c-.67.618-1.688.93-2.792 1.017a9.103 9.103 0 01-1.994-.07c.183-1.565 1.178-2.785 2.067-3.499.56-.45 1.523-.766 2.552-.865.5-.048.98-.042 1.385.012.156.02.293.047.41.077z"
+                    fill="currentColor"></path>
+                </svg>
+                <span>搜索最新种草、拔草信息</span>
+              </div>
+              <div class="container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18.865 19.503a1.81 1.81 0 01-.737 1.649 1.823 1.823 0 01-1.8.196L12.2 19.546a.5.5 0 00-.4 0l-4.127 1.802a1.823 1.823 0 01-1.801-.196 1.81 1.81 0 01-.737-1.65l.452-4.384a.5.5 0 00-.127-.386l-2.994-3.32a1.808 1.808 0 01-.377-1.77c.2-.615.713-1.077 1.347-1.213l4.404-.945a.5.5 0 00.326-.235l2.265-3.853a1.82 1.82 0 013.138 0l2.265 3.853a.5.5 0 00.326.235l4.404.945a1.808 1.808 0 01.97 2.984l-2.994 3.319a.5.5 0 00-.127.386l.452 4.385zm-1.662-5.977l2.994-3.32c.003-.002.003-.005.003-.007-.001-.003-.005-.008-.013-.01l-4.404-.945a2.3 2.3 0 01-1.5-1.083l-2.266-3.853c-.002-.003-.008-.008-.017-.008-.01 0-.015.005-.017.008L9.718 8.161a2.3 2.3 0 01-1.5 1.083l-4.405.945c-.008.002-.012.007-.013.01 0 .002 0 .005.003.008l2.994 3.32a2.3 2.3 0 01.58 1.776l-.452 4.384s0 .005.005.01a.021.021 0 00.01.003h.002c.004 0 .007 0 .01-.002l4.128-1.801a2.3 2.3 0 011.84 0l4.127 1.801a.023.023 0 00.012.002.021.021 0 00.01-.004c.006-.004.006-.009.006-.009l-.452-4.384a2.3 2.3 0 01.58-1.777z"
+                    fill="currentColor"></path>
+                </svg>
+                <span>查看收藏、点赞的笔记</span>
+              </div>
+              <div class="container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M3.925 17.006l1.528-.95c.308.496.389 1.11.199 1.681L5.09 19.42l.237-.044c.44-.08.903-.162 1.299-.223.337-.053.784-.118 1.098-.118.459 0 .968.138 1.255.216l.077.02c.7.187 1.61.429 2.943.429 4.234 0 7.7-3.45 7.7-7.7a7.7 7.7 0 10-14.247 4.056l-1.528.95zM2.917 20.25a.95.95 0 00.882 1.25c.013 0 .023 0 .036-.003.252-.051 3.3-.662 3.89-.662.208 0 .492.076.868.176.739.197 1.833.489 3.407.489 5.225 0 9.5-4.253 9.5-9.5a9.5 9.5 0 10-17.576 5.006c.03.049.038.108.02.162L2.917 20.25z"
+                    fill="currentColor"></path>
+                </svg>
+                <span>与他人更好的互动、交流</span>
+              </div>
+            </div>
+            <div class="bottom">
+              <span>更多</span>
+            </div>
+          </div>
+          <div class="large-box">
+            <div class="main-box">
+              <ul class="box-header">
+                <li class="recommend">
+                  <span>
+                    推荐
+                  </span>
+                </li>
+                <li class="park">
+                  <img src="img/电子公园.svg" alt="电子公园">
+                  <span>
+                    电子公园
+                  </span>
+                </li>
+                <li class="education">
+                  <span>
+                    教育
+                  </span>
+                </li>
+                <li class="fashion">
+                  <span>
+                    穿搭
+                  </span>
+                </li>
+                <li class="food">
+                  <span>
+                    美食
+                  </span>
+                </li>
+                <li class="makeup">
+                  <span>
+                    彩妆
+                  </span>
+                </li>
+                <li class="movie">
+                  <span>
+                    影视
+                  </span>
+                </li>
+                <li class="work">
+                  <span>
+                    职场
+                  </span>
+                </li>
+                <li class="home">
+                  <span>
+                    家居
+                  </span>
+                </li>
+                <li class="game">
+                  <span>
+                    游戏
+                  </span>
+                </li>
+                <li class="travel">
+                  <span>
+                    旅行
+                  </span>
+                </li>
+                <li class="fitness">
+                  <span>
+                    健身
+                  </span>
+                </li>
+              </ul>
+              <div class="box-cards">
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/头像.jpg" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <a class="card-a" href="">
+                    <img class="card-img" src="img/小杜0.JPG" alt="主图片">
+                  </a>
+                  <div class="card-bottom">
+                    <div class="card-brief" href="">
+                      <span>清明上河园滑梯真好玩</span>
+                    </div>
+                    <div class="card-user">
+                      <a class="user" href="">
+                        <img class="user-head" src="img/头像.jpg" alt="">
+                        <span class="user-name">绫袅</span>
+                      </a>
+                      <a class="good">
+                        <img class="red-heart" src="img/小红心.svg" alt="">
+                        <span class="numbers">1w+</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-
 
 
 </body>
