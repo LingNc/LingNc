@@ -27,4 +27,12 @@ function re_position() {
     // 把top和left-page的left定位设为margin
     top.style.left = margin + 'px';
     left_page.style.left = margin + 'px'; // 同样为style属性并加'px'
+
+    //当global宽度小于1728的时候把global宽度和max-width设为100vw
+    if (width < 1728) {
+        global.style.maxWidth = '100vw';
+    }
+    else {
+        global.style.maxWidth = '1728px';
+    }
 }
