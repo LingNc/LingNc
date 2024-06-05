@@ -39,7 +39,7 @@ def main():
         # 得到json结构,载入对象
         result=response.choices[0].message.content[8:-4]
         print(result)
-        res_json=json.load(result)
+        res_json=json.loads(result)
         
         #保存结果到文件
         save_json(res_json)
@@ -47,7 +47,7 @@ def main():
     
 
 def save_json(res_json):
-    res_json=json.load(open("test.json",'r'))
+    #res_json=json.load(open("test.json",'r'))
 
     #载入对象
     json_problem=res_json["json"][0]
