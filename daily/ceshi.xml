@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
+	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
+    <item> <title><![CDATA[Fibonacci数列的前20个数]]></title> <time_limit unit="s"><![CDATA[1]]></time_limit> <memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+<description><![CDATA[编写一个程序，计算并输出Fibonacci数列的前20个数字。Fibonacci数列的定义是：F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2)，其中n > 1。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出Fibonacci数列的前20个数字，每个数字后换行。]]></output>
+<sample_input><![CDATA[无输入数据样例]]></sample_input>
+<sample_output><![CDATA[0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765 ]]></sample_output>
+<test_input><![CDATA[无测试输入数据集]]></test_input>
+<test_output><![CDATA[0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765 ]]></test_output>
+<hint><![CDATA[Fibonacci数列是一个经典的递归数列，别忘了初始化前两个数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+int fib[20] = {0, 1}; // 初始化前两个数
+for(int i = 2; i < 20; i++) {
+fib[i] = fib[i-1] + fib[i-2];
+printf("%d\n", fib[i]);
+}
+return 0;
+}
+]]></solution>
+</item>
+</fps>

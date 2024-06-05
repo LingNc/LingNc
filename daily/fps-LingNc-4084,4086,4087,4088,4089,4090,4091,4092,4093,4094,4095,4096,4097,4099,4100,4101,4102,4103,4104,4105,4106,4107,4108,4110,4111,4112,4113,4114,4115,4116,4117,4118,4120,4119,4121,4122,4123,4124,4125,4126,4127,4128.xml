@@ -1,0 +1,3175 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
+	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
+	<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题11.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[已有a、b两个链表，每个链表中的结点包括学好、成绩。要求把两个链表合并，按学号升序排列。]]></description>
+<input><![CDATA[第一行，a、b两个链表元素的数量N、M,用空格隔开。接下来N行是a的数据然后M行是b的数据每行数据由学号和成绩两部分组成]]></input> 
+<output><![CDATA[按照学号升序排列的数据]]></output>
+<sample_input><![CDATA[2 3
+5 100
+6 89
+3 82
+4 95
+2 10]]></sample_input>
+<sample_output><![CDATA[2 10
+3 82
+4 95
+5 100
+6 89]]></sample_output>
+  <test_input><![CDATA[15 15
+2 20
+4 40
+6 60
+8 80
+10 100
+12 120
+14 140
+16 160
+18 180
+20 200
+22 220
+24 240
+26 260
+28 280
+30 300
+1 10
+3 30
+5 50
+7 70
+9 90
+11 110
+13 130
+15 150
+17 170
+19 190
+21 210
+23 230
+25 250
+27 270
+29 290]]></test_input>
+<test_output><![CDATA[1 10
+2 20
+3 30
+4 40
+5 50
+6 60
+7 70
+8 80
+9 90
+10 100
+11 110
+12 120
+13 130
+14 140
+15 150
+16 160
+17 170
+18 180
+19 190
+20 200
+21 210
+22 220
+23 230
+24 240
+25 250
+26 260
+27 270
+28 280
+29 290
+30 300]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-顺序结构]]></source>
+		<solution language="C"><![CDATA[#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _Link
+{
+    int Id;
+    int Score;
+    struct _Link * Prev;
+    struct _Link * Next;
+}Link,*PLink;
+
+void input(PLink * nml,int nm)
+{
+    int i=0;
+    for(;i<nm;++i)
+    {
+        PLink l =(PLink)malloc(sizeof(Link));
+        if(*nml)
+        {
+            (*nml)->Next = l; 
+            l->Prev = (*nml);
+            l->Next = NULL;
+            (*nml)=  (*nml)->Next ;
+        }
+        else
+        {
+            (*nml) = l;
+            l->Prev=NULL;
+            l->Next = NULL;
+        }
+        scanf("%d %d",&((*nml)->Id),&((*nml)->Score));
+    }
+}
+
+PLink merge(PLink* nl,PLink* ml,int n,int m)
+{
+    PLink l = n<m? *nl:*ml;
+    while((*nl)->Prev)*nl=(*nl)->Prev;
+    while((*ml)->Prev)*ml=(*ml)->Prev;
+    if(n<m)
+    {
+        l->Next= *ml;
+        (*ml)->Prev = l;
+        return *nl;
+    }
+    l->Next = *nl;
+    (*nl)->Prev = l;
+    return *ml;
+}
+
+void sort(PLink  h)
+{
+    PLink i,j;
+    for(i=h;i->Next;i=i->Next)
+    {
+        for(j=i->Next;(j)&&(j->Prev);j=j->Prev)
+        {
+            if(j->Id<(j->Prev->Id))
+            {
+                //change values
+                j->Id +=j->Prev->Id;
+                j->Prev->Id = j->Id-(j->Prev->Id);
+                j->Id-=j->Prev->Id;
+                j->Score +=j->Prev->Score;
+                j->Prev->Score = j->Score-(j->Prev->Score);
+                j->Score-=j->Prev->Score;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int N,M,ni,mi;
+    PLink NL=0,ML=0,HL=0;
+    scanf("%d %d",&N,&M);
+    //input
+    input(&NL,N);
+    input(&ML,M);
+    //merge
+    HL = merge(&NL,&ML,N,M);
+    //sort
+    sort(HL);
+    //output
+    while(HL)
+    {
+        printf("%d %d\n",HL->Id,HL->Score);
+        HL = HL->Next;
+    }
+    return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<bits/stdc++.h>
+using namespace std;
+struct f
+{
+    int a,b;
+}a[100000];
+bool cmp(f a,f b)
+{
+    return a.a<b.a;
+}
+int n,m;
+int main()
+{
+    cin>>n>>m;
+    for(int i=1;i<=n+m;i++)
+    cin>>a[i].a>>a[i].b;
+    sort(a+1,a+n+m+1,cmp);
+    for(int i=1;i<=n+m;i++)
+    cout<<a[i].a<<" "<<a[i].b<<"\n";
+    return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题1.6]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输入a、b、c三个值，输出其中最大值。]]></description>
+<input><![CDATA[一行数组，分别为a b c]]></input> 
+<output><![CDATA[a b c其中最大的数]]></output>
+<sample_input><![CDATA[10 20 30]]></sample_input>
+<sample_output><![CDATA[30]]></sample_output>
+  <test_input><![CDATA[1 2 5
+]]></test_input>
+<test_output><![CDATA[5
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a,b,c,max;
+    scanf("%d%d%d",&a,&b,&c);
+    max=a;
+    if(b>max)
+    max=b;
+    if(c>max)
+    max=c;
+    printf("%d\n",max);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+  int a,b,c,max;
+  scanf("%d%d%d",&a,&b,&c);
+  if(a>b)
+    max=a;
+  else
+    max=b;
+  if(max>c)
+    printf("%d\n",max);
+  else
+    printf("%d\n",c);
+  return 0;
+    
+}]]></solution>
+			<solution language="Pascal"><![CDATA[var a,b,c:longint;
+begin
+  readln(a,b,c);
+  if a>=b then if a>=c then writeln(a);
+  if b>a then if b>=c then writeln(b);
+  if c>a then if c>b then writeln(c);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题4.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[设圆半径r，圆柱高h
+求圆周长C1、圆面积Sa、圆球表面积Sb、圆球体积Va、圆柱体积Vb。
+用scanf输入数据，输出计算结果，输出时要求文字说明，取小数点后两位数字。请编程序。
+PI＝3.14]]></description>
+<input><![CDATA[两个浮点数，r和h]]></input> 
+<output><![CDATA[圆周长C1、圆面积Sa、圆球表面积Sb、圆球体积Va、圆柱体积Vb。
+保留两位小数，每个结果后换行。]]></output>
+<sample_input><![CDATA[1.5 3]]></sample_input>
+<sample_output><![CDATA[C1=9.42
+Sa=7.07
+Sb=28.26
+Va=14.13
+Vb=21.19
+
+]]></sample_output>
+  <test_input><![CDATA[10.1 20.5
+]]></test_input>
+<test_output><![CDATA[C1=63.43
+Sa=320.31
+Sb=1281.25
+Va=4313.53
+Vb=6566.38
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#define PI 3.14
+int main()
+{
+//	freopen("testin.txt","r",stdin);
+//	freopen("testout.txt","w",stdout);
+	float r,h,C1,Sa,Sb,Va,Vb;
+	scanf("%f%f",&r,&h);
+	C1=2*PI*r;
+	Sa=PI*r*r;
+	Sb=4*PI*r*r;
+	Va=4*PI*r*r*r/3;
+	Vb=PI*r*r*h;
+	printf("C1=%.2f\nSa=%.2f\nSb=%.2f\nVa=%.2f\nVb=%.2f\n",C1,Sa,Sb,Va,Vb);
+	return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+int main()
+{
+    double r,h,PI=3.14;
+    scanf("%lf%lf",&r,&h);
+    printf("C1=%.2lf\n",2*PI*r);
+    printf("Sa=%.2lf\n",PI*r*r);
+    printf("Sb=%.2lf\n",4*PI*r*r);
+    printf("Va=%.2lf\n",PI*r*r*r*4.0/3.0);
+    printf("Vb=%.2lf\n",PI*r*r*h-0.005);
+	return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题4.9]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入一个华氏温度，要求输出摄氏温度。公式为  
+c=5(F-32)/9  
+输出要求有文字说明，取位2小数。]]></description>
+<input><![CDATA[一个华氏温度，浮点数]]></input> 
+<output><![CDATA[摄氏温度，浮点两位小数]]></output>
+<sample_input><![CDATA[-40]]></sample_input>
+<sample_output><![CDATA[c=-40.00]]></sample_output>
+  <test_input><![CDATA[500
+]]></test_input>
+<test_output><![CDATA[c=260.00
+]]></test_output>
+<hint><![CDATA[零下40度，可以不问是？氏]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+	double f,c;
+	scanf("%lf",&f);
+	c=5*(f-32)/9;
+	printf("c=%.2f\n",c);
+	return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    float f;
+    scanf("%f",&f);
+    printf("c=%.2f",5.0/9.0*(f-32));
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题5.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有三个整数a b c,由键盘输入，输出其中的最大的数。]]></description>
+<input><![CDATA[一行数组，分别为a b c]]></input> 
+<output><![CDATA[a b c其中最大的数]]></output>
+<sample_input><![CDATA[10 20 30]]></sample_input>
+<sample_output><![CDATA[30]]></sample_output>
+  <test_input><![CDATA[1 2 3
+]]></test_input>
+<test_output><![CDATA[3
+]]></test_output>
+<hint><![CDATA[max ?
+if(a&gt;b) ?
+int main(){
+  return 0;
+}]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+  int a,b,c;
+  scanf("%d%d%d",&a,&b,&c);
+  printf("%d\n",(a>b?a:b)>c?(a>b?a:b):c);
+  return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+  int a,b,c,max;
+  cin>>a>>b>>c;
+  max=a;
+  if(max<b)
+    max=b;
+  if(max<c)
+    max=c;
+  cout<<max<<endl;  
+}]]></solution>
+			<solution language="Pascal"><![CDATA[var a,b,c:longint;
+begin
+  readln(a,b,c);
+  if a>=b then if a>=c then writeln(a);
+  if b>a then if b>=c then writeln(b);
+  if c>a then if c>b then writeln(c);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题5.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[<p>
+	有一个函数<br />
+y={ x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x&lt;1<br />
+&nbsp;&nbsp; &nbsp;| 2x-1&nbsp;&nbsp; 1&lt;=x&lt;10<br />
+&nbsp;&nbsp;&nbsp; \ 3x-11&nbsp; x&gt;=10
+</p>
+<p>
+	写一段程序，输入x，输出y
+</p>]]></description>
+<input><![CDATA[<p>
+	一个数x
+</p>]]></input> 
+<output><![CDATA[<p>
+	一个数y
+</p>]]></output>
+<sample_input><![CDATA[14
+]]></sample_input>
+<sample_output><![CDATA[31]]></sample_output>
+  <test_input><![CDATA[-10
+]]></test_input>
+<test_output><![CDATA[-10
+]]></test_output>
+<hint><![CDATA[使用函数]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int x;
+    scanf("%d",&x);
+    if(x<1) printf("%d\n",x);
+    else if(x<10) printf("%d\n",2*x-1);
+    else printf("%d\n",3*x-11);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+  int x,y;
+  cin>>x;
+  if(x<1)
+    y=x;
+  else if(x<10)
+    y=2*x-1;
+    else
+    y=3*x-11;
+    cout<<y<<endl;
+  return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题5.6]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[给出一百分制成绩，要求输出成绩等级‘A’、‘B’、‘C’、‘D’、‘E’。
+90分以上为A
+80-89分为B
+70-79分为C
+60-69分为D
+60分以下为E]]></description>
+<input><![CDATA[一个整数0－100以内]]></input> 
+<output><![CDATA[一个字符，表示成绩等级]]></output>
+<sample_input><![CDATA[90]]></sample_input>
+<sample_output><![CDATA[A]]></sample_output>
+  <test_input><![CDATA[100
+]]></test_input>
+<test_output><![CDATA[A
+]]></test_output>
+<hint><![CDATA[分段函数返回字符]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int x;
+    char grade;
+    scanf("%d",&x);
+    if(x>=90)   grade='A';
+    else if(x>79) grade='B';
+    else if(x>69) grade='C';
+    else if(x>59) grade='D';
+    else grade='E';
+    printf("%c\n",grade);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+  int a;
+  cin>>a;
+  if(a>=0&&a<=100)
+  {
+    if(a>=90)
+   cout<<'A'<<endl;
+    else if(a>=80)
+      cout<<'B'<<endl;
+      else if(a>=70)
+     cout<<'C'<<endl;
+      else if(a>=60)
+     cout<<'D'<<endl;
+      else
+      cout<<'E'<<endl;
+      }
+ return 0; 
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题5.7]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[给出一个不多于5位的整数，要求
+1、求出它是几位数
+2、分别输出每一位数字
+3、按逆序输出各位数字，例如原数为321,应输出123]]></description>
+<input><![CDATA[一个不大于5位的数字]]></input> 
+<output><![CDATA[三行
+第一行 位数
+第二行 用空格分开的每个数字，注意最后一个数字后没有空格
+第三行 按逆序输出这个数]]></output>
+<sample_input><![CDATA[12345]]></sample_input>
+<sample_output><![CDATA[5
+1 2 3 4 5
+54321]]></sample_output>
+  <test_input><![CDATA[12345
+]]></test_input>
+<test_output><![CDATA[5
+1 2 3 4 5
+54321
+]]></test_output>
+<hint><![CDATA[哈姆雷特：数字还是字符？这是一个问题！]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char a[5];
+    gets(a);
+    int len=strlen(a);
+    printf("%d\n",len);
+    for(int i=0;i<len;i++)
+    {
+        if(!i)
+            putchar(a[i]);
+        else
+            printf(" %c",a[i]);
+    }
+    puts("");
+    for(int j=len-1;j>=0;j--)
+        putchar(a[j]);
+    puts("");
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<algorithm>
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string s;
+	int i;
+	cin >> s;
+	cout << s.size() << endl;
+	for(i = 0; i < s.size() - 1; i++)
+		cout << s[i] << " ";
+	cout << s[s.size() - 1] << endl;
+	for(i = s.size() - 1; i >= 0; i--)
+		cout << s[i];
+	cout << endl;
+	return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题5.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[<p>
+	企业发放的奖金根据利润提成。利润低于或等于100000元的，奖金可提10%;<br />
+利润高于100000元，低于200000元（100000&lt;I≤200000）时，低于100000元的部分按10％提成，高于100000元的部分，可提成 7.5%;<br />
+200000&lt;I≤400000时，低于200000元部分仍按上述办法提成，（下同），高于200000元的部分按5％提成；<br />
+400000&lt;I≤600000元时，高于400000元的部分按3％提成；600000&lt;I≤1000000时，高于600000元的部分按1.5%提成；<br />
+I&gt;1000000时，超过1000000元的部分按1%提成。从键盘输入当月利润I,求应发奖金总数。
+</p>]]></description>
+<input><![CDATA[<p>
+	一个整数，当月利润。
+</p>]]></input> 
+<output><![CDATA[<p>
+	一个整数，奖金。
+</p>]]></output>
+<sample_input><![CDATA[900]]></sample_input>
+<sample_output><![CDATA[90]]></sample_output>
+  <test_input><![CDATA[900
+]]></test_input>
+<test_output><![CDATA[90
+]]></test_output>
+<hint><![CDATA[用Switch要比用if的看起来更清晰。]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    long lr;
+    float jj;
+    scanf("%ld",&lr);
+    if(lr<=100000) jj=lr*0.1;
+    else if(lr<=200000) jj=100000*0.1+(lr-100000)*0.075;
+    else if(lr<=400000) jj=100000*(0.1+0.075)+(lr-200000)*0.05;
+    else if(lr<=600000) jj=100000*(0.1+0.075)+200000*0.05+(lr-200000)*0.03;
+    else if(lr<=1000000) jj=100000*(0.1+0.075)+200000*0.05+200000*0.03+(lr-200000)*0.015;
+    else jj=100000*(0.1+0.075)+200000*0.05+200000*0.03+200000*0.015+(lr-200000)*0.01;
+    printf("%.0f\n",jj);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<algorithm>
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	double s, i;
+	cin >> i;
+	if(i <= 100000)
+		s = i * 0.1;
+	else
+		if(i <= 200000)
+			s = 10000 + (i - 100000) * 0.075;
+		else
+			if(i <= 400000)
+				s = 10000 + 7500 + (i - 200000) * 0.05;
+			else
+				if(i <= 600000)
+					s = 10000 + 7500 + 10000 + (i - 400000) * 0.03;
+				else
+					if(i <= 1000000)
+						s = 10000 + 7500 + 10000 + 6000 + (i - 600000) * 0.015;
+					else
+						s = 27500 + 6000 + 60000 + (i - 1000000) * 0.01;
+					cout << s << endl;
+	return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.1]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入两个正整数m和n，求其最大公约数和最小公倍数。]]></description>
+<input><![CDATA[两个整数]]></input> 
+<output><![CDATA[最大公约数，最小公倍数]]></output>
+<sample_input><![CDATA[5 7]]></sample_input>
+<sample_output><![CDATA[1 35]]></sample_output>
+  <test_input><![CDATA[81 87
+]]></test_input>
+<test_output><![CDATA[3 2349
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include <stdio.h>
+int main()
+ {
+  int  p,r,n,m,temp;
+  scanf("%d%d,",&n,&m);
+  if (n<m)
+   {
+    temp=n;
+    n=m;
+    m=temp;
+   }
+  p=n*m;
+  while(m!=0)
+   {
+    r=n%m;
+    n=m;
+    m=r;
+   }
+  printf("%d %d\n",n,p/n);
+  return 0;
+ }]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+    int a,b,c,d,min;
+    cin>>a>>b;
+    if(a>b)
+        c=a,a=b,b=c;
+    if(b%a==0)
+    {
+        d=a;
+        cout<<a<<' ';
+    }
+    else
+        for(c=a-1; c>=1; c--)
+            if(a%c==0&&b%c==0)
+            {
+                cout<<c<<' ';
+                d=c;
+                break;
+            }
+            cout<<a*b/d<<endl;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.2]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入一行字符，分别统计出其中英文字母、空格、数字和其他字符的个数。]]></description>
+<input><![CDATA[一行字符]]></input> 
+<output><![CDATA[统计值]]></output>
+<sample_input><![CDATA[aklsjflj123 sadf918u324 asdf91u32oasdf/.';123
+]]></sample_input>
+<sample_output><![CDATA[23 16 2 4]]></sample_output>
+  <test_input><![CDATA[1qaz4rgb7ujk9ol-[p#$%^&  89uoijafsdflkj3123[pl.l;l,
+]]></test_input>
+<test_output><![CDATA[28 10 2 11
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+    char a[1000];
+    int i=-1;
+    int zm,kg,sz,others;
+    zm=kg=sz=others=0;
+    gets(a);
+    while(a[++i]!='\0')
+    {
+        if(isalpha(a[i])) zm++;
+        else if(isdigit(a[i])) sz++;
+        else if(isblank(a[i])) kg++;
+        else others++;
+    }
+    printf("%d %d %d %d\n",zm,sz,kg,others);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a,b,c,d,e;
+    char k[100],*p;
+    a=b=c=d=e=0;
+    gets(k);
+    p=k;
+    while(*p)
+    {
+        if(*p>='a'&&*p<='z'||*p>='A'&&*p<='Z')
+            a++;
+        else if(*p==' ')
+            b++;
+        else if(*p>='0'&&*p<='9')
+            c++;
+        else d++;
+        p++;
+    }
+    printf("%d %d %d %d\n",a,c,b,d);
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[求Sn=a+aa+aaa+…+aa…aaa（有n个a）之值，其中a是一个数字。
+例如：2+22+222+2222+22222（n=5），n由键盘输入。]]></description>
+<input><![CDATA[a]]></input> 
+<output><![CDATA[和]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[24690]]></sample_output>
+  <test_input><![CDATA[5
+]]></test_input>
+<test_output><![CDATA[24690
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int a;
+    long sums=0;
+    scanf("%d",&a);
+    long sum[100];
+    for(int i=0;i<a;i++)
+    {
+        if(!i)
+            sum[i] = 2*(int)pow(10,i);
+        else
+            sum[i] = sum[i-1]+2*(int)pow(10,i);
+        //printf("%ld\n",sum[i]);
+        sums += sum[i];
+    }
+    printf("%ld\n",sums);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+	long long s = 0, t = 2, n;
+	cin >> n;
+	while(n--)
+	{
+		s += t;
+		t = t * 10 + 2;
+	}
+	cout << s << endl;
+	return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[求Sn=1!+2!+3!+4!+5!+…+n!之值，其中n是一个数字。]]></description>
+<input><![CDATA[n]]></input> 
+<output><![CDATA[和]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[153]]></sample_output>
+  <test_input><![CDATA[20
+]]></test_input>
+<test_output><![CDATA[2561327494111820313
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+long long jc(int );
+int main()
+{
+    int a;
+    long long sum=0ll;
+    scanf("%d",&a);
+    for(int i=2;i<=a;i++)
+        sum += jc(i);
+    printf("%lld\n",sum+1ll);
+    return 0;
+}
+long long jc(int n)
+{
+    long long sum=1;
+    for(int i=2;i<=n;i++)
+       sum *= (long long)i;
+    return sum;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+	 int n;
+	 long long s=0,a=1;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+	{
+	  a*=i;
+	  s+=a;
+	}
+	printf("%lld\n",s);
+	return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[求以下三数的和,保留2位小数
+1~a之和
+1~b的平方和
+1~c的倒数和]]></description>
+<input><![CDATA[a b c]]></input> 
+<output><![CDATA[1+2+...+a + 1^2+2^2+...+b^2 + 1/1+1/2+...+1/c]]></output>
+<sample_input><![CDATA[100 50 10]]></sample_input>
+<sample_output><![CDATA[47977.93]]></sample_output>
+  <test_input><![CDATA[20 30 40
+]]></test_input>
+<test_output><![CDATA[9669.28
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a,b,c,i;
+    double sum=0.0;
+    scanf("%d%d%d",&a,&b,&c);
+    for(i=1;i<=a;i++)
+        sum += (double)i;
+    for(i=1;i<=b;i++)
+        sum += (double)(i*i);
+    //printf("%lf\n",sum);
+    for(i=1;i<=c;i++)
+        sum += (double)(1.0/(double)i);
+    printf("%.2lf\n",sum);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+	float c;
+	int a,b;
+float i,s=0,m=0,n=0;
+	cin>>a>>b>>c;
+	for( i=1;i<=a;i++)
+	{ s+=i;}
+	for(i=1;i<=b;i++)
+	{  n+=i*i;}
+	for(i=1;i<=c;i++)
+	{ m+=1/i;}
+	printf("%.2f\n",s+m+n);
+  return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.7]]></title>
+<time_limit unit="s"><![CDATA[10]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[<p>
+	一个数如果恰好等于它的因子之和，这个数就称为"完数"。 例如，6的因子为1、2、3，而6=1+2+3，因此6是"完数"。 编程序找出N之内的所有完数，并按下面格式输出其因子：
+</p>]]></description>
+<input><![CDATA[<p>
+	N
+</p>]]></input> 
+<output><![CDATA[<p>
+	? its factors are ? ? ?
+</p>]]></output>
+<sample_input><![CDATA[1000]]></sample_input>
+<sample_output><![CDATA[6 its factors are 1 2 3 
+28 its factors are 1 2 4 7 14 
+496 its factors are 1 2 4 8 16 31 62 124 248 ]]></sample_output>
+  <test_input><![CDATA[20224
+]]></test_input>
+<test_output><![CDATA[6 its factors are 1 2 3 
+28 its factors are 1 2 4 7 14 
+496 its factors are 1 2 4 8 16 31 62 124 248 
+8128 its factors are 1 2 4 8 16 32 64 127 254 508 1016 2032 4064 
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+int he(int n)
+{
+	int s, i;
+	for(s = 1, i = 2; i <= n / 2; i++)
+	{
+		if(n % i == 0)
+			s += i;
+	}
+	return s;
+}
+int main()
+{
+	int t, i, j;
+	scanf("%d", &t);
+	for(i = 2; i <= t; i++)
+	{
+		if(i == he(i))
+		{
+			printf("%d its factors are ", i);
+			for(j = 1; j <= i / 2; j++)
+				if(i % j == 0)
+					printf("%d ", j);
+				puts("");
+		}
+	}
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a,b,c,d,sum,n;
+    scanf("%d",&n);
+    for(b=2; b<=n; b++)
+    {
+        sum=0;
+        for(a=1; a<b; a++)
+        {
+            if(b%a==0)
+                sum=sum+a;
+        }
+        if(sum==b)
+        {
+            printf("%d its factors are ",b);
+            for(a=1; a<b; a++)
+                if(b%a==0)
+                    printf("%d ",a);
+                    printf("\n");
+        }
+    }
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有一分数序列：  
+2/1 3/2 5/3 8/5 13/8 21/13......
+求出这个数列的前N项之和，保留两位小数。]]></description>
+<input><![CDATA[N]]></input> 
+<output><![CDATA[数列前N项和]]></output>
+<sample_input><![CDATA[10]]></sample_input>
+<sample_output><![CDATA[16.48]]></sample_output>
+  <test_input><![CDATA[10
+]]></test_input>
+<test_output><![CDATA[16.48
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+	int n;
+	double a,b,t,m,s=0;
+     scanf("%d",&n);
+	 a=2;b=1;
+	 for(int i=0;i<n;i++)
+	 { 
+		 t=a/b;
+		 s+=t;
+		 m=a;
+		 a+=b;
+		 b=m;
+	 }
+	 printf("%.2f\n",s);
+return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    int c=0,d,n;
+    float a=2,b=1,sum=0,e;
+    scanf("%d",&n);
+    while(c<n)
+    {
+        sum+=a/b;
+        e=b;
+        b=a;
+        a=a+e;
+        c++;
+    }
+    printf("%.2f",sum);
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.9]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[一球从M米高度自由下落，每次落地后返回原高度的一半，再落下。
+它在第N次落地时反弹多高？共经过多少米？
+保留两位小数]]></description>
+<input><![CDATA[M N]]></input> 
+<output><![CDATA[它在第N次落地时反弹多高？共经过多少米？
+保留两位小数，空格隔开，放在一行]]></output>
+<sample_input><![CDATA[1000 5]]></sample_input>
+<sample_output><![CDATA[31.25 2875.00]]></sample_output>
+  <test_input><![CDATA[1024 10
+]]></test_input>
+<test_output><![CDATA[1.00 3068.00
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include <stdio.h>
+int main()
+{
+int i;
+float m=0,n=0,sum=0;
+scanf("%f %f",&m,&n);
+for(i=1;i<=n;i++)
+   {
+   sum+=(m+m/2);
+   m=m/2;
+   }
+    printf("%.2f %.2f\n",m,sum-m);
+return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    float sum,m;
+    int n;
+    scanf("%f%d",&m,&n);
+    sum=m;
+    while(n--)
+        {
+            m=m/2;
+            sum+=2*m;
+        }
+    printf("%.2f %.2f\n",m,sum-2*m);
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.10]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[猴子吃桃问题。猴子第一天摘下若干个桃子，当即吃了一半，还不过瘾，又多吃了一个。
+第二天早上又将剩下的桃子吃掉一半，又多吃一个。以后每天早上都吃了前一天剩下的一半零一个。
+到第N天早上想再吃时，见只剩下一个桃子了。求第一天共摘多少桃子。]]></description>
+<input><![CDATA[N]]></input> 
+<output><![CDATA[桃子总数]]></output>
+<sample_input><![CDATA[10]]></sample_input>
+<sample_output><![CDATA[1534]]></sample_output>
+  <test_input><![CDATA[16
+]]></test_input>
+<test_output><![CDATA[98302
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include <stdio.h>
+int main()
+{
+int m=1,n,s=0;
+scanf("%d",&n);
+if(n==1)
+s=1;
+while(n!=1)
+{ 
+	m=2*(m+1); 
+	n--;
+}
+printf("%d\n",m);
+return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+    int a=1,b,c,n;
+    cin>>n;
+    n--;
+    while(n--)
+    {
+        a=(a+1)*2;
+    }
+    cout<<a<<endl;
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var s,n,i:longint;
+begin
+  readln(n);
+  s:=1;
+  for i:=1 to n-1 do
+  s:=(s+1)*2;
+  writeln(s);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题6.11]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[用迭代法求 。求平方根的迭代公式为：  
+X[n+1]=1/2(X[n]+a/X[n])
+要求前后两次求出的得差的绝对值少于0.00001。
+输出保留3位小数]]></description>
+<input><![CDATA[X]]></input> 
+<output><![CDATA[X的平方根]]></output>
+<sample_input><![CDATA[4]]></sample_input>
+<sample_output><![CDATA[2.000]]></sample_output>
+  <test_input><![CDATA[123456789
+]]></test_input>
+<test_output><![CDATA[11111.111
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+int main()
+{
+	double a, x2, x1;
+	scanf("%lf", &a);
+	x2 = 1.0;
+	do
+	{
+		x1 = x2;
+		x2 = 0.5 * (x1 + a / x1);
+	}
+	while(fabs(x1 - x2) >= 1e-5);
+	printf("%.3lf\n", x2);
+	return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include<stdio.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+ double x1,x2,a;
+cin>>a;
+ if(a>=0)
+ { 
+  x2=1.0;
+  do
+  {
+   x1=x2;
+   x2=0.5*(x1+a/x1);
+  }
+  while(fabs(x2-x1)>=1e-5);
+  printf("%.3f\n",x2);
+ }
+ return 0;
+}]]></solution>
+			<solution language="Pascal"><![CDATA[var s:longint;
+begin
+  readln(s);
+  writeln(sqrt(s):0:3);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题7.1]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[用筛法求之N内的素数。]]></description>
+<input><![CDATA[N]]></input> 
+<output><![CDATA[0～N的素数]]></output>
+<sample_input><![CDATA[100]]></sample_input>
+<sample_output><![CDATA[2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+53
+59
+61
+67
+71
+73
+79
+83
+89
+97]]></sample_output>
+  <test_input><![CDATA[150]]></test_input>
+<test_output><![CDATA[2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+41
+43
+47
+53
+59
+61
+67
+71
+73
+79
+83
+89
+97
+101
+103
+107
+109
+113
+127
+131
+137
+139
+149]]></test_output>
+<hint><![CDATA[数组大小动态定义？函数？]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int prime(int n)
+{
+	for(int i = 2; i * i <= n; i++)
+		if(n % i == 0)
+			return 0;
+		return 1;
+}
+int main()
+{
+	int i, N;
+	scanf("%d", &N);
+	for(i = 2; i <= N; i++)
+		if(prime(i))
+			printf("%d\n", i);
+		return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+#include<stdlib.h> 
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    static char a[10000000];
+    unsigned long k,i;
+    for(k=2;k<=10000;k++)
+        if(!a[k])
+            for(i=2*k;i<n;i+=k)
+               a[i]=1;
+    for(i=2;i<n;i++)
+        if(!a[i])
+    {
+        printf("%ld\n",i);
+    }
+    return 0;
+}]]></solution>
+			<solution language="Pascal"><![CDATA[var a,b,n,k:longint;
+begin
+  readln(n);
+  for a:=1 to n do
+  begin
+    k:=0;
+    for b:=1 to a do
+    if a mod b=0 then k:=k+1;
+    if k=2 then writeln(a);
+  end;
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题7.2]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[用选择法对10个整数从小到大排序。]]></description>
+<input><![CDATA[10个整数]]></input> 
+<output><![CDATA[排序好的10个整数]]></output>
+<sample_input><![CDATA[4 85  3 234 45 345 345 122 30 12]]></sample_input>
+<sample_output><![CDATA[3
+4
+12
+30
+45
+85
+122
+234
+345
+345]]></sample_output>
+  <test_input><![CDATA[89 72 47 68 35 26 73 91 57 36]]></test_input>
+<test_output><![CDATA[26
+35
+36
+47
+57
+68
+72
+73
+89
+91]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#define N temp=num[j];num[j]=num[j+1];num[j+1]=temp
+int main()
+{
+    int i,j;
+    int temp;
+    int num[10];
+    for(i=0;i<10;i++){scanf("%d",&num[i]);}
+    for(i=0;i<9;i++)
+    {
+        for(j=0;j<9-i;j++)
+        {
+            if(num[j]>num[j+1])
+            {
+                N;
+            }
+        }
+    }
+    for(i=0;i<10;i++){printf("%d\n",num[i]);}
+    return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+	int i,j,a[10],t;
+	for(i=0;i<10;i++)
+		cin>>a[i];
+	for(i=0;i<10;i++)
+	{	for(j=i;j<10;j++)
+		
+			if(a[i]>a[j])
+			{
+				t=a[i];
+				a[i]=a[j];
+				a[j]=t;
+		}
+		}
+		for(i=0;i<10;i++)
+		{	cout<<a[i]<<endl;  }
+		return 0;
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[const n=10;
+var a:array[1..n]of longint;
+    i,t,j:longint;
+begin
+  for i:=1 to n do
+  read(a[i]);
+  for i:=1 to n-1 do
+   for j:=i+1 to n do
+   if a[i]>a[j] then begin t:=a[i]; a[i]:=a[j]; a[j]:=t;end;
+  for i:=1 to n do
+  writeln(a[i]);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题7.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[求一个3×3矩阵对角线元素之和。]]></description>
+<input><![CDATA[矩阵]]></input> 
+<output><![CDATA[主对角线 副对角线 元素和]]></output>
+<sample_input><![CDATA[1 2 3
+1 1 1
+3 2 1]]></sample_input>
+<sample_output><![CDATA[3 7]]></sample_output>
+  <test_input><![CDATA[123 456 789
+888 777 666
+1 2 3]]></test_input>
+<test_output><![CDATA[903 1567]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdlib.h>
+#include<stdio.h>
+int main()
+{
+    int num[3][3],ret[3][3];
+    int x,y;
+int i,j;
+int sum1=0,sum2;
+    for(i=0;i<3;i++)
+    {
+        for(j=0;j<3;j++)
+        {
+            scanf("%d",&num[i][j]);
+        }
+    }
+for(i=0;i<3;i++)
+{
+sum1+=num[i][i];
+}
+printf("%d ",sum1);
+sum2=num[2][0]+num[1][1]+num[0][2];
+printf("%d\n",sum2);
+return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+	int a[3][3],s1,s2;
+	for(int i=0;i<3;i++)
+		for(int j=0;j<3;j++)
+			cin>>a[i][j];
+		s1=a[0][0]+a[1][1]+a[2][2];
+		s2=a[0][2]+a[1][1]+a[2][0];
+     cout<<s1<<" "<<s2<<endl;
+	return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题7.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[已有一个已排好的9个元素的数组，今输入一个数要求按原来排序的规律将它插入数组中。]]></description>
+<input><![CDATA[第一行，原始数列。
+第二行，需要插入的数字。]]></input> 
+<output><![CDATA[排序后的数列]]></output>
+<sample_input><![CDATA[1 7 8 17 23 24 59 62 101
+50]]></sample_input>
+<sample_output><![CDATA[1
+7
+8
+17
+23
+24
+50
+59
+62
+101
+]]></sample_output>
+  <test_input><![CDATA[1 5 8 17 23 24 60 62 101
+88]]></test_input>
+<test_output><![CDATA[1
+5
+8
+17
+23
+24
+60
+62
+88
+101
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+	int i, k, j, t, a[10];
+	for(i = 0; i < 9; i++)
+		scanf("%d", &a[i]);
+	scanf("%d", &k);
+	for(i = 0; i < 9; i++)
+		if(k < a[i])
+			break;
+		for(j = i; j < 10; j++)
+		{
+			t = a[j];
+			a[j] = k;
+			k = t;
+		}
+		for(i = 0; i < 10; i++)
+			printf("%d\n", a[i]);
+		return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+	int i, k, j, t, a[10];
+	for(i = 0; i < 9; i++)
+		scanf("%d", &a[i]);
+	scanf("%d", &k);
+	for(i = 0; i < 9; i++)
+		if(k < a[i])
+			break;
+		for(j = i; j < 10; j++)
+		{
+			t = a[j];
+			a[j] = k;
+			k = t;
+		}
+		for(i = 0; i < 10; i++)
+			printf("%d\n", a[i]);
+		return 0;
+}]]></solution>
+			<solution language="Pascal"><![CDATA[const n=9;
+var a:array[1..n+1]of longint;
+    i,t,j:longint;
+begin
+  for i:=1 to n do
+  read(a[i]);
+  readln;
+  read(a[n+1]);
+  for i:=1 to n-1+1 do
+   for j:=i+1 to n+1 do
+   if a[i]>a[j] then begin t:=a[i]; a[i]:=a[j]; a[j]:=t;end;
+  for i:=1 to n+1 do
+  writeln(a[i]);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题7.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入10个数字，然后逆序输出。]]></description>
+<input><![CDATA[十个整数]]></input> 
+<output><![CDATA[逆序输出，空格分开]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 0]]></sample_input>
+<sample_output><![CDATA[0 9 8 7 6 5 4 3 2 1]]></sample_output>
+  <test_input><![CDATA[1 3 5 9 7 6 8 2 4 0]]></test_input>
+<test_output><![CDATA[0 4 2 8 6 7 9 5 3 1
+]]></test_output>
+<hint><![CDATA[数组？堆栈？]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+	int i, k, j, t, a[10];
+	for(i = 0; i < 10; i++)
+		scanf("%d", &a[i]);
+	printf("%d", a[9]);
+	for(i = 8; i >= 0; i--)
+		printf(" %d", a[i]);
+	puts("");
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+	int i,a[10];
+	for( i=0;i<10;i++)
+		cin>>a[i];
+
+		for(i=9;i>0;i--)
+		{cout<<a[i]<<" ";}
+		cout<<a[0]<<endl;
+		return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.2]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[求方程 的根，用三个函数分别求当b^2-4ac大于0、等于0、和小于0时的根，并输出结果。从主函数输入a、b、c的值。]]></description>
+<input><![CDATA[a b c]]></input> 
+<output><![CDATA[x1=? x2=?]]></output>
+<sample_input><![CDATA[4 1 1]]></sample_input>
+<sample_output><![CDATA[x1=-0.125+0.484i x2=-0.125-0.484i]]></sample_output>
+  <test_input><![CDATA[4 1 2]]></test_input>
+<test_output><![CDATA[x1=-0.125+0.696i x2=-0.125-0.696i]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+int main()
+{
+	double a, b, c, C;
+	scanf("%lf%lf%lf", &a, &b, &c);
+	C = pow(b, 2) - 4 * a * c;
+	if(C == 0)
+		printf("x1=%.3lf x2=%.3lf\n", -b / (2 * a), -b / (2 * a));
+	if(C < 0)
+		printf("x1=%.3lf+%.3lfi x2=%.3lf-%.3lfi\n",-b / (2 * a), sqrt(-C) / (2 * a), -b / (2 * a), sqrt(-C) / (2 * a));
+	if(C > 0)
+	printf("x1=%.3lf+%.3lf x2=%.3lf-%.3lf\n",-b / (2 * a), sqrt(C) / (2 * a), -b / (2 * a), sqrt(C) / (2 * a));
+}]]></solution>
+			<solution language="C++"><![CDATA[#include <stdio.h>
+#include <cmath>
+#include <string.h>
+#include <cstdlib>
+#include <iostream>
+#define eps 1e-6
+using namespace std;
+
+
+int main()
+{
+    double a, b, c, disc, x1, x2, real, imag;
+    scanf("%lf%lf%lf", &a, &b, &c);
+
+    disc = b * b - 4 * a * c;
+    if(fabs(disc) <= eps)
+    {
+        printf("x1=%.3lf ", -b / (2 * a));
+        printf("x2=%.3lf\n", -b / (2 * a));
+    }
+    else if(fabs(disc > eps))
+    {
+        x1 = (-b + sqrt(disc)) / (2 * a);
+        x2 = (-b - sqrt(disc)) / (2 * a);
+        printf("x1=%.3lf x2=%.3f\n", x1, x2);
+    }
+    else
+    {
+        real = -b / (2 * a);
+        imag = sqrt(-disc) / (2 * a);
+
+        printf("x1=%.3f+%.3fi ", real, imag);
+        printf("x2=%.3f-%.3fi\n", real, imag);
+    }
+
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一个判断素数的函数，在主函数输入一个整数，输出是否是素数的消息。]]></description>
+<input><![CDATA[一个数]]></input> 
+<output><![CDATA[如果是素数输出prime
+如果不是输出not prime]]></output>
+<sample_input><![CDATA[97]]></sample_input>
+<sample_output><![CDATA[prime]]></sample_output>
+  <test_input><![CDATA[98]]></test_input>
+<test_output><![CDATA[not prime]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+int prime(int n)
+{
+	for(int i = 2; i * i <= n; i++)
+		if(n % i == 0)
+			return 0;
+		return 1;
+}
+int main()
+{
+	int a;
+	scanf("%d", &a);
+	if(prime(a))
+		puts("prime");
+	else
+		puts("not prime");
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+void judge(int a)
+{
+    int b=2;
+    while(b<a&&a%b)
+        b++;
+    if(b==a)
+        cout<<"prime"<<endl;
+    else cout<<"not prime"<<endl;
+}
+int main()
+{
+    int a;
+    cin>>a;
+    judge(a);
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一个函数，使给定的一个二维数组（３×３）转置，即行列互换。]]></description>
+<input><![CDATA[一个3x3的矩阵]]></input> 
+<output><![CDATA[转置后的矩阵]]></output>
+<sample_input><![CDATA[1 2 3
+4 5 6
+7 8 9
+]]></sample_input>
+<sample_output><![CDATA[1 4 7 
+2 5 8 
+3 6 9 
+]]></sample_output>
+  <test_input><![CDATA[9 8 7
+6 5 4
+3 2 1]]></test_input>
+<test_output><![CDATA[9 6 3 
+8 5 2 
+7 4 1 
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+  int i,j;
+  int a[3][3];
+  for(i=0;i<3;i++)
+    for(j=0;j<3;j++)
+    	scanf("%d",&a[i][j]);
+  for(i=0;i<3;i++)
+  {
+    for(j=0;j<3;j++)
+    	printf("%d ",a[j][i]);
+    if(i!=2)
+    	puts("");
+  }
+  return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+using namespace std;
+int main()
+{
+    int a[3][3],b,c,d;
+    for(b=0; b<3; b++)
+        for(c=0; c<3; c++)
+            cin>>a[b][c];
+    for(b=0; b<3; b++)
+    {
+        for(c=0; c<3; c++)
+            cout<<a[c][b]<<' ';
+        cout<<endl;
+    }
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var a:array [1..3,1..3] of shortint;
+    i,j:integer;
+begin
+  for i:=1 to 3 do
+   for j:=1 to 3 do
+   read(a[i,j]);
+  for i:=1 to 3 do
+  begin
+   for j:=1 to 3 do
+   write(a[j,i],' ');
+   if j=3 then writeln;
+  end;
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一函数，使输入的一个字符串按反序存放，在主函数中输入输出反序后的字符串。]]></description>
+<input><![CDATA[一行字符]]></input> 
+<output><![CDATA[逆序后的字符串]]></output>
+<sample_input><![CDATA[123456abcdef
+]]></sample_input>
+<sample_output><![CDATA[fedcba654321
+]]></sample_output>
+  <test_input><![CDATA[1qaz-pl,
+]]></test_input>
+<test_output><![CDATA[,lp-zaq1]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+void fanxu(int);
+char a[100],b[100];
+int main()
+{
+  int len,i=-1;
+  gets(a);
+  len=strlen(a);
+  fanxu(len);
+  puts(b);
+  return 0;
+}
+void fanxu(int len)
+{
+  int i,j;
+  for(i=len-1,j=0;i>=0;i--)
+    b[j++]=a[i];
+  b[j]='\0';
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+    char a[50];
+    int b,c;
+    cin>>a;
+    b=strlen(a);
+    while(b--)
+        cout<<a[b];
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var st:string;
+    i:longint;
+begin
+  readln(st);
+  for i:=length(st) downto 1 do
+  write(st[i]);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.6]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一函数，将两个字符串连接]]></description>
+<input><![CDATA[两行字符串]]></input> 
+<output><![CDATA[链接后的字符串]]></output>
+<sample_input><![CDATA[123
+abc]]></sample_input>
+<sample_output><![CDATA[123abc]]></sample_output>
+  <test_input><![CDATA[456
+def]]></test_input>
+<test_output><![CDATA[456def]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char a[300],b[100];
+    gets(a);
+    gets(b);
+    strcat(a,b);
+    puts(a);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+    char a[50],b[50];
+    cin>>a>>b;
+    cout<<strcat(a,b)<<endl;
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var st,s:string;
+begin
+  readln(st);
+  readln(s);
+  writeln(st,s);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.7]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一函数，将两个字符串中的元音字母复制到另一个字符串，然后输出。]]></description>
+<input><![CDATA[一行字符串]]></input> 
+<output><![CDATA[顺序输出其中的元音字母（aeiuo）]]></output>
+<sample_input><![CDATA[abcde]]></sample_input>
+<sample_output><![CDATA[ae]]></sample_output>
+  <test_input><![CDATA[abcdefghijklmnopqrstuvwxyz]]></test_input>
+<test_output><![CDATA[aeiou]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char a[300];
+    int i=-1;
+    gets(a);
+    while(a[++i]!='\0')
+    {
+        if(a[i]=='a'||a[i]=='e'||a[i]=='i'||a[i]=='o'||a[i]=='u')
+            putchar(a[i]);
+    }
+    puts("");
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+    char a[50],b[50],c,d=0;
+    cin>>a;
+    c=strlen(a);
+    while(c--)
+        if(a[c]=='a'||a[c]=='e'||a[c]=='i'||a[c]=='o'||a[c]=='u')
+            b[d]=a[c],d++;
+    while(d--)
+        cout<<b[d];
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var st:string;
+    i:longint;
+begin
+  readln(st);
+  for i:=1 to length(st) do
+  if (st[i]='a') or (st[i]='e') or  (st[i]='i') or (st[i]='o') or  (st[i]='u') then write(st[i]);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[写一函数，输入一个四位数字，要求输出这四个数字字符，但每两个数字间空格。如输入1990，应输出"1 9 9 0"。]]></description>
+<input><![CDATA[一个四位数]]></input> 
+<output><![CDATA[增加空格输出]]></output>
+<sample_input><![CDATA[1990]]></sample_input>
+<sample_output><![CDATA[1 9 9 0 ]]></sample_output>
+  <test_input><![CDATA[2009]]></test_input>
+<test_output><![CDATA[2 0 0 9 ]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    char a[5];
+    int i=-1;
+    gets(a);
+    while(a[++i]!='\0')
+        printf("%c ",a[i]);
+    puts("");
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a,b=4,d;
+    char c[4];
+    scanf("%d",&a);
+    while(b--)
+    {
+        c[b]=a%10+48;
+        a=a/10;
+    }
+    for(b=0;b<4;b++)
+        printf("%c ",c[b]);
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var st:string;
+    i:longint;
+begin
+  readln(st);
+  for i:=1 to length(st) do
+  write(st[i],' ');
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题8.9]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一函数，由实参传来一个字符串，统计此字符串中字母、数字、空格和其它字符的个数，在主函数中输入字符串以及输出上述结果。
+只要结果，别输出什么提示信息。]]></description>
+<input><![CDATA[一行字符串]]></input> 
+<output><![CDATA[统计数据，4个数字，空格分开。]]></output>
+<sample_input><![CDATA[!@#$%^QWERT    1234567]]></sample_input>
+<sample_output><![CDATA[5 7 4 6 ]]></sample_output>
+  <test_input><![CDATA[!34drd23478t sadfoiweruo inJK*&UIH&*Fi88jhio2u3r98usdf)(*(*^87]]></test_input>
+<test_output><![CDATA[34 15 2 11 ]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+    char a[200];
+    int i=-1,zm,sz,kg,others;
+    zm=sz=kg=others=0;
+    gets(a);
+    while(a[++i]!='\0')
+    {
+        if(isalpha(a[i]))
+            zm++;
+        else if(isdigit(a[i]))
+            sz++;
+        else if(a[i]==' ')
+            kg++;
+        else others++;
+    }
+    printf("%d %d %d %d \n",zm,sz,kg,others);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int a=0,b,c,d,e,f;
+    b=c=d=e=0;
+    char k[1000];
+    gets(k);
+    f=strlen(k);
+    for(;a<f;a++)
+    {
+        if(k[a]>='a'&&k[a]<='z'||k[a]>='A'&&k[a]<='Z')
+            b++;
+        else if(k[a]>='0'&&k[a]<='9')
+            c++;
+        else if(k[a]==' ')
+            d++;
+        else e++;
+    }
+    printf("%d %d %d %d",b,c,d,e);
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.1]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[定义一个带参的宏，使两个参数的值互换，并写出程序，输入两个数作为使用宏时的实参。输出已交换后的两个值。]]></description>
+<input><![CDATA[两个数，空格隔开]]></input> 
+<output><![CDATA[交换后的两个数，空格隔开]]></output>
+<sample_input><![CDATA[1 2]]></sample_input>
+<sample_output><![CDATA[2 1]]></sample_output>
+  <test_input><![CDATA[100 99]]></test_input>
+<test_output><![CDATA[99 100]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#define CHANGE(a,b) printf("%d %d\n",b,a);
+int main()
+{
+  int a,b;
+  scanf("%d%d",&a,&b);
+  CHANGE(a,b);
+  return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+    int a,b;
+    cin>>a>>b;
+    cout<<b<<' '<<a<<endl;
+    return 0;
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var a,b:longint;
+begin
+  readln(a,b);
+  writeln(b,' ',a);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.2]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入两个整数，求他们相除的余数。用带参的宏来实现，编程序。]]></description>
+<input><![CDATA[a b两个数]]></input> 
+<output><![CDATA[a/b的余数]]></output>
+<sample_input><![CDATA[3 2]]></sample_input>
+<sample_output><![CDATA[1]]></sample_output>
+  <test_input><![CDATA[39 10]]></test_input>
+<test_output><![CDATA[9]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#define x(a,b) a%b
+int main()
+{
+    int n,a;
+    scanf("%d%d",&n,&a);
+    printf("%d\n",x(n,a));
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+  int m,n;
+  cin>>m>>n;
+  int x=m%n;
+  cout<<x<<endl;
+}]]></solution>
+			<solution language="Pascal"><![CDATA[var a,b:longint;
+begin
+  readln(a,b);
+  writeln(a mod b);
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[三角形面积=SQRT(S*(S-a)*(S-b)*(S-c))
+其中S=(a+b+c)/2，a、b、c为三角形的三边。
+定义两个带参的宏，一个用来求area，
+另一个宏用来求S。
+写程序，在程序中用带实参的宏名来求面积area。]]></description>
+<input><![CDATA[a b c三角形的三条边,可以是小数。]]></input> 
+<output><![CDATA[三角形面积，保留3位小数]]></output>
+<sample_input><![CDATA[3 4 5]]></sample_input>
+<sample_output><![CDATA[6.000]]></sample_output>
+  <test_input><![CDATA[70 90 100]]></test_input>
+<test_output><![CDATA[3059.412]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+#define S(a,b,c) (a+b+c)/2
+#define AREA(s,a,b,c) sqrt(s*(s-a)*(s-b)*(s-c))
+int main()
+{
+    float a,b,c,s,area;
+    scanf("%f%f%f",&a,&b,&c);
+    s=S(a,b,c);
+    area=AREA(s,a,b,c);
+    printf("%.3f\n",area);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+#include <cstdio>
+#include <cmath>
+using namespace std;
+int main()
+{
+    double a,b,c,s,area;
+    cin>>a>>b>>c;
+    s=(a+b+c)/2;
+    area=sqrt(s*(s-a)*(s-b)*(s-c));
+    printf("%.3lf\n",area);
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[给年份year，定义一个宏，以判别该年份是否闰年。提示：宏名可以定义为LEAP_YEAR，形参为y，既定义宏的形式为  
+#define LEAP_YEAR(y) （读者设计的字符串）]]></description>
+<input><![CDATA[一个年份]]></input> 
+<output><![CDATA[根据是否闰年输出，是输出"L",否输出"N"]]></output>
+<sample_input><![CDATA[2000]]></sample_input>
+<sample_output><![CDATA[L]]></sample_output>
+  <test_input><![CDATA[1900]]></test_input>
+<test_output><![CDATA[N]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<math.h>
+#define LEAP_YEAR(year) (year%4==0&&year/100!=0)&&(year%400==0)
+int main()
+{
+    int y;
+    scanf("%d",&y);
+    printf("%c\n",(LEAP_YEAR(y)>0)?'L':'N');
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    if(n%400==0||(n%4==0&&n%100))
+        cout<<"L"<<endl;
+    else cout<<"N"<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.6]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[请设计输出实数的格式，包括：⑴一行输出一个实数；⑵一行内输出两个实数；⑶一行内输出三个实数。实数用"6.2f"格式输出。]]></description>
+<input><![CDATA[一个实数，float范围]]></input> 
+<output><![CDATA[输出3行，第一行打印一遍输入的数，第二行打印两遍，第三行打印三遍。
+第二行和第三行，用空格分隔同一行的数字。
+实数用"6.2f"格式输出。]]></output>
+<sample_input><![CDATA[0.618]]></sample_input>
+<sample_output><![CDATA[  0.62
+  0.62   0.62
+  0.62   0.62   0.62
+]]></sample_output>
+  <test_input><![CDATA[0.61]]></test_input>
+<test_output><![CDATA[  0.61
+  0.61   0.61
+  0.61   0.61   0.61
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    float a;
+    scanf("%f",&a);
+    printf("%6.2f\n%6.2f %6.2f\n%6.2f %6.2f %6.2f\n",a,a,a,a,a,a);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<cstdio>
+#define SC	scanf
+#define	PR	printf
+#define	NL	"\n"
+#define	FS	"%f"
+#define	F	"%6.2f"
+#define	F1	F NL
+#define	F2	F " " F NL
+#define	F3	F " " F " " F NL
+int main()
+{
+	float x;
+	SC(FS,&x);
+	PR(F1,x);
+	PR(F2,x,x);
+	PR(F3,x,x,x);
+	return 0;
+}]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[分别用函数和带参的宏，从三个数中找出最大的数。]]></description>
+<input><![CDATA[3个实数]]></input> 
+<output><![CDATA[最大的数,输出两遍，先用函数，再用宏。
+保留3位小数。]]></output>
+<sample_input><![CDATA[1 2 3]]></sample_input>
+<sample_output><![CDATA[3.000
+3.000]]></sample_output>
+  <test_input><![CDATA[4 5 6]]></test_input>
+<test_output><![CDATA[6.000
+6.000
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#define MAX(a,b,c) ((a>b)?a:b)>c?((a>b)?a:b):c
+int main()
+{
+    float a,b,c;
+    scanf("%f%f%f",&a,&b,&c);
+    printf("%.3f\n%.3f\n",MAX(a,b,c),MAX(a,b,c));
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    double a[3];
+    cin>>a[0]>>a[1]>>a[2];
+    sort(a,a+3);
+    printf("%.3lf\n",a[2]);
+    printf("%.3lf\n",a[2]);
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题9.10]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入一行电报文字，将字母变成其下一字母（如’a’变成’b’……’z’变成’ａ’其它字符不变）。]]></description>
+<input><![CDATA[一行字符]]></input> 
+<output><![CDATA[加密处理后的字符]]></output>
+<sample_input><![CDATA[a b]]></sample_input>
+<sample_output><![CDATA[b c]]></sample_output>
+  <test_input><![CDATA[askdjflaksdjfoiweroi190283 0912  ladkj f923 lfkad
+
+]]></test_input>
+<test_output><![CDATA[btlekgmbltekgpjxfspj190283 0912  mbelk g923 mglbe
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+    char a[202];
+    gets(a);
+    for(int i=0;a[i]!='\0';i++)
+    {
+        if(isalpha(a[i]))
+        {
+            if(a[i]=='z')
+                putchar('z');
+            else
+                putchar(a[i]+1);
+        }
+        else
+            putchar(a[i]);
+    }
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <stdio.h>
+#include<string.h>
+int main()
+{
+    char a[100];
+    gets(a);
+    int b,i;
+    b=strlen(a);
+    for(i=0; i<b; i++)
+        if(a[i]=='z')
+            a[i]='a';
+        else if(a[i]>='a'&&a[i]<='y')
+            a[i]+=1;
+    for(i=0; i<b; i++)
+        printf("%c",a[i]);
+    printf("\n");
+
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.1]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入三个整数，按由小到大的顺序输出。]]></description>
+<input><![CDATA[三个整数]]></input> 
+<output><![CDATA[由小到大输出成一行，每个数字后面跟一个空格]]></output>
+<sample_input><![CDATA[2 3 1]]></sample_input>
+<sample_output><![CDATA[1 2 3 ]]></sample_output>
+  <test_input><![CDATA[99 55 11]]></test_input>
+<test_output><![CDATA[11 55 99 ]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int t,a,b,c;
+    scanf("%d%d%d",&a,&b,&c);
+    if(a>b){t=a;a=b;b=t;}
+    if(a>c){t=a;a=c;c=t;}
+    if(b>c){t=b;b=c;c=t;}
+    printf("%d %d %d ",a,b,c);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    int a[3];
+    cin>>a[0]>>a[1]>>a[2];
+    sort(a,a+3);
+    printf("%d %d %d \n",a[0],a[1],a[2]);
+    return 0;
+}
+]]></solution>
+			<solution language="Pascal"><![CDATA[var t,a,b,c:longint;
+begin
+  readln(a,b,c);
+  if a>b then begin t:=a; a:=b; b:=t; end;
+  if a>c then begin t:=a; a:=c; c:=t; end;
+  if b>c then begin t:=b; b:=c; c:=t; end;
+  writeln(a,' ',b,' ',c,' ');
+end.]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.2]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入三个字符串，按由小到大的顺序输出]]></description>
+<input><![CDATA[3行字符串]]></input> 
+<output><![CDATA[按照从小到大输出成3行]]></output>
+<sample_input><![CDATA[cde
+afg
+abc
+]]></sample_input>
+<sample_output><![CDATA[abc
+afg
+cde]]></sample_output>
+  <test_input><![CDATA[abczefghijklmnopqrstuvwxyz
+xbcdefghijklmnopqrstuvwxyz
+abcdefahijklmnopqrstuvwxyz]]></test_input>
+<test_output><![CDATA[abcdefahijklmnopqrstuvwxyz
+abczefghijklmnopqrstuvwxyz
+xbcdefghijklmnopqrstuvwxyz]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char t[100],a[100],b[100],c[100];
+    gets(a);gets(b);gets(c);
+    if(strcmp(a,b)>0){strcpy(t,a);strcpy(a,b);strcpy(b,t);}
+    if(strcmp(a,c)>0){strcpy(t,a);strcpy(a,c);strcpy(c,t);}
+    if(strcmp(b,c)>0){strcpy(t,b);strcpy(b,c);strcpy(c,t);}
+    printf("%s\n%s\n%s\n",a,b,c);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<iostream>
+#include <algorithm>
+using namespace std;
+struct gax{
+    string s;
+}str[5];
+int compare(struct gax s1,struct gax s2)
+{
+    return s1.s<s2.s;
+}
+int main()
+{
+    for(int i=0;i<3;i++)
+        cin>>str[i].s;
+    sort(str,str+3,compare);
+    for(int i=0;i<3;i++)
+        cout<<str[i].s<<endl;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[输入10个整数，将其中最小的数与第一个数对换，把最大的数与最后一个数对换。写三个函数；
+①输入10个数；②进行处理；③输出10个数。]]></description>
+<input><![CDATA[10个整数]]></input> 
+<output><![CDATA[整理后的十个数，每个数后跟一个空格（注意最后一个数后也有空格）]]></output>
+<sample_input><![CDATA[2 1 3 4 5 6 7 8 10 9]]></sample_input>
+<sample_output><![CDATA[1 2 3 4 5 6 7 8 9 10 ]]></sample_output>
+  <test_input><![CDATA[10 9 8 7 6 5 4 1 3 2]]></test_input>
+<test_output><![CDATA[1 9 8 7 6 5 4 2 3 10 
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int a[10],i,min=100000,max=-100000,tmax,tmin,t;
+    for(i=0;i<10;i++)
+    {
+        scanf("%d",&a[i]);
+        if(a[i]>max)
+        {
+            max=a[i];
+            tmax=i;
+        }
+        if(a[i]<min)
+        {
+            min=a[i];
+            tmin=i;
+        }
+    }
+    t=max;
+    a[tmax]=a[9];
+    a[9]=t;
+    t=min;
+    a[tmin]=a[0];
+    a[0]=t;
+    for(i=0;i<10;i++)
+        printf("%d ",a[i]);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <stdio.h>
+int main()
+{
+    void input(int*);
+    void max_min_value(int*);
+    void output(int *);
+    int number[10];
+    input(number);
+    max_min_value(number);
+    output(number);
+    return 0;
+}
+void input(int *number)
+{
+    int i;
+    for (i=0; i<10; i++)
+        scanf("%d",&number[i]);
+}
+void max_min_value(int *number)
+{
+    int *max,*min,*p,temp;
+    max=min=number;
+    for (p=number+1; p<number+10; p++)
+        if (*p>*max) max=p;
+        else if (*p<*min) min=p;
+    temp=number[0];
+    number[0]=*min;
+    *min=temp;
+    if(max==number) max=min;
+    temp=number[9];
+    number[9]=*max;
+    *max=temp;
+}
+void output(int *number)
+{
+    int *p;
+    for (p=number; p<number+10; p++)
+        printf("%d ",*p);
+    printf("\n");
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.4]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[使前面各数顺有n个整数，序向后移m个位置，最后m个数变成前面m个数，见图。写一函数：实现以上功能，在主函数中输入n个数和输出调整后的n个数。]]></description>
+<input><![CDATA[输入数据的个数n
+n个整数
+移动的位置m]]></input> 
+<output><![CDATA[移动后的n个数]]></output>
+<sample_input><![CDATA[10
+1 2 3 4 5 6 7 8 9 10
+2]]></sample_input>
+<sample_output><![CDATA[9 10 1 2 3 4 5 6 7 8 ]]></sample_output>
+  <test_input><![CDATA[10
+1 2 3 4 5 6 7 8 9 10
+9]]></test_input>
+<test_output><![CDATA[2 3 4 5 6 7 8 9 10 1 ]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+    int n,i,m;
+    scanf("%d",&n);
+    int a[n],b[n];
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    scanf("%d",&m);
+    for(i=0;i<n-m;i++)
+        b[i+m]=a[i];
+    for(i=n-m;i<n;i++)
+        b[i-n+m]=a[i];
+    for(i=0;i<n;i++)
+        printf("%d ",b[i]);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+    int a[1000],i,n,t;
+    cin>>n;
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    cin>>t;
+    for(i=t;i>0;i--)
+        cout<<a[n-i]<<' ';
+    for(i=0;i<n-t;i++)
+        cout<<a[i]<<' ';
+    cout<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有n人围成一圈，顺序排号。从第1个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来的第几号的那位。]]></description>
+<input><![CDATA[初始人数n]]></input> 
+<output><![CDATA[最后一人的初始编号]]></output>
+<sample_input><![CDATA[3]]></sample_input>
+<sample_output><![CDATA[2]]></sample_output>
+  <test_input><![CDATA[7]]></test_input>
+<test_output><![CDATA[4]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int n,i,k,m,num[50],*p;
+    scanf("%d",&n);
+    p=num;
+    for(i=0;i<n;i++)
+        *(p+i)=i+1;
+    i=k=m=0;
+    while(m<n-1)
+    {
+        if(*(p+i)!=0) k++;
+        if(k==3)
+        {
+            *(p+i)=0;
+            k=0;
+            m++;
+        }
+        i++;
+        if(i==n)
+            i=0;
+    }
+    while(*p==0)
+        p++;
+    printf("%d\n",*p);
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+    int i,n,s=0;
+    cin>>n;
+    for(i=2;i<=n;i++)
+        s=(s+3)%i;
+    cout<<s+1<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题10.7]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有一字符串，包含n个字符。写一函数，将此字符串中从第m个字符开始的全部字符复制成为另一个字符串。]]></description>
+<input><![CDATA[数字n
+一行字符串
+数字m]]></input> 
+<output><![CDATA[从m开始的子串]]></output>
+<sample_input><![CDATA[6
+abcdef
+3]]></sample_input>
+<sample_output><![CDATA[cdef]]></sample_output>
+  <test_input><![CDATA[26
+abcdefghijklmnopqrstuvwxyz
+10]]></test_input>
+<test_output><![CDATA[jklmnopqrstuvwxyz]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+int main()
+{
+  int m,n,i;
+  char a[100];
+  scanf("%d",&m);
+  getchar();
+  gets(a);
+  scanf("%d",&n);
+  for(i=n-1;a[i]!='\0';i++)
+    putchar(a[i]);
+  puts("");
+  return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int main()
+{
+    string s,str;
+    char c;
+    int n,m,i;
+    cin>>n;
+    cin>>s;
+    cin>>m;
+    str=s.substr(m-1,n-m+1);
+    cout<<str<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题11.1]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[定义一个结构体变量（包括年、月、日）。计算该日在本年中是第几天，注意闰年问题。]]></description>
+<input><![CDATA[年月日]]></input> 
+<output><![CDATA[当年第几天]]></output>
+<sample_input><![CDATA[2000 12 31]]></sample_input>
+<sample_output><![CDATA[366]]></sample_output>
+  <test_input><![CDATA[2009 9 17]]></test_input>
+<test_output><![CDATA[260]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+struct time
+{
+	int year;
+	int month;
+	int day;
+}t;
+int main()
+{
+	int i, days = 0;
+	int a[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	scanf("%d%d%d", &t.year, &t.month, &t.day);
+	if((t.year % 4 == 0 && t.year % 100 != 0) || t.year % 400 == 0)
+		a[2] = 29;
+	for(i = 1; i < t.month; i++)
+		days += a[i];
+	printf("%d\n", days + t.day);
+	return 0;
+}]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+int main()
+{
+    int month[12]= {31,28,31,30,31,30,31,31,30,31,30,31};
+    int days=0,i;
+    int mon,day,year;
+    cin>>year>>mon>>day;
+    if((year%4==0&&year%100!=0)||year%400==0)
+        month[1]++;
+    for(i=0; i<mon-1; i++)
+        days+=month[i];
+    cout<<days+day<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题11.3]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[现有有N个学生的数据记录，每个记录包括学号、姓名、三科成绩。
+编写一个函数input,用来输入一个学生的数据记录。
+编写一个函数print,打印一个学生的数据记录。
+在主函数调用这两个函数，读取N条记录输入，再按要求输出。
+N&lt;100]]></description>
+<input><![CDATA[学生数量N占一行
+每个学生的学号、姓名、三科成绩占一行，空格分开。]]></input> 
+<output><![CDATA[每个学生的学号、姓名、三科成绩占一行，逗号分开。]]></output>
+<sample_input><![CDATA[2
+a100 zhblue 70 80 90
+b200 newsclan 90 85 75
+]]></sample_input>
+<sample_output><![CDATA[a100,zhblue,70,80,90
+b200,newsclan,90,85,75
+]]></sample_output>
+  <test_input><![CDATA[3
+1 2 3 4 5
+5 6 7 8 9
+10 11 12 13 14
+]]></test_input>
+<test_output><![CDATA[1,2,3,4,5
+5,6,7,8,9
+10,11,12,13,14
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int a;
+    char b[100];
+    scanf("%d",&a);
+    getchar();
+    for(int i=0;i<a;i++)
+    {
+        gets(b);
+        for(int j=0;b[j]!='\0';j++)
+            if(b[j]==' ')
+                putchar(',');
+            else putchar(b[j]);
+        puts("");
+    }
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+using namespace std;
+struct stu{
+    char num[100],name[100];
+    double s1,s2,s3;
+}s[100];
+int main()
+{
+    int n,i,j;
+    cin>>n;
+    for(i=0; i<n; i++)
+        cin>>s[i].num>>s[i].name>>s[i].s1>>s[i].s2>>s[i].s3;
+    for(i=0;i<n;i++)
+    cout<<s[i].num<<','<<s[i].name<<','<<s[i].s1<<','<<s[i].s2<<','<<s[i].s3<<endl;
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题11.5]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有N个学生，每个学生的数据包括学号、姓名、3门课的成绩，从键盘输入N个学生的数据，要求打印出3门课的总平均成绩，以及最高分的学生的数据（包括学号、姓名、3门课成绩）]]></description>
+<input><![CDATA[学生数量N占一行每个学生的学号、姓名、三科成绩占一行，空格分开。]]></input> 
+<output><![CDATA[各门课的平均成绩
+最高分的学生的数据（包括学号、姓名、3门课成绩）]]></output>
+<sample_input><![CDATA[2
+1 blue 90 80 70
+b clan 80 70 60]]></sample_input>
+<sample_output><![CDATA[85 75 65
+1 blue 90 80 70]]></sample_output>
+  <test_input><![CDATA[3
+1 blue 85 75 65
+2 clan 80 70 60
+a zzy 90 80 70
+]]></test_input>
+<test_output><![CDATA[85 75 65
+a zzy 90 80 70]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+int N;
+struct Student
+{
+	char num[20];
+	char name[20];
+	int score[3];
+	int aver;
+};
+int main()
+{
+    int ss[N];
+    scanf("%d",&N);
+    memset(ss,0,sizeof(0));
+	void input(struct Student stu[]);
+	struct Student max(struct Student stu[]);
+	void print(struct Student stu);
+	struct Student stu[N],*p=stu;
+    input(p);
+    for(int i=0;i<3;i++)
+    {
+        ss[i]=0;
+        for(int j = 0 ;j< N;j++)
+        ss[i]+=stu[j].score[i];
+    }
+    printf("%d %d %d\n",ss[0]/N,ss[1]/N,ss[2]/N);
+	print(max(p));
+	return 0;
+}
+	void input(struct Student stu[])
+	{
+		int i;
+		for(i=0;i<N;i++)
+		{
+			scanf("%s %s %d %d %d",stu[i].num,stu[i].name,&stu[i].score[0],&stu[i].score[1],&stu[i].score[2]);
+			stu[i].aver=(stu[i].score[0]+stu[i].score[1]+stu[i].score[2])/3;
+		}
+
+	}
+	struct Student max(struct Student stu[])
+	{
+		int i,m=0;
+		for(i=0;i<N;i++)
+			if(stu[i].aver>stu[m].aver)
+				m=i;
+			return stu[m];
+	}
+	void print(struct Student stu)
+	{
+		printf("%s %s %d %d %d\n",stu.num,stu.name,stu.score[0],stu.score[1],stu.score[2]);
+	}
+]]></solution>
+			<solution language="C++"><![CDATA[#include<stdlib.h>
+#include<stdio.h>
+struct student
+{
+    char num[4];
+    char name[10];
+    int great[3];
+    int sum;
+
+
+};
+int main()
+{
+    int n,m,i,j,sum1=0,sum2=0,sum3=0;
+    scanf("%d",&n);
+    struct student a[n],temp;
+    temp.sum=0;
+    for(i=0; i<n; i++)
+    {
+        scanf("%s",&a[i].num);
+        scanf("%s",&a[i].name);
+        scanf("%d%d%d",&a[i].great[0],&a[i].great[1],&a[i].great[2]);
+        a[i].sum=a[i].great[0]+a[i].great[1]+a[i].great[2];
+    }
+
+    for(i=0; i<n; i++)
+    {
+        sum1+=a[i].great[0];
+        sum2+=a[i].great[1];
+        sum3+=a[i].great[2];
+    }
+    printf("%d %d %d\n",sum1/n,sum2/n,sum3/n);
+    for(i=0; i<n; i++)
+        if(a[i].sum>temp.sum)
+            temp=a[i];
+
+    printf("%s ",temp.num);
+    printf("%s ",temp.name);
+    printf("%d %d %d\n",temp.great[0],temp.great[1],temp.great[2]);
+    return 0;
+}
+]]></solution>
+	</item>
+<item>
+<title><![CDATA[C语言程序设计教程（第三版）课后习题11.8]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[已有a、b两个链表，每个链表中的结点包括学好、成绩。要求把两个链表合并，按学号升序排列。]]></description>
+<input><![CDATA[第一行，a、b两个链表元素的数量N、M,用空格隔开。
+接下来N行是a的数据
+然后M行是b的数据
+每行数据由学号和成绩两部分组成]]></input> 
+<output><![CDATA[按照学号升序排列的数据]]></output>
+<sample_input><![CDATA[2 3
+5 100
+6 89
+3 82
+4 95
+2 10]]></sample_input>
+<sample_output><![CDATA[2 10
+3 82
+4 95
+5 100
+6 89]]></sample_output>
+  <test_input><![CDATA[15 15
+2 20
+4 40
+6 60
+8 80
+10 100
+12 120
+14 140
+16 160
+18 180
+20 200
+22 220
+24 240
+26 260
+28 280
+30 300
+1 10
+3 30
+5 50
+7 70
+9 90
+11 110
+13 130
+15 150
+17 170
+19 190
+21 210
+23 230
+25 250
+27 270
+29 290]]></test_input>
+<test_output><![CDATA[1 10
+2 20
+3 30
+4 40
+5 50
+6 60
+7 70
+8 80
+9 90
+10 100
+11 110
+12 120
+13 130
+14 140
+15 150
+16 160
+17 170
+18 180
+19 190
+20 200
+21 210
+22 220
+23 230
+24 240
+25 250
+26 260
+27 270
+28 280
+29 290
+30 300]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[语言入门-谭浩强C程序设计课后习题]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<malloc.h>
+typedef struct student
+{
+    int a;
+    int b;
+    struct student *next;
+} STU;
+int main()
+{
+    int m,n;
+    scanf("%d%d",&n,&m);
+    int i,j,k,l;
+    i=n;
+    j=m;
+    STU *q1,*q2,head1,head2,*p;
+       q1=&head1;
+       q2=&head2;
+    while(i--)
+    {
+        p=(STU*)malloc(sizeof(STU));
+        scanf("%d %d",&p->a,&p->b);
+        q1->next=p;
+        q1=q1->next;
+    }
+        while(j--)
+    {
+        p=(STU*)malloc(sizeof(STU));
+        scanf("%d %d",&p->a,&p->b);
+        q2->next=p;
+        q2=q2->next;
+    }
+    q1->next=head2.next;
+    STU *x,*y;
+    for(x=head1.next; x!=NULL;x=x->next)
+        for(y=x; y!=NULL;y=y->next)
+        if(x->a>y->a)
+    {
+        int temp;
+        temp=x->a;
+        x->a=y->a;
+        y->a=temp;
+         temp=x->b;
+        x->b=y->b;
+        y->b=temp;
+    }
+    STU *g;
+    g=head1.next;
+    while(g!=NULL)
+    {
+        printf("%d ",g->a);
+        printf("%d\n",g->b);
+        g=g->next;
+    }
+    return 0;
+}
+]]></solution>
+			<solution language="C++"><![CDATA[#include <iostream>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+struct A
+{
+    int num,score;
+}a[100000];
+int cmp(A p1,A p2)
+{
+
+    if(p1.num<p2.num) return 1;
+    else return 0;
+}
+int main()
+{
+    int N,M,i,j,k;
+    cin>>N>>M;
+    for(i = 0,j = 0;i < N; i++,j++)
+    cin>>a[j].num>>a[j].score;
+    for(k = 0;k < M;k++,j++)
+    cin>>a[j].num>>a[j].score;
+    sort(a,a+N+M,cmp);
+    for(i = 0;i < N + M; i++)
+    cout<<a[i].num<<" "<<a[i].score<<endl;
+   
+    return 0;
+}
+]]></solution>
+	</item>
+</fps>

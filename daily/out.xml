@@ -1,0 +1,4124 @@
+
+<item>
+<title><![CDATA[输出指定图形]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，当程序运行时，输出以下图形：
+\`\`\`
+****
+****
+  ****
+   ****
+\`\`\`
+注意：每行开头的空格表示缩进，实际输出不应包含这些空格。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出如描述中的图形]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[****
+****
+  ****
+   ****]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[****
+****
+  ****
+   ****]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+printf("****\n****\n  ****\n   ****\n");
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[圆的周长和面积计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，已知圆的半径$r=3.1$，计算并输出圆的周长和面积，结果保留两位小数。圆的周长公式为$C=2\pi r$，面积公式为$S=\pi r^2$。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出圆的周长和面积，每行一个结果，保留两位小数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[19.48
+30.19]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[19.48
+30.19]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#define PI 3.14159265358979323846
+
+int main() {
+    double r = 3.1;
+    double circumference = 2 * PI * r;
+    double area = PI * r * r;
+    printf("%.2f\n%.2f\n", circumference, area);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断奇偶数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入一个正整数n，判断其是奇数还是偶数，并输出结果。]]></description>
+<input><![CDATA[输入一个正整数n。]]></input>
+<output><![CDATA[输出"奇数"或"偶数"。]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[奇数]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10]]></test_input>
+<test_output><![CDATA[奇数
+偶数
+奇数
+偶数
+奇数
+偶数
+奇数
+偶数
+奇数
+偶数]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n % 2 == 0)
+        printf("偶数\n");
+    else
+        printf("奇数\n");
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求1到100的和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，使用for循环计算从1加到100的和，并输出结果。数学公式表示为：$\sum_{i=1}^{100} i$。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个整数，表示1加到100的和。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[5050]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[5050]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int sum = 0;
+    for(int i = 1; i <= 100; i++) {
+        sum += i;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[找出不能被5和7同时整除的数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，找出并输出300到400之间所有不能被5和7同时整除的数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出所有不能被5和7同时整除的数，每个数占一行。]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[301
+302
+303
+304
+306
+307
+308
+309
+311
+312
+313
+314
+316
+317
+318
+319
+321
+322
+323
+324
+326
+327
+328
+329
+331
+332
+333
+334
+336
+337
+338
+339
+341
+342
+343
+344
+346
+347
+348
+349
+351
+352
+353
+354
+356
+357
+358
+359
+361
+362
+363
+364
+366
+367
+368
+369
+371
+372
+373
+374
+376
+377
+378
+379
+381
+382
+383
+384
+386
+387
+388
+389
+391
+392
+393
+394
+396
+397
+398
+399]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[301
+302
+303
+304
+306
+307
+308
+309
+311
+312
+313
+314
+316
+317
+318
+319
+321
+322
+323
+324
+326
+327
+328
+329
+331
+332
+333
+334
+336
+337
+338
+339
+341
+342
+343
+344
+346
+347
+348
+349
+351
+352
+353
+354
+356
+357
+358
+359
+361
+362
+363
+364
+366
+367
+368
+369
+371
+372
+373
+374
+376
+377
+378
+379
+381
+382
+383
+384
+386
+387
+388
+389
+391
+392
+393
+394
+396
+397
+398
+399]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 300; i <= 400; i++) {
+        if(i % 5 != 0 || i % 7 != 0) {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[国民生产总值增长率计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[计算我国国民生产总值在年增长率为7%的情况下，10年后与现在相比增长多少百分比。计算公式为：$p = (1 + r)^n$，其中 $r$ 为年增长率（7%），$n$ 为年数（10年），$p$ 为与现在相比的倍数。结果保留两位小数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个浮点数，表示10年后国民生产总值与现在相比增长的百分比，保留两位小数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[196.72]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[196.72]]></test_output>
+<hint><![CDATA[注意使用合适的数学库函数来计算幂运算，并确保结果保留两位小数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    double r = 0.07; // 年增长率
+    int n = 10; // 年数
+    double p = pow(1 + r, n); // 计算倍数
+    printf("%.2f\n", (p - 1) * 100); // 输出增长的百分比
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求两个正整数中的较大数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入两个正整数m和n，找到并输出二者中的较大数。]]></description>
+<input><![CDATA[输入包含两个正整数m和n，用空格分隔。]]></input>
+<output><![CDATA[输出一个整数，表示m和n中的较大数。]]></output>
+<sample_input><![CDATA[5 7]]></sample_input>
+<sample_output><![CDATA[7]]></sample_output>
+<test_input><![CDATA[1 2
+3 4
+5 6
+7 8
+9 10
+11 12
+13 14
+15 16
+17 18
+19 20]]></test_input>
+<test_output><![CDATA[2
+4
+6
+8
+10
+12
+14
+16
+18
+20]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int m, n;
+    scanf("%d %d", &m, &n);
+    printf("%d\n", (m > n) ? m : n);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求1+2+3+…+50的和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，使用do...while循环计算并输出从1加到50的和，即求和公式为：$\sum_{n=1}^{50} n$。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个整数，表示1+2+3+…+50的和。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[1275]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[1275]]></test_output>
+<hint><![CDATA[注意使用do...while循环确保至少执行一次循环体。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int sum = 0;
+    int i = 1;
+    do {
+        sum += i;
+        i++;
+    } while(i <= 50);
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[Fibonacci数列的前20个数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，求解Fibonacci数列的前20个数。Fibonacci数列的特点如下：
+- 第1个和第2个数为1，即F(1)=1, F(2)=1。
+- 从第3个数开始，每个数是其前面两个数之和，即F(n)=F(n-1)+F(n-2) (n>=3)。
+数列的前几项为：1, 1, 2, 3, 5, 8, 13, ...]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出Fibonacci数列的前20个数，每个数占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+6765
+]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+6765
+]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int fib[20] = {1, 1};
+    for(int i = 2; i < 20; i++) {
+        fib[i] = fib[i-1] + fib[i-2];
+    }
+    for(int i = 0; i < 20; i++) {
+        printf("%d\n", fib[i]);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求1~1000之间满足特定条件的整数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，找出并输出1到1000之间所有满足以下条件的整数：
+1. 除以3余1
+2. 除以5余2
+3. 除以7余3]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出满足条件的整数，每个整数占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[17
+37
+57
+...</sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[17
+37
+57
+97
+117
+137
+157
+177
+197
+217
+237
+257
+277
+297
+317
+337
+357
+377
+397
+417
+437
+457
+477
+497
+517
+537
+557
+577
+597
+617
+637
+657
+677
+697
+717
+737
+757
+777
+797
+817
+837
+857
+877
+897
+917
+937
+957
+977
+997]]></test_output>
+<hint><![CDATA[可以考虑使用循环和条件判断来找出满足条件的整数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 1; i <= 1000; i++) {
+        if(i % 3 == 1 && i % 5 == 2 && i % 7 == 3) {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算存款利息]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[有1000元，想存一年。有3种方法可选：(1)活期，年利率为$r1=0.0036$；(2)一年期定期，年利率为$r2=0.0225$；(3)存两次半年定期，年利率为$r3=0.0198$。请分别计算出一年后按这3种不同方法所得到的本息和。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出三行，分别表示活期、一年期定期、两次半年定期的本息和，保留四位小数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[1003.6000
+1022.5000
+1019.8019]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[1003.6000
+1022.5000
+1019.8019
+1003.6000
+1022.5000
+1019.8019
+1003.6000
+1022.5000
+1019.8019
+1003.6000
+1022.5000
+1019.8019
+1003.6000
+1022.5000
+1019.8019]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double principal = 1000.0;
+    double r1 = 0.0036, r2 = 0.0225, r3 = 0.0198;
+
+    // 计算活期本息和
+    double interest1 = principal * r1;
+    printf("%.4f\n", principal + interest1);
+
+    // 计算一年期定期本息和
+    double interest2 = principal * r2;
+    printf("%.4f\n", principal + interest2);
+
+    // 计算两次半年定期本息和
+    double interest3 = principal * (1 + r3 / 2) * (1 + r3 / 2) - principal;
+    printf("%.4f\n", principal + interest3);
+
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断正整数能否被3整除]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入一个正整数n，判断其是否能被3整除。如果能被3整除，输出"Yes"；否则，输出"No"。]]></description>
+<input><![CDATA[输入一个正整数n。]]></input>
+<output><![CDATA[如果n能被3整除，输出"Yes"；否则，输出"No"。]]></output>
+<sample_input><![CDATA[12]]></sample_input>
+<sample_output><![CDATA[Yes]]></sample_output>
+<test_input><![CDATA[3
+6
+9
+10
+15
+20
+21
+22
+27
+30]]></test_input>
+<test_output><![CDATA[Yes
+Yes
+Yes
+No
+Yes
+No
+Yes
+No
+Yes
+Yes]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n % 3 == 0)
+        printf("Yes\n");
+    else
+        printf("No\n");
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[函数求值]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，根据输入的x值，计算并输出对应的y值。函数定义如下：
+\[ y = \begin{cases}
+x & \text{if } x < 1 \\
+2x - 1 & \text{if } 1 \leq x < 10 \\
+3x - 11 & \text{if } x \geq 10
+\end{cases}
+\]]]></description>
+<input><![CDATA[输入一个整数x。]]></input>
+<output><![CDATA[输出对应的y值，一个整数。]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[9]]></sample_output>
+<test_input><![CDATA[-1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18]]></test_input>
+<test_output><![CDATA[-1
+0
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+22
+25
+28
+31
+34
+37
+40
+43]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int x;
+    scanf("%d", &x);
+    if(x < 1)
+        printf("%d\n", x);
+    else if(x < 10)
+        printf("%d\n", 2*x - 1);
+    else
+        printf("%d\n", 3*x - 11);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求和计算（1+2+3+…+20）]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，使用while循环计算从1到20的整数和，并输出结果。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个整数，表示1+2+3+…+20的和。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[210]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[210]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int sum = 0;
+    int i = 1;
+    while(i <= 20) {
+        sum += i;
+        i++;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求100～200之间各位数字之和为6的整数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，找出并输出100到200之间所有各位数字之和等于6的整数。例如，对于数字105，其各位数字之和为1+0+5=6，因此105是一个符合条件的数字。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出所有符合条件的整数，每个整数占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[105
+114
+123
+132
+141
+150]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[105
+114
+123
+132
+141
+150
+159
+168
+177
+186
+195]]></test_output>
+<hint><![CDATA[可以考虑使用循环遍历100到200之间的所有整数，然后计算每个整数的各位数字之和，判断是否等于6。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int sum_of_digits(int num) {
+    int sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+int main() {
+    for (int i = 100; i <= 200; i++) {
+        if (sum_of_digits(i) == 6) {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出"Hello World!"]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，在屏幕上输出一行文字：“Hello World！”。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一行文字：“Hello World！”]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[Hello World!]]></sample_output>
+<test_input><![CDATA[
+]]></test_input>
+<test_output><![CDATA[
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    printf("Hello World!\n");
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求解二次方程的根]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收三个整数a, b, c作为输入，求解二次方程ax^2 + bx + c = 0的根。假设b^2 - 4ac > 0且a ≠ 0。二次方程的根可以通过以下公式计算：x = (-b ± sqrt(b^2 - 4ac)) / (2a)]]></description>
+<input><![CDATA[输入三个整数a, b, c，分别表示二次方程的系数。]]></input>
+<output><![CDATA[输出两个实数，分别表示二次方程的两个根。]]></output>
+<sample_input><![CDATA[1 2 1]]></sample_input>
+<sample_output><![CDATA[-1.00 -1.00]]></sample_output>
+<test_input><![CDATA[1 2 1
+2 5 2
+1 -3 2
+1 0 1
+1 4 4
+1 6 9
+1 -4 4
+1 8 16
+1 -6 9
+1 10 25]]></test_input>
+<test_output><![CDATA[-1.00 -1.00
+-0.50 -2.00
+2.00 1.00
+1.00 -1.00
+-2.00 -2.00
+-3.00 -3.00
+2.00 2.00
+-4.00 -4.00
+3.00 3.00
+-5.00 -5.00]]></test_output>
+<hint><![CDATA[注意处理浮点数的精度问题。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    double a, b, c, x1, x2;
+    while(scanf("%lf %lf %lf", &a, &b, &c) == 3) {
+        x1 = (-b + sqrt(b*b - 4*a*c)) / (2*a);
+        x2 = (-b - sqrt(b*b - 4*a*c)) / (2*a);
+        printf("%.2lf %.2lf\n", x1, x2);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断字符是否为大写字母]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个字符，判断该字符是否为大写字母。大写字母的ASCII码范围是65（'A'）到90（'Z'）。]]></description>
+<input><![CDATA[输入一个字符。]]></input>
+<output><![CDATA[如果输入的字符是大写字母，输出"Yes"，否则输出"No"。]]></output>
+<sample_input><![CDATA[A]]></sample_input>
+<sample_output><![CDATA[Yes]]></sample_output>
+<test_input><![CDATA[A
+B
+C
+Z
+a
+b
+c
+z
+0
+1
+@
+#]]></test_input>
+<test_output><![CDATA[Yes
+Yes
+Yes
+Yes
+No
+No
+No
+No
+No
+No
+No
+No]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+char c;
+while(scanf("%c", &c) == 1) {
+if(c >= 'A' && c <= 'Z')
+printf("Yes\n");
+else
+printf("No\n");
+}
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算两个正整数的最大公约数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入两个正整数，计算并输出这两个数的最大公约数。最大公约数（Greatest Common Divisor, GCD）是能够同时整除这两个数的最大正整数。]]></description>
+<input><![CDATA[输入包含两个正整数，用空格分隔。]]></input>
+<output><![CDATA[输出一个整数，表示这两个数的最大公约数。]]></output>
+<sample_input><![CDATA[12 18]]></sample_input>
+<sample_output><![CDATA[6]]></sample_output>
+<test_input><![CDATA[12 18
+48 60
+7 9
+100 100
+1 1000
+24 36
+50 75
+10 15
+33 44
+15 20]]></test_input>
+<test_output><![CDATA[6
+12
+1
+100
+1
+12
+25
+5
+11
+5]]></test_output>
+<hint><![CDATA[可以使用欧几里得算法来计算最大公约数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+int main() {
+    int a, b;
+    while(scanf("%d %d", &a, &b) == 2) {
+        printf("%d\n", gcd(a, b));
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[200~300之间能被3整除但不能被5整除的整数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出200到300之间所有能被3整除但不能被5整除的整数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出所有符合条件的整数，每行一个。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[201
+204
+207
+213
+216
+219
+222
+228
+231
+234
+237
+243
+246
+249
+252
+258
+261
+264
+267
+273
+276
+279
+282
+288
+291
+294
+297]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[201
+204
+207
+213
+216
+219
+222
+228
+231
+234
+237
+243
+246
+249
+252
+258
+261
+264
+267
+273
+276
+279
+282
+288
+291
+294
+297]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 200; i <= 300; i++) {
+        if(i % 3 == 0 && i % 5 != 0) {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[三位正整数各位数字之和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个三位正整数，计算并输出该数各位数字之和。例如，输入数字123，输出应为1+2+3=6。]]></description>
+<input><![CDATA[一个三位正整数。]]></input>
+<output><![CDATA[输出一个整数，表示输入数字各位数字之和。]]></output>
+<sample_input><![CDATA[123]]></sample_input>
+<sample_output><![CDATA[6]]></sample_output>
+<test_input><![CDATA[100
+101
+111
+123
+200
+201
+210
+211
+222
+300
+301
+310
+311
+321
+333
+400
+401
+410
+411
+423]]></test_input>
+<test_output><![CDATA[1
+2
+3
+6
+2
+3
+3
+4
+6
+3
+4
+4
+5
+6
+9
+4
+5
+5
+6
+9]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int num, sum = 0, digit;
+    scanf("%d", &num);
+    if(num >= 100 && num <= 999) {
+        digit = num % 10;
+        sum += digit;
+        num /= 10;
+        digit = num % 10;
+        sum += digit;
+        num /= 10;
+        digit = num % 10;
+        sum += digit;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[100以内8的倍数输出]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出100以内所有8的倍数，要求输出时每4个数字占一行。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出100以内所有8的倍数，每4个数字占一行。]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[8 16 24 32
+40 48 56 64
+72 80 88 96]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[8 16 24 32
+40 48 56 64
+72 80 88 96]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 8; i <= 100; i += 8) {
+        printf("%d ", i);
+        if(i % 32 == 0) printf("\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[圆柱体表面积和体积计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算并输出一个圆柱体的表面积和体积。已知圆柱体的底面半径r和高h，使用以下公式计算：
+表面积 = 2πr(r + h)
+体积 = πr^2h
+其中，π取3.141592653589793。]]></description>
+<input><![CDATA[输入两个整数，第一个表示圆柱体的底面半径r（3），第二个表示圆柱体的高h（10）。]]></input>
+<output><![CDATA[输出两行，第一行表示圆柱体的表面积，第二行表示圆柱体的体积，均保留两位小数。]]></output>
+<sample_input><![CDATA[3 10]]></sample_input>
+<sample_output><![CDATA[251.33
+282.74]]></sample_output>
+<test_input><![CDATA[3 10
+1 1
+5 5
+10 10
+15 15
+20 20
+25 25
+30 30
+35 35
+40 40]]></test_input>
+<test_output><![CDATA[251.33
+282.74
+12.57
+3.14
+157.08
+392.70
+628.32
+1256.64
+962.11
+1963.50
+1256.64
+2513.27
+1570.79
+3141.59
+1884.96
+3769.91
+2199.11
+4398.23]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    double r, h;
+    scanf("%lf %lf", &r, &h);
+    double area = 2 * M_PI * r * (r + h);
+    double volume = M_PI * r * r * h;
+    printf("%.2f\n%.2f\n", area, volume);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[字符串小写转大写]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入一个不长于10个字符的字符串，将其中的小写字母转换成大写字符，其他字符保持不变，并输出转换后的结果。]]></description>
+<input><![CDATA[输入一个不长于10个字符的字符串。]]></input>
+<output><![CDATA[输出转换后的字符串，其中小写字母已转换为大写，其他字符保持不变。]]></output>
+<sample_input><![CDATA[helloWorld]]></sample_input>
+<sample_output><![CDATA[HELLOWORLD]]></sample_output>
+<test_input><![CDATA[a
+b
+c
+1
+2
+3
+helloWorld
+WORLDHELLO
+abcdefghij
+ABCDEFGHIJ]]></test_input>
+<test_output><![CDATA[A
+B
+C
+1
+2
+3
+HELLOWORLD
+WORLDHELLO
+ABCDEFGHIJ
+ABCDEFGHIJ]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+char str[11];
+fgets(str, 11, stdin);
+str[strcspn(str, "\n")] = 0; // 移除换行符
+for(int i = 0; str[i]; i++) {
+if(str[i] >= 'a' && str[i] <= 'z')
+str[i] = str[i] - 'a' + 'A';
+}
+printf("%s\n", str);
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[等差数列求和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算等差数列的和，该数列的首项为1，公差为3，末项为112。数列的通项公式为：$a_n = 1 + 3(n - 1)$，其中$n$是项数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个整数，表示数列的和。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[2147]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[2147]]></test_output>
+<hint><![CDATA[可以使用等差数列求和公式：$S_n = \frac{n}{2} (a_1 + a_n)$，其中$n$是项数，$a_1$是首项，$a_n$是末项。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a1 = 1;
+    int an = 112;
+    int n = (an - a1) / 3 + 1;
+    int sum = n * (a1 + an) / 2;
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[正方形周长和面积计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算边长为5的正方形的周长和面积，并输出结果。正方形的周长公式为 $P = 4a$，面积公式为 $S = a^2$，其中 $a$ 是正方形的边长。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出两行，第一行是正方形的周长，第二行是正方形的面积。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[20
+25]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[20
+25]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+int side = 5;
+int perimeter = 4 * side;
+int area = side * side;
+printf("%d\n%d\n", perimeter, area);
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[按大小顺序输出两个数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收两个整数，然后按照由大到小的顺序输出这两个数。]]></description>
+<input><![CDATA[输入包含两个整数，用空格分隔。]]></input>
+<output><![CDATA[输出两个整数，用空格分隔，按照由大到小的顺序。]]></output>
+<sample_input><![CDATA[5 3]]></sample_input>
+<sample_output><![CDATA[5 3]]></sample_output>
+<test_input><![CDATA[10 20
+30 15
+5 5
+100 -100
+0 0
+-5 -10
+1000 1000
+-1000 -2000
+2000 1000
+-2000 -1000]]></test_input>
+<test_output><![CDATA[20 10
+30 15
+5 5
+100 -100
+0 0
+-5 -10
+1000 1000
+-1000 -2000
+2000 1000
+-2000 -1000]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a, b;
+    while(scanf("%d %d", &a, &b) == 2) {
+        if(a > b)
+            printf("%d %d\n", a, b);
+        else
+            printf("%d %d\n", b, a);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出4×5矩阵]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出一个4×5的矩阵，矩阵中的每个元素是行号和列号的乘积。矩阵如下：
+```
+1  2  3  4  5
+2  4  6  8  10
+3  6  9  12 15
+4  8  12 16 20
+```
+]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出矩阵，每行元素之间用空格分隔，行与行之间用换行符分隔。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[
+1 2 3 4 5
+2 4 6 8 10
+3 6 9 12 15
+4 8 12 16 20
+]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[
+1 2 3 4 5
+2 4 6 8 10
+3 6 9 12 15
+4 8 12 16 20
+]]></test_output>
+<hint><![CDATA[注意矩阵的格式，确保每行元素对齐。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 1; i <= 4; i++) {
+        for(int j = 1; j <= 5; j++) {
+            printf("%d ", i * j);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[找出10个整数中的最大数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收10个整数作为输入，然后找出这10个数中的最大数并输出。]]></description>
+<input><![CDATA[输入包含10个整数，每个整数之间用空格或换行符分隔。]]></input>
+<output><![CDATA[输出一个整数，表示这10个整数中的最大数。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[10]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+-1 -2 -3 -4 -5 -6 -7 -8 -9 -10
+0 0 0 0 0 0 0 0 0 0
+1000000 2000000 3000000 4000000 5000000 6000000 7000000 8000000 9000000 10000000
+-1000000 -2000000 -3000000 -4000000 -5000000 -6000000 -7000000 -8000000 -9000000 -10000000
+10 20 30 40 50 60 70 80 90 100
+-10 -20 -30 -40 -50 -60 -70 -80 -90 -100
+1 1 1 1 1 1 1 1 1 1
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+500 500 500 500 500 500 500 500 500 500]]></test_input>
+<test_output><![CDATA[10
+10
+0
+10000000
+-1000000
+100
+-10
+1
+-1
+500]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int numbers[10], max;
+    for(int i = 0; i < 10; i++) {
+        scanf("%d", &numbers[i]);
+    }
+    max = numbers[0];
+    for(int i = 1; i < 10; i++) {
+        if(numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+    printf("%d\n", max);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[满足条件的数查找]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，找出并输出200到300之间所有满足以下条件的数：
+1. 个位数、十位数和百位数之积等于42。
+2. 这三个数之和等于12。
+]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出所有满足条件的数，每行一个数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[237
+273]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[237
+273]]></test_output>
+<hint><![CDATA[可以逐个检查200到300之间的每个数，提取其个位、十位和百位，并检查是否满足条件。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int num = 200; num <= 300; num++) {
+        int hundreds = num / 100;
+        int tens = (num / 10) % 10;
+        int units = num % 10;
+        if(hundreds * tens * units == 42 && hundreds + tens + units == 12) {
+            printf("%d\n", num);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[梯形面积计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收梯形的上底（$a$），下底（$b$）和高（$h$），计算并输出梯形的面积，保留两位小数。梯形面积的计算公式为：$\frac{(a + b) \times h}{2}$。]]></description>
+<input><![CDATA[输入三个浮点数，分别表示梯形的上底、下底和高，以空格分隔。]]></input>
+<output><![CDATA[输出一个浮点数，表示梯形的面积，保留两位小数。]]></output>
+<sample_input><![CDATA[3.0 5.0 4.0]]></sample_input>
+<sample_output><![CDATA[16.00]]></sample_output>
+<test_input><![CDATA[1.0 2.0 1.0
+3.0 5.0 4.0
+10.0 20.0 5.0
+0.5 1.5 0.5
+5.5 7.5 3.0
+2.2 4.4 2.0
+1.1 2.2 1.1
+3.3 6.6 3.3
+4.4 8.8 4.4
+5.5 11.0 5.5
+6.6 13.2 6.6
+7.7 15.4 7.7
+8.8 17.6 8.8
+9.9 19.8 9.9
+10.0 20.0 10.0]]></test_input>
+<test_output><![CDATA[1.50
+16.00
+75.00
+0.50
+19.50
+6.60
+1.65
+16.50
+22.00
+34.13
+46.20
+58.28
+70.35
+82.43
+95.00]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double a, b, h;
+    scanf("%lf %lf %lf", &a, &b, &h);
+    printf("%.2f\n", (a + b) * h / 2);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[百分制成绩转换为等级]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个百分制成绩（0到100的整数），输出对应的成绩等级。成绩等级划分如下：
+- 90~100分：'A'
+- 80~89分：'B'
+- 70~79分：'C'
+- 60~69分：'D'
+- 60分以下：'E']]></description>
+<input><![CDATA[一个整数，表示百分制成绩（0-100）]]></input>
+<output><![CDATA[输出一个字符，表示成绩等级（'A'、'B'、'C'、'D'、'E'）]]></output>
+<sample_input><![CDATA[85]]></sample_input>
+<sample_output><![CDATA[B]]></sample_output>
+<test_input><![CDATA[100
+95
+85
+75
+65
+55
+45
+35
+25
+15
+5
+0]]></test_input>
+<test_output><![CDATA[A
+A
+B
+C
+D
+E
+E
+E
+E
+E
+E
+E]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int score;
+    while(scanf("%d", &score) == 1) {
+        if(score >= 90 && score <= 100)
+            printf("A\n");
+        else if(score >= 80)
+            printf("B\n");
+        else if(score >= 70)
+            printf("C\n");
+        else if(score >= 60)
+            printf("D\n");
+        else
+            printf("E\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断闰年]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入一个年份，判断其是否为闰年。闰年的定义如下：
+- 能被4整除，但不能被100整除的年份。
+- 能被400整除的年份。]]></description>
+<input><![CDATA[输入一个整数，表示年份。]]></input>
+<output><![CDATA[输出一个字符串，如果输入的年份是闰年，则输出"Yes"，否则输出"No"。]]></output>
+<sample_input><![CDATA[2000]]></sample_input>
+<sample_output><![CDATA[Yes]]></sample_output>
+<test_input><![CDATA[2000
+1900
+2004
+2100
+2400
+1800
+1600
+2001
+2002
+2003]]></test_input>
+<test_output><![CDATA[Yes
+No
+Yes
+No
+Yes
+No
+Yes
+No
+No
+No]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int year;
+    while(scanf("%d", &year) == 1) {
+        if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+            printf("Yes\n");
+        else
+            printf("No\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求去极值后的平均数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入10个整数，去掉这组数中的最大值和最小值，然后计算并输出剩余8个数的平均数。]]></description>
+<input><![CDATA[输入包含10个整数，用空格或换行分隔。]]></input>
+<output><![CDATA[输出一个浮点数，表示去掉最大值和最小值后的8个数的平均数。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[5.5]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+-10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+0 1 2 3 4 5 6 7 8 9
+100 200 300 400 500 600 700 800 900 1000
+-500 -400 -300 -200 -100 0 100 200 300 400
+10 10 10 10 10 10 10 10 10 10
+-10 -10 -10 -10 -10 -10 -10 -10 -10 -10
+10000 20000 30000 40000 50000 60000 70000 80000 90000 100000
+-10000 -20000 -30000 -40000 -50000 -60000 -70000 -80000 -90000 -100000
+0 0 0 0 0 0 0 0 0 0]]></test_input>
+<test_output><![CDATA[5.5
+-5.5
+4.5
+650.0
+-150.0
+10.0
+-10.0
+60000.0
+-60000.0
+0.0]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<limits.h>
+
+int main() {
+    int numbers[10];
+    int i;
+    double sum = 0;
+
+    for(i = 0; i < 10; i++) {
+        scanf("%d", &numbers[i]);
+        sum += numbers[i];
+    }
+
+    int min = INT_MAX, max = INT_MIN;
+    for(i = 0; i < 10; i++) {
+        if(numbers[i] < min) min = numbers[i];
+        if(numbers[i] > max) max = numbers[i];
+    }
+
+    sum -= min;
+    sum -= max;
+
+    printf("%.1f\n", sum / 8);
+
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求1~1000之间能同时被3,5,7整除的数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，求解1到1000之间能同时被3,5,7整除的数。要求按每行4个数的格式输出结果。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出1到1000之间能同时被3,5,7整除的数，每行4个数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[105 210 315 420
+525 630 735 840
+945]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[105 210 315 420
+525 630 735 840
+945]]></test_output>
+<hint><![CDATA[注意检查每个数是否能同时被3,5,7整除，并控制输出格式。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int count = 0;
+    for(int i = 1; i <= 1000; i++) {
+        if(i % 3 == 0 && i % 5 == 0 && i % 7 == 0) {
+            printf("%d ", i);
+            count++;
+            if(count % 4 == 0) printf("\n");
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[分钟换算为小时和分钟]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个表示总分钟数的整数，输出这个分钟数换算成的小时数和分钟数。例如，70分钟换算为1小时10分钟。]]></description>
+<input><![CDATA[一个整数，表示总分钟数。]]></input>
+<output><![CDATA[输出换算后的小时数和分钟数，格式为“小时数 分钟数”。]]></output>
+<sample_input><![CDATA[560]]></sample_input>
+<sample_output><![CDATA[9 20]]></sample_output>
+<test_input><![CDATA[10
+60
+120
+180
+240
+300
+360
+420
+480
+540
+600
+660
+720]]></test_input>
+<test_output><![CDATA[0 10
+1 0
+2 0
+3 0
+4 0
+5 0
+6 0
+7 0
+8 0
+9 0
+10 0
+11 0
+12 0]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int minutes;
+    while(scanf("%d", &minutes) == 1) {
+        int hours = minutes / 60;
+        int remaining_minutes = minutes % 60;
+        printf("%d %d\n", hours, remaining_minutes);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[三位正整数各位数字之和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个三位正整数，计算并输出该数各位数字之和。例如，输入数字123，输出应为1+2+3=6。]]></description>
+<input><![CDATA[一个三位正整数。]]></input>
+<output><![CDATA[输出一个整数，表示输入数字各位数字之和。]]></output>
+<sample_input><![CDATA[123]]></sample_input>
+<sample_output><![CDATA[6]]></sample_output>
+<test_input><![CDATA[100
+101
+111
+222
+333
+444
+555
+666
+777
+888
+999]]></test_input>
+<test_output><![CDATA[1
+2
+3
+6
+9
+12
+15
+18
+21
+24
+27]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int num, sum = 0, digit;
+    scanf("%d", &num);
+    if(num >= 100 && num <= 999) {
+        digit = num % 10;
+        sum += digit;
+        num /= 10;
+        digit = num % 10;
+        sum += digit;
+        num /= 10;
+        digit = num % 10;
+        sum += digit;
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断正整数能否被5和7同时整除]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个正整数，判断该数是否能被5和7同时整除。如果能同时被5和7整除，输出"Yes"，否则输出"No"。]]></description>
+<input><![CDATA[一个正整数n，其中n > 0。]]></input>
+<output><![CDATA[输出"Yes"或"No"，表示输入的正整数是否能被5和7同时整除。]]></output>
+<sample_input><![CDATA[35]]></sample_input>
+<sample_output><![CDATA[Yes]]></sample_output>
+<test_input><![CDATA[1
+5
+7
+10
+14
+21
+25
+35
+49
+50
+70
+105
+120
+140
+245
+350
+700]]></test_input>
+<test_output><![CDATA[No
+No
+No
+No
+No
+No
+No
+Yes
+No
+No
+Yes
+Yes
+No
+Yes
+Yes
+Yes
+Yes]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        if(n > 0 && n % 5 == 0 && n % 7 == 0)
+            printf("Yes\n");
+        else
+            printf("No\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求和序列计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算序列的和：$1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \ldots + \frac{1}{99} - \frac{1}{100}$，并输出结果，小数点后保留四位数字。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个浮点数，表示序列的和，小数点后保留四位数字。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[0.6881]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[0.6881]]></test_output>
+<hint><![CDATA[注意处理正负交替的序列求和。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    double sum = 0.0;
+    for(int i = 1; i <= 100; i++) {
+        sum += pow(-1, i+1) * (1.0 / i);
+    }
+    printf("%.4f\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[水仙花数和除法余数计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写程序，完成以下两个任务：
+1. 找到并输出100~999之间的水仙花数。水仙花数是指这样的三位正整数，其各位数字的立方和等于该数本身。例如：$153 = 1^3 + 5^3 + 3^3$。
+2. 求88除以7的余数并输出。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[首先输出所有100~999之间的水仙花数，每个数占一行。然后输出88除以7的余数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[153
+370
+371
+407
+1]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[153
+370
+371
+407
+1]]></test_output>
+<hint><![CDATA[注意检查每个三位数是否为水仙花数，可以通过分离出每个位上的数字并计算其立方和来实现。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int i, a, b, c;
+    for(i = 100; i <= 999; i++) {
+        a = i / 100;
+        b = (i / 10) % 10;
+        c = i % 10;
+        if(i == a*a*a + b*b*b + c*c*c) {
+            printf("%d\n", i);
+        }
+    }
+    printf("%d\n", 88 % 7);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[小写字母转大写]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个表示小写字母的字符，输出对应的大写字母。]]></description>
+<input><![CDATA[一个小写字母字符。]]></input>
+<output><![CDATA[输出对应的大写字母。]]></output>
+<sample_input><![CDATA[a]]></sample_input>
+<sample_output><![CDATA[A]]></sample_output>
+<test_input><![CDATA[a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z]]></test_input>
+<test_output><![CDATA[A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    char lowercase;
+    while(scanf("%c", &lowercase) == 1) {
+        if(lowercase >= 'a' && lowercase <= 'z')
+            printf("%c\n", lowercase - 'a' + 'A');
+        else
+            printf("Invalid input!\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[素数判定]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个大于或等于3的整数，判断该数是否为素数。素数定义为只能被1和它本身整除的大于1的整数。]]></description>
+<input><![CDATA[输入一个整数n，n >= 3。]]></input>
+<output><![CDATA[如果n是素数，输出"Yes"；否则输出"No"。]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[Yes]]></sample_output>
+<test_input><![CDATA[3
+4
+5
+6
+7
+8
+9
+10
+11
+13]]></test_input>
+<test_output><![CDATA[Yes
+No
+Yes
+No
+Yes
+No
+No
+No
+Yes
+Yes]]></test_output>
+<hint><![CDATA[可以考虑使用试除法来判断一个数是否为素数，即检查2到sqrt(n)之间的所有整数是否能整除n。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    int n;
+    while(scanf("%d", &n) == 1) {
+        if(n < 3) {
+            printf("Invalid input!
+");
+            continue;
+        }
+        int is_prime = 1;
+        for(int i = 2; i <= sqrt(n); i++) {
+            if(n % i == 0) {
+                is_prime = 0;
+                break;
+            }
+        }
+        printf("%s
+", is_prime ? "Yes" : "No");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出500~600之间的所有偶数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出500到600之间所有的偶数。偶数是指能被2整除的整数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出500到600之间的所有偶数，每个偶数占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[500
+502
+504
+...
+598
+600]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[500
+502
+504
+506
+508
+510
+512
+514
+516
+518
+520
+522
+524
+526
+528
+530
+532
+534
+536
+538
+540
+542
+544
+546
+548
+550
+552
+554
+556
+558
+560
+562
+564
+566
+568
+570
+572
+574
+576
+578
+580
+582
+584
+586
+588
+590
+592
+594
+596
+598
+600]]></test_output>
+<hint><![CDATA[无]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 500; i <= 600; i++) {
+        if(i % 2 == 0) {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[整型数组排序并输出]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入8个整数到整型数组中，然后使用合适的排序算法将数组中的元素从小到大排序，并输出排序后的数组。]]></description>
+<input><![CDATA[输入8个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出排序后的8个整数，每个整数之间用空格分隔。]]></output>
+<sample_input><![CDATA[3 1 4 1 5 9 2 6]]></sample_input>
+<sample_output><![CDATA[1 1 2 3 4 5 6 9]]></sample_output>
+<test_input><![CDATA[8 7 6 5 4 3 2 1
+1 2 3 4 5 6 7 8
+-1 -2 -3 -4 -5 -6 -7 -8
+0 0 0 0 0 0 0 0
+1000 -1000 500 -500 200 -200 300 -300
+1 1 1 1 1 1 1 1
+-1 -1 -1 -1 -1 -1 -1 -1
+999 999 999 999 999 999 999 999]]></test_input>
+<test_output><![CDATA[1 2 3 4 5 6 7 8
+-8 -7 -6 -5 -4 -3 -2 -1
+0 0 0 0 0 0 0 0
+-1000 -500 -300 -200 200 300 500 1000
+1 1 1 1 1 1 1 1
+-1 -1 -1 -1 -1 -1 -1 -1
+999 999 999 999 999 999 999 999]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+void sort(int arr[], int n) {
+    int i, j, temp;
+    for(i = 0; i < n-1; i++) {
+        for(j = 0; j < n-1-i; j++) {
+            if(arr[j] > arr[j+1]) {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[8], i;
+    for(i = 0; i < 8; i++) {
+        scanf("%d", &arr[i]);
+    }
+    sort(arr, 8);
+    for(i = 0; i < 8; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[圆周率近似值计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，使用公式 $355.0 / 113.0$ 来计算圆周率 $\pi$ 的近似值，并输出结果，小数点后保留五位数字。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出圆周率的近似值，小数点后保留五位数字。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[3.14159]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[3.14159]]></test_output>
+<hint><![CDATA[注意输出格式，确保小数点后保留五位数字。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double pi = 355.0 / 113.0;
+    printf("%.5f\n", pi);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[阶跃函数求值]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+<description><![CDATA[编写一个程序，接收一个表示x值的实数，输出根据以下阶跃函数计算得到的y值：
+\[ y = \begin{cases}
+-1 & \text{if } x < 0 \\
+0 & \text{if } x = 0 \\
+1 & \text{if } x > 0
+\end{cases} \]
+]]></description>
+<input><![CDATA[一个实数，表示x值。]]></input>
+<output><![CDATA[输出一个整数，表示根据阶跃函数计算得到的y值。]]></output>
+<sample_input><![CDATA[-2
+0
+3]]></sample_input>
+<sample_output><![CDATA[-1
+0
+1]]></sample_output>
+<test_input><![CDATA[-5
+-1
+0
+1
+5
+-0.5
+0.5
+-100
+100
+0.001]]></test_input>
+<test_output><![CDATA[-1
+-1
+0
+1
+1
+-1
+1
+-1
+1
+1]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double x;
+    while(scanf("%lf", &x) == 1) {
+        if(x < 0)
+            printf("%d\n", -1);
+        else if(x == 0)
+            printf("%d\n", 0);
+        else
+            printf("%d\n", 1);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出100～200之间的所有奇数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出100到200之间所有的奇数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出100到200之间的所有奇数，每个奇数占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[
+101
+103
+105
+...
+199]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[
+101
+103
+105
+107
+109
+111
+113
+115
+117
+119
+121
+123
+125
+127
+129
+131
+133
+135
+137
+139
+141
+143
+145
+147
+149
+151
+153
+155
+157
+159
+161
+163
+165
+167
+169
+171
+173
+175
+177
+179
+181
+183
+185
+187
+189
+191
+193
+195
+197
+199]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int i = 101; i <= 200; i += 2) {
+        printf("%d\n", i);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算两个正整数的最小公倍数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入两个正整数 $a$ 和 $b$，计算并输出这两个数的最小公倍数（LCM）。最小公倍数是能被 $a$ 和 $b$ 同时整除的最小正整数。]]></description>
+<input><![CDATA[输入包含两个正整数 $a$ 和 $b$，用空格分隔。]]></input>
+<output><![CDATA[输出一个正整数，表示 $a$ 和 $b$ 的最小公倍数。]]></output>
+<sample_input><![CDATA[10 15]]></sample_input>
+<sample_output><![CDATA[30]]></sample_output>
+<test_input><![CDATA[1 1
+2 3
+5 7
+10 15
+20 30
+45 60
+7 9
+11 13
+17 19
+23 29]]></test_input>
+<test_output><![CDATA[1
+6
+35
+30
+60
+180
+63
+143
+323
+667]]></test_output>
+<hint><![CDATA[可以使用辗转相除法求最大公约数，然后通过公式 $lcm(a, b) = \frac{a \times b}{gcd(a, b)}$ 计算最小公倍数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+int main() {
+    int a, b;
+    while(scanf("%d %d", &a, &b) == 2) {
+        int lcm = (a * b) / gcd(a, b);
+        printf("%d\n", lcm);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求一维数组中的最大值]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入10个整数存入一维数组a中，然后求出这些整数中的最大值并输出。]]></description>
+<input><![CDATA[输入包含10个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出一个整数，表示输入的10个整数中的最大值。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[10]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+10 9 8 7 6 5 4 3 2 1
+-5 -4 -3 -2 -1 0 1 2 3 4
+0 0 0 0 0 0 0 0 0 0
+10000 -10000 5000 -5000 2000 -2000 1500 -1500 1000 -1000
+100 200 300 400 500 600 700 800 900 1000
+-100 -200 -300 -400 -500 -600 -700 -800 -900 -1000
+1 1 1 1 1 1 1 1 1 1
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+5 5 5 5 5 5 5 5 5 5]]></test_input>
+<test_output><![CDATA[10
+10
+1
+0
+10000
+1000
+1000
+1
+-1
+5]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a[10], max, i;
+    for(i = 0; i < 10; i++) {
+        scanf("%d", &a[i]);
+    }
+    max = a[0];
+    for(i = 1; i < 10; i++) {
+        if(a[i] > max) {
+            max = a[i];
+        }
+    }
+    printf("%d\n", max);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[ASCII码输出]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入一个英文字母，输出该字母对应的ASCII码。]]></description>
+<input><![CDATA[输入一个英文字母。]]></input>
+<output><![CDATA[输出该字母对应的ASCII码，一个整数。]]></output>
+<sample_input><![CDATA[A]]></sample_input>
+<sample_output><![CDATA[65]]></sample_output>
+<test_input><![CDATA[A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z]]></test_input>
+<test_output><![CDATA[65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    char letter;
+    scanf("%c", &letter);
+    printf("%d\n", letter);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[景区门票价格计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入购票数目，计算并输出所需购票款的数额。如果购票数目超过30张（含30张），则按团体票价格20元计算；否则按零售价格25元计算。]]></description>
+<input><![CDATA[输入一个整数，表示购票数目。]]></input>
+<output><![CDATA[输出一个整数，表示所需购票款的数额。]]></output>
+<sample_input><![CDATA[35]]></sample_input>
+<sample_output><![CDATA[700]]></sample_output>
+<test_input><![CDATA[10
+20
+30
+31
+40
+50
+60
+70
+80
+90
+100]]></test_input>
+<test_output><![CDATA[250
+500
+600
+620
+800
+1000
+1200
+1400
+1600
+1800
+2000]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int num;
+    scanf("%d", &num);
+    if(num >= 30)
+        printf("%d\n", num * 20);
+    else
+        printf("%d\n", num * 25);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求和序列计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+<description><![CDATA[编写一个程序，计算并输出以下序列的和：$1/2 - 2/3 + 3/4 - 4/5 \cdots - 98/99 + 99/100$，结果保留小数点后四位。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出序列的和，保留小数点后四位。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[0.5773]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[0.5773]]></test_output>
+<hint><![CDATA[注意处理正负交替的分数求和。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<math.h>
+
+int main() {
+    double sum = 0.0;
+    for(int i = 1; i <= 99; i++) {
+        sum += (i % 2 == 0 ? -1.0 : 1.0) * (double)i / (i + 1);
+    }
+    printf("%.4f\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[字符串字符个数统计]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入一个字符串，统计并输出该字符串中字符的个数。]]></description>
+<input><![CDATA[输入一个字符串。]]></input>
+<output><![CDATA[输出一个整数，表示字符串中字符的个数。]]></output>
+<sample_input><![CDATA[Hello, World!]]></sample_input>
+<sample_output><![CDATA[13]]></sample_output>
+<test_input><![CDATA[Hello, World!
+Programming
+12345
+A
+空字符串
+Special@Characters!
+LongStringWithManyCharactersToTestTheFunctionality
+Short
+MediumLengthString
+VeryLongStringWithOver100Characters]]></test_input>
+<test_output><![CDATA[13
+11
+5
+1
+0
+16
+37
+5
+15
+105]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char str[1000];
+    fgets(str, sizeof(str), stdin);
+    // Remove newline character if present
+    str[strcspn(str, "\n")] = 0;
+    printf("%lu\n", strlen(str));
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算10个整数之和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入10个整数，使用数组存储这些整数，并计算它们的总和，最后输出这个总和。]]></description>
+<input><![CDATA[输入包含10个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出一个整数，表示这10个整数的总和。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[55]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+-1 -2 -3 -4 -5 -6 -7 -8 -9 -10
+0 0 0 0 0 0 0 0 0 0
+1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000
+5 15 25 35 45 55 65 75 85 95
+-5 -15 -25 -35 -45 -55 -65 -75 -85 -95
+10000 -10000 20000 -20000 30000 -30000 40000 -40000 50000 -50000
+999999 999999 999999 999999 999999 999999 999999 999999 999999 999999
+-999999 -999999 -999999 -999999 -999999 -999999 -999999 -999999 -999999 -999999
+1 1 1 1 1 1 1 1 1 1]]></test_input>
+<test_output><![CDATA[55
+-55
+0
+10000000000
+450
+-450
+0
+9999990
+-9999990
+10]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int numbers[10];
+    int sum = 0;
+    for(int i = 0; i < 10; i++) {
+        scanf("%d", &numbers[i]);
+        sum += numbers[i];
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出特定图形]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出以下图形：
+```
+#
+###
+#####
+```
+]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出上述图形，每行一个字符串。]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[
+#
+###
+#####
+]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[
+#
+###
+#####
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+printf("#\n");
+printf("###\n");
+printf("#####\n");
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[浮点数四则运算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入两个浮点型数据，计算这两个数的和、差、积、商，并输出结果（保留两位小数）。]]></description>
+<input><![CDATA[输入包含两行，每行一个浮点数。]]></input>
+<output><![CDATA[输出包含四行，分别表示两个数的和、差、积、商，每个结果保留两位小数。]]></output>
+<sample_input><![CDATA[3.5
+2.0]]></sample_input>
+<sample_output><![CDATA[和: 5.50
+差: 1.50
+积: 7.00
+商: 1.75]]></sample_output>
+<test_input><![CDATA[1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+11.0
+12.0
+13.0
+14.0
+15.0
+16.0
+17.0
+18.0
+19.0
+20.0]]></test_input>
+<test_output><![CDATA[和: 3.00
+差: -1.00
+积: 2.00
+商: 0.50
+和: 6.00
+差: -1.00
+积: 12.00
+商: 0.75
+和: 8.00
+差: -1.00
+积: 20.00
+商: 0.60
+和: 9.00
+差: -1.00
+积: 24.00
+商: 0.67
+和: 11.00
+差: -1.00
+积: 30.00
+商: 0.60
+和: 12.00
+差: -1.00
+积: 36.00
+商: 0.63
+和: 14.00
+差: -1.00
+积: 42.00
+商: 0.67
+和: 15.00
+差: -1.00
+积: 48.00
+商: 0.63
+和: 17.00
+差: -1.00
+积: 54.00
+商: 0.65
+和: 18.00
+差: -1.00
+积: 60.00
+商: 0.64
+和: 20.00
+差: -1.00
+积: 66.00
+商: 0.65
+和: 21.00
+差: -1.00
+积: 72.00
+商: 0.66
+和: 23.00
+差: -1.00
+积: 78.00
+商: 0.67
+和: 24.00
+差: -1.00
+积: 84.00
+商: 0.67
+和: 26.00
+差: -1.00
+积: 90.00
+商: 0.68
+和: 27.00
+差: -1.00
+积: 96.00
+商: 0.68
+和: 29.00
+差: -1.00
+积: 102.00
+商: 0.69
+和: 30.00
+差: -1.00
+积: 108.00
+商: 0.69
+和: 32.00
+差: -1.00
+积: 114.00
+商: 0.70
+和: 33.00
+差: -1.00
+积: 120.00
+商: 0.70
+和: 35.00
+差: -1.00
+积: 126.00
+商: 0.71]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double a, b;
+    scanf("%lf %lf", &a, &b);
+    printf("和: %.2f\n", a + b);
+    printf("差: %.2f\n", a - b);
+    printf("积: %.2f\n", a * b);
+    printf("商: %.2f\n", a / b);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[倒序输出正整数的各位数字]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个不多于5位的正整数，然后倒序输出它的各位数字。例如，输入12345，输出应为54321。]]></description>
+<input><![CDATA[一个不多于5位的正整数。]]></input>
+<output><![CDATA[倒序输出的各位数字，每个数字之间用空格分隔。]]></output>
+<sample_input><![CDATA[12345]]></sample_input>
+<sample_output><![CDATA[5 4 3 2 1]]></sample_output>
+<test_input><![CDATA[1
+2
+12
+123
+1234
+12345
+123456
+98765
+54321
+10000]]></test_input>
+<test_output><![CDATA[1
+2
+21
+321
+4321
+54321
+654321
+5 6 7 8 9
+1 2 3 4 5
+0 0 0 0 1]]></test_output>
+<hint><![CDATA[注意处理输入超过5位的情况，此时应输出错误提示。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int num;
+    scanf("%d", &num);
+    if(num >= 0 && num <= 99999) {
+        if(num == 0) {
+            printf("0");
+        } else {
+            while(num > 0) {
+                printf("%d ", num % 10);
+                num /= 10;
+            }
+        }
+    } else {
+        printf("Invalid input! Number should be up to 5 digits.");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算阶乘n!]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+<description><![CDATA[编写一个程序，从键盘输入一个正整数n（1 ≤ n ≤ 15），计算并输出n的阶乘（n!）。阶乘的定义为：n! = n * (n-1) * (n-2) * ... * 1。]]></description>
+<input><![CDATA[输入一个正整数n，表示要计算阶乘的数。]]></input>
+<output><![CDATA[输出一个整数，表示n的阶乘。]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[120]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15]]></test_input>
+<test_output><![CDATA[1
+2
+6
+24
+120
+720
+5040
+40320
+362880
+3628800
+39916800
+479001600
+6227020800
+87178291200
+1307674368000]]></test_output>
+<hint><![CDATA[注意计算过程中的数值范围，避免溢出。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int n;
+    long long factorial = 1;
+    scanf("%d", &n);
+    if(n >= 1 && n <= 15) {
+        for(int i = 2; i <= n; i++) {
+            factorial *= i;
+        }
+        printf("%lld\n", factorial);
+    } else {
+        printf("Invalid input!\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算一维数组偶数下标元素之和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，定义一个包含10个元素的一维数组，从键盘对其进行初始化。计算并输出该数组中所有下标为偶数的元素之和。数组下标从0开始。]]></description>
+<input><![CDATA[输入包含10个整数，每行一个，表示数组的元素。]]></input>
+<output><![CDATA[输出一个整数，表示数组中所有下标为偶数的元素之和。]]></output>
+<sample_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10]]></sample_input>
+<sample_output><![CDATA[26]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+-1
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+-9
+-10
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1000
+-100
+-200
+-300
+-400
+-500
+-600
+-700
+-800
+-900
+-1000
+10000
+20000
+30000
+40000
+50000
+60000
+70000
+80000
+90000
+100000]]></test_input>
+<test_output><![CDATA[26
+-26
+0
+26000
+-26000]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int arr[10];
+    int sum = 0;
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &arr[i]);
+        if (i % 2 == 0) {
+            sum += arr[i];
+        }
+    }
+    printf("%d\n", sum);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[平方和计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收两个整数 $a$ 和 $b$，计算它们的平方和 $a^2 + b^2$，并输出结果。]]></description>
+<input><![CDATA[输入包含两个整数，每行一个，分别为 $a$ 和 $b$。]]></input>
+<output><![CDATA[输出一个整数，表示 $a^2 + b^2$ 的结果。]]></output>
+<sample_input><![CDATA[3
+4]]></sample_input>
+<sample_output><![CDATA[25]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+-1
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+-9
+-10]]></test_input>
+<test_output><![CDATA[5
+25
+53
+97
+145
+205
+277
+361
+457
+565
+5
+25
+53
+97
+145
+205
+277
+361
+457
+565]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a, b;
+    while(scanf("%d %d", &a, &b) == 2) {
+        printf("%d\n", a*a + b*b);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[分段函数求值]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个表示自变量x的值，根据以下分段函数计算并输出y的值：
+\[ y = \begin{cases}
+18 & \text{if } x > 0 \\
+0 & \text{if } x = 0 \\
+-10 & \text{if } x < 0
+\end{cases} \]
+]]></description>
+<input><![CDATA[一个整数，表示自变量x的值。]]></input>
+<output><![CDATA[输出一个整数，表示根据分段函数计算得到的y的值。]]></output>
+<sample_input><![CDATA[1]]></sample_input>
+<sample_output><![CDATA[18]]></sample_output>
+<test_input><![CDATA[1
+0
+-1
+5
+-5
+10
+-10
+20
+-20
+30
+-30]]></test_input>
+<test_output><![CDATA[18
+0
+-10
+18
+-10
+18
+-10
+18
+-10
+18
+-10]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int x;
+    while(scanf("%d", &x) == 1) {
+        if(x > 0)
+            printf("%d\n", 18);
+        else if(x == 0)
+            printf("%d\n", 0);
+        else
+            printf("%d\n", -10);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[三个整数中找最大值]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收用户输入的三个整数，然后输出这三个整数中的最大值。]]></description>
+<input><![CDATA[输入包含三个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出一个整数，表示输入的三个整数中的最大值。]]></output>
+<sample_input><![CDATA[10 20 30]]></sample_input>
+<sample_output><![CDATA[30]]></sample_output>
+<test_input><![CDATA[1 2 3
+4 5 6
+7 8 9
+10 20 30
+30 20 10
+-1 -2 -3
+-4 -5 -6
+-7 -8 -9
+0 0 0
+15 15 15]]></test_input>
+<test_output><![CDATA[3
+6
+9
+30
+30
+-1
+-4
+-7
+0
+15]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a, b, c;
+    while(scanf("%d %d %d", &a, &b, &c) == 3) {
+        int max = a;
+        if(b > max) max = b;
+        if(c > max) max = c;
+        printf("%d\n", max);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[逆序输出一维数组元素]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入10个整数存入一维数组a中，然后逆序输出数组a中的元素。]]></description>
+<input><![CDATA[输入包含10个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出数组a中的元素，逆序排列，每个整数之间用空格分隔。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[10 9 8 7 6 5 4 3 2 1]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+11 12 13 14 15 16 17 18 19 20
+21 22 23 24 25 26 27 28 29 30
+31 32 33 34 35 36 37 38 39 40
+41 42 43 44 45 46 47 48 49 50
+51 52 53 54 55 56 57 58 59 60
+61 62 63 64 65 66 67 68 69 70
+71 72 73 74 75 76 77 78 79 80
+81 82 83 84 85 86 87 88 89 90
+91 92 93 94 95 96 97 98 99 100]]></test_input>
+<test_output><![CDATA[10 9 8 7 6 5 4 3 2 1
+20 19 18 17 16 15 14 13 12 11
+30 29 28 27 26 25 24 23 22 21
+40 39 38 37 36 35 34 33 32 31
+50 49 48 47 46 45 44 43 42 41
+60 59 58 57 56 55 54 53 52 51
+70 69 68 67 66 65 64 63 62 61
+80 79 78 77 76 75 74 73 72 71
+90 89 88 87 86 85 84 83 82 81
+100 99 98 97 96 95 94 93 92 91]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a[10];
+    for(int i = 0; i < 10; i++) {
+        scanf("%d", &a[i]);
+    }
+    for(int i = 9; i >= 0; i--) {
+        printf("%d ", a[i]);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[公历闰年年份输出]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出公历1949年到2019年之间的所有闰年年份。闰年的定义是：年份能被4整除但不能被100整除，或者能被400整除。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出1949年到2019年之间的所有闰年年份，每个年份占一行。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[1952
+1956
+1960
+1964
+1968
+1972
+1976
+1980
+1984
+1988
+1992
+1996
+2000
+2004
+2008
+2012
+2016]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[1949
+1952
+1956
+1960
+1964
+1968
+1972
+1976
+1980
+1984
+1988
+1992
+1996
+2000
+2004
+2008
+2012
+2016
+2019]]></test_output>
+<hint><![CDATA[注意闰年的判断条件，确保代码逻辑正确。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    for(int year = 1949; year <= 2019; year++) {
+        if((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            printf("%d\n", year);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[华氏温度转摄氏温度]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个表示华氏温度的浮点数，输出转换后的摄氏温度。转换公式为：$c = \frac{5}{9}(f - 32)$，其中 $f$ 代表华氏温度，$c$ 代表摄氏温度。]]></description>
+<input><![CDATA[一个浮点数，表示华氏温度。]]></input>
+<output><![CDATA[输出转换后的摄氏温度，保留一位小数。]]></output>
+<sample_input><![CDATA[64]]></sample_input>
+<sample_output><![CDATA[17.8]]></sample_output>
+<test_input><![CDATA[32
+0
+100
+-40
+212
+-17.777779
+15.555556
+99.999999
+-99.999999
+1000]]></test_input>
+<test_output><![CDATA[0.0
+-17.8
+37.8
+-40.0
+100.0
+-27.7
+-9.2
+37.8
+-73.3
+537.8]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    double fahrenheit;
+    while(scanf("%lf", &fahrenheit) == 1) {
+        double celsius = 5.0 / 9 * (fahrenheit - 32);
+        printf("%.1f\n", celsius);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[整数排序输出]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入三个整数$x$, $y$, $z$，然后输出这三个数由大到小的顺序。]]></description>
+<input><![CDATA[输入三个整数，用空格或换行分隔。]]></input>
+<output><![CDATA[输出排序后的三个整数，由大到小，用空格分隔。]]></output>
+<sample_input><![CDATA[3 1 2]]></sample_input>
+<sample_output><![CDATA[3 2 1]]></sample_output>
+<test_input><![CDATA[1 2 3
+3 2 1
+10 -5 0
+5 5 5
+-1 -2 -3
+0 0 0
+100 200 -300
+2 2 1
+3 1 4
+-5 5 0]]></test_input>
+<test_output><![CDATA[3 2 1
+3 2 1
+200 100 -300
+5 5 5
+-1 -2 -3
+0 0 0
+100 200 -300
+2 2 1
+4 3 1
+5 0 -5]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int x, y, z;
+    while(scanf("%d %d %d", &x, &y, &z) == 3) {
+        if(x >= y && x >= z) {
+            if(y >= z) printf("%d %d %d\n", x, y, z);
+            else printf("%d %d %d\n", x, z, y);
+        } else if(y >= x && y >= z) {
+            if(x >= z) printf("%d %d %d\n", y, x, z);
+            else printf("%d %d %d\n", y, z, x);
+        } else {
+            if(x >= y) printf("%d %d %d\n", z, x, y);
+            else printf("%d %d %d\n", z, y, x);
+        }
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[月份天数计算（不考虑闰年）]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收一个表示月份的整数（1到12），输出这个月份的天数。不考虑闰年，每个月的天数如下：
+1月: 31天
+2月: 28天
+3月: 31天
+4月: 30天
+5月: 31天
+6月: 30天
+7月: 31天
+8月: 31天
+9月: 30天
+10月: 31天
+11月: 30天
+12月: 31天]]></description>
+<input><![CDATA[一个整数，表示月份（1-12）]]></input>
+<output><![CDATA[输出该月份的天数，一个整数。]]></output>
+<sample_input><![CDATA[3]]></sample_input>
+<sample_output><![CDATA[31]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12]]></test_input>
+<test_output><![CDATA[31
+28
+31
+30
+31
+30
+31
+31
+30
+31
+30
+31]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int month;
+    while(scanf("%d", &month) == 1) {
+        if(month >= 1 && month <= 12)
+            printf("%d\n", (month == 2) ? 28 : (month % 2 == 0 && month != 2) ? 30 : 31);
+        else
+            printf("Invalid input!\n");
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求600~800之间所有奇数的和]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算并输出600到800之间所有奇数的和。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一个整数，表示600到800之间所有奇数的和。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[7500]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[7500]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+int sum = 0;
+for(int i = 601; i <= 800; i += 2) {
+sum += i;
+}
+printf("%d\n", sum);
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[求9个数的平均数（去掉最大值）]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入10个整数，去掉这10个数中的最大值，然后计算并输出剩余9个数的平均数。]]></description>
+<input><![CDATA[输入包含10个整数，每个整数之间用空格或换行分隔。]]></input>
+<output><![CDATA[输出一个浮点数，表示去掉最大值后9个数的平均数。]]></output>
+<sample_input><![CDATA[1 2 3 4 5 6 7 8 9 10]]></sample_input>
+<sample_output><![CDATA[5.5]]></sample_output>
+<test_input><![CDATA[1 2 3 4 5 6 7 8 9 10
+10 9 8 7 6 5 4 3 2 1
+-1 -2 -3 -4 -5 -6 -7 -8 -9 -10
+-10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+0 0 0 0 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 1 1
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+5 5 5 5 5 5 5 5 5 6
+-5 -5 -5 -5 -5 -5 -5 -5 -5 -4
+1000 -1000 -2000 -3000 -4000 -5000 -6000 -7000 -8000 -9000]]></test_input>
+<test_output><![CDATA[5.5
+5.5
+-5.5
+-5.5
+0.0
+0.5
+-0.5
+5.0
+-5.0
+-5000.0]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int numbers[10];
+    int i, max;
+    double sum = 0.0;
+
+    // 读取输入
+    for(i = 0; i < 10; i++) {
+        scanf("%d", &numbers[i]);
+    }
+
+    // 初始化最大值
+    max = numbers[0];
+    for(i = 0; i < 10; i++) {
+        if(numbers[i] > max) {
+            max = numbers[i];
+        }
+        sum += numbers[i];
+    }
+
+    // 计算平均数
+    sum -= max;
+    printf("%.1f\n", sum / 9.0);
+
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[计算三个正整数的和及平均数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，接收三个正整数，计算并输出它们的和及平均数。平均数应保留两位小数。]]></description>
+<input><![CDATA[输入包含三个正整数，每个整数之间用空格分隔。]]></input>
+<output><![CDATA[输出包含两行，第一行是三个整数的和，第二行是平均数，保留两位小数。]]></output>
+<sample_input><![CDATA[1 2 3]]></sample_input>
+<sample_output><![CDATA[6
+2.00]]></sample_output>
+<test_input><![CDATA[1 2 3
+4 5 6
+7 8 9
+10 11 12
+13 14 15
+16 17 18
+19 20 21
+22 23 24
+25 26 27
+28 29 30]]></test_input>
+<test_output><![CDATA[6
+2.00
+15
+5.00
+24
+8.00
+33
+11.00
+42
+14.00
+51
+17.00
+60
+20.00
+69
+23.00
+78
+26.00
+87
+29.00]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int a, b, c;
+    while(scanf("%d %d %d", &a, &b, &c) == 3) {
+        double sum = a + b + c;
+        printf("%d\n%.2f\n", (int)sum, sum / 3.0);
+    }
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[一年分钟数计算（不考虑闰年）]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，计算并输出一年中的总分钟数。不考虑闰年，一年有365天。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出一年中的总分钟数，一个整数。]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[525600]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[525600]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int minutes = 365 * 24 * 60;
+    printf("%d\n", minutes);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[字符串连接]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘输入两个字符串，然后将这两个字符串连接成一个字符串输出。]]></description>
+<input><![CDATA[输入包含两行，每行一个字符串。]]></input>
+<output><![CDATA[输出一行，为连接后的字符串。]]></output>
+<sample_input><![CDATA[Hello
+World]]></sample_input>
+<sample_output><![CDATA[HelloWorld]]></sample_output>
+<test_input><![CDATA[Hello
+World
+
+Good
+Morning
+
+Open
+AI
+
+Programming
+Contest
+
+First
+Second
+
+Third
+Fourth
+
+Fifth
+Sixth
+
+Seventh
+Eighth
+
+Ninth
+Tenth
+
+Eleventh
+Twelfth]]></test_input>
+<test_output><![CDATA[HelloWorld
+GoodMorning
+OpenAI
+ProgrammingContest
+FirstSecond
+ThirdFourth
+FifthSixth
+SeventhEighth
+NinthTenth
+EleventhTwelfth]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#include<string.h>
+
+int main() {
+    char str1[100], str2[100];
+    fgets(str1, 100, stdin);
+    fgets(str2, 100, stdin);
+    str1[strlen(str1) - 1] = '\0'; // 去除换行符
+    str2[strlen(str2) - 1] = '\0'; // 去除换行符
+    printf("%s%s\n", str1, str2);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[慈善募捐统计]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[在全系1000名学生中举行慈善募捐，当捐款总数达到2万元时结束。编写程序，统计此时捐款的人数以及平均每人捐款的数目。]]></description>
+<input><![CDATA[输入为一系列整数，表示每位学生的捐款金额，以0结束输入。]]></input>
+<output><![CDATA[输出两个数，第一个数表示捐款的人数，第二个数表示平均每人捐款的数目，保留两位小数。]]></output>
+<sample_input><![CDATA[100 200 300 0]]></sample_input>
+<sample_output><![CDATA[3 200.00]]></sample_output>
+<test_input><![CDATA[100 200 300 0
+50 150 250 0
+200 400 600 0
+10 30 50 0
+500 1000 1500 0
+250 500 750 0
+150 300 450 0
+350 700 1050 0
+20 40 60 0
+400 800 1200 0]]></test_input>
+<test_output><![CDATA[3 200.00
+3 150.00
+3 400.00
+3 30.00
+3 1000.00
+3 500.00
+3 300.00
+3 700.00
+3 40.00
+3 800.00]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int donation, count = 0, total = 0;
+    while (1) {
+        scanf("%d", &donation);
+        if (donation == 0) break;
+        total += donation;
+        count++;
+        if (total >= 20000) break;
+    }
+    printf("%d %.2f\n", count, (float)total / count);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[输出100~200之间的所有素数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，输出100到200之间的所有素数。素数是指除了1和它本身之外，没有其他因数的自然数。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出100到200之间的所有素数，每行输出一个素数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[101
+103
+107
+109
+113
+127
+131
+137
+139
+149
+151
+157
+163
+167
+173
+179
+181
+191
+193
+197
+199]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[101
+103
+107
+109
+113
+127
+131
+137
+139
+149
+151
+157
+163
+167
+173
+179
+181
+191
+193
+197
+199]]></test_output>
+<hint><![CDATA[可以使用循环和判断语句来检查每个数是否为素数。]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int is_prime(int num) {
+    if (num <= 1) return 0;
+    for(int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return 0;
+    }
+    return 1;
+}
+
+int main() {
+    for(int i = 100; i <= 200; i++) {
+        if(is_prime(i)) printf("%d\n", i);
+    }
+    return 0;
+}
+]]></solution>
+</item>

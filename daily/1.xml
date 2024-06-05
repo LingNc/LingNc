@@ -1,0 +1,75 @@
+你好，你是一个非常棒的程序员，现在你正在编写一个程序，用来把一个问题转化为一种fps格式，要求你自己写入测试数据样例还有正确答案等，请你按照如下格式输出：
+<item>
+<title><![CDATA[题目标题]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[题目描述]]></description>
+<input><![CDATA[输入描述]]></input>
+<output><![CDATA[输出描述]]></output>
+<sample_input><![CDATA[样例输入（换行来表示多个输入）]]></sample_input>
+<sample_output><![CDATA[样例输出（换行来表示多个输出）]]></sample_output>
+<test_input><![CDATA[测试输入数据集（换行来表示多个输入）]]></test_input>
+<test_output><![CDATA[测试输出数据集（换行来表示多个输出）]]></test_output>
+<hint><![CDATA[提示]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+		<solution language="C"><![CDATA[C语言正确答案
+]]></solution>
+
+例如：{
+问题：68．编写程序，输入一个月份，求解并输出这个月有几天？（不考虑闰年情况）（20分）
+
+<item> <title><![CDATA[月份天数计算（不考虑闰年）]]></title> <time_limit unit="s"><![CDATA[1]]></time_limit> <memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+<description><![CDATA[编写一个程序，接收一个表示月份的整数（1到12），输出这个月份的天数。不考虑闰年，每个月的天数如下： 1月: 31天 2月: 28天 3月: 31天 4月: 30天 5月: 31天 6月: 30天 7月: 31天 8月: 31天 9月: 30天 10月: 31天 11月: 30天 12月: 31天 ]]></description>
+<input><![CDATA[一个整数，表示月份（1-12）]]></input>
+<output><![CDATA[输出该月份的天数，一个整数。]]></output>
+<sample_input><![CDATA[3(样例只需要选答案中的一个就可以)]]></sample_input>
+<sample_output><![CDATA[31]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12]]></test_input>
+<test_output><![CDATA[31
+28
+31
+30
+31
+30
+31
+31
+30
+31
+30
+31]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+int month;
+while(scanf("%d", &month) == 1) {
+if(month >= 1 && month <= 12)
+printf("%d\n", (month == 2) ? 28 : (month % 2 == 0 && month != 2) ? 30 : 31);
+else
+printf("Invalid input!\n");
+}
+return 0;
+}
+]]></solution>
+</item>}
+
+接下来我给你一个问题，在你输出的xml格式中CDATA[]中可以用数学公式等md语法，并且sample输出是展示的，test输出是判题的，请你不用了把test输出为空，保证一定有结果，最好需要10组以上的测试点，test数据允许的话10个以上，并覆盖数据范围到边界，并且覆盖完全数据范围，如果test和sample的数据相同，请你依然把test的属数据写上和sample相同，不要说一样即可，谢谢谢谢，提示可以写也可以不写简单题不需要写，请你按照上述要求并输出在代码块中保证换行缩进正确给我相应的输出，谢谢。
+问题：
+有分段函数如下，编写程序，输入自变量x的值，求y相应的值并输出。（20分）
+      18      (x>0)
+y=    0       (x=0)
+-10     (x<0)
