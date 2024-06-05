@@ -2,10 +2,9 @@ import os
 from openai import OpenAI
 import json
 
+# for backward compatibility, you can still use `https://api.deepseek.com/v1` as `base_url`.
+client = OpenAI(api_key="sk-9011b751ed194e12bc0876ed3256f172", base_url="https://api.deepseek.com")
 def main():
-    # for backward compatibility, you can still use `https://api.deepseek.com/v1` as `base_url`.
-    client = OpenAI(api_key="sk-9011b751ed194e12bc0876ed3256f172", base_url="https://api.deepseek.com")
-
     # 打开并读取JSON文件
     with open('question.json', 'r') as file:
         data = json.load(file)
@@ -21,30 +20,44 @@ def main():
         base_question = file.read()
 
     #进入循环读取
-    for question in questions:
+    for index,ques in enumerate(questions):
+        if index + 1!=66:
+            continue
+
+        #判断问题是不是简单问题
+
         #生成问题
-        question=base_question+question
+        question=base_question+ques
 
         # 接入ai请求结果
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant with the code problem solving skills."},
-                {"role": "user", "content": question},
-        ],
-            max_tokens=4096,
-            temperature=0.1,
-            stream=False
-        )
         # 得到json结构,载入对象
-        result=response.choices[0].message.content[8:-4]
-        print(result)
-        res_json=json.loads(result)
-        
-        #保存结果到文件
-        save_json(res_json)
-    
-    
+        result=deepseek(question,4096)
+        #异常处理
+        try:
+            res_json=json.loads(result)
+        except Exception as e:
+            print("error: 生成有误")
+            with open('error.json', 'r') as file:
+                res_json=json.load(file)
+            #把异常写入error.log
+            with open("error.log", "a") as f:
+                f.write(ques + "\n")
+                f.write(result + "\n")
+                f.write(str(e) + "\n")
+            continue
+
+        else:
+            print(res_json["json"][0]["problem"]["problemId"] + "生成成功")
+        finally:
+            #保存结果到文件
+            save_json(res_json)
+
+
+def judge():
+
+def diff():
+
+def easy():
 
 def save_json(res_json):
     #res_json=json.load(open("test.json",'r'))
@@ -84,7 +97,7 @@ def save_json(res_json):
     # 在problem目录中创建JSON文件
     json_file_path = os.path.join(problem_dir, f"problem_{problem_id}.json")
     with open(json_file_path, 'w',encoding='utf-8') as json_file:
-        json.dump(json_problem, json_file, indent=4,ensure_ascii=False)
+        json.dump(json_problem, json_file,ensure_ascii=False)
 
     # 在problem目录中创建problem_id文件夹
     problem_id_dir = os.path.join(problem_dir, "problem_"+problem_id)
@@ -102,6 +115,20 @@ def save_json(res_json):
                     # 写入文件内容
                     with open(file_path, 'w',encoding='utf-8') as file:
                         file.write(content)
+
+# deepseek向ai问问题设定最大token
+def deepseek(question,max):
+    response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant with the code problem solving skills."},
+                {"role": "user", "content": question},
+        ],
+            max_tokens=max,
+            temperature=0.1,
+            stream=False
+        )
+    return response.choices[0].message.content[8:-4]
 
 if __name__ == "__main__":
     main()

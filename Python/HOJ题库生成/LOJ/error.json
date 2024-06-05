@@ -1,0 +1,27 @@
+{
+    "json": [
+        {
+            "problem": {
+                "problemId": "C0000"
+            },
+            "judgeMode": "default",
+            "samples": [
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 0
+                }
+            ],
+            "tags": ["error"],
+            "codeTemplates": []
+        },
+        {
+            "data1": [
+                {
+                    "1.in": "0000",
+                    "1.out": "0000"
+                }
+            ]
+        }
+    ]
+}

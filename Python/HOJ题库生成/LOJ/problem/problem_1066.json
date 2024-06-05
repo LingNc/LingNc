@@ -1,0 +1,57 @@
+{
+    "problem": {
+        "auth": 1,
+        "author": "LingNc",
+        "isRemote": false,
+        "problemId": "C1066",
+        "description": "编写一个程序，将华氏温度转换为摄氏温度。转换公式为：$C = \\frac{5}{9}(F - 32)$，其中 $F$ 是华氏温度，$C$ 是摄氏温度。",
+        "source": "C程序设计A-机试题库",
+        "title": "66.华氏温度转摄氏温度",
+        "type": 1,
+        "timeLimit": 1000,
+        "memoryLimit": 256,
+        "stackLimit": 128,
+        "input": "一个浮点数，表示华氏温度。",
+        "output": "输出转换后的摄氏温度，保留一位小数。",
+        "examples": "<input>64</input><output>17.8</output>",
+        "difficulty": 0,
+        "ioScore": 100,
+        "codeShare": true,
+        "hint": "",
+        "isRemoveEndBlank": true,
+        "openCaseResult": true,
+        "judgeCaseMode": "default",
+        "isFileIO": false,
+        "isGroup": false,
+        "isUploadCase": true,
+        "judgeMode": "default"
+    },
+    "judgeMode": "default",
+    "samples": [
+        {
+            "input": "1.in",
+            "output": "1.out",
+            "score": 100
+        }
+    ],
+    "tags": [
+        "河工C语言上机题库A"
+    ],
+    "codeTemplates": [],
+    "languages": [
+        "C",
+        "C With O2",
+        "C++",
+        "C++ With O2",
+        "C++ 17",
+        "C++ 17 With O2",
+        "C++ 20",
+        "C++ 20 With O2",
+        "Java",
+        "Python3",
+        "Golang",
+        "C#",
+        "JavaScript Node",
+        "JavaScript V8"
+    ]
+}

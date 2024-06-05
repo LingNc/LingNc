@@ -1,0 +1,60 @@
+{
+    "problem": {
+        "stackLimit": 128,
+        "judgeCaseMode": "default",
+        "auth": 1,
+        "isRemote": false,
+        "description": " e发色绯色风Egzsrsdz总督　　$23123 \\neq $",
+        "source": "上机题库",
+        "title": "14.asdfaf",
+        "type": 1,
+        "timeLimit": 1000,
+        "output": " aef asd faw fdsa",
+        "difficulty": 0,
+        "input": "a fvewa fawe fgsa fd",
+        "examples": "<input>qweqw\n123\n23\n12\n3</input><output>r23$234\n23\n4\n23\n4</output>",
+        "ioScore": 100,
+        "codeShare": true,
+        "hint": "dasf sdf dsf asdf",
+        "isRemoveEndBlank": true,
+        "openCaseResult": true,
+        "isFileIO": false,
+        "memoryLimit": 256,
+        "problemId": "C1014",
+        "isGroup": false,
+        "isUploadCase": true,
+        "judgeMode": "default"
+    },
+    "languages": [
+        "C",
+        "C With O2",
+        "C++",
+        "C++ With O2",
+        "C++ 17",
+        "C++ 17 With O2",
+        "C++ 20",
+        "C++ 20 With O2",
+        "Java",
+        "Python3",
+        "Python2",
+        "Golang",
+        "C#",
+        "PHP",
+        "PyPy2",
+        "PyPy3",
+        "JavaScript Node",
+        "JavaScript V8",
+        "Ruby",
+        "Rust"
+    ],
+    "samples": [
+        {
+            "output": "1.out",
+            "input": "1.in",
+            "score": 100
+        }
+    ],
+    "tags": [],
+    "codeTemplates": [],
+    "judgeMode": "default"
+}
