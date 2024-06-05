@@ -45,6 +45,15 @@
           "ignoreFailures": true
         }
       ]
+    },
+    {
+      "name": "Python Debugger: Python File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "python": "${fileDirname}/venv/bin/python",
+      "cwd": "${fileDirname}",
+      "envFile": "${fileDirname}/venv",
     }
   ]
 }

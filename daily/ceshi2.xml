@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/" />
+    <generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
+    <item> <title><![CDATA[输出指定图形]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，当程序运行时，输出以下图形：
+\`\`\`
+****
+****
+  ****
+   ****
+\`\`\`
+注意：每行开头的空格表示缩进，实际输出不应包含这些空格。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出如描述中的图形]]></output>
+<sample_input><![CDATA[]]></sample_input>
+<sample_output><![CDATA[****
+****
+  ****
+   ****]]></sample_output>
+<test_input><![CDATA[]]></test_input>
+<test_output><![CDATA[****
+****
+  ****
+   ****]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+printf("****\n****\n  ****\n   ****\n");
+return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[圆的周长和面积计算]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，已知圆的半径$r=3.1$，计算并输出圆的周长和面积，结果保留两位小数。圆的周长公式为$C=2\pi r$，面积公式为$S=\pi r^2$。]]></description>
+<input><![CDATA[无输入]]></input>
+<output><![CDATA[输出圆的周长和面积，每行一个结果，保留两位小数。]]></output>
+<sample_input><![CDATA[无]]></sample_input>
+<sample_output><![CDATA[19.48
+30.19]]></sample_output>
+<test_input><![CDATA[无]]></test_input>
+<test_output><![CDATA[19.48
+30.19]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+#define PI 3.14159265358979323846
+
+int main() {
+    double r = 3.1;
+    double circumference = 2 * PI * r;
+    double area = PI * r * r;
+    printf("%.2f\n%.2f\n", circumference, area);
+    return 0;
+}
+]]></solution>
+</item>
+
+<item>
+<title><![CDATA[判断奇偶数]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[编写一个程序，从键盘上输入一个正整数n，判断其是奇数还是偶数，并输出结果。]]></description>
+<input><![CDATA[输入一个正整数n。]]></input>
+<output><![CDATA[输出"奇数"或"偶数"。]]></output>
+<sample_input><![CDATA[5]]></sample_input>
+<sample_output><![CDATA[奇数]]></sample_output>
+<test_input><![CDATA[1
+2
+3
+4
+5
+6
+7
+8
+9
+10]]></test_input>
+<test_output><![CDATA[奇数
+偶数
+奇数
+偶数
+奇数
+偶数
+奇数
+偶数
+奇数
+偶数]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[C程序设计A-机试题库]]></source>
+<solution language="C"><![CDATA[
+#include<stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    if (n % 2 == 0)
+        printf("偶数\n");
+    else
+        printf("奇数\n");
+    return 0;
+}
+]]></solution>
+</item>
+</fps>

@@ -1,4 +1,6 @@
-
+<?xml version='1.0' encoding='utf-8'?>
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/" />
+<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
 <item>
 <title><![CDATA[输出指定图形]]></title>
 <time_limit unit="s"><![CDATA[1]]></time_limit>
@@ -4122,3 +4124,4 @@ int main() {
 }
 ]]></solution>
 </item>
+</fps>

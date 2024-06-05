@@ -1,0 +1,48 @@
+{
+    "json": [
+        {
+            "judgeMode": "default",
+            "samples": [
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 100
+                }
+            ],
+            "tags": [
+                "河工C语言上机题库A"
+            ],
+            "problem": {
+                "auth": 1,
+                "author": "LingNc",
+                "isRemote": false,
+                "problemId": "C1015",
+                "description": "编写一个程序，求100～200之间各位数字之和为6的所有整数，并输出结果。例如，整数105的各位数字之和为1+0+5=6，符合条件。",
+                "source": "C程序设计A-机试题库",
+                "title": "15.求各位数字之和为6的整数",
+                "type": 1,
+                "timeLimit": 1000,
+                "memoryLimit": 256,
+                "input": "无输入",
+                "output": "输出100～200之间各位数字之和为6的所有整数，每行一个。",
+                "examples": "<output>105\n114\n123\n132\n141\n150\n204</output>",
+                "difficulty": 1,
+                "ioScore": 100,
+                "codeShare": true,
+                "hint": "",
+                "isRemoveEndBlank": true,
+                "openCaseResult": true,
+                "judgeCaseMode": "default"
+            },
+            "codeTemplates": []
+        },
+        {
+            "data1": [
+                {
+                    "1.in": "",
+                    "1.out": "105\n114\n123\n132\n141\n150\n204"
+                }
+            ]
+        }
+    ]
+}
