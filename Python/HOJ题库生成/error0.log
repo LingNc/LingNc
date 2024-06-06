@@ -1,0 +1,500 @@
+你好，你是一个非常棒的程序员，现在你正在编写一个文本，用来把一个问题转化为一种导入网站的格式，要求你自己写入测试数据样例等，请你按照如下格式输出：
+例如：问题：68．编写程序，输入一个月份，求解并输出这个月有几天？（不考虑闰年情况）（20分）
+你应该给出回答为1个json：
+{
+    "json": [
+        { // 题目标签
+            "problem": {
+                // 默认为1公开，2为私有，3为比赛中
+                "auth": 1,
+                // 题目上传的作者，请使用用户名
+                "author": "LingNc",
+                // 均为非VJ题目，不用修改
+                "isRemote": false,
+                // 题目的展示id,以C开头加题号
+                "problemId": "C1068",
+                // 题目的描述，支持markdown语法,这里的markdown中需要将\转义 例如$ \neq $应写作 $ \\neq $
+                "description": "编写一个程序，已知圆的半径$r=3.1$，计算并输出圆的周长和面积，结果保留两位小数。圆的周长公式为$C=2\\pi r$，面积公式为$S=\\pi r^2$。",
+                // 题目来源
+                "source": "C程序设计A-机试题库",
+                // 题目标题
+                "title": "68.月份天数计算（不考虑闰年）",
+                // 0为ACM题目，1为OI题目
+                "type": 1,
+                // 时间限制 单位是ms
+                "timeLimit": 1000,
+                // 空间限制 单位是mb
+                "memoryLimit": 256,
+                //stackLimit
+                "stackLimit": 128,
+                // 题目的输入描述
+                "input": "一个整数，表示月份（1-12）",
+                // 题目的输出描述
+                "output": "输出该月份的天数，一个整数。", // 题目的输出描述
+                // 题目的题面样例，样例只选取正确答案的一个即可，格式为<input>输入</input><output>输出</output>
+                //input 和 output换行用\n
+                //如果换行就例如 <input>1\n2\n3\n4</input><output>31\n28\n31\n30</output>",
+                "examples": "<input>3</input><output>31</output>",
+                // 题目难度，0为简单，1为中等，2为困难
+                "difficulty": 1,
+                // OI题目总得分，与测试点总分一致
+                "ioScore": 100,
+                // 该题目是否允许用户共享其提交的代码
+                "codeShare": true,
+                // 题目提示
+                "hint": "",
+                // 评测数据的输出是否自动去掉行末空格
+                "isRemoveEndBlank": true,
+                // 是否允许用户看到各个评测点的结果
+                "openCaseResult": true,
+                // oi题目其他值为subtask_lowest或subtask_average
+                "judgeCaseMode": "default",
+                //读写模式用标准IO
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            // 普通判题：default
+            "judgeMode": "default",
+            "samples": [ //输入输出样例,不一定只有两个，按照题意增加测试点，总分100,请合理分配
+                //这里写的是文件的名字和方式，其中文件内容会在第二个json里面让你书写
+                //注意输入输出各个数据集的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 50
+                },
+                {
+                    "input": "2.in",
+                    "output": "2.out",
+                    "score": 50
+                }
+            ],
+            //标签
+            "tags": ["河工C语言上机题库A"],
+            //代码模板空
+            "codeTemplates": [],
+        },
+        //接下来是评测数据的格式
+        {
+            //数据点1
+            "data1": [
+                {
+                    //1.in的测评内容,无内容就不写，有多个输入用\n换行
+                    "1.in": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+                    //1.out的测评内容,无内容就不写，有多个输出用\n换行
+                    "1.out": "31\n28\n31\n30\n31\n30\n31\n31\n30\n31\n30\n31"
+                }
+            ],
+            //多个测试点就继续写，这个例子用不到第二个测试点，所以不需要写data2
+            //假如data2需要大数测试点，如果不需要data2就不要写data2
+            "data2": [
+                {
+                    "2.in": "3192487\n2413513",
+                    "2.out": "YES\nNO"
+                }
+            ]
+        }
+    ]
+}
+
+接下来我给你一个问题，在你输出的json格式中：
+1.用数学公式等md语法,为了美观简洁请你把问题中的描述含有数学的转化为md格式让方便看懂，比如矩阵，分数等，而且注意字符串中的反斜杠转义md数学中的应写作双反斜杠。
+2.example是案例，data是判题的，并且请你不用了把data输出为空，保证一定有结果。
+3.测试数据点，一个数据点最好需要10组以上的测试数据，最好需要多个测试点，例如data1,data2,data3，如果答案唯一就有限个就可以。
+4.数据范围应的覆盖数据范围到边界，并且覆盖完全数据范围，如果example和data的数据相同，请你依然把data的属性数据in和out写上和example相同，不要说一样即可，谢谢谢谢。
+5.注意输入输出各个数据点加一起的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分，不一定必须两个测试点data1 2,当判不同类型的数据的时候，比如第一个data1是正常输入输出，第二个data2是大数输入输出，第三个data3是极限情况等，根据需要来添加data,如果没有必要一个data点即可，谢谢你理解我的意思
+6.data里面必须要有.in和.out的值,即使.in为空,或者input无输入.in文件也必须有否则判题会出错,如果data是空的就不要再多创建多余的data项目，或者前面已经有data2了，那么就必须补上数据在后面的文件属性里面
+7.提示可以写也可以不写简单题不需要写。
+8.布尔值true和false应全写作小写请注意
+9.请你按照上述要求并输出在代码块中保证换行缩进正确给我相应的输出，谢谢。
+问题：18．编写程序，输入一个字符，判别它是否为大写字母，并输出结果。（‘A’对应的ASCII码为65）（20分）
+{
+    "json": [
+        {
+            "problem": {
+                "auth": 1,
+                "author": "LingNc",
+                "isRemote": false,
+                "problemId": "C1018",
+                "description": "编写一个程序，输入一个字符，判断它是否为大写字母。大写字母的ASCII码范围为65到90。",
+                "source": "C程序设计A-机试题库",
+                "title": "18.判断大写字母",
+                "type": 1,
+                "timeLimit": 1000,
+                "memoryLimit": 256,
+                "stackLimit": 128,
+                "input": "一个字符，表示待判断的字符。",
+                "output": "如果输入的字符是大写字母，输出'Yes'，否则输出'No'。",
+                "examples": "<input>A</input><output>Yes</output>",
+                "difficulty": 0,
+                "ioScore": 20,
+                "codeShare": true,
+                "hint": "",
+                "isRemoveEndBlank": true,
+                "openCaseResult": true,
+                "judgeCaseMode": "default",
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            "judgeMode": "default",
+            "samples": [
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 100
+                }
+            ],
+            "tags": ["河工C语言上机题库A"],
+            "codeTemplates": []
+        },
+        {
+            "data1": [
+                {
+                    "1.in": "A\nB\nC\nD\nE\nF\nG\nH\nI\nJ\nK\nL\nM\nN\nO\nP\nQ\nR\nS\nT\nU\nV\nW\nX\nY\nZ\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nt\nu\nv\nw\nx\ny\nz\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n!\n@\n#\n$\n%\n^\n&\n*\n(\n)\n-\n_\n=\n+\n[\n]\n{\n}\n|\n\\\n;\n:\n'\n\"\n,\n<\n.\n>\n/\n?\n",
+                    "1.out": "Yes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nYes\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\nNo\
+Unterminated string starting at: line 46 column 30 (char 1754)
+你好，你是一个非常棒的程序员，现在你正在编写一个文本，用来把一个问题转化为一种导入网站的格式，要求你自己写入测试数据样例等，请你按照如下格式输出：
+例如：问题：68．编写程序，输入一个月份，求解并输出这个月有几天？（不考虑闰年情况）（20分）
+你应该给出回答为1个json：
+{
+    "json": [
+        { // 题目标签
+            "problem": {
+                // 默认为1公开，2为私有，3为比赛中
+                "auth": 1,
+                // 题目上传的作者，请使用用户名
+                "author": "LingNc",
+                // 均为非VJ题目，不用修改
+                "isRemote": false,
+                // 题目的展示id,以C开头加题号
+                "problemId": "C1068",
+                // 题目的描述，支持markdown语法,这里的markdown中需要将\转义 例如$ \neq $应写作 $ \\neq $
+                "description": "编写一个程序，已知圆的半径$r=3.1$，计算并输出圆的周长和面积，结果保留两位小数。圆的周长公式为$C=2\\pi r$，面积公式为$S=\\pi r^2$。",
+                // 题目来源
+                "source": "C程序设计A-机试题库",
+                // 题目标题
+                "title": "68.月份天数计算（不考虑闰年）",
+                // 0为ACM题目，1为OI题目
+                "type": 1,
+                // 时间限制 单位是ms
+                "timeLimit": 1000,
+                // 空间限制 单位是mb
+                "memoryLimit": 256,
+                //stackLimit
+                "stackLimit": 128,
+                // 题目的输入描述
+                "input": "一个整数，表示月份（1-12）",
+                // 题目的输出描述
+                "output": "输出该月份的天数，一个整数。", // 题目的输出描述
+                // 题目的题面样例，样例只选取正确答案的一个即可，格式为<input>输入</input><output>输出</output>
+                //input 和 output换行用\n
+                //如果换行就例如 <input>1\n2\n3\n4</input><output>31\n28\n31\n30</output>",
+                "examples": "<input>3</input><output>31</output>",
+                // 题目难度，0为简单，1为中等，2为困难
+                "difficulty": 1,
+                // OI题目总得分，与测试点总分一致
+                "ioScore": 100,
+                // 该题目是否允许用户共享其提交的代码
+                "codeShare": true,
+                // 题目提示
+                "hint": "",
+                // 评测数据的输出是否自动去掉行末空格
+                "isRemoveEndBlank": true,
+                // 是否允许用户看到各个评测点的结果
+                "openCaseResult": true,
+                // oi题目其他值为subtask_lowest或subtask_average
+                "judgeCaseMode": "default",
+                //读写模式用标准IO
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            // 普通判题：default
+            "judgeMode": "default",
+            "samples": [ //输入输出样例,不一定只有两个，按照题意增加测试点，总分100,请合理分配
+                //这里写的是文件的名字和方式，其中文件内容会在第二个json里面让你书写
+                //注意输入输出各个数据集的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 50
+                },
+                {
+                    "input": "2.in",
+                    "output": "2.out",
+                    "score": 50
+                }
+            ],
+            //标签
+            "tags": ["河工C语言上机题库A"],
+            //代码模板空
+            "codeTemplates": [],
+        },
+        //接下来是评测数据的格式
+        {
+            //数据点1
+            "data1": [
+                {
+                    //1.in的测评内容,无内容就不写，有多个输入用\n换行
+                    "1.in": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+                    //1.out的测评内容,无内容就不写，有多个输出用\n换行
+                    "1.out": "31\n28\n31\n30\n31\n30\n31\n31\n30\n31\n30\n31"
+                }
+            ],
+            //多个测试点就继续写，这个例子用不到第二个测试点，所以不需要写data2
+            //假如data2需要大数测试点，如果不需要data2就不要写data2
+            "data2": [
+                {
+                    "2.in": "3192487\n2413513",
+                    "2.out": "YES\nNO"
+                }
+            ]
+        }
+    ]
+}
+
+接下来我给你一个问题，在你输出的json格式中：
+1.用数学公式等md语法,为了美观简洁请你把问题中的描述含有数学的转化为md格式让方便看懂，比如矩阵，分数等，而且注意字符串中的反斜杠转义md数学中的应写作双反斜杠。
+2.example是案例，data是判题的，并且请你不用了把data输出为空，保证一定有结果。
+3.测试数据点，一个数据点最好需要10组以上的测试数据，最好需要多个测试点，例如data1,data2,data3，如果答案唯一就有限个就可以。
+4.数据范围应的覆盖数据范围到边界，并且覆盖完全数据范围，如果example和data的数据相同，请你依然把data的属性数据in和out写上和example相同，不要说一样即可，谢谢谢谢。
+5.注意输入输出各个数据点加一起的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分，不一定必须两个测试点data1 2,当判不同类型的数据的时候，比如第一个data1是正常输入输出，第二个data2是大数输入输出，第三个data3是极限情况等，根据需要来添加data,如果没有必要一个data点即可，谢谢你理解我的意思
+6.data里面必须要有.in和.out的值,即使.in为空,或者input无输入.in文件也必须有否则判题会出错,如果data是空的就不要再多创建多余的data项目，或者前面已经有data2了，那么就必须补上数据在后面的文件属性里面
+7.提示可以写也可以不写简单题不需要写。
+8.布尔值true和false应全写作小写请注意
+9.请你按照上述要求并输出在代码块中保证换行缩进正确给我相应的输出，谢谢。
+问题：37．编写程序，输入一个三位正整数，求该数各位数字之和并输出。（20分）
+{
+    "json": [
+        {
+            "problem": {
+                "auth": 1,
+                "author": "LingNc",
+                "isRemote": false,
+                "problemId": "C1037",
+                "description": "编写一个程序，输入一个三位正整数，计算并输出该数各位数字之和。例如，输入$123$，输出应为$1+2+3=6$。",
+                "source": "C程序设计A-机试题库",
+                "title": "37.三位数各位数字之和",
+                "type": 1,
+                "timeLimit": 1000,
+                "memoryLimit": 256,
+                "stackLimit": 128,
+                "input": "一个三位正整数，例如123",
+                "output": "该数各位数字之和，例如6",
+                "examples": "<input>123</input><output>6</output>",
+                "difficulty": 0,
+                "ioScore": 20,
+                "codeShare": true,
+                "hint": "",
+                "isRemoveEndBlank": true,
+                "openCaseResult": true,
+                "judgeCaseMode": "default",
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            "judgeMode": "default",
+            "samples": [
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 100
+                }
+            ],
+            "tags": ["河工C语言上机题库A"],
+            "codeTemplates": []
+        },
+        {
+            "data1": [
+                {
+                    "1.in": "100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\n121\n122\n123\n124\n125\n126\n127\n128\n129\n130\n131\n132\n133\n134\n135\n136\n137\n138\n139\n140\n141\n142\n143\n144\n145\n146\n147\n148\n149\n150\n151\n152\n153\n154\n155\n156\n157\n158\n159\n160\n161\n162\n163\n164\n165\n166\n167\n168\n169\n170\n171\n172\n173\n174\n175\n176\n177\n178\n179\n180\n181\n182\n183\n184\n185\n186\n187\n188\n189\n190\n191\n192\n193\n194\n195\n196\n197\n198\n199\n200\n201\n202\n203\n204\n205\n206\n207\n208\n209\n210\n211\n212\n213\n214\n215\n216\n217\n218\n219\n220\n221\n222\n223\n224\n225\n226\n227\n228\n229\n230\n231\n232\n233\n234\n235\n236\n237\n238\n239\n240\n241\n242\n243\n244\n245\n246\n247\n248\n249\n250\n251\n252\n253\n254\n255\n256\n257\n258\n259\n260\n261\n262\n263\n264\n265\n266\n267\n268\n269\n270\n271\n272\n273\n274\n275\n276\n277\n278\n279\n280\n281\n282\n283\n284\n285\n286\n287\n288\n289\n290\n291\n292\n293\n294\n295\n296\n297\n298\n299\n300\n301\n302\n303\n304\n305\n306\n307\n308\n309\n310\n311\n312\n313\n314\n315\n316\n317\n318\n319\n320\n321\n322\n323\n324\n325\n326\n327\n328\n329\n330\n331\n332\n333\n334\n335\n336\n337\n338\n339\n340\n341\n342\n343\n344\n345\n346\n347\n348\n349\n350\n351\n352\n353\n354\n355\n356\n357\n358\n359\n360\n361\n362\n363\n364\n365\n366\n367\n368\n369\n370\n371\n372\n373\n374\n375\n376\n377\n378\n379\n380\n381\n382\n383\n384\n385\n386\n387\n388\n389\n390\n391\n392\n393\n394\n395\n396\n397\n398\n399\n400\n401\n402\n403\n404\n405\n406\n407\n408\n409\n410\n411\n412\n413\n414\n415\n416\n417\n418\n419\n420\n421\n422\n423\n424\n425\n426\n427\n428\n429\n430\n431\n432\n433\n434\n435\n436\n437\n438\n439\n440\n441\n442\n443\n444\n445\n446\n447\n448\n449\n450\n451\n452\n453\n454\n455\n456\n457\n458\n459\n460\n461\n462\n463\n464\n465\n466\n467\n468\n469\n470\n471\n472\n473\n474\n475\n476\n477\n478\n479\n480\n481\n482\n483\n484\n485\n486\n487\n488\n489\n490\n491\n492\n493\n494\n495\n496\n497\n498\n499\n500\n501\n502\n503\n504\n505\n506\n507\n508\n509\n510\n511\n512\n513\n514\n515\n516\n517\n518\n519\n520\n521\n522\n523\n524\n525\n526\n527\n528\n529\n530\n531\n532\n533\n534\n535\n536\n537\n538\n539\n540\n541\n542\n543\n544\n545\n546\n547\n548\n549\n550\n551\n552\n553\n554\n555\n556\n557\n558\n559\n560\n561\n562\n563\n564\n565\n566\n567\n568\n569\n570\n571\n572\n573\n574\n575\n576\n577\n578\n579\n580\n581\n582\n583\n584\n585\n586\n587\n588\n589\n590\n591\n592\n593\n594\n595\n596\n597\n598\n599\n600\n601\n602\n603\n604\n605\n606\n607\n608\n609\n610\n611\n612\n613\n614\n615\n616\n617\n618\n619\n620\n621\n622\n623\n624\n625\n626\n627\n628\n629\n630\n631\n632\n633\n634\n635\n636\n637\n638\n639\n640\n641\n642\n643\n644\n645\n646\n647\n648\n649\n650\n651\n652\n653\n654\n655\n656\n657\n658\n659\n660\n661\n662\n663\n664\n665\n666\n667\n668\n669\n670\n671\n672\n673\n674\n675\n676\n677\n678\n679\n680\n681\n682\n683\n684\n685\n686\n687\n688\n689\n690\n691\n692\n693\n694\n695\n696\n697\n698\n699\n700\n701\n702\n703\n704\n705\n706\n707\n708\n709\n710\n711\n712\n713\n714\n715\n716\n717\n718\n719\n720\n721\n722\n723\n724\n725\n726\n727\n728\n729\n730\n731\n732\n733\n734\n735\n736\n737\n738\n739\n740\n741\n742\n743\n744\n745\n746\n747\n748\n749\n750\n751\n752\n753\n754\n755\n756\n757\n758\n759\n760\n761\n762\n763\n764\n765\n766\n767\n768\n769\n770\n771\n772\n773\n774\n775\n776\n777\n778\n779\n780\n781\n782\n783\n784\n785\n786\n787\n788\n789\n790\n791\n792\n793\n794\n795\n796\n797\n798\n799\n800\n801\n802\n803\n804\n805\n806\n807\n808\n809\n810\n811\n812\n813\n814\n815\n816\n817\n818\n819\n820\n821\n822\n823\n824\n825\n826\n827\n828\n829\n830\n8
+Unterminated string starting at: line 45 column 29 (char 1438)
+你好，你是一个非常棒的程序员，现在你正在编写一个文本，用来把一个问题转化为一种导入网站的格式，要求你自己写入测试数据样例等，请你按照如下格式输出：
+例如：问题：68．编写程序，输入一个月份，求解并输出这个月有几天？（不考虑闰年情况）（20分）
+你应该给出回答为1个json：
+{
+    "json": [
+        { // 题目标签
+            "problem": {
+                // 默认为1公开，2为私有，3为比赛中
+                "auth": 1,
+                // 题目上传的作者，请使用用户名
+                "author": "LingNc",
+                // 均为非VJ题目，不用修改
+                "isRemote": false,
+                // 题目的展示id,以C开头加题号
+                "problemId": "C1068",
+                // 题目的描述，支持markdown语法,这里的markdown中需要将\转义 例如$ \neq $应写作 $ \\neq $
+                "description": "编写一个程序，已知圆的半径$r=3.1$，计算并输出圆的周长和面积，结果保留两位小数。圆的周长公式为$C=2\\pi r$，面积公式为$S=\\pi r^2$。",
+                // 题目来源
+                "source": "C程序设计A-机试题库",
+                // 题目标题
+                "title": "68.月份天数计算（不考虑闰年）",
+                // 0为ACM题目，1为OI题目
+                "type": 1,
+                // 时间限制 单位是ms
+                "timeLimit": 1000,
+                // 空间限制 单位是mb
+                "memoryLimit": 256,
+                //stackLimit
+                "stackLimit": 128,
+                // 题目的输入描述
+                "input": "一个整数，表示月份（1-12）",
+                // 题目的输出描述
+                "output": "输出该月份的天数，一个整数。", // 题目的输出描述
+                // 题目的题面样例，样例只选取正确答案的一个即可，格式为<input>输入</input><output>输出</output>
+                //input 和 output换行用\n
+                //如果换行就例如 <input>1\n2\n3\n4</input><output>31\n28\n31\n30</output>",
+                "examples": "<input>3</input><output>31</output>",
+                // 题目难度，0为简单，1为中等，2为困难
+                "difficulty": 1,
+                // OI题目总得分，与测试点总分一致
+                "ioScore": 100,
+                // 该题目是否允许用户共享其提交的代码
+                "codeShare": true,
+                // 题目提示
+                "hint": "",
+                // 评测数据的输出是否自动去掉行末空格
+                "isRemoveEndBlank": true,
+                // 是否允许用户看到各个评测点的结果
+                "openCaseResult": true,
+                // oi题目其他值为subtask_lowest或subtask_average
+                "judgeCaseMode": "default",
+                //读写模式用标准IO
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            // 普通判题：default
+            "judgeMode": "default",
+            "samples": [ //输入输出样例,不一定只有两个，按照题意增加测试点，总分100,请合理分配
+                //这里写的是文件的名字和方式，其中文件内容会在第二个json里面让你书写
+                //注意输入输出各个数据集的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 50
+                },
+                {
+                    "input": "2.in",
+                    "output": "2.out",
+                    "score": 50
+                }
+            ],
+            //标签
+            "tags": ["河工C语言上机题库A"],
+            //代码模板空
+            "codeTemplates": [],
+        },
+        //接下来是评测数据的格式
+        {
+            //数据点1
+            "data1": [
+                {
+                    //1.in的测评内容,无内容就不写，有多个输入用\n换行
+                    "1.in": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12",
+                    //1.out的测评内容,无内容就不写，有多个输出用\n换行
+                    "1.out": "31\n28\n31\n30\n31\n30\n31\n31\n30\n31\n30\n31"
+                }
+            ],
+            //多个测试点就继续写，这个例子用不到第二个测试点，所以不需要写data2
+            //假如data2需要大数测试点，如果不需要data2就不要写data2
+            "data2": [
+                {
+                    "2.in": "3192487\n2413513",
+                    "2.out": "YES\nNO"
+                }
+            ]
+        }
+    ]
+}
+
+接下来我给你一个问题，在你输出的json格式中：
+1.用数学公式等md语法,为了美观简洁请你把问题中的描述含有数学的转化为md格式让方便看懂，比如矩阵，分数等，而且注意字符串中的反斜杠转义md数学中的应写作双反斜杠。
+2.example是案例，data是判题的，并且请你不用了把data输出为空，保证一定有结果。
+3.测试数据点，一个数据点最好需要10组以上的测试数据，最好需要多个测试点，例如data1,data2,data3，如果答案唯一就有限个就可以。
+4.数据范围应的覆盖数据范围到边界，并且覆盖完全数据范围，如果example和data的数据相同，请你依然把data的属性数据in和out写上和example相同，不要说一样即可，谢谢谢谢。
+5.注意输入输出各个数据点加一起的总分数是100,根据每个测试数据集的不同请你合理分配分数，比如两个数据集情况下，假如data1 30分 data2 70分，那么总分也是100分，不一定必须两个测试点data1 2,当判不同类型的数据的时候，比如第一个data1是正常输入输出，第二个data2是大数输入输出，第三个data3是极限情况等，根据需要来添加data,如果没有必要一个data点即可，谢谢你理解我的意思
+6.data里面必须要有.in和.out的值,即使.in为空,或者input无输入.in文件也必须有否则判题会出错,如果data是空的就不要再多创建多余的data项目，或者前面已经有data2了，那么就必须补上数据在后面的文件属性里面
+7.提示可以写也可以不写简单题不需要写。
+8.布尔值true和false应全写作小写请注意
+9.请你按照上述要求并输出在代码块中保证换行缩进正确给我相应的输出，谢谢。
+问题：52．某景区每张门票零售价格为25元，团体票价为20元，一次购票数目超过30张（含30张）时按团体票出售。编程从键盘输入购票数目，求出所需购票款的数额，并输出。（20分）
+{
+    "json": [
+        {
+            "problem": {
+                "auth": 1,
+                "author": "LingNc",
+                "isRemote": false,
+                "problemId": "C1052",
+                "description": "某景区每张门票零售价格为25元，团体票价为20元，一次购票数目超过30张（含30张）时按团体票出售。编程从键盘输入购票数目，求出所需购票款的数额，并输出。",
+                "source": "C程序设计A-机试题库",
+                "title": "52.景区门票价格计算",
+                "type": 1,
+                "timeLimit": 1000,
+                "memoryLimit": 256,
+                "stackLimit": 128,
+                "input": "一个整数，表示购票数目（1-100）",
+                "output": "输出所需购票款的数额，一个整数。",
+                "examples": "<input>35</input><output>700</output>",
+                "difficulty": 0,
+                "ioScore": 100,
+                "codeShare": true,
+                "hint": "",
+                "isRemoveEndBlank": true,
+                "openCaseResult": true,
+                "judgeCaseMode": "default",
+                "isFileIO": false,
+                "isGroup": false,
+                "isUploadCase": true,
+                "judgeMode": "default"
+            },
+            "judgeMode": "default",
+            "samples": [
+                {
+                    "input": "1.in",
+                    "output": "1.out",
+                    "score": 100
+                }
+            ],
+            "tags": ["河工C语言上机题库A"],
+            "codeTemplates": []
+        },
+        {
+            "data1": [
+                {
+                    "1.in": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100",
+                    "1.out": "25\n50\n75\n100\n125\n150\n175\n200\n225\n250\n275\n300\n325\n350\n375\n400\n425\n450\n475\n500\n525\n550\n575\n600\n625\n650\n675\n700\n725\n750\n775\n800\n825\n850\n875\n900\n925\n950\n975\n1000\n1025\n1050\n1075\n1100\n1125\n1150\n1175\n1200\n1225\n1250\n1275\n1300\n1325\n1350\n1375\n1400\n1425\n1450\n1475\n1500\n1525\n1550\n1575\n1600\n1625\n1650\n1675\n1700\n1725\n1750\n1775\n1800\n1825\n1850\n1875\n1900\n1925\n1950\n1975\n2000\n2025\n2050\n2075\n2100\n2125\n2150\n2175\n2200\n2225\n2250\n2275\n2300\n2325\n2350\n2375\n2400\n2425\n2450\n2475\n2500\n2525\n2550\n2575\n2600\n2625\n2650\n2675\n2700\n2725\n2750\n2775\n2800\n2825\n2850\n2875\n2900\n2925\n2950\n2975\n3000\n3025\n3050\n3075\n3100\n3125\n3150\n3175\n3200\n3225\n3250\n3275\n3300\n3325\n3350\n3375\n3400\n3425\n3450\n3475\n3500\n3525\n3550\n3575\n3600\n3625\n3650\n3675\n3700\n3725\n3750\n3775\n3800\n3825\n3850\n3875\n3900\n3925\n3950\n3975\n4000\n4025\n4050\n4075\n4100\n4125\n4150\n4175\n4200\n4225\n4250\n4275\n4300\n4325\n4350\n4375\n4400\n4425\n4450\n4475\n4500\n4525\n4550\n4575\n4600\n4625\n4650\n4675\n4700\n4725\n4750\n4775\n4800\n4825\n4850\n4875\n4900\n4925\n4950\n4975\n5000\n5025\n5050\n5075\n5100\n5125\n5150\n5175\n5200\n5225\n5250\n5275\n5300\n5325\n5350\n5375\n5400\n5425\n5450\n5475\n5500\n5525\n5550\n5575\n5600\n5625\n5650\n5675\n5700\n5725\n5750\n5775\n5800\n5825\n5850\n5875\n5900\n5925\n5950\n5975\n6000\n6025\n6050\n6075\n6100\n6125\n6150\n6175\n6200\n6225\n6250\n6275\n6300\n6325\n6350\n6375\n6400\n6425\n6450\n6475\n6500\n6525\n6550\n6575\n6600\n6625\n6650\n6675\n6700\n6725\n6750\n6775\n6800\n6825\n6850\n6875\n6900\n6925\n6950\n6975\n7000\n7025\n7050\n7075\n7100\n7125\n7150\n7175\n7200\n7225\n7250\n7275\n7300\n7325\n7350\n7375\n7400\n7425\n7450\n7475\n7500\n7525\n7550\n7575\n7600\n7625\n7650\n7675\n7700\n7725\n7750\n7775\n7800\n7825\n7850\n7875\n7900\n7925\n7950\n7975\n8000\n8025\n8050\n8075\n8100\n8125\n8150\n8175\n8200\n8225\n8250\n8275\n8300\n8325\n8350\n8375\n8400\n8425\n8450\n8475\n8500\n8525\n8550\n8575\n8600\n8625\n8650\n8675\n8700\n8725\n8750\n8775\n8800\n8825\n8850\n8875\n8900\n8925\n8950\n8975\n9000\n9025\n9050\n9075\n9100\n9125\n9150\n9175\n9200\n9225\n9250\n9275\n9300\n9325\n9350\n9375\n9400\n9425\n9450\n9475\n9500\n9525\n9550\n9575\n9600\n9625\n9650\n9675\n9700\n9725\n9750\n9775\n9800\n9825\n9850\n9875\n9900\n9925\n9950\n9975\n10000\n10025\n10050\n10075\n10100\n10125\n10150\n10175\n10200\n10225\n10250\n10275\n10300\n10325\n10350\n10375\n10400\n10425\n10450\n10475\n10500\n10525\n10550\n10575\n10600\n10625\n10650\n10675\n10700\n10725\n10750\n10775\n10800\n10825\n10850\n10875\n10900\n10925\n10950\n10975\n11000\n11025\n11050\n11075\n11100\n11125\n11150\n11175\n11200\n11225\n11250\n11275\n11300\n11325\n11350\n11375\n11400\n11425\n11450\n11475\n11500\n11525\n11550\n11575\n11600\n11625\n11650\n11675\n11700\n11725\n11750\n11775\n11800\n11825\n11850\n11875\n11900\n11925\n11950\n11975\n12000\n12025\n12050\n12075\n12100\n12125\n12150\n12175\n12200\n12225\n12250\n12275\n12300\n12325\n12350\n12375\n12400\n12425\n12450\n12475\n12500\n12525\n12550\n12575\n12600\n12625\n12650\n12675\n12700\n12725\n12750\n12775\n12800\n12825\n12850\n12875\n12900\n12925\n12950\n12975\n13000\n13025\n13050\n13075\n13100\n13125\n1315
+Unterminated string starting at: line 46 column 30 (char 1892)
+1．编写程序,程序运行时输出以下图形。（20分）
+****
+****
+  ****
+   ****
+{
+    "easy": false,
+}
+Expecting property name enclosed in double quotes: line 3 column 1 (char 21)
+2．已知圆的半径r=3.1，编程求圆的周长和面积，并输出结果（保留两位小数）。（20分）
+{
+    "easy": true,
+}
+Expecting property name enclosed in double quotes: line 3 column 1 (char 20)
+3．编写程序，从键盘上输入一个正整数n，判断其是奇数还是偶数，并输出结果。（20分）
+{
+    "easy": true,
+}
+Expecting property name enclosed in double quotes: line 3 column 1 (char 20)
+4．编写程序,用for循环求1+2+3+…+100的值并输出。（20分）
+{
+    "easy": true,
+}
+Expecting property name enclosed in double quotes: line 3 column 1 (char 20)
