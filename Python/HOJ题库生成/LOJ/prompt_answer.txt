@@ -9,7 +9,7 @@
     "output": "输出转换后的摄氏温度，保留一位小数。"
 }
 你的反馈JSON：
-{   
+{
     //这里给出C语言的正确答案
     "RightCode": "#include<stdio.h>\nint main(){\n    double f,c;\n    scanf(\"%lf\",&f);\n    c=5.0/9.0*(f-32);\n    printf(\"%lf\",c);\n    return 0;\n}"
 }

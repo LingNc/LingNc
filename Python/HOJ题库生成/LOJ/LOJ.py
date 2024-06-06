@@ -17,23 +17,24 @@ def main():
 
     #进入循环读取
     for index,ques in enumerate(questions):
-        
-        index += 1
-        # if index !=66:
-        #     continue
 
+        index += 1
+        if index not in [36]:
+            continue
+
+        # IsEasy = False
         #判断问题是不是简单问题
         IsEasy = judge(ques)
         if IsEasy == 'error':
             print(f"第{index}个问题，判断难度失败")
             continue
-        
+
         #选择执行
         if IsEasy:
             easy(ques,index)
         else:
             diff(ques,index)
-        
+
 
 
 def judge(ques):
@@ -51,13 +52,13 @@ def judge(ques):
         return res
     else:
         return res["easy"]
-    
+
 
 def diff(ques,index):
     # 打开prompt_problem文件并读取内容
     with open('prompt_problem.txt', 'r') as file:
         prompt_problem = file.read()
-    
+
     #合并问题
     question=prompt_problem+ques
     #请求答案
@@ -68,24 +69,24 @@ def diff(ques,index):
     if res_1=='error':
         print(f"第{index}个问题，解析diff文件失败")
         return 0
-    
+
     #解析JSON
     json_problem=res_1["content"]
-    
+
     # 获取第二次请求内容
     ques_2={}
     ques_2["question"]=res_1["question"]
     #请求标准答案代码
     ques_2["RightCode"]=answer(json_problem,index)["RightCode"]
     ques_2["testDataFileUse"]=res_1["testDataFileUse"]
-    
+
     ques_2_str=json.dumps(ques_2,indent=4,ensure_ascii=False)
     #载入prompt_data.txt
     with open('prompt_data.txt', 'r') as file:
         prompt_data = file.read()
     #合并问题
     question_2=prompt_data+ques_2_str
-    
+
     # 发送第二次请求，获取测试数据点
     result_2=deepseek(question_2,4096)
     #第二次解析配置文件
@@ -95,15 +96,15 @@ def diff(ques,index):
         return 0
     #解析数据
     json_data=res_2
-    
+
     # 保存数据
     save_json(json_problem,json_data)
-    
+
 def easy(ques,index):
     # 打开prompt文件并读取内容
     with open('base_question.txt', 'r') as file:
         base_question = file.read()
-    
+
     #合并问题
     question=base_question+ques
     #请求答案JSON
@@ -124,13 +125,13 @@ def answer(json_problem,index):
     # 打开prompt_answer文件并读取内容
     with open('prompt_answer.txt', 'r') as file:
         prompt_answer = file.read()
-    
+
     #读入问题和格式
     ques_json={}
     ques_json["question"]=json_problem["problem"]["description"]
     ques_json["input"]=json_problem["problem"]["input"]
     ques_json["output"]=json_problem["problem"]["output"]
-    
+
     ques_str=json.dumps(ques_json,indent=4,ensure_ascii=False)
     #合并问题
     question=prompt_answer+ques_str
@@ -138,9 +139,9 @@ def answer(json_problem,index):
     answer=deepseek(question,4096)
     #解析JSON
     json_answer = JSON(answer,ques_str)
-    
+
     return json_answer
-    
+
 def JSON(result,ques):
     #异常处理
     try:
@@ -158,11 +159,11 @@ def JSON(result,ques):
 
     else:
         # print(res_json["json"][0]["problem"]["problemId"] + "生成成功")
-        
+
         return res_json
         # 保存结果到文件
         # save_json(res_json)
-    
+
 def save_json(json_problem,json_data):
     #res_json=json.load(open("test.json",'r'))
 
@@ -203,7 +204,7 @@ def save_json(json_problem,json_data):
                 # 写入文件内容
                 with open(file_path, 'w',encoding='utf-8') as file:
                     file.write(content)
-                        
+
     print(f"{problem_id}生成成功")
 
 #添加标准设置
@@ -247,7 +248,7 @@ def add_setting(json_problem):
         "judgeMode": "default"
         }
     json_problem["problem"].update(setting)
-    
+
 # deepseek向ai问问题设定最大token
 def deepseek(question,max):
     response = client.chat.completions.create(
@@ -257,7 +258,7 @@ def deepseek(question,max):
                 {"role": "user", "content": question},
         ],
             max_tokens=max,
-            temperature=0.1,
+            temperature=0.0,
             stream=False
         )
     return response.choices[0].message.content[8:-4]
@@ -300,12 +301,12 @@ def deepseek(question,max):
 #     problem_id_dir = os.path.join(problem_dir, "problem_"+problem_id)
 #     if not os.path.exists(problem_id_dir):
 #         os.mkdir(problem_id_dir)
-        
+
 # def save_data(json_data,problem_id):
 #     #设置文件基础路径
 #     problem_dir = "problem"
 #     problem_id_dir = os.path.join(problem_dir, "problem_"+problem_id)
-    
+
 #     # 遍历json_data中的data列表
 #     for data_set_name, data_set in json_data.items():
 #         for data in data_set:
