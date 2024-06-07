@@ -19,7 +19,7 @@ def main():
     for index,ques in enumerate(questions):
 
         index += 1
-        if index not in [36]:
+        if index not in [71]:
             continue
 
         # IsEasy = False
