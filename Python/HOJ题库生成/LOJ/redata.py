@@ -15,7 +15,7 @@ def write_file(file_path, content):
         file.write(content)
 
 # deepseek向ai问问题设定最大token
-def deepseek(question,max):
+def deepseek(question,max,tem):
     response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
@@ -23,11 +23,25 @@ def deepseek(question,max):
                 {"role": "user", "content": question},
         ],
             max_tokens=max,
-            temperature=0.0,
+            temperature=tem,
             stream=False
         )
     return response.choices[0].message.content[8:-4]
 
+def JSON(result,id):
+    #异常处理
+    try:
+        res_json=json.loads(result)
+    except Exception as e:
+        print(f"error: {id}JSON解析失败")
+        #把异常写入error.log
+        with open("reData_error.log", "a") as f:
+            f.write(id + ":\n")
+            f.write(result + "\n")
+            f.write(str(e) + "\n")
+            return "error"
+    else:
+        return res_json
 def solve(json_file_path,base_path):
     # 读取JSON文件
     json_data = read_json_file(json_file_path)
@@ -51,9 +65,19 @@ def solve(json_file_path,base_path):
         prompt_text = prompt_file.read()
     request_text = prompt_text + json.dumps(new_json)
 
+    temperature = 0.1
     # 调用deepseek函数
-    result_json_str = deepseek(request_text,4096)
-    result_dict = json.loads(result_json_str)
+    while(temperature<=1):
+        result_json_str = deepseek(request_text,4096,temperature)
+        result_dict = JSON(result_json_str,id)
+        if(result_dict!="error"):
+            break
+        temperature += 0.3
+
+    # 如果出现错误，返回0
+    if(result_dict=="error"):
+        return 0
+
 
     # 提取RightCode
     right_code = result_dict['RightCode']
@@ -70,8 +94,16 @@ def solve(json_file_path,base_path):
     request_text = prompt_text + json.dumps(answer)
 
     # 再次调用deepseek函数
-    result_json_str = deepseek(request_text,4096)
-    data = json.loads(result_json_str)
+    while(temperature<=1):
+        result_json_str = deepseek(request_text,4096,temperature)
+        data = JSON(result_json_str,id)
+        if(data!="error"):
+            break
+        temperature += 0.3
+
+    # 如果出现错误，返回0
+    if(data=="error"):
+        return 0
 
     # 创建文件夹和文件
     problem_folder = os.path.join(base_path,f'problem_{id}')
