@@ -1,14 +1,8 @@
 #include<stdio.h>
-#include<string.h>
+
 int main(){
-    char num[50]={ 0 };
-    scanf("%s",num);
-    int len=strlen(num);
-    int m=len%3;
-    for(int i=0;i<=len-1;i++){
-        if((i-m)%3==0&&i!=0)
-            printf("%c",',');
-        printf("%c",num[i]);
-    }
+    int a=5;
+    int P=4*a,S=a*a;
+    printf("周长=%d,面积=%d",P,S);
     return 0;
 }
