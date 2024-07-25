@@ -180,5 +180,11 @@
     "comments": "off",
     "strings": "off"
   },
-  "livePreview.defaultPreviewPath": "/learn-web/RedBook/RedBook.html"
+  "livePreview.defaultPreviewPath": "/learn-web/RedBook/RedBook.html",
+  //cph配置文件
+  "cph.general.defaultLanguage": "cpp",
+    "cph.general.defaultLanguageTemplateFileLocation": "template.cpp",    // 这是你的模板文件路径
+    "cph.general.firstTime": false,
+    "cph.language.cpp.SubmissionCompiler": "GNU G++14 6.4.0",   // 使用 C++14 标准
+    "cph.language.cpp.Args": "-std=c++14 -O2",    // -O2
 }
