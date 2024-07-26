@@ -32,7 +32,7 @@ void solve(){
             have_1++;
         }
     }
-    int have_0=r-1-l-have_1;
+    int have_0=r-l-1-have_1;
     int cheap=0;
     if(have_0>=min_0){
         cheap=2*a-have_0*b;
