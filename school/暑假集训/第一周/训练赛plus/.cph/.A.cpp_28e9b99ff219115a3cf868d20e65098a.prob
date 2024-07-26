@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"/home/lingnc/LingNc/school/暑假集训/第一周/训练赛plus/A.cpp","tests":[{"id":1721976102818,"input":"3\n15 2 3\n5 10\n7 5 2\n10 12\n1 100 100\n100 100\n","output":"40\n34\n0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/暑假集训/第一周/训练赛plus/A.cpp","group":"local","local":true}
