@@ -2,14 +2,15 @@
 #define foe(i,a,b) for(int i=(a);i<=(b);i++)
 #define fod(i,a,b) for(int i=(a);i>=(b);i--)
 #define endl '\n'
-#define int long long
+#define long long
 using i64=long long;
 using namespace std;
 
 const int N=1e5+10;
-i64 h[N],e[2*N],ne[2*N],idx;
-i64 n;
-bool st[N];
+int h[N],e[2*N],ne[2*N],idx;
+int n;
+vector<pair<int,int>> ans;
+
 void init(){
     memset(h,-1,sizeof h);
     idx=0;
@@ -17,45 +18,40 @@ void init(){
 void add(int a,int b){
     e[idx]=b,ne[idx]=h[a],h[a]=idx++;
 }
-double lis_len(int val,int fa){
-    double l=0;
+bool dfs(int start,int u,int val,int fa){
+    int cnt=0;
+    bool res=true;
+    if(!u) ans.clear();
     for(int p=h[val];p!=-1;p=ne[p]){
-        if(e[p]!=fa) l+=1;
-    }
-    return l;
-}
-// void pri(){
-//     foe(i,1,n){
-//         cout<<i<<": ";
-//         for(int p=h[i];p!=-1;p=ne[p]){
-//             cout<<e[p]<<' ';
-//         }
-//         cout<<endl;
-//     }
-//     cout<<endl;
-// }
-
-//u路数，pro概率
-bool dfs(int val,int fa){
-    int times=0;
-    for(int p=h[val];p!=-1;p=ne[p]){
-        if(++times>1) return false;
         int j=e[p];
-        if(j!=fa)
-            return dfs(j,val);
+        if(j!=fa){
+            cnt++;
+            res=dfs(start,u+1,j,val);
+        }
     }
-    return true;
+    if(cnt==0){
+        ans.push_back({start,val});
+    }
+    if(!u&&res){
+        cout<<"Yes"<<endl;
+        cout<<ans.size()<<endl;
+        for(auto &i:ans) cout<<i.first<<' '<<i.second<<endl;
+    }
+    if(cnt>1&&u) res=false;
+    return res;
 }
 signed main(){
-    scanf("%lld",&n);
+    scanf("%d",&n);
     init();
     int a,b;
     foe(i,1,n-1){
-        scanf("%lld%lld",&a,&b);
+        scanf("%d%d",&a,&b);
         add(a,b);
         add(b,a);
     }
-    dfs(1,0);
-    printf("%.7lf",res);
+    foe(i,1,n){
+        if(dfs(i,0,1,0)) return 0;
+    }
+    cout<<"No"<<endl;
     return 0;
 }
