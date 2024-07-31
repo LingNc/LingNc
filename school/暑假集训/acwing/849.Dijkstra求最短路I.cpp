@@ -11,7 +11,8 @@ using namespace std;
 const int N=5e2+10;
 int n,m,dist[N],st[N];
 int g[N][N];
-
+//朴素版 稠密图 n很小的时候用 (n^2~m  1e2)
+//n^2
 int Dijkstra(){
     memset(dist,0x3f,sizeof(dist));
     dist[1]=0;

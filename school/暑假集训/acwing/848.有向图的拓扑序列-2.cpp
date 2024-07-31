@@ -36,6 +36,7 @@ bool topsort(){
         int t=q[hh++];
         for(int p=h[t];p!=-1;p=ne[p]){
             int j=e[p];
+            //当前点的入度减1
             in[j]--;
             if(!in[j])
                 q[++tt]=j;

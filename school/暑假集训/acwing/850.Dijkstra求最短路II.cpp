@@ -26,11 +26,15 @@ void init(){
 }
 //添加单向边
 void add(int a,int b,int c){
-    //给权重
+    //给a->b权重
     w[idx]=c;
     e[idx]=b,ne[idx]=h[a],h[a]=idx++;
     
 }
+//堆优化版 稀疏图 n~m(当n很大的时候用 1e5)
+//mlogn
+//记得init()初始化 忘了该超时了
+//记得改 const int N=1e6+10 段错误
 int Dijkstra(){
     memset(dist,0x3f,sizeof(dist));
     dist[1]=0;
@@ -41,6 +45,7 @@ int Dijkstra(){
         auto t=heap.top();
         heap.pop();
         //确定这个路径最小
+        //已经存在过 冗余
         if(st[t.second]==true) continue;
         //else st[t.second]=true 这个就错了
         st[t.second]=true;

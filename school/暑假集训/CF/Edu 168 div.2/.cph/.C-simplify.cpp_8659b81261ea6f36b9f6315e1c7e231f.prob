@@ -1,0 +1,1 @@
+{"name":"Local: C-simplify","url":"/home/lingnc/LingNc/school/暑假集训/CF/Edu 168 div.2/C-simplify.cpp","tests":[{"id":1722400552395,"input":"4\n6\n_(_)_)\n2\n_)\n8\n_)_)_)_)\n8\n_(_)_(_)\n","output":"5\n1\n4\n8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/暑假集训/CF/Edu 168 div.2/C-simplify.cpp","group":"local","local":true}
