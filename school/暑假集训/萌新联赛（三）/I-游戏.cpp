@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#define int long long 
+#define int long long
 #define foe(i,a,b) for(int i=(a);i<=(b);i++)
 #define fod(i,a,b) for(int i=(a);i>=(b);i--)
 #define endl '\n'
@@ -27,6 +27,7 @@ void add(int a,int b,int c,bool d){
     w[idx]=c,tim[idx]=d;
     e[idx]=b,ne[idx]=h[a],h[a]=idx++;
 }
+
 //覆盖状态
 void set_tim(bool x){
     foe(i,0,2*N-1) tim[i]=x;
@@ -35,29 +36,31 @@ void set_tim(bool x){
 //mlogn
 // val结点开始
 void Dijkstra(int val){
-    priority_queue<PII> heap;
+    //默认排序函数是less<T>
+    //一个排序卡我一下午无语了
+    priority_queue<PII,vector<PII>,greater<PII>> heap;
 
     memset(dist,0x3f,sizeof dist);
     memset(st,0,sizeof st);
     dist[val]=0;
-    heap.push({0,val});
-    
+    heap.push({ 0,val });
+
     //无论走不走到k的最小距离
     while(heap.size()){
         //找到未确定的距离最小的点
         auto t=heap.top();
         heap.pop();
         //已经存在过 冗余
-        if(st[t.second]==true) continue;
+        // if(st[t.second]==true) continue;
         st[t.second]=true;
-        
+
         // 判断从该点(t)出发的所有路径的点的距离最小值
         for(int p=h[t.second];p!=-1;p=ne[p]){
             int j=e[p];
             //状态可以走
             if(t.first+w[p]<dist[j]&&tim[p]){
                 dist[j]=t.first+w[p];
-                heap.push({dist[j],j});
+                heap.push({ dist[j],j });
             }
         }
     }
@@ -69,17 +72,16 @@ void solve(){
     int a,b,c,d;
     foe(i,1,m){
         cin>>a>>b>>c>>d;
+
         add(a,b,c,d);
         add(b,a,c,d);
     }
     Dijkstra(1);
     int res=dist[n],min_k=dist[k];
     set_tim(true);
-
     Dijkstra(k);
-    res=min(dist[n]+min_k,res);
-    
-    if(res==INF) res=-1;
+    res=min(res,dist[n]+min_k);
+    if(res>=INF) res=-1;
     cout<<res<<endl;
 }
 

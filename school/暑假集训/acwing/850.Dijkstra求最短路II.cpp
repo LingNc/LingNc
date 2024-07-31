@@ -17,6 +17,7 @@ int h[N],e[N],ne[N],idx,w[N];//w[N]idx对应的权重
 //是否是已经确定的点
 bool st[N];
 typedef pair<int,int> PII;
+//默认排序函数是less<T>，记得写greater<T>
 priority_queue<PII,vector<PII>,greater<PII>> heap;
 
 //初始化
@@ -29,12 +30,13 @@ void add(int a,int b,int c){
     //给a->b权重
     w[idx]=c;
     e[idx]=b,ne[idx]=h[a],h[a]=idx++;
-    
+
 }
 //堆优化版 稀疏图 n~m(当n很大的时候用 1e5)
 //mlogn
 //记得init()初始化 忘了该超时了
 //记得改 const int N=1e6+10 段错误
+//多次Dijs距离dist[n]如果存在inf的时候求和有可能小于0 res=(dist[n]+inf,res)<0答案直接错误
 int Dijkstra(){
     memset(dist,0x3f,sizeof(dist));
     dist[1]=0;
@@ -49,7 +51,7 @@ int Dijkstra(){
         if(st[t.second]==true) continue;
         //else st[t.second]=true 这个就错了
         st[t.second]=true;
-        
+
         //if(t==n) break;
         // 判断从该点(t)出发的所有路径的点的距离最小值
         for(int p=h[t.second];p!=-1;p=ne[p]){
@@ -75,7 +77,7 @@ signed main(){
     }
     int t=Dijkstra();
     cout<<t<<endl;
-    
+
     return 0;
 }
 /*
