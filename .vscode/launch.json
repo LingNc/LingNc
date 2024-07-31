@@ -34,8 +34,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/root/LingNc/hello-algo/14动态规划",
-      "program": "/root/LingNc/hello-algo/14动态规划/build/Debug/outDebug",
+      "cwd": "/home/lingnc/LingNc/school/暑假集训/萌新联赛（三）",
+      "program": "/home/lingnc/LingNc/school/暑假集训/萌新联赛（三）/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -53,7 +53,7 @@
       "program": "${file}",
       "python": "${fileDirname}/.env/bin/python",
       "cwd": "${fileDirname}",
-      "envFile": "${fileDirname}/.env",
+      "envFile": "${fileDirname}/.env"
     }
   ]
 }

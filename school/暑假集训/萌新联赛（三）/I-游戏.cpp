@@ -19,7 +19,6 @@ int dist[N];
 int n,m,k;
 typedef pair<int,int> PII;
 
-
 void init(){
     memset(h,-1,sizeof h);
     idx=0;
