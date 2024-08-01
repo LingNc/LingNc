@@ -1,45 +1,42 @@
 #include<bits/stdc++.h>
+#define int long long
 #define foe(i,a,b) for(int i=(a);i<=(b);i++)
 #define fod(i,a,b) for(int i=(a);i>=(b);i--)
 #define endl '\n'
-#define int long long
+#define IOS ios::sync_with_stdio(0),cin.tie(0)
+#define all(a) a.begin(),a.end()
+
+using i32=signed;
 using i64=long long;
 using namespace std;
 
-const int N=1e5+10;
-
+const int N=1e6+10;
+int a[N],b[N],c[N];
 void solve(){
     int n;
     cin>>n;
-    int a[n+1],b[n+1];
-    memset(a,0,sizeof a);
-    memset(b,0,sizeof b);
-    foe(i,1,n-1){
-        cin>>b[i];
-    }
-
-    foe(i,1,n-1){
-        a[i]=a[i]|b[i];
-        a[i+1]=a[i+1]|b[i];
-    }
+    n--;
+    foe(i,0,n-1)
+        cin>>a[i];
+    b[0]=a[0];
+    foe(i,1,n-1) 
+        b[i]=a[i]|a[i-1];
+    b[n]=a[n-1];
+    foe(i,0,n-1) 
+        c[i]=b[i]&b[i+1];
     bool res=true;
-    foe(i,1,n-1){
-        int t=a[i]&a[i+1];
-        if(t!=b[i]){
+    foe(i,0,n-1)
+        if(c[i]!=a[i]) 
             res=false;
-            break;
-        }
-    }
-    if(res==true){
-        for(int i=1;i<=n;i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
-    }
-    else cout<<-1<<endl;
+    if(res)
+        foe(i,0,n)
+            cout<<b[i]<<' ';
+    else
+        cout<<-1;
+    cout<<endl;
 }
 signed main(){
-    ios::sync_with_stdio(0),cin.tie(0);
+    IOS;
     int T=1;
     cin>>T;
     while(T--) solve();

@@ -1,6 +1,8 @@
 #include<iostream>
 #include<algorithm>
 #include<string>
+#include<vector>
+#include<bits/stdc++.h>
 #define foe(i,a,b) for(int i=a;i<=b;i++)
 #define ll long long
 #define endl '\n'
@@ -13,5 +15,7 @@ int main(){
 	foe(i,0,3){
 		cout<<*(p+i)<<endl;
 	}
+	vector<int> c;
+	
 	return 0;
 }
