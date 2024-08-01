@@ -22,7 +22,7 @@ void solve(){
     foe(i,1,n-1) 
         b[i]=a[i]|a[i-1];
     b[n]=a[n-1];
-    foe(i,0,n-1) 
+    foe(i,0,n-1)
         c[i]=b[i]&b[i+1];
     bool res=true;
     foe(i,0,n-1)
