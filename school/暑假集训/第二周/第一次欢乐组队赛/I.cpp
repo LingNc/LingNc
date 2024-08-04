@@ -6,14 +6,14 @@ int mp3[N];
 void  solve(){
     int n,q;
     cin>>n>>q;
-    memset(mp3,-1,sizeof mp3);
+    // memset(mp3,-1,sizeof mp3);
     for(int i=1;i<n;i++) {
         int x,y,z;
         cin>>x>>y>>z;
-        if(mp3[x]==-1) mp3[x]=z;
-        else mp3[x]^=z;
-        if(mp3[y]==-1) mp3[y]=z;
-        else mp3[y]^=z;
+        // if(mp3[x]==-1) mp3[x]=z;
+        mp3[x]^=z;
+        // if(mp3[y]==-1) mp3[y]=z;
+        mp3[y]^=z;
     }
     while(q--) {
         int op;
