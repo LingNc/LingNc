@@ -10,25 +10,18 @@ using namespace std;
 using i32=signed;
 using i64=long long;
 
+int a[4];
 void solve(){
-    int n[4]={ 0 };
-    string m;
-    int b,d,c;
-    cin>>b;
-    c=4*b;
-    d=0;
-    cin>>m;
-    foe(i,0,c-1){
-        if(m[i]=='A')n[0]++;
-        else if(m[i]=='B')n[1]++;
-        else if(m[i]=='C')n[2]++;
-        else if(m[i]=='D')n[3]++;
-    }
-    foe(i,0,3){
-        if(n[i]<=b)d=d+n[i];
-        else d=d+b;
-    }
-    cout<<d<<endl;
+    memset(a,0,sizeof a);
+    int n,res=0;
+    cin>>n;
+    string str;
+    cin>>str;
+    for(auto &i:str)
+        if(i!='?') a[i-'A']++;
+    for(auto &i:a)
+        res+=min(i,n);
+    cout<<res<<endl;
 }
 i32 main(){
     IOS;
