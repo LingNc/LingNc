@@ -20,13 +20,11 @@ int primes[N],cnt;     // primes[]存储所有素数
 bool st[N];         // st[x]存储x是否被筛掉
 
 void get_primes(int n){
-    for (int i = 2; i <= n; i ++ )
-    {
-        if (!st[i]) primes[cnt ++ ] = i;
-        for (int j = 0; primes[j] <= n / i; j ++ )
-        {
-            st[primes[j] * i] = true;
-            if (i % primes[j] == 0) break;
+    for(int i=2; i<=n; i++){
+        if(!st[i]) primes[cnt++]=i;
+        for(int j=0; primes[j]<=n/i; j++){
+            st[primes[j]*i]=true;
+            if(i%primes[j]==0) break;
         }
     }
 }
@@ -36,23 +34,20 @@ void solve(){
     int ll,rr;
     int l=0,r=cnt;
     int mid=0;
-    while (l < r)
-    {
-        int mid = l + r >> 1;
-        if (primes[mid]>x) r = mid;
-        else l = mid + 1;
-    }  
+    while(l<r){
+        int mid=l+r>>1;
+        if(primes[mid]>x) r=mid;
+        else l=mid+1;
+    }
     ll=l;
     l=0,r=cnt;
-    while (l < r)
-    {
-        int mid = l + r >> 1;
-        if (primes[mid]>y) r = mid;
-        else l = mid + 1;
-    }  
+    while(l<r){
+        int mid=l+r>>1;
+        if(primes[mid]>y) r=mid;
+        else l=mid+1;
+    }
     rr=l;
     int num=rr-ll+1;
-    if(st[x]) num--;
     cout<<num<<' ';
     if(x>2) cout<<0<<endl;
     else{
