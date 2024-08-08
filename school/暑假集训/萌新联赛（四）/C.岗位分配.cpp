@@ -40,11 +40,8 @@ void init(){
 }
  
 int C(int n,int m){
-    if(m>n){
-        return 0;
-    }
-    if(m==0)
-        return 1;
+    if(m>n) return 0;
+    if(m==0) return 1;
     return fac[n]*inv[m]%p*inv[n-m]%p;
 }
 

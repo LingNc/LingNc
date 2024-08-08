@@ -32,27 +32,27 @@ void solve(){
     int x,y;
     cin>>x>>y;
     int ll,rr;
-    int l=0,r=cnt;
-    int mid=0;
-    while(l<r){
-        int mid=l+r>>1;
-        if(primes[mid]>x) r=mid;
-        else l=mid+1;
+    //l和r必须一个小于数组第一个下表 一个大于数组最后一个下标
+    i64 l=-1,r=cnt;
+    while(l+1<r){
+        i64 mid=l+r>>1;
+        //r为满足条件的第一个数
+        if(primes[mid]>=x) r=mid;
+        //l为不满足条件的最后一个数
+        else l=mid;
     }
-    ll=l;
-    l=0,r=cnt;
-    while(l<r){
-        int mid=l+r>>1;
+    ll=r;
+    l=-1,r=cnt;
+    while(l+1<r){
+        i64 mid=l+r>>1;
         if(primes[mid]>y) r=mid;
-        else l=mid+1;
+        else l=mid;
     }
-    rr=l;
-    int num=rr-ll+1;
+    rr=r;
+    int num=rr-ll;
     cout<<num<<' ';
     if(x>2) cout<<0<<endl;
-    else{
-        cout<<num-2<<endl;
-    }
+    else cout<<max(0,num-2)<<endl;
 }
 i32 main(){
     IOS;
