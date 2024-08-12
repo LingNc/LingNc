@@ -13,23 +13,49 @@ using i32=signed;
 using i64=long long;
 using namespace std;
 
-const i32 N=0;
+const i32 N=1e5+10;
 
+//边
 struct edge{
-    int val;
+    int val,next;
+    edge(int next):next(next){}
 };
+//邻接表
+vector<vector<edge>> adj(N,vector<edge>());
+vector<int> fa(N);
 
-typedef struct{
-    const i64 N;
+//初始化，读入所需要的节点数量
+void init(int n){
+    foe(i,0,n) mp[i].clear();
+}
+//加边
+void add(int a,int b){
+    mp[a].push_back(edge(b));
+}
 
-}adj;
+
+
+
+void dfs(int val,int fa){
+    if(lis.mp[val].empty()){
+        
+    }
+    for(auto &i:lis.mp[val]){
+        int j=i.next;
+        if(j!=fa) dfs(j,val);
+    }
+}
 void solve(){
     int n,q;
     cin>>n>>q;
-    int fa;
+    lis.init(n);
+    vector<int> fa(n+1,0);
     foe(i,2,n){
-        cin>>fa;
+        cin>>fa[i];
+        lis.add(fa[i],i);
     }
+    vector<int> a(n,0);
+    foe(i,0,n-1) cin>>a[i];
 
 }
 i32 main(){

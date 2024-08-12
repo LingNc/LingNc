@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
-using i32=signed;
-using i64=long long;
-using namespace std;
+#include"A.cpp"
 
 //找到满足条件的第一个值,返回下标
 //arr查找索引数组，val需要查找的值，check匹配函数（当前值，匹配值）
