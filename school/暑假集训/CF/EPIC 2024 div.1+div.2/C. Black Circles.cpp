@@ -7,7 +7,7 @@ template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
 #define all(a) a.begin(),a.end()
 #define INF64 0x3f3f3f3f3f3f3f3f
 #define INF32 0x3f3f3f3f
-#define ll long long
+#define int long long
 #define endl '\n'
 using i32=signed;
 using i64=long long;
@@ -15,14 +15,10 @@ using namespace std;
 
 const i32 N=0;
 typedef pair<int,int> PII;
-
-double dis(PII a,PII b){
-    int x1=a.first,y1=a.second,x2=b.first,y2=b.second;
-    double res=sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+int dis(PII a,PII b){
+    i64 x1=a.first,y1=a.second,x2=b.first,y2=b.second;
+    i64 res=(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
     return res;
-}
-double cos_a(double a,double b,double c){;
-    return (a*a+b*b-c*c)/(2*a*b);
 }
 void solve(){
     int n;
@@ -34,12 +30,12 @@ void solve(){
     int a1,a2,b1,b2;
     cin>>a1>>b1>>a2>>b2;
     PII p1={ a1,b1 },p2={ a2,b2 };
-    bool res=false;
+    bool res=true;
+    int ans=dis(p1,p2);
     foe(i,0,n-1){
-        double x=dis(a[i],p2),y=dis(a[i],p1),z=dis(p1,p2);
-        double left=cos_a(z,x,y),right=cos_a(z,y,x);
-        if(left<=right){
-            res=true;
+        int t=dis(a[i],p2);
+        if(t<=ans){
+            res=false;
             break;
         }
     }

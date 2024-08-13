@@ -1,16 +1,4 @@
-#include<bits/stdc++.h>
-#define int long long
-#define foe(i,a,b) for(int i=(a);i<=(b);i++)
-#define fod(i,a,b) for(int i=(a);i>=(b);i--)
-#define endl '\n'
-#define IOS ios::sync_with_stdio(0),cin.tie(0)
-#define ai64(a) a.begin(),a.end()
-
-using namespace std;
-using i32=signed;
-using i64=long long;
-int gcd(int a,int b){ return b==0?a:gcd(b,a%b); }
-int lcm(int a,int b){ return a/gcd(a,b)*b; }
+#include"A.cpp"
 typedef struct Combine{
     //N最大，p模
     int N,p;
@@ -56,29 +44,3 @@ typedef struct Combine{
         else return com(m,n);
     }
 }combine;
-
-const int N=2e5+10,p=1e9+7;
-combine C(N,p);
-
-void solve(){
-    int n,k,B=0;
-    cin>>n>>k;
-    bool num=0;
-    foe(i,1,n){
-        cin>>num;
-        if(num) B++;
-    }
-    i64 res=0;
-    foe(i,k/2+1,k){
-        res=(res+(C.C(B,i)*C.C(n-B,k-i))%p)%p;
-    }
-    cout<<res%p<<endl;
-}
-i32 main(){
-    IOS;
-    int T=1;
-    cin>>T;
-    C.init();
-    while(T--) solve();
-    return 0;
-}
