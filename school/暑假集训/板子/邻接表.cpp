@@ -1,6 +1,21 @@
 #include<bits/stdc++.h>
 #include"A.cpp"
 
+//常规板子
+const i32 N=1e6+10;
+struct edge{
+    int val,next;
+    edge(int val,int next):val(val),next(next){}
+};
+vector<vector<edge>> adj(N,vector<edge>());
+bool st[N];
+void init(int n){
+    foe(i,0,n){
+        adj[i].clear();
+        st[i]=false;
+    }
+}
+
 //vector有O2优化版
 typedef struct Adj{
     //边
