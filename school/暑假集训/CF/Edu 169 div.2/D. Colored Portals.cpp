@@ -22,21 +22,21 @@ bool eq(string &a,string &b){
             if(i==j) cnt++;
     return (!cnt)?0:1;
 }
-int lower(vector<int> &str,int val){
-    int l=-1,r=str.size();
-    while(l+1<r){
-        int mid=l+(r-l>>1);
+int bigger(vector<int> &str,int val){
+    int l=0,r=str.size();
+    while(l<r){
+        int mid=l+r>>1;
         if(str[mid]>=val) r=mid;
-        else l=mid;
+        else l=mid+1;
     }
-    return str[r];
+    return str[l];
 }
-int upper(vector<int> &str,int val){
-    int l=-1,r=str.size();
-    while(l+1<r){
-        int mid=l+(r-l>>1);
-        if(str[mid]>=val) r=mid;
-        else l=mid;
+int lesser(vector<int> &str,int val){
+    int l=0,r=str.size();
+    while(l<r){
+        int mid=l+r+1>>1;
+        if(str[mid]<=val) l=mid;
+        else r=mid-1;
     }
     return str[l];
 }
@@ -49,9 +49,6 @@ void solve(){
         cin>>a[i];
         mp[a[i]].push_back(i);
     }
-    for(auto &it:mp){
-        sort(all(it.second),less<int>());
-    }
     int x,y;
     foe(i,1,q){
         cin>>x>>y;
@@ -61,15 +58,19 @@ void solve(){
             else cout<<-1<<endl;
             continue;
         }
-        int ll=-1,rr=INF32;
+        int ll=-1,rr=INF64;
         for(auto &it:mp){
             if(it.first==a[l]||it.first==a[r]) continue;
-            ll=max(ll,lower(it.second,l));
-            rr=min(rr,upper(it.second,l));
+            // int tr=upper_bound(all(it.second),l)-it.second.begin();
+            // int tl=lower_bound(all(it.second),l)-it.second.begin()-1;
+            ll=max(ll,lesser(it.second,l));
+            rr=min(rr,bigger(it.second,l));
+            // if(tr!=it.second.size()) rr=min(rr,it.second[tr]);
+            // if(tl!=-1) ll=max(ll,it.second[tl]);
         }
-        int s1=INF32,s2=INF32;
+        int s1=INF64,s2=INF64;
         if(ll!=-1) s1=abs(l-ll)+abs(r-ll);
-        if(rr!=INF32) s2=abs(l-rr)+abs(r-rr);
+        if(rr!=INF64) s2=abs(l-rr)+abs(r-rr);
         cout<<min(s1,s2)<<endl;
     }
 }
