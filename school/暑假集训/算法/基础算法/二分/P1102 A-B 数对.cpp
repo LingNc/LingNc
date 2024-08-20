@@ -16,8 +16,36 @@ typedef vector<int> arr;
 
 const i32 N=0;
 
+int bigger(arr &a,int val){
+    int l=-1,r=a.size();
+    while(l+1<r){
+        int mid=l+(r-l>>1);
+        if(a[mid]>=val) r=mid;
+        else l=mid;
+    }
+    return (a[r]==val)?r-1:0;
+}
+int lesser(arr &a,int val){
+    int l=-1,r=a.size();
+    while(l+1<r){
+        int mid=l+(r-l>>1);
+        if(a[mid]<=val) l=mid;
+        else r=mid;
+    }
+    return (a[l]==val)?l:0;
+}
 void solve(){
-    
+    int N,C;
+    cin>>N>>C;
+    arr a(N,0);
+    int res=0;
+    foe(i,0,N-1) cin>>a[i];
+    sort(all(a));
+    foe(i,0,N-1){
+        int t=C+a[i];
+        res+=lesser(a,t)-bigger(a,t);
+    }
+    cout<<res<<endl;
 }
 i32 main(){
     IOS;

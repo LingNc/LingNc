@@ -13,11 +13,35 @@ using i32=signed;
 using i64=long long;
 using namespace std;
 typedef vector<int> arr;
-
 const i32 N=0;
 
+bool check(arr &a,int h,int m){
+    int res=0;
+    for(auto &it:a){
+        res+=max((int)0,it-h);
+    }
+    return (res>=m)?true:false;
+}
+
+int mfind(arr &a,int m){
+    int maxa=-1;
+    for(auto &i:a)
+        maxa=max(i,maxa);
+    int l=-1,r=maxa+1;
+    while(l+1<r){
+        int mid=l+(r-l>>1);
+        if(check(a,mid,m)) l=mid;
+        else r=mid;
+    }
+    return l;
+}
+
 void solve(){
-    
+    int N,M;
+    cin>>N>>M;
+    arr a(N,0);
+    foe(i,0,N-1) cin>>a[i];
+    cout<<mfind(a,M)<<endl;
 }
 i32 main(){
     IOS;

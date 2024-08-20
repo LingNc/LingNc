@@ -15,12 +15,26 @@ using namespace std;
 typedef vector<int> arr;
 
 const i32 N=0;
-
+double a,b,c,d;
+double f(double x){
+    return a*pow(x,3)+b*pow(x,2)+c*x+d;
+}
+double root(double x1,double x2){
+    while(x2-x1>0.0001){
+        double mid=(x1+x2)/2.0;
+        if(f(mid)*f(x1)<=0) x2=mid;
+        else x1=mid;
+    }
+    return x1;
+}
 void solve(){
-    
+    cin>>a>>b>>c>>d;
+    foe(i,-100,100){
+        if(f(i)*f(i+1)<0||f(i)==0) cout<<fixed<<setprecision(2)<<root(i,i+1)<<' ';
+    }
 }
 i32 main(){
-    IOS;
+    //IOS;
     i32 T=1;
     //cin>>T;
     while(T--) solve();

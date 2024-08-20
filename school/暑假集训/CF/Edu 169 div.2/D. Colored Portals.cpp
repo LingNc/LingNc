@@ -7,7 +7,7 @@ template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
 #define all(a) a.begin(),a.end()
 #define INF64 0x3f3f3f3f3f3f3f3f
 #define INF32 0x3f3f3f3f
-#define int long long
+// #define int long long
 #define endl '\n'
 using i32=signed;
 using i64=long long;
@@ -23,22 +23,24 @@ bool eq(string &a,string &b){
     return (!cnt)?0:1;
 }
 int bigger(vector<int> &str,int val){
-    int l=0,r=str.size();
-    while(l<r){
-        int mid=l+r>>1;
+    int l=-1,r=str.size();
+    while(l+1<r){
+        int mid=l+(r-l>>1);
         if(str[mid]>=val) r=mid;
-        else l=mid+1;
+        else l=mid;
     }
-    return str[l];
+    // 没找到的判断条件
+    return (r==str.size())?INF64:str[r];
 }
 int lesser(vector<int> &str,int val){
-    int l=0,r=str.size();
-    while(l<r){
-        int mid=l+r+1>>1;
+    int l=-1,r=str.size();
+    while(l+1<r){
+        int mid=l+(r-l>>1);
         if(str[mid]<=val) l=mid;
-        else r=mid-1;
+        else r=mid;
     }
-    return str[l];
+    // 记得加判断条件直接返回str[l]应该是l==-1返回-1
+    return (l==-1)?-1:str[l];
 }
 void solve(){
     int n,q;
@@ -61,12 +63,19 @@ void solve(){
         int ll=-1,rr=INF64;
         for(auto &it:mp){
             if(it.first==a[l]||it.first==a[r]) continue;
+            //STl二分
             // int tr=upper_bound(all(it.second),l)-it.second.begin();
             // int tl=lower_bound(all(it.second),l)-it.second.begin()-1;
-            ll=max(ll,lesser(it.second,l));
-            rr=min(rr,bigger(it.second,l));
+            // int tl=lesser(it.second,l),tr=bigger(it.second,l);
             // if(tr!=it.second.size()) rr=min(rr,it.second[tr]);
             // if(tl!=-1) ll=max(ll,it.second[tl]);
+            // 手写二分
+            // if(tl!=-1) ll=max(ll,tl);
+            // if(tr!=-1) rr=min(rr,tr);
+
+            ll=max(ll,lesser(it.second,l));
+            rr=min(rr,bigger(it.second,l));
+
         }
         int s1=INF64,s2=INF64;
         if(ll!=-1) s1=abs(l-ll)+abs(r-ll);
