@@ -1,0 +1,429 @@
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\WhiteBalanceData-v2.bin
+Action 0:18:37: Verifying model hash. Verifying integrity of WhiteBalanceData-v2.bin
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\apnb-v2-fp32-512x512-ov.tz2
+Action 0:18:38: Verifying model hash. Verifying integrity of apnb-v2-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\apnb-v2-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v2-fp32-512x512-ov.tz2
+Action 0:18:38: Verifying model hash. Verifying integrity of clc-v2-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v2-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp16-512x512-ox.tz2
+Action 0:18:38: Verifying model hash. Verifying integrity of clc-v3-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-ox-rt809-rt.tz2
+Action 0:18:38: Verifying model hash. Verifying integrity of clc-v3-fp32-512x512-ox-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-ox-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-ox.tz2
+Action 0:18:38: Verifying model hash. Verifying integrity of clc-v3-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-rt809-rt.tz2
+Action 0:18:39: Verifying model hash. Verifying integrity of clc-v3-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\clc-v3-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp16-512x512-ox.tz2
+Action 0:18:39: Verifying model hash. Verifying integrity of dnt_beta-v5-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp32-512x512-ov.tz2
+Action 0:18:39: Verifying model hash. Verifying integrity of dnt_beta-v5-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp32-512x512-rt809-rt.tz2
+Action 0:18:39: Verifying model hash. Verifying integrity of dnt_beta-v5-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\dnt_beta-v5-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp16-512x512-ox.tz2
+Action 0:18:39: Verifying model hash. Verifying integrity of draw_linear-v1-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp32-512x512-ov.tz2
+Action 0:18:40: Verifying model hash. Verifying integrity of draw_linear-v1-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp32-512x512-rt809-rt.tz2
+Action 0:18:40: Verifying model hash. Verifying integrity of draw_linear-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\draw_linear-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp16-512x512-ov.tz2
+Action 0:18:40: Verifying model hash. Verifying integrity of drw_native-v1-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp32-512x512-ox.tz2
+Action 0:18:40: Verifying model hash. Verifying integrity of drw_native-v1-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp32-512x512-rt809-rt.tz2
+Action 0:18:40: Verifying model hash. Verifying integrity of drw_native-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_native-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp16-512x512-ov.tz2
+Action 0:18:41: Verifying model hash. Verifying integrity of drw_standard-v1-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp32-512x512-ox.tz2
+Action 0:18:41: Verifying model hash. Verifying integrity of drw_standard-v1-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp32-512x512-rt809-rt.tz2
+Action 0:18:41: Verifying model hash. Verifying integrity of drw_standard-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\drw_standard-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp16-512x512-1x-ov.tz2
+Action 0:18:41: Verifying model hash. Verifying integrity of expog-v1-fp16-512x512-1x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp16-512x512-1x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp16-512x512-1x-ox.tz2
+Action 0:18:42: Verifying model hash. Verifying integrity of expog-v1-fp16-512x512-1x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp16-512x512-1x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp32-512x512-1x-rt809-rt.tz2
+Action 0:18:42: Verifying model hash. Verifying integrity of expog-v1-fp32-512x512-1x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expog-v1-fp32-512x512-1x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-ov.tz2
+Action 0:18:42: Verifying model hash. Verifying integrity of expoi-v1-fp32-256x256-1x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-ox.tz2
+Action 0:18:42: Verifying model hash. Verifying integrity of expoi-v1-fp32-256x256-1x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-rt809-rt.tz2
+Action 0:18:42: Verifying model hash. Verifying integrity of expoi-v1-fp32-256x256-1x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\expoi-v1-fp32-256x256-1x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-2x-ov.tz
+Action 0:18:43: Verifying model hash. Verifying integrity of gclc-v1-fp16-128x128-2x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-2x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-2x-ov.tz2
+Action 0:18:43: Verifying model hash. Verifying integrity of gclc-v1-fp16-128x128-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-4x-ov.tz
+Action 0:18:43: Verifying model hash. Verifying integrity of gclc-v1-fp16-128x128-4x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-4x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-4x-ov.tz2
+Action 0:18:43: Verifying model hash. Verifying integrity of gclc-v1-fp16-128x128-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-128x128-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-96x96-2x-ov.tz2
+Action 0:18:44: Verifying model hash. Verifying integrity of gclc-v1-fp16-96x96-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-96x96-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-96x96-4x-ov.tz2
+Action 0:18:44: Verifying model hash. Verifying integrity of gclc-v1-fp16-96x96-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp16-96x96-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-ox.tz
+Action 0:18:44: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-2x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-ox.tz2
+Action 0:18:44: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-rt809-rt.tz2
+Action 0:18:44: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-ox.tz
+Action 0:18:45: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-4x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-ox.tz2
+Action 0:18:45: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-rt809-rt.tz2
+Action 0:18:45: Verifying model hash. Verifying integrity of gclc-v1-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-ov.tz2
+Action 0:18:45: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-ox.tz2
+Action 0:18:46: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-rt809-rt.tz2
+Action 0:18:46: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-ov.tz2
+Action 0:18:47: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-ox.tz2
+Action 0:18:47: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-rt809-rt.tz2
+Action 0:18:47: Verifying model hash. Verifying integrity of gclc-v1-fp32-192x192-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-192x192-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-2x-ox.tz2
+Action 0:18:48: Verifying model hash. Verifying integrity of gclc-v1-fp32-96x96-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-2x-rt809-rt.tz2
+Action 0:18:48: Verifying model hash. Verifying integrity of gclc-v1-fp32-96x96-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-4x-ox.tz2
+Action 0:18:48: Verifying model hash. Verifying integrity of gclc-v1-fp32-96x96-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-4x-rt809-rt.tz2
+Action 0:18:48: Verifying model hash. Verifying integrity of gclc-v1-fp32-96x96-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gclc-v1-fp32-96x96-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfclc-v1-fp32-512x512-ov-11.tz2
+Action 0:18:48: Verifying model hash. Verifying integrity of gfclc-v1-fp32-512x512-ov-11.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfclc-v1-fp32-512x512-ov-11.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gffm-v1-fp32-512x512-ov.tz2
+Action 0:18:49: Verifying model hash. Verifying integrity of gffm-v1-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gffm-v1-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp16-512x512-ov.tz2
+Action 0:18:49: Verifying model hash. Verifying integrity of gfg-v1-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp32-512x512-ox.tz2
+Action 0:18:49: Verifying model hash. Verifying integrity of gfg-v1-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp32-512x512-rt809-rt.tz2
+Action 0:18:49: Verifying model hash. Verifying integrity of gfg-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfg-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfp-l-v1-fp32-2048x2048-ov.tz2
+Action 0:18:49: Verifying model hash. Verifying integrity of gfp-l-v1-fp32-2048x2048-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfp-l-v1-fp32-2048x2048-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfp-s-v1-fp32-1024x1024-ov.tz2
+Action 0:18:50: Verifying model hash. Verifying integrity of gfp-s-v1-fp32-1024x1024-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfp-s-v1-fp32-1024x1024-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfpf-v1-fp16-48x48-ov.tz2
+Action 0:18:50: Verifying model hash. Verifying integrity of gfpf-v1-fp16-48x48-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gfpf-v1-fp16-48x48-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v1-fp32-192x192-2x-ov.tz2
+Action 0:18:50: Verifying model hash. Verifying integrity of ggi-v1-fp32-192x192-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v1-fp32-192x192-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v1-fp32-192x192-4x-ov.tz2
+Action 0:18:50: Verifying model hash. Verifying integrity of ggi-v1-fp32-192x192-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v1-fp32-192x192-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp16-192x192-2x-ox.tz2
+Action 0:18:51: Verifying model hash. Verifying integrity of ggi-v2-fp16-192x192-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp16-192x192-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp16-192x192-4x-ox.tz2
+Action 0:18:51: Verifying model hash. Verifying integrity of ggi-v2-fp16-192x192-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp16-192x192-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp32-192x192-2x-rt809-rt.tz2
+Action 0:18:51: Verifying model hash. Verifying integrity of ggi-v2-fp32-192x192-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp32-192x192-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp32-192x192-4x-rt809-rt.tz2
+Action 0:18:52: Verifying model hash. Verifying integrity of ggi-v2-fp32-192x192-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggi-v2-fp32-192x192-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fix-fp16-128x128-2x-ox.tz2
+Action 0:18:52: Verifying model hash. Verifying integrity of ggn-v3-fix-fp16-128x128-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fix-fp16-128x128-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-2x-ov.tz2
+Action 0:18:52: Verifying model hash. Verifying integrity of ggn-v3-fp16-128x128-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-4x-ov.tz2
+Action 0:18:52: Verifying model hash. Verifying integrity of ggn-v3-fp16-128x128-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-4x-ox.tz2
+Action 0:18:52: Verifying model hash. Verifying integrity of ggn-v3-fp16-128x128-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp16-128x128-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp32-128x128-2x-rt809-rt.tz2
+Action 0:18:53: Verifying model hash. Verifying integrity of ggn-v3-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp32-128x128-4x-rt809-rt.tz2
+Action 0:18:53: Verifying model hash. Verifying integrity of ggn-v3-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn-v3-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn_ap-v2-fp16-128x128-ov.tz2
+Action 0:18:53: Verifying model hash. Verifying integrity of ggn_ap-v2-fp16-128x128-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggn_ap-v2-fp16-128x128-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-2x-ov.tz
+Action 0:18:53: Verifying model hash. Verifying integrity of ggnv2-v3-fp16-128x128-2x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-2x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-2x-ox.tz
+Action 0:18:53: Verifying model hash. Verifying integrity of ggnv2-v3-fp16-128x128-2x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-2x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-4x-ov.tz
+Action 0:18:54: Verifying model hash. Verifying integrity of ggnv2-v3-fp16-128x128-4x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-4x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-4x-ox.tz
+Action 0:18:54: Verifying model hash. Verifying integrity of ggnv2-v3-fp16-128x128-4x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp16-128x128-4x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp32-128x128-2x-rt809-rt.tz2
+Action 0:18:54: Verifying model hash. Verifying integrity of ggnv2-v3-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp32-128x128-4x-rt809-rt.tz2
+Action 0:18:54: Verifying model hash. Verifying integrity of ggnv2-v3-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ggnv2-v3-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fix-fp16-96x96-2x-ox.tz2
+Action 0:18:54: Verifying model hash. Verifying integrity of ghq-v1-fix-fp16-96x96-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fix-fp16-96x96-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-2x-ov.tz2
+Action 0:18:55: Verifying model hash. Verifying integrity of ghq-v1-fp16-96x96-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-4x-ov.tz2
+Action 0:18:55: Verifying model hash. Verifying integrity of ghq-v1-fp16-96x96-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-4x-ox.tz2
+Action 0:18:55: Verifying model hash. Verifying integrity of ghq-v1-fp16-96x96-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp16-96x96-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp32-96x96-2x-rt809-rt.tz2
+Action 0:18:55: Verifying model hash. Verifying integrity of ghq-v1-fp32-96x96-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp32-96x96-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp32-96x96-4x-rt809-rt.tz2
+Action 0:18:55: Verifying model hash. Verifying integrity of ghq-v1-fp32-96x96-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghq-v1-fp32-96x96-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-2x-ov.tz
+Action 0:18:56: Verifying model hash. Verifying integrity of ghqv2-v1-fp16-128x128-2x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-2x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-2x-ox.tz
+Action 0:18:56: Verifying model hash. Verifying integrity of ghqv2-v1-fp16-128x128-2x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-2x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-4x-ov.tz
+Action 0:18:56: Verifying model hash. Verifying integrity of ghqv2-v1-fp16-128x128-4x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-4x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-4x-ox.tz
+Action 0:18:56: Verifying model hash. Verifying integrity of ghqv2-v1-fp16-128x128-4x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp16-128x128-4x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp32-128x128-2x-rt809-rt.tz2
+Action 0:18:57: Verifying model hash. Verifying integrity of ghqv2-v1-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp32-128x128-4x-rt809-rt.tz2
+Action 0:18:57: Verifying model hash. Verifying integrity of ghqv2-v1-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2-v1-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-2x-ov.tz
+Action 0:18:57: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp16-128x128-2x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-2x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-2x-ox.tz
+Action 0:18:57: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp16-128x128-2x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-2x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-4x-ov.tz
+Action 0:18:57: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp16-128x128-4x-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-4x-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-4x-ox.tz
+Action 0:18:58: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp16-128x128-4x-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp16-128x128-4x-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp32-128x128-2x-rt809-rt.tz2
+Action 0:18:58: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp32-128x128-4x-rt809-rt.tz2
+Action 0:18:58: Verifying model hash. Verifying integrity of ghqv2_ldn-v1-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\ghqv2_ldn-v1-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v1-fp32-192x192-2x-ov.tz2
+Action 0:18:58: Verifying model hash. Verifying integrity of gmp-v1-fp32-192x192-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v1-fp32-192x192-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v1-fp32-192x192-4x-ov.tz2
+Action 0:18:58: Verifying model hash. Verifying integrity of gmp-v1-fp32-192x192-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v1-fp32-192x192-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp16-192x192-2x-ox.tz2
+Action 0:18:59: Verifying model hash. Verifying integrity of gmp-v2-fp16-192x192-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp16-192x192-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp16-192x192-4x-ox.tz2
+Action 0:18:59: Verifying model hash. Verifying integrity of gmp-v2-fp16-192x192-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp16-192x192-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp32-192x192-2x-rt809-rt.tz2
+Action 0:18:59: Verifying model hash. Verifying integrity of gmp-v2-fp32-192x192-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp32-192x192-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp32-192x192-4x-rt809-rt.tz2
+Action 0:18:59: Verifying model hash. Verifying integrity of gmp-v2-fp32-192x192-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\gmp-v2-fp32-192x192-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-ov.tz2
+Action 0:18:59: Verifying model hash. Verifying integrity of isoa-v1-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-ox.tz2
+Action 0:19:00: Verifying model hash. Verifying integrity of isoa-v1-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-rt809-rt.tz2
+Action 0:19:00: Verifying model hash. Verifying integrity of isoa-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isoa-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-ov.tz2
+Action 0:19:00: Verifying model hash. Verifying integrity of isob-v1-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-ox.tz2
+Action 0:19:00: Verifying model hash. Verifying integrity of isob-v1-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-rt809-rt.tz2
+Action 0:19:00: Verifying model hash. Verifying integrity of isob-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\isob-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\lmx-v1-fp16-512x512-ov.tz2
+Action 0:19:01: Verifying model hash. Verifying integrity of lmx-v1-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\lmx-v1-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\s_mask_l_flexible-v2-fp16-320x320-ov.tz2
+Action 0:19:01: Verifying model hash. Verifying integrity of s_mask_l_flexible-v2-fp16-320x320-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\s_mask_l_flexible-v2-fp16-320x320-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samdec-v1-fp16-1024x1024-ov.tz
+Action 0:19:01: Verifying model hash. Verifying integrity of samdec-v1-fp16-1024x1024-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samdec-v1-fp16-1024x1024-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samdec-v1-fp16-1024x1024-ox.tz
+Action 0:19:01: Verifying model hash. Verifying integrity of samdec-v1-fp16-1024x1024-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samdec-v1-fp16-1024x1024-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samenc-v1-fp16-1024x1024-ov.tz
+Action 0:19:02: Verifying model hash. Verifying integrity of samenc-v1-fp16-1024x1024-ov.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samenc-v1-fp16-1024x1024-ov.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samenc-v1-fp16-1024x1024-ox.tz
+Action 0:19:02: Verifying model hash. Verifying integrity of samenc-v1-fp16-1024x1024-ox.tz
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\samenc-v1-fp16-1024x1024-ox.tz does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_dec-v2-fp16-512x512-ov.tz2
+Action 0:19:02: Verifying model hash. Verifying integrity of sdi_dec-v2-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_dec-v2-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_dec-v2-fp16-512x512-ox.tz2
+Action 0:19:02: Verifying model hash. Verifying integrity of sdi_dec-v2-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_dec-v2-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_embed0.bin
+Action 0:19:02: Verifying model hash. Verifying integrity of sdi_embed0.bin
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_embed0.bin does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_enc-v2-fp16-512x512-ov.tz2
+Action 0:19:03: Verifying model hash. Verifying integrity of sdi_enc-v2-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_enc-v2-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_enc-v2-fp16-512x512-ox.tz2
+Action 0:19:03: Verifying model hash. Verifying integrity of sdi_enc-v2-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_enc-v2-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_imdn-v1-fp32-96x96-2x-ov.tz2
+Action 0:19:03: Verifying model hash. Verifying integrity of sdi_imdn-v1-fp32-96x96-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_imdn-v1-fp32-96x96-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_unet-v4-fp16-512x512-ort.tz2
+Action 0:19:03: Verifying model hash. Verifying integrity of sdi_unet-v4-fp16-512x512-ort.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_unet-v4-fp16-512x512-ort.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_unet-v4-fp16-512x512-ov.tz2
+Action 0:19:04: Verifying model hash. Verifying integrity of sdi_unet-v4-fp16-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sdi_unet-v4-fp16-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp16-512x512-ox.tz2
+Action 0:19:04: Verifying model hash. Verifying integrity of slsp-v3-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp32-512x512-ov.tz2
+Action 0:19:04: Verifying model hash. Verifying integrity of slsp-v3-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp32-512x512-rt809-rt.tz2
+Action 0:19:04: Verifying model hash. Verifying integrity of slsp-v3-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp-v3-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp_ap-v3-fp32-512x512-ov.tz2
+Action 0:19:04: Verifying model hash. Verifying integrity of slsp_ap-v3-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\slsp_ap-v3-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\smp_flexible-v2-fp16-320x320-ov.tz2
+Action 0:19:05: Verifying model hash. Verifying integrity of smp_flexible-v2-fp16-320x320-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\smp_flexible-v2-fp16-320x320-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sms_new-v3-fp16-320x320-ov.tz2
+Action 0:19:05: Verifying model hash. Verifying integrity of sms_new-v3-fp16-320x320-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sms_new-v3-fp16-320x320-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-ov.tz2
+Action 0:19:05: Verifying model hash. Verifying integrity of sstd-v2-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-ox.tz2
+Action 0:19:05: Verifying model hash. Verifying integrity of sstd-v2-fp32-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-rt809-rt.tz2
+Action 0:19:06: Verifying model hash. Verifying integrity of sstd-v2-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstd-v2-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp16-512x512-ox.tz2
+Action 0:19:06: Verifying model hash. Verifying integrity of sstg-v1-fp16-512x512-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp16-512x512-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp32-512x512-ov.tz2
+Action 0:19:06: Verifying model hash. Verifying integrity of sstg-v1-fp32-512x512-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp32-512x512-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp32-512x512-rt809-rt.tz2
+Action 0:19:06: Verifying model hash. Verifying integrity of sstg-v1-fp32-512x512-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\sstg-v1-fp32-512x512-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-2x-ov.tz2
+Action 0:19:07: Verifying model hash. Verifying integrity of trf-v1-fp16-128x128-2x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-2x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-2x-ox.tz2
+Action 0:19:07: Verifying model hash. Verifying integrity of trf-v1-fp16-128x128-2x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-2x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-4x-ov.tz2
+Action 0:19:07: Verifying model hash. Verifying integrity of trf-v1-fp16-128x128-4x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-4x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-4x-ox.tz2
+Action 0:19:08: Verifying model hash. Verifying integrity of trf-v1-fp16-128x128-4x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp16-128x128-4x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp32-128x128-2x-rt809-rt.tz2
+Action 0:19:08: Verifying model hash. Verifying integrity of trf-v1-fp32-128x128-2x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp32-128x128-2x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp32-128x128-4x-rt809-rt.tz2
+Action 0:19:08: Verifying model hash. Verifying integrity of trf-v1-fp32-128x128-4x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trf-v1-fp32-128x128-4x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp16-512x512-1x-ov.tz2
+Action 0:19:08: Verifying model hash. Verifying integrity of trfn-v1-fp16-512x512-1x-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp16-512x512-1x-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp16-512x512-1x-ox.tz2
+Action 0:19:09: Verifying model hash. Verifying integrity of trfn-v1-fp16-512x512-1x-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp16-512x512-1x-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp32-512x512-1x-rt809-rt.tz2
+Action 0:19:09: Verifying model hash. Verifying integrity of trfn-v1-fp32-512x512-1x-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\trfn-v1-fp32-512x512-1x-rt809-rt.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp16-128x128-ov.tz2
+Action 0:19:09: Verifying model hash. Verifying integrity of wbc-v1-fp16-128x128-ov.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp16-128x128-ov.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp16-128x128-ox.tz2
+Action 0:19:09: Verifying model hash. Verifying integrity of wbc-v1-fp16-128x128-ox.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp16-128x128-ox.tz2 does not exist
+1: Log: [1] 2: Checking canSkipDownload for D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp32-128x128-rt809-rt.tz2
+Action 0:19:09: Verifying model hash. Verifying integrity of wbc-v1-fp32-128x128-rt809-rt.tz2
+1: Log: [1] 2: D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\wbc-v1-fp32-128x128-rt809-rt.tz2 does not exist
+1: Log: [1] 2: modelNum is currently: 1
+Action 0:19:10: Downloading Models. Downloading WhiteBalanceData-v2.bin (1 of 142)
+1: Log: [1] 2: Setting up download from http://models-bal.topazlabs.com/v1/WhiteBalanceData-v2.bin
+1: Log: [1] 2: Downloading to D:\Creation\Topaz Labs LLC\Topaz Photo AI\models\WhiteBalanceData-v2.bin
