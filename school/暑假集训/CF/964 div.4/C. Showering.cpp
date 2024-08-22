@@ -5,27 +5,23 @@
 #define endl '\n'
 #define IOS ios::sync_with_stdio(0),cin.tie(0)
 #define all(a) a.begin(),a.end()
-
+#define yes(res) cout<<((res)?"YES":"NO")<<endl
 using namespace std;
 using i32=signed;
 using i64=long long;
 
 void solve(){
-    int n,m,k,y,v,s,x;
-    cin>>n>>m>>k;
-        cin>>x>>y;
-        v=0;
-        if(x>=m)v=1;
-        for(int i=1;i<n;i++){
-            s=y;
-            cin>>x>>y;
-            if(x-s>=m){
-                v=1;
-            }
-        }
-        if(k-y>=m)v=1;
-        if(v) cout<<"YES"<<endl;
-        else cout<<"NO"<<endl;
+    int n,s,m;
+    cin>>n>>s>>m;
+    int l,r,rr=0;
+    bool res=false;
+    foe(i,1,n){
+        cin>>l>>r;
+        if(l-rr>=s) res=true;
+        rr=r;
+    }
+    if(m-r>=s) res=true;
+    yes(res);
 }
 i32 main(){
     IOS;

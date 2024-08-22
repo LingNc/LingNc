@@ -13,44 +13,29 @@ using i32=signed;
 using i64=long long;
 using namespace std;
 typedef vector<int> arr;
-
-const i32 N=1e6+10;
 typedef pair<int,int> PII;
 
+const i32 N=1e6+10;
 
-vector<PII> edge;
-unordered_map<int,bool> q;
-int now,n;
-int query(int a,int b){
-    cout<<"? "<<a<<' '<<b<<endl;
-    int res;
+bool query(int m){
+    cout<<"? "<<m<<" "<<m<<endl;
+    int res,ans=m*m;
     cin>>res;
-    return res;
+    return (res==ans)?0:1;
 }
-void dfs(int a,int b){
-    if(q.count(a)) return;
-    int res=query(a,b);
-    if(res==a){
-        q[a]=1;
-        edge.push_back({ a,b });
-        return;
+
+int bigger(){
+    int l=0,r=1000;
+    while(l+1<r){
+        int mid=l+(r-l>>1);
+        if(query(mid)) r=mid;
+        else l=mid;
     }
-    dfs(a,res);
+    return r;
 }
 void solve(){
-    cin>>n;
-    edge.clear();
-    q.clear();
-    int last=15*n,now=0;
-    int res,a=1,b=2;
-    foe(i,2,n){
-        dfs(i,1);
-    }
-    cout<<'!';
-    for(auto &it:edge){
-        cout<<' '<<it.first<<' '<<it.second;
-    }
-    cout<<endl;
+    int res=bigger();
+    cout<<"! "<<res<<endl;
 }
 i32 main(){
     IOS;
