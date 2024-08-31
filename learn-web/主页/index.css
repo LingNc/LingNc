@@ -1,0 +1,53 @@
+:root{
+    background-color: azure;
+}
+.header{
+    width: 100vw;
+    background-color: #CCFFFF ;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header span{
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+.under{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.body{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.body p{
+    text-align: left;
+    font-size: 30px;
+    margin: 16px 0px 0px 40px;
+}
+.beian{
+    width: 100vw;
+}
+.beian a{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    margin: auto;
+    text-align: center;
+    font-size: 17px;
+
+    margin-top: 70vh;
+}
+.beian a span{
+    color: black;
+}
