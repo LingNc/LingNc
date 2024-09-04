@@ -18,13 +18,25 @@ typedef pair<int,int> PII;
 
 const i32 N=1e9+10;
 
+int n,k;
+int f(int x){
+    return k*(2*x-n)+x*x-x+(n-n*n)/2;
+}
+int ch(int x){
+    int res=k*(2*x-n)+x*x-x+(n-n*n)/2;
+    if(res>0) return 1;
+    else if(res<0) return -1;
+    else return 0;
+}
 void solve(){
-    double n,k;
     cin>>n>>k;
-    double del=k*k+k+0.25+4*n*k+2*n*(n-1);
-    del=sqrt(del);
-    double ans=(k+0.5+del)/2;
-    cout<<(int)floor(ans)<<endl;
+    int l=0,r=n;
+    while(l+1<r){
+        int mid=l+(r-l>>1);
+        if(ch(mid)*ch(l)<=0) r=mid;
+        else l=mid;
+    }
+    cout<<min(abs(f(l)),abs(f(r)))<<endl;
 }
 i32 main(){
     IOS;
