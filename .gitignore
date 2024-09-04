@@ -1,3 +1,4 @@
-/.history
-/Python/HOJ题库生成/LOJ/.env
+##忽略所有目录中存在的.history
+**/.history/
+**/.env/
 /Python/problem
