@@ -1,0 +1,53 @@
+{
+    "current_index": 2,
+    "name": "CSP35",
+    "problems": [
+        {
+            "cases": [
+            ],
+            "description": "",
+            "memory_limit": 0,
+            "memory_limit_unit": 1,
+            "name": "key",
+            "time_limit": 0,
+            "time_limit_unit": 0,
+            "url": ""
+        },
+        {
+            "cases": [
+                {
+                    "expected": "#H llarWaeld#\n#HrlloeWo ld#\n#Hella Warld#\n",
+                    "expected_output_filename": "C:/Users/user/Desktop/CSP35-down/str/1.ans",
+                    "input": "#Hello World#\n6\n#HH#\n#e #\n# r#\n#re#\n#oa#\n#ao#\n3\n1 2 3\n",
+                    "input_filename": "C:/Users/user/Desktop/CSP35-down/str/1.in",
+                    "name": "1"
+                },
+                {
+                    "expected": "#Hello World#\n#H yyarWaeyd#\n#HrmmoeWo md#\n#Hemma Warmd#\n#H mmorWoemd#\n#HrmmaeWa md#\n#Hemmo Wormd#\n#H mmarWaemd#\n#HrmmoeWo md#\n#Hemma Warmd#\n#H mmorWoemd#",
+                    "expected_output_filename": "",
+                    "input": "#Hello World#\n8\n#HH#\n#e #\n# r#\n#re#\n#oa#\n#ao#\n#ly#\n#ym#\n11\n0 1 2 3 4 5 6 7 8 9 10",
+                    "input_filename": "",
+                    "name": "2"
+                }
+            ],
+            "description": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:16px; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">str</p></body></html>",
+            "memory_limit": 0,
+            "memory_limit_unit": 1,
+            "name": "str",
+            "time_limit": 0,
+            "time_limit_unit": 0,
+            "url": ""
+        },
+        {
+            "cases": [
+            ],
+            "description": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:16px; font-weight:400; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>",
+            "memory_limit": 0,
+            "memory_limit_unit": 1,
+            "name": "patch",
+            "time_limit": 0,
+            "time_limit_unit": 0,
+            "url": ""
+        }
+    ]
+}
