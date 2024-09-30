@@ -1,0 +1,1 @@
+{"name":"Local: I","url":"/home/lingnc/LingNc/school/周赛/2024-1/I.cpp","tests":[{"id":1727504408516,"input":"5 2\n2 1\n2 1","output":"3"},{"id":1727504718292,"input":"10 2\n2 1\n2 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/周赛/2024-1/I.cpp","group":"local","local":true}

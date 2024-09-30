@@ -1,0 +1,1 @@
+{"name":"Local: G","url":"/home/lingnc/LingNc/school/周赛/2024-1/G.cpp","tests":[{"id":1727506368655,"input":"2 3\n158 3600 60\n164 4500 70\n177 3600 50\n182 2800 63\n173 8000 72","output":"Sorry.\nCongratulations!\nCongratulations!"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/周赛/2024-1/G.cpp","group":"local","local":true}
