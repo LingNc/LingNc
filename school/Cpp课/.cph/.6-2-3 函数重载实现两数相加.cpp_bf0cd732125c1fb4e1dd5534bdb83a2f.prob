@@ -1,0 +1,1 @@
+{"name":"Local: 6-2-3 函数重载实现两数相加","url":"/home/lingnc/LingNc/school/Cpp课/6-2-3 函数重载实现两数相加.cpp","tests":[{"id":1728313861494,"input":"3 5\n3.3333 5.555555\nhello world","output":"8\n8.89\nhelloworld"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/Cpp课/6-2-3 函数重载实现两数相加.cpp","group":"local","local":true}

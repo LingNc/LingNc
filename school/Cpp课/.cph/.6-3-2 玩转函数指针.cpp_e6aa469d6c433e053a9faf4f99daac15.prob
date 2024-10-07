@@ -1,0 +1,1 @@
+{"name":"Local: 6-3-2 玩转函数指针","url":"/home/lingnc/LingNc/school/Cpp课/6-3-2 玩转函数指针.cpp","tests":[{"id":1728314463857,"input":"3\n1 10 15\n5 5 10","output":"5 is not a factor of 1.\n5 is a factor of 10.\n10 is not a factor of 15."}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/Cpp课/6-3-2 玩转函数指针.cpp","group":"local","local":true}
