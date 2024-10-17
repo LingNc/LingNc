@@ -49,7 +49,7 @@ void dfs(int u){
 void solve(){
     cin>>a>>b>>c;
     dfs(0);
-    if(!res_num) cout<<"no!!!"<<endl;
+    if(!res_num) cout<<"No!!!"<<endl;
 }
 
 i32 main(){
