@@ -1,0 +1,1 @@
+{"name":"Local: 三位数比例分组","url":"/home/LingNc/LingNc/xiaodu/蓝桥杯/三位数比例分组.cpp","tests":[{"id":1729062728196,"input":"1 2 3","output":" 192 384 576\n 219 438 657\n 273 546 819\n 327 654 981\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/LingNc/LingNc/xiaodu/蓝桥杯/三位数比例分组.cpp","group":"local","local":true}
