@@ -1,0 +1,1 @@
+{"name":"Local: 比例分组du","url":"/home/LingNc/LingNc/xiaodu/蓝桥杯/比例分组du.cpp","tests":[{"id":1729063278176,"input":"1 2 3","output":" 192 384 576\n 219 438 657\n 273 546 819\n 327 654 981\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/LingNc/LingNc/xiaodu/蓝桥杯/比例分组du.cpp","group":"local","local":true}
