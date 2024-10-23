@@ -13,7 +13,7 @@ typedef pair<int,int> PII;
 
 
 typedef struct fraction{
-    int up,down,sign;
+    int up,down;
 
     void insert(int _up,int _down){
         int _gcd=gcd(_up,_down);
@@ -32,6 +32,10 @@ typedef struct fraction{
         if(up==b.up&&down==b.down) return true;
         else return false;
     }
+    bool check(){
+        return (down-up)==1;
+    }
+    
     fraction(){
         up=1,down=1;
     }
@@ -52,23 +56,39 @@ bool is_prime(int x){
     return true;
 }
 
-void dfs(int u){
-    if(u==0){
+vector<Fraction> res(13);
+bool st[35];
+int n;
 
+void dfs(int u,int last,Fraction &sum){
+    if(u==n+1){
+        foe(i,1,n) cout<<res[i]<<' ';
+        return ;
     }
+    if(u==n){
+        if(sum.down<=30){
+            res[u]=Fraction(1,sum.down);
+            dfs(u+1,0,sum);
+        }
+        else{
+            return ;
+        }
+    }
+    foe(i,last+1,30){
+        Fraction t(1,i);
+        if((sum+t).check()){
+            sum=sum+t;
+            res[u]=t;
+            dfs(u+1,i,sum);
+        }
+    }
+
 }
 
 void solve(){
-    int a,b,c,d;
-    cin>>a>>b>>c>>d;
-
-
-    Fraction t1(a,b),t2(c,d);
-    cout<<t1<<' '<<t2<<endl;
-    auto e=t1+t2,f=t1-t2;
-    cout<<t1+t2<<endl;
-    cout<<t1-t2<<endl;
-    cout<<f-e<<endl;
+    cin>>n;
+    Fraction sum(0,1);
+    dfs(1,1,sum);
 }
 
 i32 main(){
