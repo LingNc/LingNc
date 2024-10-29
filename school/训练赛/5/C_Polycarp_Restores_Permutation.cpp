@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+template<typename iii> iii gcd(iii a,iii b){ return b==0?a:gcd(b,a%b); }
+template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
+#define IOS ios::sync_with_stdio(0),cin.tie(0),cout.tie(0)
+#define yes(res) cout<<((res)?"YES":"NO")<<'\n'
+#define foe(i,a,b) for(int i=(a);i<=(b);i++)
+#define fod(i,a,b) for(int i=(a);i>=(b);i--)
+#define all(a) a.begin(),a.end()
+#define INF64 0x3f3f3f3f3f3f3f3f
+#define INF32 0x3f3f3f3f
+#define int long long
+#define endl '\n'
+using i32=signed;
+using i64=long long;
+using namespace std;
+typedef vector<int> arr;
+typedef pair<int,int> PII;
+
+const i32 N=0;
+
+void solve(){
+    int n;
+    cin>>n;
+    arr a(n,0),b(n,0);
+    int sum_1=0,sum_2=0;
+    foe(i,1,n) sum_1+=i;
+    foe(i,1,n-1){
+        cin>>a[i];
+    }
+    foe(i,1,n-1){
+        b[i]=a[i]+b[i-1];
+        sum_2+=b[i];
+    }
+    arr res(n,0);
+    res[0]=(sum_1-sum_2)/n;
+    bool ans=1;
+    if(res[0]<1||res[0]>n) ans=0;
+    foe(i,1,n-1){
+        res[i]=b[i]+res[0];
+        if(res[i]<1||res[i]>n) ans=0;
+    }
+    unordered_map<int,bool> mp;
+    for(auto &it:res){
+        mp[it]=1;
+    }
+    if(mp.size()<n) ans=0;
+
+    if(ans)
+        foe(i,0,n-1) cout<<res[i]<<' ';
+    else
+        cout<<-1;
+    cout<<endl;
+}
+i32 main(){
+    IOS;
+    i32 T=1;
+    //cin>>T;
+    while(T--) solve();
+    return 0;
+}
