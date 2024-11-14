@@ -23,6 +23,15 @@ bool rd(string &temp){
     else return true;
 }
 
+string dtos(int num){
+    string str;
+    while(num){
+        str+=num%10;
+        num/=10;
+    }
+    reverse(all(str));
+}
+
 void solve(){
     string com;
     cin>>com;
@@ -45,7 +54,8 @@ void solve(){
     string str;
     foe(i,1,n){
         vector<string> res(1,"Case ");
-        res[0].push_back('0'+i);res[0]+=':';
+        res[0]+=dtos(i);
+        res[0]+=':';
 
         int tim=0;
         bool end=true;
