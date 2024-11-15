@@ -3,6 +3,8 @@ import subprocess
 import json
 from openai import OpenAI
 
+problem_num=""
+
 # 读取Markdown文件内容
 def read_markdown_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -37,22 +39,26 @@ def generate_generate_py(prompt, api_key):
         max_tokens=8192,  # 设置最大token数为128k
         temperature=0.0
     )
-
+    res=json.loads(response.choices[0].message.content)
     if response.choices:
-        generate_py_code = json.loads(response.choices[0].message.content)['code']
-        with open('generate.py', 'w', encoding='utf-8') as file:
+        generate_py_code = res['code']
+        global problem_num
+        problem_num = res['problem_num']
+        generate_file_name=f"generate_{problem_num}.py"
+        with open(generate_file_name, 'w', encoding='utf-8') as file:
             file.write(generate_py_code)
-        print("generate.py 生成成功")
+        print(f"{generate_file_name} 生成成功")
     else:
-        print("生成generate.py失败")
+        print(f"生成{generate_file_name}失败")
 
 # 运行生成的generate.py代码
 def run_generate_py():
+    global problem_num
     try:
-        subprocess.run(['python', 'generate.py'], check=True)
-        print("generate.py 运行成功")
+        subprocess.run(['python', f'generate_{problem_num}.py'], check=True)
+        print(f"generate_{problem_num}.py 运行成功")
     except subprocess.CalledProcessError as e:
-        print(f"运行generate.py失败: {e}")
+        print(f"运行generate_{problem_num}.py失败: {e}")
 
 # 检查并获取API Key
 def get_api_key():
@@ -129,7 +135,10 @@ def main():
 
         Please generate the code and return it in the following JSON format:
         ```json
-        {{"code":"/*there is generate.py code.*/"}}
+        {{
+            "code":"/*there is generate.py code.*/",
+            "problem_num":"/*there is the problem num, for example: A*/"
+        }}
         ```
     """
     generate_generate_py(prompt, api_key)

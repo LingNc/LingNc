@@ -25,7 +25,7 @@ void solve(){
     }
     cout<<min_res;
 }
-int main(){
+signed main(){
     int T=1;
     // cin>>T;
     while(T--) solve();

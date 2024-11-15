@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    "*.vue": "vue",
     "iostream": "cpp",
     "random": "cpp",
     "cmath": "cpp",
@@ -88,7 +89,8 @@
     "spanstream": "cpp",
     "stacktrace": "cpp",
     "stop_token": "cpp",
-    "syncstream": "cpp"
+    "syncstream": "cpp",
+    "stdio.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
