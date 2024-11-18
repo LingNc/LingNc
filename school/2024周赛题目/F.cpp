@@ -1,14 +1,12 @@
-#include<iostream>
-#define endl '\n'
-using namespace std;
+#include <stdio.h>
 
-
-int main(){
-    int n,m;
-    cin>>n>>m;
-    if(n%(m+1)==0)
-        cout<<"ZCY"<<endl;
-    else
-        cout<<"WY"<<endl;
-        return 0;
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    if (n % (m + 1) == 0) {
+        printf("ZCY\n");
+    } else {
+        printf("WY\n");
+    }
+    return 0;
 }
