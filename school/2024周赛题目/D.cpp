@@ -1,6 +1,5 @@
 #include<stdio.h>
 
-
 int main(){
 	int a[10001]={0}; //初始化化数组作为环
 	int n,m;//n代表总的人数，m代表报数到几退出

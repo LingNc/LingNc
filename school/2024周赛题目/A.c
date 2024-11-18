@@ -12,16 +12,16 @@ int main(){
         for(i=0;i<n;i++){
             scanf("%d",&a[i]);
         }
-        for(int i=0;i<n-1;i++){
-            for(int j=0;j<n-1-i;j++){
-                if(a[j]>a[j+1]){
-                    auto t=a[j];
-                    a[j]=a[j+1];
-                    a[j+1]=t;
-                }
-            }
-        }
-        // qsort(a,n,sizeof(int),cmp);
+        // for(int i=0;i<n-1;i++){
+        //     for(int j=0;j<n-1-i;j++){
+        //         if(a[j]>a[j+1]){
+        //             auto t=a[j];
+        //             a[j]=a[j+1];
+        //             a[j+1]=t;
+        //         }
+        //     }
+        // }
+        qsort(a,n,sizeof(int),cmp);
         printf("%d\n",a[n/2]);
     }
     return 0;

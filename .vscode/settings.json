@@ -149,5 +149,8 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "commentTranslate.hover.enabled": false
+  "commentTranslate.hover.enabled": false,
+  "cSpell.words": [
+    "endl"
+  ]
 }
