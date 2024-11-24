@@ -1,8 +1,5 @@
 #include<iostream>
-// #ifndef student
-// #define student
-// #include"student.h"
-// #endif
+#include"include.h"
 #define foe(i,a,b) for(int i=(a);i<=(b);i++)
 
 //管理者类
@@ -12,10 +9,6 @@ class Manager{
     char mName[20]; //管理者姓名
 public:
     int scoresAvg(Student &s);
-};
-class Print{
-public:
-    void printStudent(Student &s);
 };
 struct studentInfo{
     int sNo;        // 学号

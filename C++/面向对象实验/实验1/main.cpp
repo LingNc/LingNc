@@ -1,5 +1,4 @@
-#include"student.h"
-#include"manager.h"
+#include"include.h"
 #include<iostream>
 using namespace std;
 int main(){
