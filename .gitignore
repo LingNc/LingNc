@@ -1,6 +1,7 @@
 ##忽略所有目录中存在的.history
 **/.history/
 **/.env/
+/*/**/.vscode
 /school/**/.vscode/
 /xiaodu/**/.vscode/
 /Python/problem
