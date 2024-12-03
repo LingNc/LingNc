@@ -1,0 +1,1 @@
+{"name":"Local: 6-3 虚基类的应用-人与教师学生","url":"/home/lingnc/LingNc/C++/面向对象实验/实验3/6-3 虚基类的应用-人与教师学生.cpp","tests":[{"id":1733216578874,"input":"","output":"name:Wang-li\nage:24\nsex:f\nscore:89.5\ntitle:assistant\nwages:1234.5\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/C++/面向对象实验/实验3/6-3 虚基类的应用-人与教师学生.cpp","group":"local","local":true}
