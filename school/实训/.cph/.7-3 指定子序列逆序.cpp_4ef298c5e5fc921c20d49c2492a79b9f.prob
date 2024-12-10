@@ -1,0 +1,1 @@
+{"name":"Local: 7-3 指定子序列逆序","url":"/home/lingnc/LingNc/school/实训/7-3 指定子序列逆序.cpp","tests":[{"id":1733719782866,"input":"2 4 6 8 10 12 14 16 18 20\n4 5","output":"2 4 6 16 14 12 10 8 18 20 "}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-3 指定子序列逆序.cpp","group":"local","local":true}

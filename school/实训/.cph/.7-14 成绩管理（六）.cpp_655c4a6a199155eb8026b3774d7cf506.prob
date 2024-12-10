@@ -1,0 +1,1 @@
+{"name":"Local: 7-14 成绩管理（六）","url":"/home/lingnc/LingNc/school/实训/7-14 成绩管理（六）.cpp","tests":[{"id":1733751111990,"input":"4\nbob 60 70 80\nalice 70 80 90\nwade 90 90 70\nhali 89 78 67","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-14 成绩管理（六）.cpp","group":"local","local":true}

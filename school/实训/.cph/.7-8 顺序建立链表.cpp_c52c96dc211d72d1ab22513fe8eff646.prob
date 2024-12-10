@@ -1,0 +1,1 @@
+{"name":"Local: 7-8 顺序建立链表","url":"/home/lingnc/LingNc/school/实训/7-8 顺序建立链表.cpp","tests":[{"id":1733731306523,"input":"5 1 2 3 4 5","output":"1 2 3 4 5"},{"id":1733731824633,"input":"10 1 2 3 4 5 1 2 3 4 5\n5 1 2 3 4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-8 顺序建立链表.cpp","group":"local","local":true}

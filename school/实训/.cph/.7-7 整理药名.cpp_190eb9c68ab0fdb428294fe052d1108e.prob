@@ -1,0 +1,1 @@
+{"name":"Local: 7-7 整理药名","url":"/home/lingnc/LingNc/school/实训/7-7 整理药名.cpp","tests":[{"id":1733730496943,"input":"4\nAspiRin\ncisapride\n2-PENICILLIN\nCefradine-6","output":"Aspirin\nCisapride\n2-penicillin\nCefradine-6"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-7 整理药名.cpp","group":"local","local":true}

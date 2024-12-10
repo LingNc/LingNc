@@ -1,0 +1,1 @@
+{"name":"Local: 7-18 培训","url":"/home/lingnc/LingNc/school/实训/7-18 培训.cpp","tests":[{"id":1733798254394,"input":"3\nkkksc03 24 0\nchen_zhe 14 400\nnzhtl1477 18 590","output":"kkksc03 25 0\nchen_zhe 15 480\nnzhtl1477 19 600"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-18 培训.cpp","group":"local","local":true}

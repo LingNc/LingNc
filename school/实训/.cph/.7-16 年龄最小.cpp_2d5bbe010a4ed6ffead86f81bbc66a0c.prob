@@ -1,0 +1,1 @@
+{"name":"Local: 7-16 年龄最小","url":"/home/lingnc/LingNc/school/实训/7-16 年龄最小.cpp","tests":[{"id":1733794866876,"input":"4\nzhang 2000-12-11\nwang 2000-12-2\nli 2000-12-1\nzhao 2000-12-3","output":"zhang"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-16 年龄最小.cpp","group":"local","local":true}

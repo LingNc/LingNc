@@ -1,0 +1,1 @@
+{"name":"Local: 7-12 输出链表偶数结点","url":"/home/lingnc/LingNc/school/实训/7-12 输出链表偶数结点.cpp","tests":[{"id":1733738549669,"input":"2\n8\n12 56 4 6 55 15 33 62\n3\n1 2 1","output":"56 6 15 62\n2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-12 输出链表偶数结点.cpp","group":"local","local":true}

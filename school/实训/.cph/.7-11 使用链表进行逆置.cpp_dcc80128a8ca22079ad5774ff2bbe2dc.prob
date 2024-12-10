@@ -1,0 +1,1 @@
+{"name":"Local: 7-11 使用链表进行逆置","url":"/home/lingnc/LingNc/school/实训/7-11 使用链表进行逆置.cpp","tests":[{"id":1733738037743,"input":"1\n3\nZhangsan 20\nLisi 21\nWangwu 20\n","output":"Wangwu 20\nLisi 21\nZhangsan 20"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-11 使用链表进行逆置.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: 7-4 挑选整数","url":"/home/lingnc/LingNc/school/实训/7-4 挑选整数.cpp","tests":[{"id":1733721491573,"input":"a123x67 222y35i088 09x8 c\n","output":"7\n123 67 222 35 88 9 8"},{"id":1733722126522,"input":"1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-4 挑选整数.cpp","group":"local","local":true}

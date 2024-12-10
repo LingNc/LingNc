@@ -1,0 +1,1 @@
+{"name":"Local: 7-6 滤字符","url":"/home/lingnc/LingNc/school/实训/7-6 滤字符.cpp","tests":[{"id":1733729241821,"input":"2\neeidliecielpvu i\necdssnepffnofdoenci e\n","output":""},{"id":1733729751325,"input":"1\niiiii i\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/实训/7-6 滤字符.cpp","group":"local","local":true}
