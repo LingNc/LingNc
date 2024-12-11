@@ -8,7 +8,7 @@ typedef struct Book{
 }Book;
 
 int get_a(Book *pThis){
-    return ((Book*)pm)->a;
+    return ((Book *)pm)->a;
 }
 typedef struct Stu{
     int b;

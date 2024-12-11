@@ -1,29 +1,29 @@
 # Makefile
 
 # 编译器
-cxx = g++
+CC = gcc
 
 # 编译器选项
-cxxflags = -std=c++20 -Wall -g
+CFLAGS = -Wall -g -I BookManager/include
 
 # 目标文件
-target = main
+TARGET = main
 
-# 查找所有的 .cpp 文件
-srcs = $(wildcard *.cpp)
+# 源文件
+SRCS = main.c BookManager/src/String.c
 
-# 生成对应的 .o 文件
-objs = $(srcs:.cpp=.o)
+# 对象文件
+OBJS = $(SRCS:.c=.o)
 
-# 目标规则
-$(target): $(objs)
-	$(cxx) $(cxxflags) -o $(target) $(objs)
+# 编译目标
+$(TARGET): $(OBJS)
+    $(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-# .cpp 文件生成 .o 文件的规则
-%.o: %.cpp
-	$(cxx) $(cxxflags) -c $< -o $@
+# 编译规则
+%.o: %.c
+    $(CC) $(CFLAGS) -c $< -o $@
 
-# 清理规则
+# 清理
 .PHONY: clean
 clean:
-	rm -f $(target) $(objs)
+    rm -f $(TARGET) $(OBJS)
