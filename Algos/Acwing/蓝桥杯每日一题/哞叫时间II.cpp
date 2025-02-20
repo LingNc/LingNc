@@ -28,9 +28,13 @@ void solve(){
         a[temp]++;
     }
     int less=0,more=0;
-    foe(i,0,N+1){
-
+    foe(i,1,N+1){
+        if(a[i]>=2) more++;
+        if(a[i]<2&&a[i]>0) less++;
     }
+    int total=more+less;
+    int res=more*(total-1);
+    cout<<res<<endl;
 }
 i32 main(){
     IOS;
