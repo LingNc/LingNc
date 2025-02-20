@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"/home/lingnc/LingNc/school/CF/A.cpp","tests":[{"id":1739863636673,"input":"6\n1 2\n1 10\n49 49\n69 420\n1 1\n9982 44353\n","output":"1\n9\n0\n351\n1\n34371\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/lingnc/LingNc/school/CF/A.cpp","group":"local","local":true}
