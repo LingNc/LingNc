@@ -1,0 +1,1 @@
+{"name":"Luogu - P2280","url":"https://www.luogu.com.cn/problem/P2280","memoryLimit":512000,"timeLimit":1000,"tests":[{"id":1740232830595,"input":"2 1\n0 0 1\n1 1 1\n","output":"1"}],"group":"luogu","srcPath":"/home/lingnc/LingNc/Algos/Luogu/Luogu_P_2280.cpp"}
