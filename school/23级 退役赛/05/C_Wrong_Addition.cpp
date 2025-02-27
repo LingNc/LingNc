@@ -62,17 +62,23 @@ void solve(){
     }
     reverse(all(b));
     if(res){
-        int zero=(b[0]=='0');
-        for(auto &it:b){
-            if(it=='0'&&zero){
-                continue;
+        if(b.size()==1){
+            cout<<b;
+        }
+        else{
+            int zero=(b[0]=='0');
+            for(auto &it:b){
+                if(it=='0'&&zero){
+                    continue;
+                }
+                else zero=false;
+                cout<<it;
             }
-            else zero=false;
-            cout<<it;
         }
         cout<<endl;
     }
-    else cout<<-1<<endl;
+    else
+        cout<<-1<<endl;
 }
 i32 main(){
     IOS;

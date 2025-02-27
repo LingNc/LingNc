@@ -18,44 +18,30 @@ typedef pair<int,int> PII;
 
 const i32 N=0;
 
-
 void solve(){
     int n;
     cin>>n;
-    int temp;
+    if(n==1){
+        cin>>n;
+        cout<<n<<endl;
+        return;
+    }
     vector<int> a(n,0);
-    foe(i,0,n)
-        cin>>a[i];
-    int ngcd=0;
-    for(int i=0;i<n;i+=2){
-        if(ngcd==0) ngcd=a[i];
-        else ngcd=gcd(ngcd,a[i]);
+    foe(i,0,n) cin>>a[i];
+    map<int,int> mp;
+    foe(i,0,n-1){
+        if(a[i]==a[i+1]||i<n-2&&a[i]==a[i+2]) mp[a[i]]++;
     }
-    bool res=true;
-    if(ngcd==1){
-        ngcd=0;
-        for(int i=1;i<n;i+=2){
-            if(ngcd==0) ngcd=a[i];
-            else ngcd=gcd(ngcd,a[i]);
-        }
-        for(int i=0;i<n;i+=2){
-            if(a[i]%ngcd==0){
-                res=false;
-                break;
-            }
+    int num=0;
+    for(auto &it:mp){
+        if(it.second>=1){
+            if(num==0) cout<<it.first;
+            else cout<<' '<<it.first;
+            num++;
         }
     }
-    else{
-        for(int i=1;i<n;i+=2){
-            if(a[i]%ngcd==0){
-                res=false;
-                break;
-            }
-        }
-    }
-    if(res) cout<<ngcd<<endl;
-    else cout<<res<<endl;
-
+    if(num==0) cout<<-1;
+    cout<<endl;
 }
 i32 main(){
     IOS;
