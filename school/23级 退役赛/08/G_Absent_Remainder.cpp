@@ -8,7 +8,7 @@ template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
 #define all(a) a.begin(),a.end()
 #define INF64 0x3f3f3f3f3f3f3f3f
 #define INF32 0x3f3f3f3f
-// #define int long long
+#define int long long
 #define endl '\n'
 using i32=signed;
 using i64=long long;
@@ -21,34 +21,20 @@ const i32 N=0;
 void solve(){
     int n;
     cin>>n;
-    string str1,str2;
-    cin>>str1>>str2;
-    int one1=0,one2=0,eq=0,uneq=0;
+    arr a(n,0);
+    foe(i,0,n) cin>>a[i];
+    int min_num=INF32;
+    for(auto &it:a){
+        min_num=min(min_num,it);
+    }
+    int k=0;
     foe(i,0,n){
-        if(str1[i]==str2[i]&&str1[i]=='1'){
-            eq++;
+        if(k>=n/2) break;
+        if(a[i]!=min_num){
+            cout<<a[i]<<' '<<min_num<<endl;
+            k++;
         }
-        if(str1[i]==str2[i]&&str1[i]=='0'){
-            uneq++;
-        }
-        if(str1[i]=='1') one1++;
-        if(str2[i]=='1') one2++;
     }
-    if(one1!=one2&&(1+n-one1)!=one2||one1==0){
-        cout<<-1<<endl;
-        return;
-    }
-    int res=0;
-    if(uneq<eq){
-        res+=1;
-    }
-    if(one1!=1+n-one1&&one1!=one2){
-        res+=1;
-
-    }
-    res+=2*(one2-eq);
-
-    cout<<res<<endl;
 }
 i32 main(){
     IOS;

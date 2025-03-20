@@ -8,7 +8,7 @@ template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
 #define all(a) a.begin(),a.end()
 #define INF64 0x3f3f3f3f3f3f3f3f
 #define INF32 0x3f3f3f3f
-// #define int long long
+#define int long long
 #define endl '\n'
 using i32=signed;
 using i64=long long;
@@ -19,36 +19,25 @@ typedef pair<int,int> PII;
 const i32 N=0;
 
 void solve(){
-    int n;
-    cin>>n;
-    string str1,str2;
-    cin>>str1>>str2;
-    int one1=0,one2=0,eq=0,uneq=0;
-    foe(i,0,n){
-        if(str1[i]==str2[i]&&str1[i]=='1'){
-            eq++;
-        }
-        if(str1[i]==str2[i]&&str1[i]=='0'){
-            uneq++;
-        }
-        if(str1[i]=='1') one1++;
-        if(str2[i]=='1') one2++;
+    int n,h;
+    cin>>n>>h;
+    arr a(n,0),b(n,0);
+    foe(i,0,n) cin>>a[i];
+    foe(i,0,n-1){
+        b[i]=a[i+1]-a[i];
     }
-    if(one1!=one2&&(1+n-one1)!=one2||one1==0){
-        cout<<-1<<endl;
-        return;
-    }
+    sort(all(b));
+    int avg=INF64;
     int res=0;
-    if(uneq<eq){
-        res+=1;
+    int i=0;
+    while(b[i]<avg){
+        h-=b[i];
+        avg=h/(n-i);
+        if(avg*(n-i)!=h) avg++;
+        i++;
+        if(i>=n) break;
     }
-    if(one1!=1+n-one1&&one1!=one2){
-        res+=1;
-
-    }
-    res+=2*(one2-eq);
-
-    cout<<res<<endl;
+    cout<<avg<<endl;
 }
 i32 main(){
     IOS;
