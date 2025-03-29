@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
-template<typename iii> iii gcd(iii a,iii b){return b==0?a:gcd(b,a%b);}
-template<typename iii> iii lcm(iii a,iii b){return a/gcd(a,b)*b;}
+template<typename iii> iii gcd(iii a,iii b){ return b==0?a:gcd(b,a%b); }
+template<typename iii> iii lcm(iii a,iii b){ return a/gcd(a,b)*b; }
 #define IOS ios::sync_with_stdio(0),cin.tie(0),cout.tie(0)
 #define yes(res) cout<<((res)?"YES":"NO")<<'\n'
 #define foe(i,a,b) for(int i=(a);i<(b);i++)
@@ -19,12 +19,25 @@ typedef pair<int,int> PII;
 const i32 N=0;
 
 void solve(){
-
+    int n;
+    cin>>n;
+    arr a(n,0);
+    foe(i,0,n){
+        cin>>a[i];
+    }
+    int maxx=INT_MIN;
+    int minn=INT_MAX;
+    foe(i,0,n){
+        maxx=max(maxx,a[i]);
+        minn=min(minn,a[i]);
+    }
+    int diff=maxx-minn;
+    cout<<diff<<endl;
 }
 i32 main(){
     IOS;
     i32 T=1;
-    //cin>>T;
+    cin>>T;
     while(T--) solve();
     return 0;
 }
