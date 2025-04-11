@@ -14,7 +14,7 @@ int e[2*N],ne[2*N],h[N],idx=0;
 bool st[N];
 
 void init(int n){
-    foe(i,0,n){
+    foe(i,0,n+1){
         st[i]=false;
         h[i]=-1;
     }
@@ -25,12 +25,33 @@ void add(int a,int b){
 }
 int res[N]={ 0 };
 void dfs(int n,int ans){
+    if(st[n]) return;
     res[n]=ans;
-    for
+    st[n]=true;
+    for(auto p=h[n];p!=-1;p=ne[p]){
+        if(st[e[p]]) continue;
+        dfs(e[p],ans);
+    }
 }
 
 void solve(){
-
+    int n,m;
+    cin>>n>>m;
+    init(n);
+    int a,b;
+    foe(i,0,m){
+        cin>>a>>b;
+        // add(a,b);
+        add(b,a);
+    }
+    fod(i,n,0){
+        dfs(i,i);
+    }
+    foe(i,1,n+1){
+        if(i!=1) cout<<' ';
+        cout<<res[i];
+    }
+    cout<<endl;
 }
 
 
