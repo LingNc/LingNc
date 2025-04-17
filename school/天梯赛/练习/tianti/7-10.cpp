@@ -9,7 +9,7 @@ using i64=long long;
 typedef pair<int,int> PII;
 
 int bigger(vector<PII> &a,int num){
-    int l=0,r=a.size();
+    int l=-1,r=a.size();
     while(l+1<r){
         int mid=(l+r)>>1;
         if(a[mid].second>=num) r=mid;
@@ -43,12 +43,16 @@ void solve(){
                     if(a[i].first>=price){
                         is_free=true;
                         mp[a[i]]=0;
+                        break;
                     }
                 }
             }
-
+            if(!is_free){
+                cost+=price;
+            }
         }
     }
+    cout<<cost<<endl;
 }
 
 i32 main(){
