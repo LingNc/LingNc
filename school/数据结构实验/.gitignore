@@ -1,0 +1,13 @@
+*
+!*/
+
+!.gitignore
+!README.md
+!LICENSE
+!Makefile
+
+!.vscode/*
+
+!*.c
+!src/*.c
+!include/*.h
