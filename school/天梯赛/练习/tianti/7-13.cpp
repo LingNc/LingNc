@@ -12,7 +12,7 @@ typedef pair<int,int> PII;
 
 const int N=1e4;
 vector<int> fa(N,0);
-vector<int> set_size(N,0);
+vector<int> set_size(N,1);
 void init(int n){
     foe(i,1,n+1){
         fa[i]=i;
@@ -20,35 +20,52 @@ void init(int n){
 }
 
 int find(int x){
-    return (fa[x]!=x)?fa[x]=find(x):x;
+    return (fa[x]!=x)?fa[x]=find(fa[x]):x;
 }
 
 void join(int x,int y){
     int fa_x=find(x);
     int fa_y=find(y);
+    if(fa_x==fa_y) return;
     set_size[fa_y]+=set_size[fa_x];
-    fa[fa_x]=find[fa_y];
+    fa[fa_x]=find(fa_y);
 }
 
 void solve(){
     int n;
     cin>>n;
     init(n);
-    
+    unordered_map<int,vector<int>> mp;
     int t;
-    foe(i,0,n){
+    foe(i,1,n+1){
         cin>>t;
         cin.get();
-        int the_k;
-        cin>>the_k;
-        set_size[find(the_k)]++;
         int a;
-        foe(j,1,t){
+        foe(j,0,t){
             cin>>a;
-            join(a,find(the_k));
+            mp[a].push_back(i);
         }
-    }        
-    unordered_map<int,int> mp;
+    }
+    for(auto &it:mp){
+        int user=it.second[0];
+        foe(i,1,it.second.size()){
+            join(it.second[i],user);
+        }
+    }
+    unordered_map<int,int> res;
+    foe(i,1,n+1){
+        int j=find(i);
+        res[j]=set_size[j];
+    }
+    vector<int> ans;
+    for(auto &it:res) ans.push_back(it.second);
+    sort(all(ans),greater<int>());
+    cout<<ans.size()<<endl;
+    foe(i,0,ans.size()){
+        if(i!=0) cout<<' ';
+        cout<<ans[i];
+    }
+    cout<<endl;
 }
 
 i32 main(){
