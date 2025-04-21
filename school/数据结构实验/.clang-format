@@ -1,0 +1,40 @@
+---
+Language: Cpp
+# 基于的编码规范, 可选值有 LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, GNU
+BasedOnStyle: LLVM
+# 缩进宽度
+IndentWidth: 4
+# 使用Tab字符: Never, ForIndentation, ForContinuationAndIndentation, Always
+UseTab: Never
+# 每行字符的限制，0表示没有限制
+ColumnLimit: 100
+# 大括号换行，只有当 BreakBeforeBraces 设置为 Custom 时才有效
+BreakBeforeBraces: Attach
+# 在赋值运算符前后保留空格
+SpaceBeforeAssignmentOperators: true
+# 缩进case标签
+IndentCaseLabels: true
+# 函数名与左括号之间是否添加空格
+SpaceBeforeParens: Never
+# 指针和引用的对齐: Left, Right, Middle
+PointerAlignment: Right
+# 允许短的函数放在同一行
+AllowShortFunctionsOnASingleLine: All
+# 允许短的if语句保持在同一行
+AllowShortIfStatementsOnASingleLine: true
+# 允许短的循环保持在同一行
+AllowShortLoopsOnASingleLine: true
+# 连续空行的最大数量
+MaxEmptyLinesToKeep: 1
+# 在左括号后加空格
+SpaceAfterCStyleCast: false
+# 构造函数的初始化列表的缩进宽度
+ConstructorInitializerIndentWidth: 4
+# 在括号中间不添加额外空格
+SpacesInParentheses: false
+# 在方括号中间不添加额外空格
+SpacesInSquareBrackets: false
+# 在尖括号中间不添加额外空格
+SpacesInAngles: false
+SpaceAfterTemplateKeyword: false
+SpaceInEmptyParentheses: false

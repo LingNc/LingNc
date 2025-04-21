@@ -10,7 +10,18 @@
 			"sqlist.h": "c",
 			"stddef.h": "c",
 			"error.h": "c"
-		}
+		},
+		"makefile.launchConfigurations": [
+			{
+				"cwd": "/home/lingnc/LingNc/school/数据结构实验",
+				"binaryPath": "/home/lingnc/LingNc/school/数据结构实验/main1",
+				"binaryArgs": []
+			}
+		],
+		"lldb.displayFormat": "auto",
+		"lldb.showDisassembly": "auto",
+		"lldb.dereferencePointers": true,
+		"lldb.consoleMode": "commands",
 	},
 	"tasks": {
 		"version": "2.0.0",

@@ -1,10 +1,12 @@
 #include "linklist.h"
+#include "type.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 // 初始化节点
 node new_node(ElemType data) {
     node n = (node)malloc(sizeof(Node));
-    if (n == NULL) {
+    if(n == NULL) {
         return NULL;
     }
     n->data = data;
@@ -13,18 +15,16 @@ node new_node(ElemType data) {
 }
 
 // 初始化节点
-node new_node_init(ElemType data) {
-    return new_node(data);
-}
+node new_node_init(ElemType data) { return new_node(data); }
 
 // 初始化链表
 linklist new_linklist() {
     linklist list = (linklist)malloc(sizeof(Linklist));
-    if (list == NULL) {
+    if(list == NULL) {
         return NULL;
     }
 
-    if (linklist_init(list) != OK) {
+    if(linklist_init(list) != OK) {
         free(list);
         return NULL;
     }
@@ -33,31 +33,29 @@ linklist new_linklist() {
 }
 
 Status linklist_init(linklist list) {
-    if (list == NULL) {
+    if(list == NULL) {
         return ERROR;
     }
 
     // 头节点不存储数据，next为NULL
-    list->data = 0;
+    list->data = *new_elemtype();
     list->next = NULL;
 
     return OK;
 }
 
 // 获取链表大小
-size_t linklist_size(linklist list) {
-    return linklist_length(list);
-}
+size_t linklist_size(linklist list) { return linklist_length(list); }
 
 size_t linklist_length(linklist list) {
-    if (list == NULL) {
+    if(list == NULL) {
         return 0;
     }
 
     size_t count = 0;
     node curr = list->next;
 
-    while (curr != NULL) {
+    while(curr != NULL) {
         count++;
         curr = curr->next;
     }
@@ -68,23 +66,24 @@ size_t linklist_length(linklist list) {
 // 获取第index个元素的值
 ElemType linklist_get(linklist list, size_t index) {
     node n = linklist_at(list, index);
-    if (n == NULL) {
-        // 返回默认值，实际应用中可能需要其他错误处理
-        return 0;
+    if(n == NULL) {
+        // 访问了不该访问的位置
+        perror("访问了不该访问的位置");
+        exit(1);
     }
     return n->data;
 }
 
 // 获取第index个节点
 node linklist_at(linklist list, size_t index) {
-    if (list == NULL) {
+    if(list == NULL) {
         return NULL;
     }
 
     node curr = list->next;
     size_t i = 0;
 
-    while (curr != NULL && i < index) {
+    while(curr != NULL && i < index) {
         curr = curr->next;
         i++;
     }
@@ -95,7 +94,7 @@ node linklist_at(linklist list, size_t index) {
 // 设置第index个元素的值
 Status linklist_set(linklist list, size_t index, ElemType value) {
     node n = linklist_at(list, index);
-    if (n == NULL) {
+    if(n == NULL) {
         return ERROR;
     }
 
@@ -105,19 +104,19 @@ Status linklist_set(linklist list, size_t index, ElemType value) {
 
 // 尾插
 Status linklist_push_back(linklist list, ElemType value) {
-    if (list == NULL) {
+    if(list == NULL) {
         return ERROR;
     }
 
     // 创建新节点
     node new = new_node(value);
-    if (new == NULL) {
+    if(new == NULL) {
         return ERROR;
     }
 
     // 找到最后一个节点
     node curr = list;
-    while (curr->next != NULL) {
+    while(curr->next != NULL) {
         curr = curr->next;
     }
 
@@ -129,13 +128,13 @@ Status linklist_push_back(linklist list, ElemType value) {
 
 // 尾删
 Status linklist_pop_back(linklist list) {
-    if (list == NULL || list->next == NULL) {
+    if(list == NULL || list->next == NULL) {
         return ERROR;
     }
 
     // 找到倒数第二个节点
     node curr = list;
-    while (curr->next != NULL && curr->next->next != NULL) {
+    while(curr->next != NULL && curr->next->next != NULL) {
         curr = curr->next;
     }
 
@@ -148,13 +147,13 @@ Status linklist_pop_back(linklist list) {
 
 // 头插
 Status linklist_push_front(linklist list, ElemType value) {
-    if (list == NULL) {
+    if(list == NULL) {
         return ERROR;
     }
 
     // 创建新节点
     node new = new_node(value);
-    if (new == NULL) {
+    if(new == NULL) {
         return ERROR;
     }
 
@@ -167,14 +166,14 @@ Status linklist_push_front(linklist list, ElemType value) {
 
 // 查找元素
 node linklist_find(linklist list, ElemType value) {
-    if (list == NULL) {
+    if(list == NULL) {
         return NULL;
     }
 
     node curr = list->next;
 
-    while (curr != NULL) {
-        if (curr->data == value) {
+    while(curr != NULL) {
+        if(curr->data == value) {
             return curr;
         }
         curr = curr->next;
@@ -185,12 +184,12 @@ node linklist_find(linklist list, ElemType value) {
 
 // 删除第index个元素
 Status linklist_delete(linklist list, size_t index) {
-    if (list == NULL || list->next == NULL) {
+    if(list == NULL || list->next == NULL) {
         return ERROR;
     }
 
     // 特殊处理: 删除第0个元素
-    if (index == 0) {
+    if(index == 0) {
         node temp = list->next;
         list->next = temp->next;
         free(temp);
@@ -201,13 +200,13 @@ Status linklist_delete(linklist list, size_t index) {
     node prev = list;
     size_t i = 0;
 
-    while (prev->next != NULL && i < index) {
+    while(prev->next != NULL && i < index) {
         prev = prev->next;
         i++;
     }
 
     // 如果找到了第index-1个节点，并且它有下一个节点
-    if (i == index - 1 && prev->next != NULL) {
+    if(i == index - 1 && prev->next != NULL) {
         node temp = prev->next;
         prev->next = temp->next;
         free(temp);
@@ -219,7 +218,7 @@ Status linklist_delete(linklist list, size_t index) {
 
 // 释放链表
 Status linklist_free(linklist list) {
-    if (list == NULL) {
+    if(list == NULL) {
         return ERROR;
     }
 
@@ -227,7 +226,7 @@ Status linklist_free(linklist list) {
     node curr = list->next;
     node temp;
 
-    while (curr != NULL) {
+    while(curr != NULL) {
         temp = curr;
         curr = curr->next;
         free(temp);

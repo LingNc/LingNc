@@ -1,42 +1,52 @@
 #ifndef LINKLIST_H
 #define LINKLIST_H
 
-#include "type1.h"
-#include"error.h"
-struct Node{
+#include "error.h"
+#include "type.h"
+#include <stddef.h>
+struct Node {
     ElemType data;
     struct Node *next;
 };
 
-typedef struct Node Node,Linklist;
-typedef Node *node,*linklist;
+typedef struct Node Node;
+typedef Node *node;
+
+struct LinkList{
+    size_t _length;
+    node _root;
+    node _head;
+    node _tail;
+};
+typedef struct LinkList Linklist;
+typedef Linklist *linklist;
 
 // 初始化结点
-node new_node(ElemType);
+node new_node(ElemType val);
 // 初始化节点
-node new_node_init(ElemType);
+node node_init(ElemType val);
 // 初始化函数
 linklist new_linklist();
-Status linklist_init(linklist);
+Status linklist_init(linklist self);
 // 获取大小
-size_t linklist_size(linklist);
-size_t linklist_length(linklist);
+size_t linklist_size(linklist self);
+size_t linklist_length(linklist self);
 // 获取元素
-ElemType linklist_get(linklist,size_t);
-node linklist_at(linklist,size_t);
+ElemType linklist_get(linklist self, size_t pos);
+node linklist_at(linklist self, size_t pos);
 // 设置元素
-Status linklist_set(linklist,size_t,ElemType);
+Status linklist_set(linklist self, size_t pos, ElemType val);
 // 尾插
-Status linklist_push_back(linklist,ElemType);
+Status linklist_push_back(linklist self, ElemType val);
 // 尾删
-Status linklist_pop_back(linklist);
+Status linklist_pop_back(linklist self);
 // 头插
-Status linklist_push_front(linklist,ElemType);
+Status linklist_push_front(linklist self, ElemType val);
 // 查找
-node linklist_find(linklist,ElemType);
+node linklist_find(linklist self, ElemType val);
 // 删除
-Status linklist_delete(linklist,size_t);
+Status linklist_delete(linklist self, size_t pos);
 // 释放
-Status linklist_free(linklist);
+Status linklist_free(linklist self);
 
 #endif // LINKLIST_H
