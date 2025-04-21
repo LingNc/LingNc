@@ -25,7 +25,9 @@ typedef struct {
 typedef MutiTerm *multiterm;
 
 // 为多项式按指数升序排序
-Status multi_sort_by_exp(MutiTerm *term);
+Status multi_sort_by_exp_up(MutiTerm *term);
+// 降序
+Status multi_sort_by_exp_down(MutiTerm *term);
 // 判断多项式是否为稀疏
 bool is_sparse(int term_count,int max_exp);
 // 创建新的多项式

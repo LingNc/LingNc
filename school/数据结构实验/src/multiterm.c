@@ -25,7 +25,6 @@ Status sqlist_sort_by_exp(sqlist self) {
     if(self == NULL || self->_length <= 1) {
         return OK;
     }
-
     for(size_t i = 0; i < self->_length - 1; i++) {
         for(size_t j = 0; j < self->_length - 1 - i; j++) {
             if(self->_data[j].exp > self->_data[j + 1].exp) {
@@ -40,7 +39,7 @@ Status sqlist_sort_by_exp(sqlist self) {
 }
 
 // 为多项式按指数升序排序的实现
-Status multi_sort_by_exp(MutiTerm *term) {
+Status multi_sort_by_exp_up(MutiTerm *term) {
     if(term == NULL) {
         return ERROR;
     }
@@ -55,6 +54,55 @@ Status multi_sort_by_exp(MutiTerm *term) {
     return ERROR;
 }
 
+// 按降幂排序
+Status multi_sort_by_exp_down(MutiTerm *term){
+    if(term == NULL) {
+        return ERROR;
+    }
+
+    // 先按升序排序
+    multi_sort_by_exp_up(term);
+
+    if(term->type == LINKLIST) {
+        linklist new_list = new_linklist();
+        if(new_list == NULL) return ERROR;
+
+        // 获取原始链表长度
+        size_t length = linklist_length(term->_linklist);
+        if(length == 0) return OK; // 空列表无需排序
+
+        // 从后往前插入，实现降序
+        for(int i = length - 1; i >= 0; i--) {
+            ElemType e = linklist_get(term->_linklist, i);
+            linklist_push_back(new_list, e);
+        }
+
+        // 释放原链表并更新指针
+        linklist old_list = term->_linklist;
+        term->_linklist = new_list;
+        linklist_free(old_list);
+    } else if(term->type == SQLIST) {
+        sqlist new_list = new_sqlist();
+        if(new_list == NULL) return ERROR;
+
+        // 获取原始顺序表长度
+        size_t length = sqlist_length(term->_sqlist);
+        if(length == 0) return OK; // 空列表无需排序
+
+        // 从后往前插入，实现降序
+        for(int i = length - 1; i >= 0; i--) {
+            ElemType e = sqlist_get(term->_sqlist, i);
+            sqlist_push_back(new_list, e);
+        }
+
+        // 释放原顺序表并更新指针
+        sqlist old_list = term->_sqlist;
+        term->_sqlist = new_list;
+        sqlist_free(old_list);
+    }
+
+    return OK;
+}
 // 判断多项式是否为稀疏表示
 bool is_sparse(int n, int max_exp) { return n < (max_exp + 1) * 0.3; }
 
@@ -70,7 +118,7 @@ MutiTerm new_multi(TypeOfTerm type) {
     return term;
 }
 // 获取表
-void *multi_get(multiterm term) {
+void *multi_get(MutiTerm *term) {
     if(term == NULL) return NULL;
     if(term->type == LINKLIST) {
         return term->_linklist;
@@ -81,57 +129,68 @@ void *multi_get(multiterm term) {
 // 多项式相加
 MutiTerm multi_add(MutiTerm a, MutiTerm b) {
     // 按指数升序排序
-    multi_sort_by_exp(&a);
-    multi_sort_by_exp(&b);
+    multi_sort_by_exp_up(&a);
+    multi_sort_by_exp_up(&b);
 
     // 结果的最大指数
     int max_exp = (a.max_exp > b.max_exp) ? a.max_exp : b.max_exp;
     int term_count = 0;
 
+    // 创建临时顺序表存储所有项
     sqlist temp = new_sqlist();
+
+    // 根据多项式的存储类型进行不同的处理
     if(a.type == LINKLIST && b.type == LINKLIST) {
-        node pa = linklist_bgein(multi_get(&a)), pb = linklist_bgein(multi_get(&b));
-        // 基本长度
+        node pa = linklist_bgein(a._linklist), pb = linklist_bgein(b._linklist);
+        // 合并两个多项式的项
         while(pa && pb) {
             if(pa->data.exp == pb->data.exp) {
+                // 同指数项，系数相加
                 ElemType e = New_Elemtype(pa->data.coe + pb->data.coe, pa->data.exp);
-                sqlist_push_back(temp, e);
-                term_count++;
-                node_next(pa);
-                node_next(pb);
-            } else if(pa->data.exp > pb->data.exp) {
+                if(e.coe != 0) {
+                    sqlist_push_back(temp, e);
+                    term_count++;
+                }
+                node_next(&pa);
+                node_next(&pb);
+            } else if(pa->data.exp < pb->data.exp) {
+                // pa指数小，先添加pa
                 sqlist_push_back(temp, pa->data);
                 term_count++;
-                node_next(pa);
+                node_next(&pa);
             } else {
+                // pb指数小，先添加pb
                 sqlist_push_back(temp, pb->data);
                 term_count++;
-                node_next(pb);
+                node_next(&pb);
             }
         }
         // 处理剩余项
         while(pa) {
             sqlist_push_back(temp, pa->data);
             term_count++;
-            node_next(pa);
+            node_next(&pa);
         }
         while(pb) {
             sqlist_push_back(temp, pb->data);
             term_count++;
-            node_next(pb);
+            node_next(&pb);
         }
     } else if(a.type == SQLIST && b.type == SQLIST) {
         size_t i = 0, j = 0;
-        while(i < a._sqlist->_length && j < b._sqlist->_length) {
+        while(i < sqlist_length(a._sqlist) && j < sqlist_length(b._sqlist)) {
             ElemType e1 = sqlist_get(a._sqlist, i);
             ElemType e2 = sqlist_get(b._sqlist, j);
             if(e1.exp == e2.exp) {
+                // 同指数项，系数相加
                 ElemType e = New_Elemtype(e1.coe + e2.coe, e1.exp);
-                sqlist_push_back(temp, e);
-                term_count++;
+                if(e.coe != 0) {
+                    sqlist_push_back(temp, e);
+                    term_count++;
+                }
                 i++;
                 j++;
-            } else if(e1.exp > e2.exp) {
+            } else if(e1.exp < e2.exp) {
                 sqlist_push_back(temp, e1);
                 term_count++;
                 i++;
@@ -142,32 +201,35 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
             }
         }
         // 处理剩余项
-        while(i < a._sqlist->_length) {
+        while(i < sqlist_length(a._sqlist)) {
             sqlist_push_back(temp, sqlist_get(a._sqlist, i));
             term_count++;
             i++;
         }
-        while(j < b._sqlist->_length) {
+        while(j < sqlist_length(b._sqlist)) {
             sqlist_push_back(temp, sqlist_get(b._sqlist, j));
             term_count++;
             j++;
         }
     } else if(a.type == LINKLIST && b.type == SQLIST) {
-        node pa = linklist_bgein(multi_get(&a));
+        node pa = linklist_bgein(a._linklist);
         size_t j = 0;
-        while(pa && j < b._sqlist->_length) {
+        while(pa && j < sqlist_length(b._sqlist)) {
             ElemType e1 = pa->data;
             ElemType e2 = sqlist_get(b._sqlist, j);
             if(e1.exp == e2.exp) {
+                // 同指数项，系数相加
                 ElemType e = New_Elemtype(e1.coe + e2.coe, e1.exp);
-                sqlist_push_back(temp, e);
-                term_count++;
-                node_next(pa);
+                if(e.coe != 0) {
+                    sqlist_push_back(temp, e);
+                    term_count++;
+                }
+                node_next(&pa);
                 j++;
-            } else if(e1.exp > e2.exp) {
+            } else if(e1.exp < e2.exp) {
                 sqlist_push_back(temp, e1);
                 term_count++;
-                node_next(pa);
+                node_next(&pa);
             } else {
                 sqlist_push_back(temp, e2);
                 term_count++;
@@ -178,37 +240,40 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
         while(pa) {
             sqlist_push_back(temp, pa->data);
             term_count++;
-            node_next(pa);
+            node_next(&pa);
         }
-        while(j < b._sqlist->_length) {
+        while(j < sqlist_length(b._sqlist)) {
             sqlist_push_back(temp, sqlist_get(b._sqlist, j));
             term_count++;
             j++;
         }
-    } else {
+    } else { // a.type == SQLIST && b.type == LINKLIST
         size_t i = 0;
-        node pb = linklist_bgein(multi_get(&b));
-        while(i < a._sqlist->_length && pb) {
+        node pb = linklist_bgein(b._linklist);
+        while(i < sqlist_length(a._sqlist) && pb) {
             ElemType e1 = sqlist_get(a._sqlist, i);
             ElemType e2 = pb->data;
             if(e1.exp == e2.exp) {
+                // 同指数项，系数相加
                 ElemType e = New_Elemtype(e1.coe + e2.coe, e1.exp);
-                sqlist_push_back(temp, e);
-                term_count++;
+                if(e.coe != 0) {
+                    sqlist_push_back(temp, e);
+                    term_count++;
+                }
                 i++;
-                node_next(pb);
-            } else if(e1.exp > e2.exp) {
+                node_next(&pb);
+            } else if(e1.exp < e2.exp) {
                 sqlist_push_back(temp, e1);
                 term_count++;
                 i++;
             } else {
                 sqlist_push_back(temp, e2);
                 term_count++;
-                node_next(pb);
+                node_next(&pb);
             }
         }
         // 处理剩余项
-        while(i < a._sqlist->_length) {
+        while(i < sqlist_length(a._sqlist)) {
             sqlist_push_back(temp, sqlist_get(a._sqlist, i));
             term_count++;
             i++;
@@ -216,14 +281,16 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
         while(pb) {
             sqlist_push_back(temp, pb->data);
             term_count++;
-            node_next(pb);
+            node_next(&pb);
         }
     }
+
     // 创建结果多项式
     MutiTerm result;
-    result.type=(is_sparse(term_count,max_exp))?LINKLIST:SQLIST;
-    result.max_exp=max_exp;
-    result.term_count=term_count;
+    result.type = (is_sparse(term_count, max_exp)) ? LINKLIST : SQLIST;
+    result.max_exp = max_exp;
+    result.term_count = term_count;
+
     if(result.type == LINKLIST) {
         result._linklist = new_linklist();
         for(size_t i = 0; i < sqlist_length(temp); i++) {
@@ -237,6 +304,10 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
             sqlist_push_back(result._sqlist, e);
         }
     }
+
+    // 释放临时顺序表
+    sqlist_free(temp);
+
     return result;
 }
 
@@ -249,7 +320,7 @@ MutiTerm multi_sub(MutiTerm a, MutiTerm b) {
         node p = linklist_bgein(temp);
         while(p){
             node_val(p)->coe=-(node_val(p)->coe);
-            node_next(p);
+            node_next(&p);
         }
     } else {
         for(size_t i = 0; i < sqlist_length(temp); i++) {
@@ -266,8 +337,8 @@ MutiTerm multi_sub(MutiTerm a, MutiTerm b) {
 // 多项式乘法
 MutiTerm multi_mul(MutiTerm a, MutiTerm b) {
     // 按指数升序排序
-    multi_sort_by_exp(&a);
-    multi_sort_by_exp(&b);
+    multi_sort_by_exp_up(&a);
+    multi_sort_by_exp_up(&b);
 
     // 创建一个临时顺序表存储结果
     sqlist temp = new_sqlist();
@@ -293,14 +364,14 @@ MutiTerm multi_mul(MutiTerm a, MutiTerm b) {
                 sqlist_push_back(temp, e);
                 term_count++;
 
-                node_next(pb);
+                node_next(&pb);
             }
-            node_next(pa);
+            node_next(&pa);
         }
     } else if (a.type == SQLIST && b.type == SQLIST) {
         // 顺序表 × 顺序表
-        int a_length=sqlist_length(multi_get(&a));
-        int b_length=sqlist_length(multi_get(&b));
+        size_t a_length=sqlist_length(multi_get(&a));
+        size_t b_length=sqlist_length(multi_get(&b));
         for(size_t i=0; i<a_length; i++){
             ElemType e1 = sqlist_get(a._sqlist, i);
             for (size_t j = 0; j < b_length; j++) {
@@ -323,7 +394,7 @@ MutiTerm multi_mul(MutiTerm a, MutiTerm b) {
         // 链表 × 顺序表
         node pa = linklist_bgein(multi_get(&a));
         while(pa){
-            int b_length=sqlist_length(multi_get(&b));
+            size_t b_length=sqlist_length(multi_get(&b));
             for(size_t j=0; j<b_length; j++){
                 ElemType e2 = sqlist_get(multi_get(&b), j);
 
@@ -339,11 +410,11 @@ MutiTerm multi_mul(MutiTerm a, MutiTerm b) {
                 sqlist_push_back(temp, e);
                 term_count++;
             }
-            node_next(pa);
+            node_next(&pa);
         }
     } else {
         // 顺序表 × 链表
-        int a_length=sqlist_length(multi_get(&a));
+        size_t a_length=sqlist_length(multi_get(&a));
         for(size_t i=0; i<a_length; i++){
             ElemType e1 = sqlist_get(multi_get(&a), i);
             node pb = linklist_bgein(multi_get(&b));
@@ -360,7 +431,7 @@ MutiTerm multi_mul(MutiTerm a, MutiTerm b) {
                 sqlist_push_back(temp, e);
                 term_count++;
 
-                node_next(pb);
+                node_next(&pb);
             }
         }
     }

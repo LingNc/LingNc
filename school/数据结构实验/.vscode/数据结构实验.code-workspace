@@ -11,7 +11,8 @@
 			"sqlist.h": "c",
 			"stddef.h": "c",
 			"error.h": "c",
-			"linklist.h": "c"
+			"linklist.h": "c",
+			"stdlib.h": "c"
 		},
 		"makefile.launchConfigurations": [
 			{

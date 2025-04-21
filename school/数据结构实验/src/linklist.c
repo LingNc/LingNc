@@ -12,14 +12,13 @@ node new_node(ElemType val) {
 }
 
 // 初始化节点（别名，兼容头文件）
-node node_init(ElemType val) {
-    return new_node(val);
-}
+node node_init(ElemType val) { return new_node(val); }
 
 // 下一个节点
-node node_next(node val) {
-    val=val->next;
-    return val;
+node node_next(node* val) {
+    if(*val == NULL) return NULL;
+    *val = (*val)->next;
+    return *val;
 }
 
 // 获取节点值
@@ -29,7 +28,7 @@ elemtype node_val(node val) {
 }
 
 // 初始化链表
-linklist new_linklist(){
+linklist new_linklist() {
     linklist self = (linklist)malloc(sizeof(Linklist));
     if(self == NULL) return NULL;
     if(linklist_init(self) != OK) {
@@ -63,9 +62,7 @@ node linklist_root(linklist self) {
     return self->_root;
 }
 
-size_t linklist_size(linklist self){
-    return linklist_length(self);
-}
+size_t linklist_size(linklist self) { return linklist_length(self); }
 
 size_t linklist_length(linklist self) {
     if(self == NULL) return 0;
@@ -155,7 +152,7 @@ node linklist_find(linklist self, ElemType val) {
     if(self == NULL) return NULL;
     node curr = self->_root;
     while(curr) {
-        if(elemtype_compare(&curr->data,&val)) return curr;
+        if(elemtype_compare(&curr->data, &val)) return curr;
         curr = curr->next;
     }
     return NULL;

@@ -13,7 +13,7 @@ $(shell mkdir -p build)
 
 # 构建实验1 main1
 # 链接文件
-main1 : build/main1.o build/sqlist.o build/linklist.o
+main1 : build/main1.o build/sqlist.o build/linklist.o build/multiterm.o build/type.o
 	@echo "正在链接 实验一 主函数..."
 	$(CC) $(FLAG) $^ -o $@ $(LIB)
 
@@ -32,6 +32,16 @@ build/linklist.o : src/linklist.c
 	@echo "正在编译 实验一 链式线性表..."
 	$(CC) $(FLAG) -I$(Include) -c $< -o $@
 
+# 编译文件
+build/multiterm.o : src/multiterm.c
+	@echo "正在编译 实验一 多项式..."
+	$(CC) $(FLAG) -I$(Include) -c $< -o $@
+
+# 编译文件
+build/type.o : src/type.c
+	@echo "正在编译 实验一 类型..."
+	$(CC) $(FLAG) -I$(Include) -c $< -o $@
+
 # 获取当前工作目录的绝对路径
 CURRENT_DIR := $(shell pwd)
 
@@ -47,7 +57,7 @@ clangd :
 .PHONY : clean
 clean :
 	@echo "正在清理..."
-	@rm .clangd
+# @rm .clangd
 	@rm -rf build/*.o
 	@rm -rf main[1-4]
 	@echo "清理完成！"

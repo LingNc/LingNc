@@ -26,7 +26,7 @@ node new_node(ElemType val);
 // 初始化节点
 node node_init(ElemType val);
 // 下一个节点
-node node_next(node val);
+node node_next(node *val);
 // 获取节点值
 elemtype node_val(node val);
 // 初始化函数
