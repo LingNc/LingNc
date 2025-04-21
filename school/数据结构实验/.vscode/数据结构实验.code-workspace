@@ -7,9 +7,11 @@
 	"settings": {
 		"files.associations": {
 			"*.vue": "vue",
+			".clangd": "yaml",
 			"sqlist.h": "c",
 			"stddef.h": "c",
-			"error.h": "c"
+			"error.h": "c",
+			"linklist.h": "c"
 		},
 		"makefile.launchConfigurations": [
 			{
@@ -22,6 +24,10 @@
 		"lldb.showDisassembly": "auto",
 		"lldb.dereferencePointers": true,
 		"lldb.consoleMode": "commands",
+		"C_Cpp.suggestSnippets": true,
+		"C_Cpp.autocomplete": "default",
+		"editor.snippetSuggestions": "inline",
+		"editor.suggest.showSnippets": true
 	},
 	"tasks": {
 		"version": "2.0.0",

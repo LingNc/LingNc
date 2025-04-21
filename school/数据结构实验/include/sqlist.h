@@ -15,12 +15,20 @@ typedef struct {
     size_t _capacity;
 } SqList, *sqlist; // 顺序表的类型名
 
+// 顺序表迭代器
+// typedef struct {
+//     sqlist _list;
+//     size_t _pos;
+// }SqList_iterator;
+// typedef SqList_iterator *sqlist_iterator;
+
+
 // 初始化函数
 sqlist new_sqlist();
 Status sqlist_init(sqlist self);
 // 获取大小
 size_t sqlist_size(sqlist self);
-size_t sqlist_lenth(sqlist self);
+size_t sqlist_length(sqlist self);
 // 获取元素
 ElemType sqlist_get(sqlist self, size_t pos);
 elemtype sqlist_at(sqlist self, size_t pos);
@@ -38,4 +46,5 @@ Status sqlist_push_back(sqlist self, ElemType val);
 Status sqlist_pop_back(sqlist self);
 // 释放
 void sqlist_free(sqlist self);
+
 #endif // SQLIST_H

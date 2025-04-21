@@ -25,9 +25,19 @@ typedef Linklist *linklist;
 node new_node(ElemType val);
 // 初始化节点
 node node_init(ElemType val);
+// 下一个节点
+node node_next(node val);
+// 获取节点值
+elemtype node_val(node val);
 // 初始化函数
 linklist new_linklist();
 Status linklist_init(linklist self);
+// 获取头节点
+node linklist_bgein(linklist self);
+// 获取尾节点
+node linklist_end(linklist self);
+// 获取根节点
+node linklist_root(linklist self);
 // 获取大小
 size_t linklist_size(linklist self);
 size_t linklist_length(linklist self);

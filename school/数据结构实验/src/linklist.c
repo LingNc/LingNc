@@ -1,239 +1,195 @@
 #include "linklist.h"
-#include "type.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-// 初始化节点
-node new_node(ElemType data) {
+// 初始化结点
+node new_node(ElemType val) {
     node n = (node)malloc(sizeof(Node));
-    if(n == NULL) {
-        return NULL;
-    }
-    n->data = data;
+    if(n == NULL) return NULL;
+    n->data = val;
     n->next = NULL;
     return n;
 }
 
-// 初始化节点
-node new_node_init(ElemType data) { return new_node(data); }
-
-// 初始化链表
-linklist new_linklist() {
-    linklist list = (linklist)malloc(sizeof(Linklist));
-    if(list == NULL) {
-        return NULL;
-    }
-
-    if(linklist_init(list) != OK) {
-        free(list);
-        return NULL;
-    }
-
-    return list;
+// 初始化节点（别名，兼容头文件）
+node node_init(ElemType val) {
+    return new_node(val);
 }
 
-Status linklist_init(linklist list) {
-    if(list == NULL) {
-        return ERROR;
+// 下一个节点
+node node_next(node val) {
+    val=val->next;
+    return val;
+}
+
+// 获取节点值
+elemtype node_val(node val) {
+    if(val == NULL) return NULL;
+    return &val->data;
+}
+
+// 初始化链表
+linklist new_linklist(){
+    linklist self = (linklist)malloc(sizeof(Linklist));
+    if(self == NULL) return NULL;
+    if(linklist_init(self) != OK) {
+        free(self);
+        return NULL;
     }
+    return self;
+}
 
-    // 头节点不存储数据，next为NULL
-    list->data = *new_elemtype();
-    list->next = NULL;
-
+Status linklist_init(linklist self) {
+    if(self == NULL) return ERROR;
+    self->_length = 0;
+    self->_root = NULL;
+    self->_head = NULL;
+    self->_tail = NULL;
     return OK;
 }
 
-// 获取链表大小
-size_t linklist_size(linklist list) { return linklist_length(list); }
-
-size_t linklist_length(linklist list) {
-    if(list == NULL) {
-        return 0;
-    }
-
-    size_t count = 0;
-    node curr = list->next;
-
-    while(curr != NULL) {
-        count++;
-        curr = curr->next;
-    }
-
-    return count;
+node linklist_bgein(linklist self) {
+    if(self == NULL) return NULL;
+    return self->_root;
 }
 
-// 获取第index个元素的值
-ElemType linklist_get(linklist list, size_t index) {
-    node n = linklist_at(list, index);
+node linklist_end(linklist self) {
+    if(self == NULL) return NULL;
+    return self->_tail;
+}
+
+node linklist_root(linklist self) {
+    if(self == NULL) return NULL;
+    return self->_root;
+}
+
+size_t linklist_size(linklist self){
+    return linklist_length(self);
+}
+
+size_t linklist_length(linklist self) {
+    if(self == NULL) return 0;
+    return self->_length;
+}
+
+ElemType linklist_get(linklist self, size_t pos) {
+    node n = linklist_at(self, pos);
     if(n == NULL) {
-        // 访问了不该访问的位置
         perror("访问了不该访问的位置");
         exit(1);
     }
     return n->data;
 }
 
-// 获取第index个节点
-node linklist_at(linklist list, size_t index) {
-    if(list == NULL) {
-        return NULL;
-    }
-
-    node curr = list->next;
+node linklist_at(linklist self, size_t pos) {
+    if(self == NULL || pos >= self->_length) return NULL;
+    node curr = self->_root;
     size_t i = 0;
-
-    while(curr != NULL && i < index) {
+    while(curr && i < pos) {
         curr = curr->next;
         i++;
     }
-
-    return curr; // 如果index超出范围，返回NULL
+    return curr;
 }
 
-// 设置第index个元素的值
-Status linklist_set(linklist list, size_t index, ElemType value) {
-    node n = linklist_at(list, index);
-    if(n == NULL) {
-        return ERROR;
-    }
-
-    n->data = value;
+Status linklist_set(linklist self, size_t pos, ElemType val) {
+    node n = linklist_at(self, pos);
+    if(n == NULL) return ERROR;
+    n->data = val;
     return OK;
 }
 
-// 尾插
-Status linklist_push_back(linklist list, ElemType value) {
-    if(list == NULL) {
-        return ERROR;
+Status linklist_push_back(linklist self, ElemType val) {
+    if(self == NULL) return ERROR;
+    node n = new_node(val);
+    if(n == NULL) return ERROR;
+    if(self->_root == NULL) {
+        self->_root = n;
+        self->_head = n;
+        self->_tail = n;
+    } else {
+        self->_tail->next = n;
+        self->_tail = n;
     }
-
-    // 创建新节点
-    node new = new_node(value);
-    if(new == NULL) {
-        return ERROR;
-    }
-
-    // 找到最后一个节点
-    node curr = list;
-    while(curr->next != NULL) {
-        curr = curr->next;
-    }
-
-    // 在尾部添加新节点
-    curr->next = new;
-
+    self->_length++;
     return OK;
 }
 
-// 尾删
-Status linklist_pop_back(linklist list) {
-    if(list == NULL || list->next == NULL) {
-        return ERROR;
-    }
-
-    // 找到倒数第二个节点
-    node curr = list;
-    while(curr->next != NULL && curr->next->next != NULL) {
-        curr = curr->next;
-    }
-
-    // 删除最后一个节点
-    free(curr->next);
-    curr->next = NULL;
-
-    return OK;
-}
-
-// 头插
-Status linklist_push_front(linklist list, ElemType value) {
-    if(list == NULL) {
-        return ERROR;
-    }
-
-    // 创建新节点
-    node new = new_node(value);
-    if(new == NULL) {
-        return ERROR;
-    }
-
-    // 在头部插入新节点
-    new->next = list->next;
-    list->next = new;
-
-    return OK;
-}
-
-// 查找元素
-node linklist_find(linklist list, ElemType value) {
-    if(list == NULL) {
-        return NULL;
-    }
-
-    node curr = list->next;
-
-    while(curr != NULL) {
-        if(curr->data == value) {
-            return curr;
-        }
-        curr = curr->next;
-    }
-
-    return NULL; // 未找到
-}
-
-// 删除第index个元素
-Status linklist_delete(linklist list, size_t index) {
-    if(list == NULL || list->next == NULL) {
-        return ERROR;
-    }
-
-    // 特殊处理: 删除第0个元素
-    if(index == 0) {
-        node temp = list->next;
-        list->next = temp->next;
-        free(temp);
+Status linklist_pop_back(linklist self) {
+    if(self == NULL || self->_root == NULL) return ERROR;
+    if(self->_length == 1) {
+        free(self->_root);
+        self->_root = self->_head = self->_tail = NULL;
+        self->_length = 0;
         return OK;
     }
-
-    // 找到第index-1个节点
-    node prev = list;
-    size_t i = 0;
-
-    while(prev->next != NULL && i < index) {
+    node prev = self->_root;
+    while(prev->next && prev->next != self->_tail) {
         prev = prev->next;
-        i++;
     }
-
-    // 如果找到了第index-1个节点，并且它有下一个节点
-    if(i == index - 1 && prev->next != NULL) {
-        node temp = prev->next;
-        prev->next = temp->next;
-        free(temp);
-        return OK;
-    }
-
-    return ERROR; // index超出范围
+    free(self->_tail);
+    prev->next = NULL;
+    self->_tail = prev;
+    self->_length--;
+    if(self->_length == 1) self->_head = self->_tail;
+    return OK;
 }
 
-// 释放链表
-Status linklist_free(linklist list) {
-    if(list == NULL) {
-        return ERROR;
+Status linklist_push_front(linklist self, ElemType val) {
+    if(self == NULL) return ERROR;
+    node n = new_node(val);
+    if(n == NULL) return ERROR;
+    n->next = self->_root;
+    self->_root = n;
+    if(self->_length == 0) {
+        self->_head = n;
+        self->_tail = n;
+    } else {
+        self->_head = n;
     }
+    self->_length++;
+    return OK;
+}
 
-    // 释放所有节点
-    node curr = list->next;
-    node temp;
+node linklist_find(linklist self, ElemType val) {
+    if(self == NULL) return NULL;
+    node curr = self->_root;
+    while(curr) {
+        if(elemtype_compare(&curr->data,&val)) return curr;
+        curr = curr->next;
+    }
+    return NULL;
+}
 
-    while(curr != NULL) {
-        temp = curr;
+Status linklist_delete(linklist self, size_t pos) {
+    if(self == NULL || self->_root == NULL || pos >= self->_length) return ERROR;
+    node to_delete = NULL;
+    if(pos == 0) {
+        to_delete = self->_root;
+        self->_root = self->_root->next;
+        if(self->_length == 1) self->_tail = NULL;
+        self->_head = self->_root;
+    } else {
+        node prev = self->_root;
+        for(size_t i = 0; i < pos - 1; ++i) prev = prev->next;
+        to_delete = prev->next;
+        prev->next = to_delete->next;
+        if(to_delete == self->_tail) self->_tail = prev;
+    }
+    free(to_delete);
+    self->_length--;
+    if(self->_length == 0) self->_head = self->_tail = self->_root = NULL;
+    return OK;
+}
+
+Status linklist_free(linklist self) {
+    if(self == NULL) return ERROR;
+    node curr = self->_root;
+    while(curr) {
+        node temp = curr;
         curr = curr->next;
         free(temp);
     }
-
-    // 释放头节点
-    free(list);
-
+    free(self);
     return OK;
 }

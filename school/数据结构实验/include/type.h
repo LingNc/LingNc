@@ -2,7 +2,7 @@
 #define TYPE1_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <error.h>
+#include "error.h"
 // #include <stdbool.h>
 // 元素类型
 typedef struct {
@@ -10,26 +10,12 @@ typedef struct {
 } ElemType;
 typedef ElemType *elemtype;
 
-elemtype new_elemtype() {
-    elemtype e = (elemtype)malloc(sizeof(ElemType));
-    if(e == NULL) {
-        return NULL;
-    }
-    e->coe = 0;
-    e->exp = 0;
-    return e;
-}
+elemtype new_elemtype();
 
-int elemtype_compare(elemtype a, elemtype b) {
-    if(a->coe == b->exp && a->exp == b->exp) return 0;
-    else return 1;
-}
+ElemType New_Elemtype(int coe,int exp);
 
-Status elemtype_free(elemtype e) {
-    if(e == NULL) {
-        return ERROR;
-    }
-    free(e);
-    return OK;
-}
+int elemtype_compare(elemtype a,elemtype b);
+
+Status elemtype_free(elemtype e);
+
 #endif // TYPE1_H
