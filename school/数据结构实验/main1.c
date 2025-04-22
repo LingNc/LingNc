@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // 按照规定格式打印多项式，形式如：x^4 - 3x^2 + 5
 void print_multiterm(MutiTerm term, const char *name) {
@@ -108,8 +109,8 @@ void print_multiterm(MutiTerm term, const char *name) {
     printf("\n");
 }
 
-// 创建多项式函数
-MutiTerm create_multiterm() {
+// 创建多项式函数 - 数字方式输入
+MutiTerm create_multiterm_numeric() {
     int n;
     printf("输入多项式的项数：");
     scanf("%d", &n);
@@ -153,19 +154,89 @@ MutiTerm create_multiterm() {
     // 释放临时顺序表
     sqlist_free(s);
 
+    // 对多项式按指数排序
+    multi_sort_by_exp_up(&term);
+
+    return term;
+}
+
+// 创建多项式函数 - 表达式方式输入
+MutiTerm create_multiterm_expression() {
+    char expr[256]; // 用于存储表达式的缓冲区
+
+    printf("输入多项式表达式 (如：2x^3 + 3x^4 + x^2)：\n");
+
+    // 清空输入缓冲区，确保不会卡住
+    int c;
+    // 仅在第一次输入时需要清除换行符
+    static int first_call = 1;
+    if (first_call) {
+        while ((c = getchar()) != '\n' && c != EOF);
+        first_call = 0;
+    }
+
+    if (fgets(expr, sizeof(expr), stdin) == NULL) {
+        fprintf(stderr, "读取表达式失败\n");
+
+        // 返回空多项式
+        MutiTerm term = new_multi(SQLIST);
+        term.max_exp = 0;
+        term.term_count = 0;
+        return term;
+    }
+
+    // 移除换行符
+    size_t len = strlen(expr);
+    if (len > 0 && expr[len-1] == '\n') {
+        expr[len-1] = '\0';
+    }
+
+    // 解析表达式
+    MutiTerm term = parse_expression(expr);
+
+    // 显示存储方式
+    if(term.type == LINKLIST) {
+        printf("使用链表存储（稀疏多项式）\n");
+    } else {
+        printf("使用顺序表存储（密集多项式）\n");
+    }
+
     return term;
 }
 
 int main() {
     printf("============= 多项式运算程序 =============\n\n");
 
+    int input_method;
+    printf("请选择多项式输入方式：\n");
+    printf("1. 数字形式 (输入系数和指数)\n");
+    printf("2. 表达式形式 (如：2x^3 + 3x^4 + x^2)\n");
+    printf("请选择 (1 或 2)：");
+    scanf("%d", &input_method);
+
     // 创建第一个多项式
-    printf("创建第一个多项式：\n");
-    MutiTerm m1 = create_multiterm();
+    printf("\n创建第一个多项式：\n");
+    MutiTerm m1;
+    if (input_method == 1) {
+        m1 = create_multiterm_numeric();
+    } else if (input_method == 2) {
+        m1 = create_multiterm_expression();
+    } else {
+        printf("无效的选择，默认使用数字形式输入\n");
+        m1 = create_multiterm_numeric();
+    }
 
     // 创建第二个多项式
     printf("\n创建第二个多项式：\n");
-    MutiTerm m2 = create_multiterm();
+    MutiTerm m2;
+    if (input_method == 1) {
+        m2 = create_multiterm_numeric();
+    } else if (input_method == 2) {
+        m2 = create_multiterm_expression();
+    } else {
+        printf("无效的选择，默认使用数字形式输入\n");
+        m2 = create_multiterm_numeric();
+    }
 
     // 多项式运算
     char op;
@@ -187,7 +258,7 @@ int main() {
             if(result.type == LINKLIST) {
                 printf("结果多项式使用链表存储（稀疏多项式）\n");
             } else {
-                printf("结果多项式使用顺序表存储（密集多项式）\n");
+                printf("结果多项式使用顺序表存储（稠密多项式）\n");
             }
 
             // 升幂输出
@@ -207,7 +278,7 @@ int main() {
             if(result.type == LINKLIST) {
                 printf("结果多项式使用链表存储（稀疏多项式）\n");
             } else {
-                printf("结果多项式使用顺序表存储（密集多项式）\n");
+                printf("结果多项式使用顺序表存储（稠密多项式）\n");
             }
 
             // 升幂输出
@@ -227,7 +298,7 @@ int main() {
             if(result.type == LINKLIST) {
                 printf("结果多项式使用链表存储（稀疏多项式）\n");
             } else {
-                printf("结果多项式使用顺序表存储（密集多项式）\n");
+                printf("结果多项式使用顺序表存储（稠密多项式）\n");
             }
 
             // 升幂输出

@@ -1,4 +1,8 @@
 #include "multiterm.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 // 按指数升序排序
 Status linklist_sort_by_exp(linklist self) {
@@ -518,4 +522,142 @@ void multi_free(MutiTerm *term) {
     } else {
         sqlist_free(multi_get(term));
     }
+}
+
+// 从表达式字符串解析多项式
+MutiTerm parse_expression(const char* expr) {
+    if (expr == NULL || *expr == '\0') {
+        // 空表达式返回空多项式
+        MutiTerm term = new_multi(SQLIST);
+        term.max_exp = 0;
+        term.term_count = 0;
+        return term;
+    }
+
+    // 创建一个临时顺序表存储所有项
+    sqlist temp = new_sqlist();
+    int max_exp = 0;
+    int term_count = 0;
+
+    const char* p = expr;
+    int sign = 1; // 1 为正，-1 为负
+
+    while (*p) {
+        int coe = 0;
+        int exp = 0;
+        bool has_x = false;
+
+        // 跳过空格
+        while (*p && isspace(*p)) p++;
+        if (!*p) break;
+
+        // 处理符号
+        if (*p == '+') {
+            sign = 1;
+            p++;
+        } else if (*p == '-') {
+            sign = -1;
+            p++;
+        }
+
+        // 跳过空格
+        while (*p && isspace(*p)) p++;
+        if (!*p) break;
+
+        // 解析系数
+        if (isdigit(*p)) {
+            while (isdigit(*p)) {
+                coe = coe * 10 + (*p - '0');
+                p++;
+            }
+        } else if (*p == 'x' || *p == 'X') {
+            // 如果直接是 x，系数为 1
+            coe = 1;
+        } else {
+            // 非法输入，跳过此项
+            while (*p && *p != '+' && *p != '-') p++;
+            continue;
+        }
+
+        // 应用符号
+        coe *= sign;
+
+        // 跳过空格
+        while (*p && isspace(*p)) p++;
+
+        // 处理 x^n
+        if (*p == 'x' || *p == 'X') {
+            has_x = true;
+            p++;
+
+            // 跳过空格
+            while (*p && isspace(*p)) p++;
+
+            if (*p == '^') {
+                p++;
+
+                // 跳过空格
+                while (*p && isspace(*p)) p++;
+
+                // 解析指数
+                if (isdigit(*p)) {
+                    while (isdigit(*p)) {
+                        exp = exp * 10 + (*p - '0');
+                        p++;
+                    }
+                } else {
+                    // 非法指数，默认为 1
+                    exp = 1;
+                }
+            } else {
+                // 无指数，默认为 1
+                exp = 1;
+            }
+        }
+
+        if (!has_x) {
+            // 无变量项，指数为 0
+            exp = 0;
+        }
+
+        // 更新最大指数
+        if (exp > max_exp) {
+            max_exp = exp;
+        }
+
+        // 添加到临时顺序表
+        if (coe != 0) {  // 系数为 0 的项不添加
+            sqlist_push_back(temp, New_Elemtype(coe, exp));
+            term_count++;
+        }
+
+        // 跳过空格
+        while (*p && isspace(*p)) p++;
+    }
+
+    // 创建多项式结果
+    MutiTerm term = new_multi(is_sparse(term_count, max_exp) ? LINKLIST : SQLIST);
+    term.max_exp = max_exp;
+    term.term_count = term_count;
+
+    // 转移数据到结果多项式
+    if(term.type == LINKLIST) {
+        for(size_t i = 0; i < sqlist_length(temp); i++) {
+            ElemType e = sqlist_get(temp, i);
+            linklist_push_back(term._linklist, e);
+        }
+    } else {
+        for(size_t i = 0; i < sqlist_length(temp); i++) {
+            ElemType e = sqlist_get(temp, i);
+            sqlist_push_back(term._sqlist, e);
+        }
+    }
+
+    // 释放临时顺序表
+    sqlist_free(temp);
+
+    // 对结果多项式排序
+    multi_sort_by_exp_up(&term);
+
+    return term;
 }

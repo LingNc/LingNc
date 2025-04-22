@@ -42,4 +42,6 @@ MutiTerm multi_sub(MutiTerm a, MutiTerm b);
 MutiTerm multi_mul(MutiTerm a, MutiTerm b);
 // 释放多项式资源
 void multi_free(MutiTerm *term);
+// 从表达式字符串解析多项式
+MutiTerm parse_expression(const char* expr);
 #endif // MULTITERM_H
