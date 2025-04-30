@@ -255,7 +255,7 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
         size_t i = 0;
         node pb = linklist_bgein(b._linklist);
         while(i < sqlist_length(a._sqlist) && pb) {
-            ElemType e1 = sqlist_get(a._sqlist, i);
+            ElemType e1 = sqlist_get(multi_get(&a), i);
             ElemType e2 = pb->data;
             if(e1.exp == e2.exp) {
                 // 同指数项，系数相加
@@ -278,7 +278,7 @@ MutiTerm multi_add(MutiTerm a, MutiTerm b) {
         }
         // 处理剩余项
         while(i < sqlist_length(a._sqlist)) {
-            sqlist_push_back(temp, sqlist_get(a._sqlist, i));
+            sqlist_push_back(temp, sqlist_get(multi_get(&a), i));
             term_count++;
             i++;
         }

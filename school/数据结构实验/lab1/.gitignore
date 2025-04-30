@@ -1,0 +1,15 @@
+*
+!*/
+
+!.gitignore
+!README.md
+!LICENSE
+!Makefile
+
+!.vscode/*
+!.clangd
+!.clang-format
+
+!*.c
+!src/*.c
+!include/*.h
