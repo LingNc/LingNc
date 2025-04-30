@@ -1,0 +1,10 @@
+*
+!*/
+
+!src/*.c
+!include/*.h
+!ext/*.h
+!main.c
+!README.md
+!LICENSE
+!.gitignore
