@@ -32,31 +32,38 @@ status nfree(any _ptr);
 // 异常捕获
 struct Exception{
     // 错误类型
-    status _status;
+    status status;
     // 错误信息
-    string _msg;
+    string msg;
 };
 typedef struct Exception Exception;
 typedef Exception *exception;
 
 // 新建异常
-exception new_exception(status status,string msg);
-// 传递异常
-exception pass_exception(exception self,string new_msg);
-// 释放异常
-status free_exception(exception self);
+Exception new_exception(status status,string msg);
+// 传递异常,累积异常
+Exception exception_pass(exception self,string new_msg);
 // 获取异常的状态
 status exception_get(exception self);
+// 异常降级
+Exception exception_down(exception self,status new_status);
+// 释放异常
+status free_exception(exception self);
 
 // 任意类型接口
 // 函数类型预先定义
-typedef self (*new_func)();
+// 初始化函数
+typedef any (*init_func)(self,interface);
+// 释放函数
 typedef any (*free_func)(self);
+
 struct InterFace{
     // 元素大小
     size_t _itemSize;
+    // 接口的接口
+    struct InterFace *subinter;
     // 函数接口
-    new_func new;
+    init_func init;
     free_func free;
 }; // InterFace
 typedef struct InterFace InterFace;
@@ -67,7 +74,10 @@ typedef InterFace *interface;
 // 初始化接口
 interface new_interface(size_t itemSize,...);
 // 释放接口
-exception free_interface(interface slef);
+Exception free_interface(interface slef);
+
+// 设置初始化顺序表容量
+#define SQLIST_INIT_SIZE 10
 
 // 顺序表
 struct SqList{
@@ -102,15 +112,21 @@ typedef SqList_Iterator *sqlist_iterator;
 
 // 初始化顺序表
 sqlist new_sqlist(interface inter);
-exception sqlist_resize(sqlist self,size_t newSize);
+sqlist sqlist_init(sqlist self,interface inter);
+Exception sqlist_resize(sqlist self,size_t newSize);
 // sqlist sqlist_insert(sqlist self,size_t pos,any item);
-exception sqlist_push_back(sqlist self,any item);
-exception sqlist_pop_back(sqlist self);
-exception free_sqlist(sqlist self);
+size_t sqlist_size(sqlist self);
+any sqlist_at(sqlist self,int index);
+Exception sqlist_push_back(sqlist self,any item);
+Exception sqlist_pop_back(sqlist self);
+Exception free_sqlist(sqlist self);
 sqlist_iterator sqlist_begin(sqlist self);
 sqlist_iterator sqlist_end(sqlist self);
 
+// 初始化迭代器
+sqlist_iterator new_sqlist_iterator(sqlist dest,int index);
 sqlist_iterator sqlist_iterator_last(sqlist_iterator self);
 sqlist_iterator sqlist_iterator_next(sqlist_iterator self);
+sqlist_iterator free_sqlist_iterator(sqlist dest);
 
 #endif //SQLIST_H
