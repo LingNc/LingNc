@@ -2,14 +2,23 @@
 #define SQLIST_H
 
 #include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 // 如果没有引入string库
 #ifndef STRING_H
     typedef char *string;
+    // 动态字符串拼接函数
+    // 拼接字符串创建新的指针来存储
+    string nstrcat(const string _str1,const string _str2);
+    // 尽可能再源指针上进行拼接，返回新的指针或者源指针
+    string strapp(string _dest,const string _str);
 #endif
 
 // 泛型定义
 typedef void *any,*self;
+// 字节指针
+typedef uint8_t *byte,(*byte2)[2],(*byte3)[3],(*byte4)[4],(*byte5)[5],(*byte6)[6],(*byte7)[7],(*byte8)[8];
 
 // 错误信号
 enum Status{
@@ -23,11 +32,14 @@ enum Status{
 typedef enum Status Status;
 typedef Status status;
 
+// 信号转字符串
+#define to_str(status) #status
+
 // 状态退化函数，状态按照 success,warring,error 等级向下递减，从不会上升
 status status_down(status *self,status new_status);
 
 // 防止 double free 的free函数
-status nfree(any _ptr);
+status nfree(any* _ptr);
 
 // 异常捕获
 struct Exception{
@@ -41,8 +53,10 @@ typedef Exception *exception;
 
 // 新建异常
 Exception new_exception(status status,string msg);
-// 传递异常,累积异常
-Exception exception_pass(exception self,string new_msg);
+// 异常的累积
+Exception exception_pass(exception self,Exception e);
+// 异常的捕获
+Exception exception_catch(exception self,Exception e);
 // 获取异常的状态
 status exception_get(exception self);
 // 异常降级
@@ -51,9 +65,16 @@ Exception exception_down(exception self,status new_status);
 status free_exception(exception self);
 
 // 任意类型接口
+// 是否启用接口错误捕获，如果启用该接口需要返回exception类型的值
+#define CAP_INTER_ERROR
+
 // 函数类型预先定义
+typedef struct InterFace InterFace;
+typedef InterFace *interface;
 // 初始化函数
 typedef any (*init_func)(self,interface);
+// 清理函数
+typedef any (*clear_func)(self);
 // 释放函数
 typedef any (*free_func)(self);
 
@@ -61,18 +82,18 @@ struct InterFace{
     // 元素大小
     size_t _itemSize;
     // 接口的接口
-    struct InterFace *subinter;
+    struct InterFace *_subinter;
     // 函数接口
     init_func init;
+    clear_func clear;
     free_func free;
 }; // InterFace
-typedef struct InterFace InterFace;
-typedef InterFace *interface;
+
 
 // 定义结束符号
 #define inter_end NULL
 // 初始化接口
-interface new_interface(size_t itemSize,...);
+interface new_interface(size_t itemSize,interface subinter,...);
 // 释放接口
 Exception free_interface(interface slef);
 
@@ -117,6 +138,7 @@ Exception sqlist_resize(sqlist self,size_t newSize);
 // sqlist sqlist_insert(sqlist self,size_t pos,any item);
 size_t sqlist_size(sqlist self);
 any sqlist_at(sqlist self,int index);
+bool sqlist_empty(sqlist self);
 Exception sqlist_push_back(sqlist self,any item);
 Exception sqlist_pop_back(sqlist self);
 Exception free_sqlist(sqlist self);
