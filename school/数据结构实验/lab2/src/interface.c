@@ -14,9 +14,15 @@ interface new_interface(size_t itemSize,interface subinter,...){
     temp=va_arg(args,init_func);
     if(temp==inter_end) goto end;
     self->init=temp;
+    temp=va_arg(args,copy_func);
+    if(temp==inter_end) goto end;
+    self->copy=temp;
     temp=va_arg(args,clear_func);
     if(temp==inter_end) goto end;
     self->clear=temp;
+    temp=va_arg(args,cmp_func);
+    if(temp==inter_end) goto end;
+    self->cmp=temp;
     temp=va_arg(args,free_func);
     if(temp==inter_end) goto end;
     self->free=temp;
@@ -36,4 +42,8 @@ Exception free_interface(interface self){
     // status_down(&res,nfree((any *)&self));
     exception_down(&e,nfree((any *)&self));
     return e;
+}
+size_t inter_item_size(interface self){
+    if(self==NULL) return 0;
+    return self->_itemSize;
 }

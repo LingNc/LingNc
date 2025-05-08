@@ -13,17 +13,11 @@
 //     return new_exception(SUCCESS,"");
 // }
 
-// 获取元素大小
-size_t get_item_size(sqlist self){
-    if(self==NULL) return 0;
-    return self->_inter->_itemSize;
-}
-
 // 扩容函数
 Exception expand(sqlist self){
     if(self==NULL) return new_exception(ERROR,"sqlist expand: 传入self指针为空!");
     size_t newSize=self->_capacity*2;
-    self->_data=realloc(self->_data,newSize*get_item_size(self));
+    self->_data=realloc(self->_data,newSize*sqlist_get_itemsize(self));
     if(self->_data==NULL) return new_exception(ERROR,"sqlist expand: 扩容失败!");
     self->_capacity=newSize;
     return new_exception(SUCCESS,"");
@@ -33,7 +27,7 @@ Exception expand(sqlist self){
 Exception shrink(sqlist self){
     if(self==NULL) return new_exception(ERROR,"sqlist expand: 传入self指针为空!");
     size_t newSize=self->_capacity/2;
-    self->_data=realloc(self->_data,newSize*get_item_size(self));
+    self->_data=realloc(self->_data,newSize*sqlist_get_itemsize(self));
     if(self->_data==NULL) return new_exception(ERROR,"sqlist expand: 收缩失败!");
     self->_capacity=newSize;
     return new_exception(SUCCESS,"");
@@ -59,7 +53,7 @@ Exception sqlist_init(sqlist self,interface inter){
     self->_capacity=SQLIST_INIT_SIZE;
     self->_data=malloc(self->_capacity*inter->_itemSize);
     for(size_t i=0; i<self->_capacity; i++){
-        if(inter->init) inter->init((byte)self->_data+i*get_item_size(self),inter->_subinter);
+        if(inter->init) inter->init((byte)self->_data+i*sqlist_get_itemsize(self),inter->_subinter);
     }
     if(self->_data==NULL) return new_exception(ERROR,"sqlist init: 内存分配失败!");
     return new_exception(SUCCESS,"");
@@ -72,7 +66,7 @@ Exception sqlist_resize(sqlist self,size_t newSize){
     }
     else{
         for(size_t i=newSize; i<self->_size; i++){
-            any curItem=(byte)self->_data+i*get_item_size(self);
+            any curItem=(byte)self->_data+i*sqlist_get_itemsize(self);
             if(self->_inter->clear) self->_inter->clear(curItem);
         }
         self->_data=realloc(self->_data,newSize);
@@ -87,9 +81,13 @@ size_t sqlist_size(sqlist self){
     return self->_size;
 }
 
+size_t sqlist_get_itemsize(sqlist self){
+    return inter_item_size(self->_inter);
+}
+
 any sqlist_at(sqlist self,int index){
     if(index>(int)self->_size||index<0) return NULL;
-    return (byte)self->_data+index*get_item_size(self);
+    return (byte)self->_data+index*sqlist_get_itemsize(self);
 }
 
 bool sqlist_empty(sqlist self){
@@ -104,7 +102,7 @@ Exception sqlist_clear(sqlist self){
     self->_capacity=0;
     // 清空数据
     for(size_t i=0; i<self->_size; i++){
-        any curItem=(byte)self->_data+i*get_item_size(self);
+        any curItem=(byte)self->_data+i*sqlist_get_itemsize(self);
         if(self->_inter->clear) self->_inter->clear(curItem);
     }
     // 收缩
@@ -118,14 +116,14 @@ Exception sqlist_push_back(sqlist self,any item){
     if(self->_size>self->_capacity){
         e=expand(self);
     }
-    any newItem=(byte)self->_data+(self->_size-1)*get_item_size(self);
+    any newItem=(byte)self->_data+(self->_size-1)*sqlist_get_itemsize(self);
     // interface tinter=self->_inter;
     // #   ifdef CAP_INTER_ERROR
     //     exception temp_e=tinter->init(newItem,tinter->_subinter);
     //     exception_catch(&e,*temp_e);
     //     free_exception(temp_e);
     // #   endif
-    memcpy(newItem,item,get_item_size(self));
+    memcpy(newItem,item,sqlist_get_itemsize(self));
     return e;
 }
 
@@ -148,6 +146,10 @@ sqlist_iterator sqlist_end(sqlist self){
     return new_sqlist_iterator(self,self->_size);
 }
 
+any sqlist_c_data(sqlist self){
+    return self->_data;
+}
+
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e=sqlist_clear(self);
@@ -161,7 +163,7 @@ sqlist_iterator new_sqlist_iterator(sqlist self,int index){
     sqlist_iterator res=malloc(sizeof(SqList_Iterator));
     res->_list=self;
     res->_index=index;
-    res->_curItem=(byte)self->_data+index*get_item_size(self);
+    res->_curItem=(byte)self->_data+index*sqlist_get_itemsize(self);
     res->back=sqlist_iterator_back;
     res->next=sqlist_iterator_next;
     return res;
@@ -171,14 +173,14 @@ sqlist_iterator sqlist_iterator_back(sqlist_iterator self){
     if(self==NULL) return NULL;
     // if(self->_index==0) return NULL;
     if(self->_index>0) self->_index--;
-    self->_curItem=(byte)self->_list->_data+self->_index*get_item_size(self->_list);
+    self->_curItem=(byte)self->_list->_data+self->_index*sqlist_get_itemsize(self->_list);
     return self;
 }
 
 sqlist_iterator sqlist_iterator_next(sqlist_iterator self){
     if(self==NULL) return NULL;
     self->_index=min(self->_list->_size,self->_index+1);
-    self->_curItem=(byte)self->_list->_data+self->_index*get_item_size(self->_list);
+    self->_curItem=(byte)self->_list->_data+self->_index*sqlist_get_itemsize(self->_list);
     return self;
 }
 

@@ -44,6 +44,7 @@ Exception sqlist_init(sqlist self,interface inter);
 Exception sqlist_resize(sqlist self,size_t newSize);
 // sqlist sqlist_insert(sqlist self,size_t pos,any item);
 size_t sqlist_size(sqlist self);
+size_t sqlist_get_itemsize(sqlist self);
 any sqlist_at(sqlist self,int index);
 bool sqlist_empty(sqlist self);
 Exception sqlist_clear(sqlist self);
@@ -51,6 +52,8 @@ Exception sqlist_push_back(sqlist self,any item);
 Exception sqlist_pop_back(sqlist self);
 sqlist_iterator sqlist_begin(sqlist self);
 sqlist_iterator sqlist_end(sqlist self);
+// 返回c风格的指针 表示数组
+any sqlist_c_data(sqlist self);
 Exception free_sqlist(sqlist self);
 
 // 初始化迭代器
