@@ -18,7 +18,7 @@ size_t right(size_t index){
 }
 // 获取元素大小
 static size_t itemsize(heap self){
-    sqlist_get_itemsize(self->_heap);
+    return sqlist_get_itemsize(self->_heap);
 }
 // 比较元素大小
 bool heap_cmp(heap self,size_t ia,size_t ib){
@@ -31,18 +31,25 @@ void heap_swap(heap self,size_t ia,size_t ib){
 // 向上调整
 void heap_up(heap self,size_t index){
     while(index>0&&heap_cmp(self,index,father(index))){
-        heap_swap(itemsize(self),index,father(index));
+        heap_swap(self,index,father(index));
         index=father(index);
     }
 }
 // 向下调整
-Exception heap_down(heap self,size_t index){
-    while(left(index)>=0){
-        size_t now=left(index);
-        if(now+1<=heap_size(self)&&heap_cmp(self,now,now+1)) now++;
-        if(!heap_cmp(self,now,index)) break;
-        heap_swap(self,index,now);
-        index=now;
+void heap_down(heap self,size_t index){
+    size_t heapSize=heap_size(self);
+    while(left(index)<heapSize){  // 注意：这里改为 < 而不是 <=
+        size_t smallerChild=left(index);
+        // 如果右子节点存在且比左子节点更符合堆条件
+        if(right(index)<heapSize&&heap_cmp(self,right(index),smallerChild)){
+            smallerChild=right(index);
+        }
+        // 如果当前节点已经满足堆条件，退出
+        if(!heap_cmp(self,smallerChild,index))
+            break;
+        // 交换当前节点与符合条件的子节点
+        heap_swap(self,index,smallerChild);
+        index=smallerChild;
     }
 }
 
@@ -71,8 +78,12 @@ heap new_heap_from(sqlist list,cmp_func cmp){
     res->_heap=list;
     res->_size=&list->_size;
     // 重新调整堆
-    for(size_t i=(*res->_size-1)/2;i>0;i--){
-        heap_down(res,i);
+    // 从最后一个非叶子节点开始，向下调整到根节点
+    if(*res->_size>0){
+        // size_t i>=0 时 i--会等于-1造成死循环
+        for(size_t i=(*res->_size)/2;i-->0;){
+            heap_down(res,i);
+        }
     }
     return res;
 }
@@ -117,8 +128,8 @@ Exception heap_clear(heap self){
     Exception e=new_exception(SUCCESS,"");
     // 清空堆
     sqlist_clear(self->_heap);
-    // 释放堆
-    free_sqlist(self->_heap);
+    // 不在这里释放self->_heap，应该由free_heap函数完成
+    // free_sqlist(self->_heap);
     return e;
 }
 Exception free_heap(heap self){

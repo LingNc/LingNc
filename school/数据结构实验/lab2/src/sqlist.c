@@ -2,6 +2,7 @@
 #include "tools.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 // 顺序表
 // 内部函数
@@ -52,10 +53,10 @@ Exception sqlist_init(sqlist self,interface inter){
     // 初始容量大小
     self->_capacity=SQLIST_INIT_SIZE;
     self->_data=malloc(self->_capacity*inter->_itemSize);
+    if(self->_data==NULL) return new_exception(ERROR,"sqlist init: 内存分配失败!");
     for(size_t i=0; i<self->_capacity; i++){
         if(inter->init) inter->init((byte)self->_data+i*sqlist_get_itemsize(self),inter->_subinter);
     }
-    if(self->_data==NULL) return new_exception(ERROR,"sqlist init: 内存分配失败!");
     return new_exception(SUCCESS,"");
 }
 
@@ -86,7 +87,9 @@ size_t sqlist_get_itemsize(sqlist self){
 }
 
 any sqlist_at(sqlist self,int index){
-    if(index>(int)self->_size||index<0) return NULL;
+    if(index>(int)self->_size||index<0){
+        perror("sqlist_at: 下标越界!");
+    }
     return (byte)self->_data+index*sqlist_get_itemsize(self);
 }
 

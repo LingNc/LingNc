@@ -32,6 +32,19 @@
 					"reveal": "always"
 				},
 				"group": "build"
+			},
+			{
+				"label": "make test_heap",
+				"command": "make",
+				"type": "shell",
+				"args": ["tests"],
+				"problemMatcher": [
+					"$gcc"
+				],
+				"presentation": {
+					"reveal": "always"
+				},
+				"group": "build"
 			}
 		]
 	},
@@ -78,6 +91,27 @@
 					}
 				],
 				"preLaunchTask": "make test_sqlist",
+				"miDebuggerPath": "/usr/bin/gdb"
+			},
+			{
+				"name": "调试 test_heap",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/build/tests/test_heap",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"setupCommands": [
+					{
+						"description": "为 gdb 启用整齐打印",
+						"text": "-enable-pretty-printing",
+						"ignoreFailures": true
+					}
+				],
+				"preLaunchTask": "make test_heap",
 				"miDebuggerPath": "/usr/bin/gdb"
 			}
 		]

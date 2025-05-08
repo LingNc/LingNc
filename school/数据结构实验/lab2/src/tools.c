@@ -1,5 +1,6 @@
 #include "tools.h"
-#include <stddef.h>
+#include <string.h>
+#include <stdlib.h>
 
 // 安全释放函数
 status nfree(any *_ptr){

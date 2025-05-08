@@ -3,6 +3,7 @@
 
 #include "exception.h"
 #include "any.h"
+#include <stddef.h>
 
 // 常用函数
 #define min(a,b) ((a)<(b)?(a):(b))

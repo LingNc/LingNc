@@ -44,14 +44,6 @@ build/tests/%.o: tests/%.c
 	$(C) $(Cflags) $(Include) -c $< -o $@
 	@echo "编译测试文件成功"
 
-# 运行测试
-run_tests: tests
-	@for test in $(Test_bin); do \
-		echo "运行测试: $$test"; \
-		$$test; \
-		echo ""; \
-	done
-
 # 清理
 clean:
 	rm -rf build
