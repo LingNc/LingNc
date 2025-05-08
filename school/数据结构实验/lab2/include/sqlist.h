@@ -5,6 +5,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+// 常用函数
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
+
 // 如果没有引入string库
 #ifndef STRING_H
     typedef char *string;
@@ -116,14 +120,14 @@ typedef SqList *sqlist;
 
 // 顺序表迭代器
 struct SqList_Iterator{
-    // 当前元素的位置
-    size_t _cur;
-    // 当前元素的指针
-    any _curItem;
     // 顺序表
     sqlist _list;
+    // 当前元素的位置
+    size_t _index;
+    // 当前元素的指针
+    any _curItem;
     // 上一个迭代器
-    sqlist_iterator (*last)(sqlist_iterator self);
+    sqlist_iterator (*back)(sqlist_iterator self);
     // 下一个迭代器
     sqlist_iterator (*next)(sqlist_iterator self);
 }; // SqList_Iterator
@@ -139,16 +143,17 @@ Exception sqlist_resize(sqlist self,size_t newSize);
 size_t sqlist_size(sqlist self);
 any sqlist_at(sqlist self,int index);
 bool sqlist_empty(sqlist self);
+Exception sqlist_clear(sqlist self);
 Exception sqlist_push_back(sqlist self,any item);
 Exception sqlist_pop_back(sqlist self);
-Exception free_sqlist(sqlist self);
 sqlist_iterator sqlist_begin(sqlist self);
 sqlist_iterator sqlist_end(sqlist self);
+Exception free_sqlist(sqlist self);
 
 // 初始化迭代器
 sqlist_iterator new_sqlist_iterator(sqlist dest,int index);
-sqlist_iterator sqlist_iterator_last(sqlist_iterator self);
+sqlist_iterator sqlist_iterator_back(sqlist_iterator self);
 sqlist_iterator sqlist_iterator_next(sqlist_iterator self);
-sqlist_iterator free_sqlist_iterator(sqlist dest);
+Exception free_sqlist_iterator(sqlist_iterator self);
 
 #endif //SQLIST_H
