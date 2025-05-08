@@ -86,7 +86,10 @@
 		"files.associations": {
 			"*.vue": "vue",
 			".clangd": "yaml",
-			"*.cfg": "ini"
+			"*.cfg": "ini",
+			"*.c": "c",
+			"*.h": "c",
+			"string": "c"
 		}
 	}
 }
