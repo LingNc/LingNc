@@ -4,8 +4,10 @@
 !src/*.c
 !include/*.h
 !ext/*.h
+!tests/*.c
 !main.c
 !README.md
 !LICENSE
+!Makefile
 !.gitignore
 !*workspace

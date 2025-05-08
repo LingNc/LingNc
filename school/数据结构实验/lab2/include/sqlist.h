@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+// 是否启用接口错误捕获，如果启用该接口需要返回exception类型的值
+#define CAP_INTER_ERROR
+// 设置初始化顺序表容量
+#define SQLIST_INIT_SIZE 10
+
 // 常用函数
 #define min(a,b) ((a)<(b)?(a):(b))
 #define max(a,b) ((a)>(b)?(a):(b))
@@ -69,9 +74,6 @@ Exception exception_down(exception self,status new_status);
 status free_exception(exception self);
 
 // 任意类型接口
-// 是否启用接口错误捕获，如果启用该接口需要返回exception类型的值
-#define CAP_INTER_ERROR
-
 // 函数类型预先定义
 typedef struct InterFace InterFace;
 typedef InterFace *interface;
@@ -86,7 +88,7 @@ struct InterFace{
     // 元素大小
     size_t _itemSize;
     // 接口的接口
-    struct InterFace *_subinter;
+    interface _subinter;
     // 函数接口
     init_func init;
     clear_func clear;
@@ -100,9 +102,6 @@ struct InterFace{
 interface new_interface(size_t itemSize,interface subinter,...);
 // 释放接口
 Exception free_interface(interface slef);
-
-// 设置初始化顺序表容量
-#define SQLIST_INIT_SIZE 10
 
 // 顺序表
 struct SqList{
@@ -119,6 +118,8 @@ typedef struct SqList SqList;
 typedef SqList *sqlist;
 
 // 顺序表迭代器
+typedef struct SqList_Iterator SqList_Iterator;
+typedef SqList_Iterator *sqlist_iterator;
 struct SqList_Iterator{
     // 顺序表
     sqlist _list;
@@ -132,12 +133,10 @@ struct SqList_Iterator{
     sqlist_iterator (*next)(sqlist_iterator self);
 }; // SqList_Iterator
 
-typedef struct SqList_Iterator SqList_Iterator;
-typedef SqList_Iterator *sqlist_iterator;
 
 // 初始化顺序表
 sqlist new_sqlist(interface inter);
-sqlist sqlist_init(sqlist self,interface inter);
+Exception sqlist_init(sqlist self,interface inter);
 Exception sqlist_resize(sqlist self,size_t newSize);
 // sqlist sqlist_insert(sqlist self,size_t pos,any item);
 size_t sqlist_size(sqlist self);
@@ -154,6 +153,7 @@ Exception free_sqlist(sqlist self);
 sqlist_iterator new_sqlist_iterator(sqlist dest,int index);
 sqlist_iterator sqlist_iterator_back(sqlist_iterator self);
 sqlist_iterator sqlist_iterator_next(sqlist_iterator self);
+any sqlist_iterator_visit(sqlist_iterator self);
 Exception free_sqlist_iterator(sqlist_iterator self);
 
 #endif //SQLIST_H

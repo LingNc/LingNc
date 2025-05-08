@@ -24,7 +24,7 @@ string strapp(string _dest,const string _str){
     size_t dest_len=strlen(_dest);
     size_t str_len=strlen(_str);
     size_t new_size=dest_len+str_len+1;
-    string temp_str=realloc(_str,new_size*sizeof(char));
+    string temp_str=realloc(_dest,new_size*sizeof(char));
     if(temp_str==NULL) return NULL;
     // 拼接
     strcat(temp_str,_str);
@@ -39,6 +39,7 @@ status status_down(status *self,status new_status){
 
 // 安全释放函数
 status nfree(any *_ptr){
+
     if(*_ptr==NULL) return WARRING;
     free(*_ptr);
     *_ptr=NULL;
@@ -51,7 +52,7 @@ Exception new_exception(status status,string msg){
     Exception self;
     Status t=status;
 #   ifndef STRING_H
-    string temp_str=nstrcat(to_str(status),' ');
+    string temp_str=nstrcat(to_str(status)," ");
     temp_str=strapp(temp_str,msg);
     // 不能free字面量
     // status_down(&t, nfree(&msg));
@@ -81,7 +82,7 @@ Exception exception_pass(exception self,Exception e){
     // 黏贴
 #   ifndef STRING_H
     strcat(temp_str,self->msg);
-    if(msgSize!=0&&next_msgSize!=0) strcat(temp_str,'\n');
+    if(msgSize!=0&&next_msgSize!=0) strcat(temp_str,"\n");
     strcat(temp_str,e.msg);
 #   endif
     self->status=res;
@@ -107,7 +108,7 @@ Exception exception_catch(exception self,Exception e){
     // 黏贴
 #   ifndef STRING_H
     strcat(temp_str,e.msg);
-    if(msgSize!=0&&next_msgSize!=0) strcat(temp_str,' --> \n');
+    if(msgSize!=0&&next_msgSize!=0) strcat(temp_str," --> \n");
     strcat(temp_str,self->msg);
 #   endif
     self->status=res;
@@ -130,8 +131,8 @@ Exception exception_down(exception self,status new_status){
 status free_exception(exception self){
     status res=SUCCESS;
     if(self==NULL) status_down(&res,WARRING);
-    else status_down(&res,nfree(&self->msg));
-    status_down(&res,nfree(&self));
+    else status_down(&res,nfree((any *)&self->msg));
+    status_down(&res,nfree((any *)&self));
     return res;
 }
 
@@ -163,21 +164,22 @@ Exception free_interface(interface self){
         status_down(&res,WARRING);
         return new_exception(res,"free_interface: 传入self指针为空!");
     }
-    status_down(&res,nfree(&self));
     Exception e=new_exception(res,"");
     if(self->_subinter!=NULL) exception_pass(&e,free_interface(self->_subinter));
-    return new_exception(res,"");
+    // status_down(&res,nfree((any *)&self));
+    exception_down(&e,nfree((any *)&self));
+    return e;
 }
 
 // 顺序表
 // 内部函数
 
 // 检查是否越界
-Exception check(sqlist self,int index){
-    if(self==NULL) return new_exception(ERROR,"sqlist check: 传入self指针为空!");
-    if(index<0||index>self->_size) return new_exception(ERROR,"sqlist check: 越界!");
-    return new_exception(SUCCESS,"");
-}
+// Exception check(sqlist self,int index){
+//     if(self==NULL) return new_exception(ERROR,"sqlist check: 传入self指针为空!");
+//     if(index<0||index>self->_size) return new_exception(ERROR,"sqlist check: 越界!");
+//     return new_exception(SUCCESS,"");
+// }
 
 // 获取元素大小
 size_t get_item_size(sqlist self){
@@ -217,8 +219,8 @@ sqlist new_sqlist(interface inter){
     return res;
 }
 
-sqlist sqlist_init(sqlist self,interface inter){
-    if(self==NULL) return NULL;
+Exception sqlist_init(sqlist self,interface inter){
+    empty_ptr_error("sqlist_init: 传入self指针为空!");
     self->_inter=inter;
     self->_size=0;
     // 初始容量大小
@@ -227,6 +229,8 @@ sqlist sqlist_init(sqlist self,interface inter){
     for(size_t i=0; i<self->_capacity; i++){
         inter->init((byte)self->_data+i*get_item_size(self),inter->_subinter);
     }
+    if(self->_data==NULL) return new_exception(ERROR,"sqlist init: 内存分配失败!");
+    return new_exception(SUCCESS,"");
 }
 
 Exception sqlist_resize(sqlist self,size_t newSize){
@@ -252,7 +256,7 @@ size_t sqlist_size(sqlist self){
 }
 
 any sqlist_at(sqlist self,int index){
-    if(index>self->_size||index<0) return NULL;
+    if(index>(int)self->_size||index<0) return NULL;
     return (byte)self->_data+index*get_item_size(self);
 }
 
@@ -283,7 +287,7 @@ Exception sqlist_push_back(sqlist self,any item){
         e=expand(self);
     }
     any newItem=(byte)self->_data+(self->_size-1)*get_item_size(self);
-    interface tinter=self->_inter;
+    // interface tinter=self->_inter;
     // #   ifdef CAP_INTER_ERROR
     //     exception temp_e=tinter->init(newItem,tinter->_subinter);
     //     exception_catch(&e,*temp_e);
@@ -315,7 +319,7 @@ sqlist_iterator sqlist_end(sqlist self){
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e=sqlist_clear(self);
-    exception_down(&e,nfree(self));
+    exception_down(&e,nfree((any *)&self));
     return e;
 }
 
@@ -325,6 +329,7 @@ sqlist_iterator new_sqlist_iterator(sqlist self,int index){
     sqlist_iterator res=malloc(sizeof(SqList_Iterator));
     res->_list=self;
     res->_index=index;
+    res->_curItem=(byte)self->_data+index*get_item_size(self);
     res->back=sqlist_iterator_back;
     res->next=sqlist_iterator_next;
     return res;
@@ -333,7 +338,7 @@ sqlist_iterator new_sqlist_iterator(sqlist self,int index){
 sqlist_iterator sqlist_iterator_back(sqlist_iterator self){
     if(self==NULL) return NULL;
     // if(self->_index==0) return NULL;
-    self->_index=max(0,self->_index-1);
+    if(self->_index>0) self->_index--;
     self->_curItem=(byte)self->_list->_data+self->_index*get_item_size(self->_list);
     return self;
 }
@@ -345,6 +350,11 @@ sqlist_iterator sqlist_iterator_next(sqlist_iterator self){
     return self;
 }
 
+any sqlist_iterator_visit(sqlist_iterator self){
+    if(self==NULL) return NULL;
+    return self->_curItem;
+}
+
 Exception free_sqlist_iterator(sqlist_iterator self){
-    return new_exception(nfree(&self),"");
+    return new_exception(nfree((any *)&self),"");
 }
