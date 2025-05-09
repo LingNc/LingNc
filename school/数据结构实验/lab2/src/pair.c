@@ -22,6 +22,7 @@ any pair_inter_clear(pair_inter self){
     if(self==NULL) return NULL;
     self->first=NULL;
     self->second=NULL;
+    return self;
 }
 any free_pair_inter(pair_inter self){
     if(self==NULL) return NULL;
@@ -29,6 +30,7 @@ any free_pair_inter(pair_inter self){
     free_interface(self->second);
     // 释放结构体
     nfree((any *)&self);
+    return NULL;
 }
 
 // pair
@@ -100,19 +102,21 @@ any pair_copy(pair self,pair other){
         }
         pair_copy(self,other);
     }
-
+    return self;
 } // pair_copy
 
 any pair_clear(pair self){
     if(self==NULL) return NULL;
     nfree((any *)&self->first);
     nfree((any *)&self->second);
+    return self;
 }
 
 any free_pair(pair self){
     if(self==NULL) return NULL;
     pair_clear(self);
     nfree((any *)&self);
+    return NULL;
 }
 
 interface pair_create_inter(){

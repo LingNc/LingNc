@@ -14,7 +14,7 @@ typedef Pair_inter *pair_inter;
 
 // new
 pair_inter new_pair_inter(interface first,interface second);
-any pair_inter_init(pair_inter self,interface inter);
+any pair_inter_init(pair_inter sel,interface inter);
 any pair_inter_clear(pair_inter self);
 any free_pair_inter(pair_inter self);
 

@@ -21,20 +21,7 @@
 				"group": "build"
 			},
 			{
-				"label": "make test_sqlist",
-				"command": "make",
-				"type": "shell",
-				"args": ["tests"],
-				"problemMatcher": [
-					"$gcc"
-				],
-				"presentation": {
-					"reveal": "always"
-				},
-				"group": "build"
-			},
-			{
-				"label": "make test_heap",
+				"label": "make tests",
 				"command": "make",
 				"type": "shell",
 				"args": ["tests"],
@@ -56,7 +43,11 @@
 				"type": "cppdbg",
 				"request": "launch",
 				"program": "${workspaceFolder}/main",
-				"args": [],
+				"args": [
+					"-c",
+					"test.md",
+					"out.bin"
+				],
 				"stopAtEntry": false,
 				"cwd": "${workspaceFolder}",
 				"environment": [],
@@ -90,7 +81,7 @@
 						"ignoreFailures": true
 					}
 				],
-				"preLaunchTask": "make test_sqlist",
+				"preLaunchTask": "make tests",
 				"miDebuggerPath": "/usr/bin/gdb"
 			},
 			{
@@ -111,7 +102,28 @@
 						"ignoreFailures": true
 					}
 				],
-				"preLaunchTask": "make test_heap",
+				"preLaunchTask": "make tests",
+				"miDebuggerPath": "/usr/bin/gdb"
+			},
+			{
+				"name": "调试 test_pair",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/build/tests/test_pair",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"setupCommands": [
+					{
+						"description": "为 gdb 启用整齐打印",
+						"text": "-enable-pretty-printing",
+						"ignoreFailures": true
+					}
+				],
+				"preLaunchTask": "make tests",
 				"miDebuggerPath": "/usr/bin/gdb"
 			}
 		]
