@@ -12,6 +12,13 @@ struct Node{
     node left,right;
     utf8 word;
 };
+// 树结构
+typedef node tree;
+
+node new_node(utf8 word);
+node node_init(node self,interface inter);
+node node_clear(node self);
+node free_node(node* self);
 
 // 哈夫曼树
 struct Huffman{
@@ -29,20 +36,22 @@ struct Huffman{
 typedef struct Huffman Huffman;
 typedef Huffman *huffman;
 
+// 表类型
 enum Table{
-    Freque,
-    Length,
-    Code
+    Freque,  // 频率表
+    Length,  // 字长表
+    Code     // 编码表
 };
 typedef enum Table Table;
 // typedef Table table;
 
-// new
+// 树操作
 huffman new_huffman();
 // Exception huffman_init(huffman self);
+// 导入指定类型表
 Exception huffman_load(huffman self,Table type,sqlist table);
-sqlist huffman_encode(huffman self);
-sqlist huffman_decode(huffman self);
+// 构造树
+tree huffman_build(huffman self);
 Exception free_huffman(huffman self);
 
 #endif // HUFFMAN_H

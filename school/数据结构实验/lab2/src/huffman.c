@@ -1,6 +1,35 @@
 #include "huffman.h"
 #include "interface.h"
+#include "tools.h"
 #include <stdlib.h>
+
+// 树节点
+node new_node(utf8 word){
+    node res=malloc(sizeof(Node));
+    if(res==NULL) return NULL;
+    node_init(res,NULL);
+    return res;
+}
+node node_init(node self,interface inter){
+    if(self==NULL) return NULL;
+    self->left=NULL;
+    self->right=NULL;
+    self->word=0;
+    return self;
+}
+node node_clear(node self){
+    if(self==NULL) return NULL;
+    self->left=NULL;
+    self->right=NULL;
+    self->word=0;
+    return self;
+}
+node free_node(node* self){
+    if(self==NULL) return NULL;
+    node_clear(self);
+    sfree(self);
+    return NULL;
+}
 
 huffman new_huffman(){
     huffman res=malloc(sizeof(struct Huffman));
