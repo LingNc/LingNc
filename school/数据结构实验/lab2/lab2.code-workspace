@@ -45,7 +45,7 @@
 				"program": "${workspaceFolder}/main",
 				"args": [
 					"-c",
-					"test.md",
+					"in.txt",
 					"out.bin"
 				],
 				"stopAtEntry": false,
@@ -135,7 +135,8 @@
 			"*.cfg": "ini",
 			"*.c": "c",
 			"*.h": "c",
-			"string": "c"
+			"string": "c",
+			"tuple": "cpp"
 		}
 	}
 }

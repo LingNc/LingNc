@@ -28,7 +28,7 @@ struct InterFace{
     // 元素大小
     size_t _itemSize;
     // 接口的接口
-    interface _subinter;
+    any _subinter;
     // 函数接口
     init_func init;
     copy_func copy;
@@ -37,11 +37,9 @@ struct InterFace{
     free_func free;
 }; // InterFace
 
-// 定义结束符号
-#define inter_end NULL
 // 初始化接口
-// 顺序 init,copy,clear,cmp,free
-interface new_interface(size_t itemSize,interface subinter,...);
+// 码表 i:init c:copy l:clear m:cmp f:free
+interface new_interface(size_t itemSize,any subinter,string format,...);
 // 释放接口
 Exception free_interface(interface slef);
 // 获取元素大小

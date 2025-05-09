@@ -3,30 +3,35 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-interface new_interface(size_t itemSize,interface subinter,...){
-    interface self=(interface)malloc(sizeof(struct InterFace));
-    if(self==NULL) return NULL;
+interface new_interface(size_t itemSize, any subinter, string format, ...) {
+    interface self = (interface)malloc(sizeof(struct InterFace));
+    if (self == NULL) return NULL;
+    self->_itemSize = itemSize;
+    self->_subinter = subinter;
+
     va_list args;
-    self->_itemSize=itemSize;
-    self->_subinter=subinter;
-    va_start(args,subinter);
-    any temp;
-    temp=va_arg(args,init_func);
-    if(temp==inter_end) goto end;
-    self->init=temp;
-    temp=va_arg(args,copy_func);
-    if(temp==inter_end) goto end;
-    self->copy=temp;
-    temp=va_arg(args,clear_func);
-    if(temp==inter_end) goto end;
-    self->clear=temp;
-    temp=va_arg(args,cmp_func);
-    if(temp==inter_end) goto end;
-    self->cmp=temp;
-    temp=va_arg(args,free_func);
-    if(temp==inter_end) goto end;
-    self->free=temp;
-end:
+    va_start(args, format);
+
+    // 初始化所有函数指针为 NULL
+    self->init = NULL;
+    self->copy = NULL;
+    self->clear = NULL;
+    self->cmp = NULL;
+    self->free = NULL;
+
+    // 按 format 字符串顺序设置函数指针
+    for (const char *p = format; p && *p; ++p) {
+        any func = va_arg(args, any);
+        switch (*p) {
+            case 'i': self->init = func; break;
+            case 'c': self->copy = func; break;
+            case 'l': self->clear = func; break;
+            case 'm': self->cmp = func; break;
+            case 'f': self->free = func; break;
+            default: break; // 未知字符忽略
+        }
+    }
+
     va_end(args);
     return self;
 }
@@ -41,6 +46,7 @@ Exception free_interface(interface self){
     if(self->_subinter!=NULL) exception_pass(&e,free_interface(self->_subinter));
     // status_down(&res,nfree((any *)&self));
     exception_down(&e,sfree(&self));
+    free(self);
     return e;
 }
 size_t inter_item_size(interface self){

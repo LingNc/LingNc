@@ -6,30 +6,31 @@
 #include "interface.h"
 
 // 对 inter
-struct Piar_inter{
+struct PiarInter{
     interface first,second;
 }; // Pair_inter
-typedef struct Piar_inter Pair_inter;
-typedef Pair_inter *pair_inter;
+typedef struct PiarInter PairInter;
+typedef PairInter *pairinter;
 
 // new
-pair_inter new_pair_inter(interface first,interface second);
-any pair_inter_init(pair_inter sel,interface inter);
-any pair_inter_clear(pair_inter self);
-any free_pair_inter(pair_inter self);
+pairinter new_pairinter(interface first,interface second);
+any pairinter_init(pairinter sel,interface inter);
+any pairinter_clear(pairinter self);
+any free_pairinter(pairinter self);
+// interface pairinter_create_inter();
 
 // 对
 struct Pair{
     any first,second;
-    pair_inter _inter;
+    pairinter _pinter;
 }; // Pair
 
 typedef struct Pair Pair;
 typedef Pair *pair;
 
 // new 接受 pair_inter
-pair new_pair(any first,any second,any inter);
-any pair_init(pair self,any inter);
+pair new_pair(any first,any second, pairinter pinter);
+// any pair_init(pair self,interface inter);
 any pair_clear(pair self);
 any pair_copy(pair slef,pair other);
 any free_pair(pair self);

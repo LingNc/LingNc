@@ -10,19 +10,19 @@
 #define max(a,b) ((a)>(b)?(a):(b))
 
 // 防止 double free 的free函数
-status pfree(any *_ptr);
+status pfree(any* _ptr);
 // 增加安全的函数
 // status nfree(any *_ptr)
 #define sfree(_ptr) pfree((any*)(_ptr))
 
 // 任意变量交换函数
-void swap(size_t itemSize,any a,any b);
+void swap(size_t itemSize, any a, any b);
 // 数据转换
 #define KB(x) ((x)*1024)
 #define MB(x) (KB(x)*1024)
 #define GB(x) (MB(x)*1024)
 
 // utf8 读取
-size_t read_utf8(utf8* res,byte buffer,size_t pos,size_t max);
+int read_utf8(utf8* res, byte buffer, size_t pos, size_t max);
 
 #endif // TOOLS_H
