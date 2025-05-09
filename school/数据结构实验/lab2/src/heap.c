@@ -138,7 +138,7 @@ Exception free_heap(heap self){
     // 释放堆
     heap_clear(self);
     // 释放堆指针
-    status res=nfree((any *)&self);
+    status res=sfree(&self);
     // 异常降级
     exception_down(&e,res);
     return e;

@@ -29,7 +29,7 @@ any free_pair_inter(pair_inter self){
     free_interface(self->first);
     free_interface(self->second);
     // 释放结构体
-    nfree((any *)&self);
+    sfree(&self);
     return NULL;
 }
 
@@ -62,7 +62,7 @@ any pair_init(pair self,any inter){
     self->first=malloc(pinter->first->_itemSize);
     self->second=malloc(pinter->second->_itemSize);
     if(self->first==NULL||self->second==NULL){
-        nfree((any *)&self);
+        sfree(&self);
         return NULL;
     }
     return self;
@@ -92,12 +92,12 @@ any pair_copy(pair self,pair other){
     }
     else{
         // 这里需要重新分配内存
-        nfree((any *)&self->first);
-        nfree((any *)&self->second);
+        sfree(&self->first);
+        sfree(&self->second);
         self->first=malloc(other->_inter->first->_itemSize);
         self->second=malloc(other->_inter->second->_itemSize);
         if(self->first==NULL||self->second==NULL){
-            nfree((any *)&self);
+            sfree(&self);
             return NULL;
         }
         pair_copy(self,other);
@@ -107,15 +107,15 @@ any pair_copy(pair self,pair other){
 
 any pair_clear(pair self){
     if(self==NULL) return NULL;
-    nfree((any *)&self->first);
-    nfree((any *)&self->second);
+    sfree(&self->first);
+    sfree(&self->second);
     return self;
 }
 
 any free_pair(pair self){
     if(self==NULL) return NULL;
     pair_clear(self);
-    nfree((any *)&self);
+    sfree(&self);
     return NULL;
 }
 

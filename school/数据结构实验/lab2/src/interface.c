@@ -40,7 +40,7 @@ Exception free_interface(interface self){
     Exception e=new_exception(res,"");
     if(self->_subinter!=NULL) exception_pass(&e,free_interface(self->_subinter));
     // status_down(&res,nfree((any *)&self));
-    exception_down(&e,nfree((any *)&self));
+    exception_down(&e,sfree(&self));
     return e;
 }
 size_t inter_item_size(interface self){

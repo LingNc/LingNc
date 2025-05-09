@@ -165,7 +165,7 @@ any sqlist_c_data(sqlist self){
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e=sqlist_clear(self);
-    exception_down(&e,nfree((any *)&self));
+    exception_down(&e,sfree(&self));
     return e;
 }
 
@@ -203,5 +203,5 @@ any sqlist_iterator_visit(sqlist_iterator self){
 }
 
 Exception free_sqlist_iterator(sqlist_iterator self){
-    return new_exception(nfree((any *)&self),"");
+    return new_exception(sfree(&self),"");
 }
