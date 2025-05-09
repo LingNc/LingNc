@@ -1,5 +1,6 @@
 C = gcc
-Cflags = -Wall -Wextra -std=c99 -g
+# 只能使用 gcc 编译器 使用了typeof
+Cflags = -Wall -Wextra -std=gnu99 -g
 
 Include = -I./include
 

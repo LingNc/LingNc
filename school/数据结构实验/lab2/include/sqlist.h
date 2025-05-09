@@ -6,6 +6,8 @@
 
 // 设置初始化顺序表容量
 #define SQLIST_INIT_SIZE 10
+// 顺序表表指针 传入顺序表指针
+#define sqlist_pointer(self) pointer(sqlist_get_itemsize(self))
 
 // 顺序表
 struct SqList{
