@@ -38,8 +38,8 @@ int main() {
     printf("开始测试堆结构...\n");
 
     // 创建整数类型的接口
-    // 按照正确的顺序初始化：init, copy, clear, cmp, free
-    interface int_interface = new_interface(sizeof(int), NULL, int_init, int_copy, NULL, int_cmp, NULL, inter_end);
+    // 码表 i:init c:copy l:clear m:cmp f:free
+    interface int_interface = new_interface(sizeof(int), NULL, "icm", int_init, int_copy, int_cmp);
     if (int_interface == NULL) {
         printf("接口创建失败！\n");
         return 1;

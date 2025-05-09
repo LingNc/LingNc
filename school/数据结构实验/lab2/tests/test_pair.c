@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "sqlist.h"
 
 // 整数类型的接口函数
 any int_init(self obj, interface subinter) {
@@ -53,60 +54,59 @@ any string_free(self obj) {
     return obj;
 }
 
-// 测试 pair_inter 的功能
+// 测试 pairinter 的功能
 void test_pair_inter(interface int_interface, interface string_interface) {
-    printf("\n=== 测试 pair_inter 功能 ===\n");
+    printf("\n=== 测试 pairinter 功能 ===\n");
 
-    // 创建 pair_inter
-    printf("创建 pair_inter...\n");
-    pair_inter pinter = new_pair_inter(int_interface, string_interface);
+    // 创建 pairinter
+    printf("创建 pairinter...\n");
+    pairinter pinter = new_pairinter(int_interface, string_interface);
     if (pinter == NULL) {
-        printf("pair_inter 创建失败！\n");
+        printf("pairinter 创建失败！\n");
         return;
     }
 
-    printf("pair_inter 创建成功！\n");
+    printf("pairinter 创建成功！\n");
     printf("first interface 项大小: %zu\n", pinter->first->_itemSize);
     printf("second interface 项大小: %zu\n", pinter->second->_itemSize);
 
-    // 测试 pair_inter_init 函数
-    printf("\n测试 pair_inter_init 函数...\n");
-    pair_inter test_init = malloc(sizeof(Pair_inter));
+    // 测试 pairinter_init 函数
+    printf("\n测试 pairinter_init 函数...\n");
+    pairinter test_init = malloc(sizeof(PairInter));
     if (test_init == NULL) {
         printf("内存分配失败！\n");
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         return;
     }
 
     // 初始化
-    pair_inter_init(test_init, NULL);
-    printf("pair_inter_init 成功！\n");
+    pairinter_init(test_init, NULL);
+    printf("pairinter_init 成功！\n");
 
-    // 测试 pair_inter_clear 函数
-    printf("\n测试 pair_inter_clear 函数...\n");
-    pair_inter_clear(test_init);
-    printf("pair_inter_clear 成功！\n");
+    // 测试 pairinter_clear 函数
+    printf("\n测试 pairinter_clear 函数...\n");
+    pairinter_clear(test_init);
+    printf("pairinter_clear 成功！\n");
 
     // 释放资源
-    printf("\n释放 pair_inter 资源...\n");
-    // free_pair_inter(pinter);
+    printf("\n释放 pairinter 资源...\n");
     free(test_init);
-    printf("pair_inter 资源释放成功！\n");
+    printf("pairinter 资源释放成功！\n");
 }
 
 // 测试 pair 的功能
 void test_pair(interface int_interface, interface string_interface) {
     printf("\n=== 测试 pair 功能 ===\n");
 
-    // 创建 pair_inter
-    printf("创建 pair_inter...\n");
-    pair_inter pinter = new_pair_inter(int_interface, string_interface);
+    // 创建 pairinter
+    printf("创建 pairinter...\n");
+    pairinter pinter = new_pairinter(int_interface, string_interface);
     if (pinter == NULL) {
-        printf("pair_inter 创建失败！\n");
+        printf("pairinter 创建失败！\n");
         return;
     }
 
-    printf("pair_inter 创建成功！\n");
+    printf("pairinter 创建成功！\n");
 
     // 测试 pair 创建和初始化
     printf("\n测试 pair 创建...\n");
@@ -114,14 +114,14 @@ void test_pair(interface int_interface, interface string_interface) {
     char* second_value = strdup("测试字符串");
     if (second_value == NULL) {
         printf("字符串内存分配失败！\n");
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         return;
     }
 
     pair test_pair = new_pair(&first_value, &second_value, pinter);
     if (test_pair == NULL) {
         printf("pair 创建失败！\n");
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         free(second_value);
         return;
     }
@@ -137,26 +137,26 @@ void test_pair(interface int_interface, interface string_interface) {
     if (copied_pair == NULL) {
         printf("复制 pair 内存分配失败！\n");
         free_pair(test_pair);
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         free(second_value);
         return;
     }
 
-    // 初始化并复制
-    if (pair_init(copied_pair, pinter) == NULL) {
-        printf("pair 初始化失败！\n");
-        free(copied_pair);
-        free_pair(test_pair);
-        free_pair_inter(pinter);
-        free(second_value);
-        return;
-    }
+    // // 初始化并复制
+    // if (pair_init(copied_pair, pinter) == NULL) {
+    //     printf("pair 初始化失败！\n");
+    //     free(copied_pair);
+    //     free_pair(test_pair);
+    //     free_pairinter(pinter);
+    //     free(second_value);
+    //     return;
+    // }
 
     if (pair_copy(copied_pair, test_pair) == NULL) {
         printf("pair 复制失败！\n");
         free_pair(copied_pair);
         free_pair(test_pair);
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         free(second_value);
         return;
     }
@@ -175,7 +175,7 @@ void test_pair(interface int_interface, interface string_interface) {
         printf("字符串内存分配失败！\n");
         free_pair(copied_pair);
         free_pair(test_pair);
-        free_pair_inter(pinter);
+        free_pairinter(pinter);
         free(second_value);
         return;
     }
@@ -200,10 +200,46 @@ void test_pair(interface int_interface, interface string_interface) {
     // 清理资源
     printf("\n释放资源...\n");
     free_pair(test_pair);
-    // free(copied_pair); // 由于已经清除了资源，所以不使用 free_pair
-    free_pair_inter(pinter);
-    // free(second_value);
+    free_pairinter(pinter);
     printf("资源释放成功！\n");
+}
+
+// 测试 pair_create_inter 及 sqlist 存储 pair
+void test_pair_sqlist() {
+    printf("\n=== 测试 pair_create_inter 及 sqlist 存储 pair ===\n");
+    // 创建 pair 接口
+    interface int_interface = new_interface(sizeof(int), NULL, "ilf", int_init, int_clear, int_free);
+    interface string_interface = new_interface(sizeof(char*), NULL, "iclf", string_init, string_copy, string_clear, string_free);
+    pairinter pinter = new_pairinter(int_interface, string_interface);
+    interface pair_iface = pair_create_inter();
+    sqlist list = new_sqlist(pair_iface);
+
+    // 创建并插入多个 pair
+    for (int i = 0; i < 3; ++i) {
+        int *first = malloc(sizeof(int));
+        *first = i * 10;
+        char buf[32];
+        snprintf(buf, sizeof(buf), "str%d", i);
+        char **second = malloc(sizeof(char*));
+        *second = strdup(buf);
+        pair p = new_pair(first, second, pinter);
+        sqlist_push_back(list, p);
+        free(first);
+        free(*second);
+        free(second);
+    }
+
+    // 访问并打印
+    for (int i = 0; i < 3; ++i) {
+        pair p = (pair)sqlist_at(list, i);
+        printf("sqlist[%d]: first=%d, second=%s\n", i, *(int*)p->first, *(char**)p->second);
+    }
+
+    // 清理
+    sqlist_clear(list);
+    free_sqlist(list);
+    free_pairinter(pinter);
+    printf("pair_create_inter 及 sqlist 存储 pair 测试完成！\n");
 }
 
 int main() {
@@ -211,8 +247,8 @@ int main() {
 
     // 创建整数和字符串的接口
     printf("创建接口...\n");
-    interface int_interface = new_interface(sizeof(int), NULL, int_init, NULL, int_clear, NULL, int_free, inter_end);
-    interface string_interface = new_interface(sizeof(char*), NULL, string_init, string_copy, string_clear, NULL, string_free, inter_end);
+    interface int_interface = new_interface(sizeof(int), NULL, "ilf", int_init, int_clear, int_free);
+    interface string_interface = new_interface(sizeof(char*), NULL, "iclf", string_init, string_copy, string_clear, string_free);
 
     if (int_interface == NULL || string_interface == NULL) {
         printf("接口创建失败！\n");
@@ -223,16 +259,17 @@ int main() {
 
     printf("接口创建成功！\n");
 
-    // 测试 pair_inter 功能
+    // 测试 pairinter 功能
     test_pair_inter(int_interface, string_interface);
 
     // 测试 pair 功能
     test_pair(int_interface, string_interface);
 
+    // 新增测试
+    test_pair_sqlist();
+
     // 释放接口资源
     printf("\n释放接口资源...\n");
-    // free_interface(int_interface);
-    // free_interface(string_interface);
     printf("接口资源释放成功！\n");
 
     printf("======= 测试完成！=======\n");
