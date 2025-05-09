@@ -40,7 +40,7 @@ struct InterFace{
 // 定义结束符号
 #define inter_end NULL
 // 初始化接口
-// 顺序 init,clear,cmp,free
+// 顺序 init,copy,clear,cmp,free
 interface new_interface(size_t itemSize,interface subinter,...);
 // 释放接口
 Exception free_interface(interface slef);
