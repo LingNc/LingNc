@@ -114,6 +114,37 @@ int main() {
         printf("接口已释放\n");
     }
 
+    // ========== 顺序表指针唯一性与浅拷贝检测 ==========
+    printf("\n===== 测试顺序表指针唯一性与浅拷贝问题 =====\n");
+    typedef struct { int val; } BoxedInt;
+    interface boxedint_interface = new_interface(sizeof(BoxedInt), NULL, "icm", NULL, NULL, NULL);
+    sqlist ptrlist = new_sqlist(boxedint_interface);
+    BoxedInt *ptrs[5];
+    for (int i = 0; i < 5; ++i) {
+        ptrs[i] = malloc(sizeof(BoxedInt));
+        ptrs[i]->val = i * 10;
+        sqlist_push_back(ptrlist, ptrs[i]);
+    }
+    void *addrs[5];
+    for (int i = 0; i < 5; ++i) {
+        BoxedInt *p = (BoxedInt*)sqlist_at(ptrlist, i);
+        addrs[i] = p;
+    }
+    int unique = 1;
+    for (int i = 0; i < 5; ++i) {
+        for (int j = i + 1; j < 5; ++j) {
+            if (addrs[i] == addrs[j]) unique = 0;
+        }
+    }
+    if (unique) {
+        printf("顺序表所有指针唯一，无浅拷贝问题。\n");
+    } else {
+        printf("[警告] 顺序表存在浅拷贝/指针复用问题！\n");
+    }
+    for (int i = 0; i < 5; ++i) free(ptrs[i]);
+    free_sqlist(ptrlist);
+    free_interface(boxedint_interface);
+
     printf("测试完成！\n");
     return 0;
 }

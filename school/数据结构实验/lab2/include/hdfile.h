@@ -3,6 +3,7 @@
 
 #include "sqlist.h"
 #include "tools.h"
+#include "huffman.h"
 #include <stdio.h>
 
 typedef FILE *file;
@@ -31,13 +32,5 @@ enum TheFile{
     OUTFILE
 };
 typedef enum TheFile TheFile;
-
-hdfile new_hdfile();
-Exception hdfile_load(hdfile self,TheFile FileType,string filepath);
-utf8 hdfile_read_utf8(hdfile self);
-// hdfile new_hdfile_from(file fp);
-// hdfile hdfile_init(hdfile self,string filepath);
-sqlist hdfile_freque(hdfile self);
-Exception free_hdfile(hdfile self);
 
 #endif // HANDLEFILE_H

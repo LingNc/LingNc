@@ -6,23 +6,24 @@
 #include <stdint.h>
 
 // 节点
-typedef struct Node Node;
-typedef Node *node;
-struct Node{
-    node left,right;
+typedef struct HuffNode HuffNode;
+typedef HuffNode *huffnode;
+struct HuffNode{
+    huffnode left,right;
     utf8 word;
+    size_t freq;
 };
 // 树结构
-typedef node tree;
+typedef huffnode tree;
 
-node new_node(utf8 word);
-node node_init(node self,interface inter);
-node node_clear(node self);
-node free_node(node* self);
+huffnode new_huffnode(utf8 word);
+huffnode huffnode_init(huffnode self,interface inter);
+huffnode huffnode_clear(huffnode self);
+huffnode free_huffnode(huffnode self);
 
 // 哈夫曼树
 struct Huffman{
-    node _tree;
+    huffnode _tree;
     // 节点数量
     size_t _nodes;
     // 表 sqlist<pair<utf8,size_t>>
@@ -50,6 +51,8 @@ huffman new_huffman();
 // Exception huffman_init(huffman self);
 // 导入指定类型表
 Exception huffman_load(huffman self,Table type,sqlist table);
+// 获得指定表
+sqlist huffman_table(huffman self,Table type);
 // 构造树
 tree huffman_build(huffman self);
 Exception free_huffman(huffman self);

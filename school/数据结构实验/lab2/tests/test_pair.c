@@ -268,6 +268,29 @@ int main() {
     // 新增测试
     test_pair_sqlist();
 
+    // ========== pair 深拷贝与浅拷贝检测 ==========
+    printf("\n===== 测试 pair 深拷贝与浅拷贝问题 =====\n");
+    interface int_interface2 = new_interface(sizeof(int), NULL, "ilf", int_init, int_clear, int_free);
+    interface str_interface2 = new_interface(sizeof(char*), NULL, "iclf", string_init, string_copy, string_clear, string_free);
+    pairinter pinter2 = new_pairinter(int_interface2, str_interface2);
+    int *a = malloc(sizeof(int)); *a = 123;
+    char **b = malloc(sizeof(char*)); *b = strdup("deepcopy");
+    pair p1 = new_pair(a, b, pinter2);
+    pair p2 = malloc(sizeof(Pair));
+    pair_copy(p2, p1);
+    // 修改原始 p1
+    *a = 999;
+    free(*b); *b = strdup("changed");
+    printf("p1: %d, %s\n", *(int*)p1->first, *(char**)p1->second);
+    printf("p2: %d, %s\n", *(int*)p2->first, *(char**)p2->second);
+    if (*(int*)p2->first == 123 && strcmp(*(char**)p2->second, "deepcopy") == 0) {
+        printf("pair 深拷贝无浅拷贝问题。\n");
+    } else {
+        printf("[警告] pair 复制存在浅拷贝问题！\n");
+    }
+    free_pair(p1); free_pair(p2); free_pairinter(pinter2);
+    free(a); free(*b); free(b);
+
     // 释放接口资源
     printf("\n释放接口资源...\n");
     printf("接口资源释放成功！\n");

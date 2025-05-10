@@ -44,9 +44,9 @@
 				"request": "launch",
 				"program": "${workspaceFolder}/main",
 				"args": [
-					"-c",
-					"in.txt",
-					"out.bin"
+					"-d",
+					"out.bin", 
+					"out.txt"
 				],
 				"stopAtEntry": false,
 				"cwd": "${workspaceFolder}",

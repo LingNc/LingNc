@@ -34,6 +34,13 @@ bool int_max_cmp(any a, any b) {
     return *(int*)a > *(int*)b;
 }
 
+typedef struct { int val; } BoxedInt;
+
+// 比较函数
+bool boxed_int_cmp(any a, any b) {
+    return ((BoxedInt*)a)->val < ((BoxedInt*)b)->val;
+}
+
 int main() {
     printf("开始测试堆结构...\n");
 
@@ -44,6 +51,8 @@ int main() {
         printf("接口创建失败！\n");
         return 1;
     }
+    // 创建 BoxedInt 类型的接口（提前声明，供所有相关测试复用）
+    interface boxedint_interface = new_interface(sizeof(BoxedInt), NULL, "icm", NULL, NULL, NULL);
 
     // 测试最小堆
     printf("\n===== 测试最小堆 =====\n");
@@ -192,6 +201,30 @@ int main() {
     free_heap(heap_from_list);
     free_sqlist(list);
     free_interface(int_interface);
+
+    // ========== 值容器内容顺序检测 ==========
+    printf("\n===== 测试堆的内容顺序（值容器） =====\n");
+    BoxedInt arr[5];
+    heap val_heap = new_heap(boxedint_interface, boxed_int_cmp); // 复用 boxedint_interface
+    for (int i = 0; i < 5; ++i) {
+        arr[i].val = i * 100;
+        heap_push(val_heap, &arr[i]);
+    }
+    int last = -1;
+    int sorted = 1;
+    while (!heap_empty(val_heap)) {
+        BoxedInt *top = (BoxedInt*)heap_top(val_heap);
+        printf("弹出: %d\n", top->val);
+        if (last != -1 && top->val < last) sorted = 0;
+        last = top->val;
+        heap_pop(val_heap);
+    }
+    if (sorted) {
+        printf("堆弹出顺序正确，无浅拷贝/指针复用问题。\n");
+    } else {
+        printf("[警告] 堆弹出顺序错误，可能有实现问题！\n");
+    }
+    free_heap(val_heap);
 
     printf("\n测试完成！\n");
     return 0;
