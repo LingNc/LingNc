@@ -33,6 +33,7 @@ pair new_pair(any first,any second, pairinter pinter);
 // any pair_init(pair self,interface inter);
 any pair_clear(pair self);
 any pair_copy(pair slef,pair other);
+void pair_print(pair self);
 any free_pair(pair self);
 interface pair_create_inter();
 
