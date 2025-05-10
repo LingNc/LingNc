@@ -78,7 +78,8 @@ pair new_pair(any first, any second, pairinter pinter){
 // } // pair_init
 
 any pair_copy(pair self, pair other){
-    if (self == NULL || other == NULL) return NULL;
+    // 如果self为空就重分配self内存
+    if (other == NULL) return NULL;
     // 重新分配内存
     // sfree(&self->first);
     // sfree(&self->second);

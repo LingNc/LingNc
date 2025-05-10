@@ -136,7 +136,8 @@
 			"*.c": "c",
 			"*.h": "c",
 			"string": "c",
-			"tuple": "cpp"
+			"tuple": "cpp",
+			"random": "c"
 		}
 	}
 }

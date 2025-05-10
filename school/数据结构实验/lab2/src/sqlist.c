@@ -85,7 +85,7 @@ size_t sqlist_size(sqlist self){
 }
 
 size_t sqlist_get_itemsize(sqlist self){
-    return inter_item_size(self->_inter);
+    return inter_size(self->_inter);
 }
 
 any sqlist_at(sqlist self, int index){

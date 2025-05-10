@@ -49,7 +49,13 @@ Exception free_interface(interface self){
     free(self);
     return e;
 }
-size_t inter_item_size(interface self){
-    if(self==NULL) return 0;
+
+size_t inter_size(interface self){
+    if (self == NULL) return 0;
     return self->_itemSize;
+}
+
+interface inter_subinter(interface self){
+    if (self == NULL) return NULL;
+    return self->_subinter;
 }

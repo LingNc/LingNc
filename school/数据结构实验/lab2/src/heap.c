@@ -26,7 +26,7 @@ bool heap_cmp(heap self,size_t ia,size_t ib){
 }
 // 交换两元素
 void heap_swap(heap self,size_t ia,size_t ib){
-    swap(itemsize(self),sqlist_at(self->_heap,ia),sqlist_at(self->_heap,ib));
+    dswap(sqlist_at(self->_heap,ia),sqlist_at(self->_heap,ib),self->_heap->_inter);
 }
 // 向上调整
 void heap_up(heap self,size_t index){

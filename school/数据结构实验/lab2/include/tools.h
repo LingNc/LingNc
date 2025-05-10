@@ -2,8 +2,10 @@
 #define TOOLS_H
 
 #include "exception.h"
+#include "interface.h"
 #include "any.h"
 #include <stddef.h>
+#include <stdbool.h>
 
 // 常用函数
 #define min(a,b) ((a)<(b)?(a):(b))
@@ -15,8 +17,12 @@ status pfree(any* _ptr);
 // status nfree(any *_ptr)
 #define sfree(_ptr) pfree((any*)(_ptr))
 
-// 任意变量交换函数
-void swap(size_t itemSize, any a, any b);
+// 指针交换函数
+bool pswap(any* a, any* b);
+// 浅拷贝交换
+bool sswap(const any a,const any b,size_t size);
+// 深拷贝交换
+bool dswap(const any a,const any b,interface inter);
 // 数据转换
 #define KB(x) ((x)*1024)
 #define MB(x) (KB(x)*1024)

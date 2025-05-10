@@ -9,13 +9,42 @@ status pfree(any* _ptr){
     *_ptr = NULL;
     return SUCCESS;
 }
-// 任意变量交换函数
-void swap(size_t itemSize, any a, any b){
-    any t = malloc(itemSize);
-    memcpy(t, a, itemSize);
-    memcpy(a, b, itemSize);
-    memcpy(b, t, itemSize);
-    free(t);
+// 指针交换函数
+bool pswap(any *a, any *b){
+    any temp = *a;
+    *a = *b;
+    *b = temp;
+    return true;
+}
+// 浅拷贝交换函数
+bool sswap(const any a,const any b,size_t size){
+    if (a == NULL || b == NULL || size == 0) return false;
+    any temp = malloc(size);
+    if (temp == NULL) return false;
+    memcpy(temp, a, size);
+    memcpy(a, b, size);
+    memcpy(b, temp, size);
+    free(temp);
+}
+// 深拷贝交换函数
+bool dswap(const any a,const any b,interface inter){
+    if (a == NULL || b == NULL) return false;
+    if (inter == NULL) return false;
+    if (inter->copy == NULL){
+        // 如果没有拷贝函数，直接交换
+        sswap(a, b,inter->_itemSize);
+        return true;
+    }
+    else{
+        // 如果有拷贝函数，使用拷贝函数交换
+        any temp = malloc(inter->_itemSize);
+        if (temp == NULL) return false;
+        inter->copy(temp, a);
+        inter->copy(a, b);
+        inter->copy(b, temp);
+        free(temp);
+    }
+    return true;
 }
 // utf8 读取
 int read_utf8(utf8* res, byte buffer, size_t pos, size_t max){
