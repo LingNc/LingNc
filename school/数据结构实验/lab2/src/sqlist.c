@@ -41,7 +41,7 @@ Exception shrink(sqlist self){
 
 sqlist new_sqlist(interface inter){
     if (inter == NULL) return NULL;
-    sqlist res = malloc(sizeof(SqList));
+    sqlist res = calloc(1,sizeof(SqList));
     sqlist_init(res, inter);
     return res;
 }
@@ -52,7 +52,7 @@ Exception sqlist_init(sqlist self, interface inter){
     self->_size = 0;
     // 初始容量大小
     self->_capacity = SQLIST_INIT_SIZE;
-    self->_data = malloc(self->_capacity * inter->_itemSize);
+    self->_data = calloc(self->_capacity, inter->_itemSize);
     if (self->_data == NULL) return new_exception(ERROR, "sqlist init: 内存分配失败!");
     sqlist_pointer(self) pItem = self->_data;
     for (size_t i = 0; i < self->_capacity; i++){
@@ -93,6 +93,19 @@ any sqlist_at(sqlist self, int index){
         perror("sqlist_at: 下标越界!");
     }
     return (sqlist_pointer(self))self->_data + index;
+}
+
+any sqlist_modify(sqlist self,int index, any newItem){
+    if (self == NULL) return NULL;
+    sqlist_pointer(self) pitem=self->_data;
+    pitem+=index;
+    if (self->_inter->copy){
+        self->_inter->copy(pitem, newItem);
+    }
+    else{
+        memcpy(pitem, newItem, sqlist_get_itemsize(self));
+    }
+    return pitem;
 }
 
 bool sqlist_empty(sqlist self){
@@ -152,6 +165,23 @@ Exception sqlist_pop_back(sqlist self){
         e = shrink(self);
     }
     return e;
+}
+
+void sqlist_print(sqlist self){
+    if (self == NULL) return;
+    printf("顺序表元素:\n");
+    if (self->_inter->print){
+        for (size_t i = 0; i < self->_size; i++){
+            any curItem = sqlist_at(self, i);
+            self->_inter->print(curItem);
+            putchar('\n');
+        }
+    }
+    else{
+        for (size_t i = 0; i < self->_size; i++){
+            printf("%zu: %p\n", i, sqlist_at(self, i));
+        }
+    }
 }
 
 sqlist_iterator sqlist_begin(sqlist self){

@@ -48,10 +48,12 @@ Exception sqlist_resize(sqlist self,size_t newSize);
 size_t sqlist_size(sqlist self);
 size_t sqlist_get_itemsize(sqlist self);
 any sqlist_at(sqlist self,int index);
+any sqlist_modify(sqlist self,int index,any newItem);
 bool sqlist_empty(sqlist self);
 Exception sqlist_clear(sqlist self);
 Exception sqlist_push_back(sqlist self,any item);
 Exception sqlist_pop_back(sqlist self);
+void sqlist_print(sqlist self);
 sqlist_iterator sqlist_begin(sqlist self);
 sqlist_iterator sqlist_end(sqlist self);
 // 返回c风格的指针 表示数组

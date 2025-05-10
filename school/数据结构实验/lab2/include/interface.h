@@ -23,6 +23,8 @@ typedef any(*clear_func)(self);
 typedef bool(*cmp_func)(any,any);
 // 释放函数
 typedef any(*free_func)(self);
+// 打印函数
+typedef void (*print_func)(self);
 
 struct InterFace{
     // 元素大小
@@ -35,10 +37,11 @@ struct InterFace{
     clear_func clear;
     cmp_func cmp;
     free_func free;
+    print_func print;
 }; // InterFace
 
 // 初始化接口
-// 码表 i:init c:copy l:clear m:cmp f:free
+// 码表 i:init c:copy l:clear m:cmp f:free p:print
 interface new_interface(size_t itemSize,any subinter,string format,...);
 // 获取元素大小
 size_t inter_size(interface self);

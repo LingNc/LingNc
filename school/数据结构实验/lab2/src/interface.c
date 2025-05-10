@@ -28,6 +28,7 @@ interface new_interface(size_t itemSize, any subinter, string format, ...) {
             case 'l': self->clear = func; break;
             case 'm': self->cmp = func; break;
             case 'f': self->free = func; break;
+            case 'p': self->print = func; break;
             default: break; // 未知字符忽略
         }
     }
