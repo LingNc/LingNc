@@ -14,11 +14,12 @@ struct HuffNode{
     size_t freq;
 };
 // 树结构
-typedef huffnode tree;
+typedef huffnode hufftree;
 
 huffnode new_huffnode(utf8 word);
 huffnode huffnode_init(huffnode self,interface inter);
 huffnode huffnode_clear(huffnode self);
+// 递归删除
 huffnode free_huffnode(huffnode self);
 
 // 哈夫曼树
@@ -26,12 +27,14 @@ struct Huffman{
     huffnode _tree;
     // 节点数量
     size_t _nodes;
-    // 表 sqlist<pair<utf8,size_t>>
     // 频率表
+    // sqlist<pair<utf8,size_t>>
     sqlist _frequeTable;
     // 字长表
+    // sqlist<pair<utf8,size_t>>
     sqlist _lenthTalbe;
     // 编码表
+    // sqlist<pair<utf8,string>>
     sqlist _codeTable;
 }; // Huffman
 typedef struct Huffman Huffman;
@@ -54,7 +57,7 @@ Exception huffman_load(huffman self,Table type,sqlist table);
 // 获得指定表
 sqlist huffman_table(huffman self,Table type);
 // 构造树
-tree huffman_build(huffman self);
+hufftree huffman_build(huffman self);
 Exception free_huffman(huffman self);
 
 #endif // HUFFMAN_H
