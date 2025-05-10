@@ -15,7 +15,9 @@ struct Heap{
 typedef struct Heap Heap;
 typedef Heap *heap;
 
+// 新建堆 这个cmp 决定大顶堆小顶堆，满足条件就会进行调整 < 则小顶堆 > 大顶堆
 heap new_heap(interface inter,cmp_func cmp);
+// 从 sqlist 进行自动建堆，指定排序方式
 heap new_heap_from(sqlist list,cmp_func cmp);
 any heap_top(heap self);
 size_t heap_size(heap self);

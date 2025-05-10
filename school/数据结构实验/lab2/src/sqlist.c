@@ -54,9 +54,9 @@ Exception sqlist_init(sqlist self, interface inter){
     self->_capacity = SQLIST_INIT_SIZE;
     self->_data = calloc(self->_capacity, inter->_itemSize);
     if (self->_data == NULL) return new_exception(ERROR, "sqlist init: 内存分配失败!");
-    sqlist_pointer(self) pItem = self->_data;
+    sqlist_pointer(self) pdata = self->_data;
     for (size_t i = 0; i < self->_capacity; i++){
-        if (inter->init) inter->init(self->_data + i, inter->_subinter);
+        if (inter->init) inter->init( pdata[i], inter->_subinter);
     }
     return new_exception(SUCCESS, "");
 }
@@ -69,7 +69,7 @@ Exception sqlist_resize(sqlist self, size_t newSize){
     else{
         sqlist_pointer(self) pItem = self->_data;
         for (size_t i = newSize; i < self->_size; i++){
-            any curItem = pItem + i;
+            any curItem = pItem[i];
             if (self->_inter->clear) self->_inter->clear(curItem);
         }
         self->_data = realloc(self->_data, newSize);
@@ -92,20 +92,20 @@ any sqlist_at(sqlist self, int index){
     if (index > (int)self->_size || index < 0){
         perror("sqlist_at: 下标越界!");
     }
-    return (sqlist_pointer(self))self->_data + index;
+    return ((sqlist_pointer(self))self->_data)[index];
 }
 
 any sqlist_modify(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
-    pitem+=index;
+    any item=pitem[index];
     if (self->_inter->copy){
-        self->_inter->copy(pitem, newItem);
+        self->_inter->copy(item, newItem);
     }
     else{
-        memcpy(pitem, newItem, sqlist_get_itemsize(self));
+        memcpy(item, newItem, sqlist_get_itemsize(self));
     }
-    return pitem;
+    return item;
 }
 
 bool sqlist_empty(sqlist self){
@@ -117,10 +117,10 @@ Exception sqlist_clear(sqlist self){
     empty_ptr_error("sqlist_clear: 传入self指针为空!");
     // if(self==NULL) return new_exception(ERROR,"sqlist_clear: 传入self指针为空!");
     self->_size = 0;
-    sqlist_pointer(self) pItem = self->_data;
+    sqlist_pointer(self) pdata = self->_data;
     // 清空数据
     for (size_t i = 0; i < self->_size; i++){
-        any curItem = pItem + i;
+        any curItem = pdata[i];
         if (self->_inter->clear) self->_inter->clear(curItem);
     }
     // 收缩
@@ -133,14 +133,10 @@ Exception sqlist_push_back(sqlist self, any item){
     if (self->_size > self->_capacity){
         e = expand(self);
     }
-    sqlist_pointer(self) pItem = self->_data;
+    sqlist_pointer(self) pdata = self->_data;
     // any newItem=(byte)self->_data+(self->_size-1)*sqlist_get_itemsize(self);
-    any newItem = pItem + self->_size - 1;
-    // interface tinter=self->_inter;
+    any newItem = pdata[self->_size - 1];
     // #   ifdef CAP_INTER_ERROR
-    //     exception temp_e=tinter->init(newItem,tinter->_subinter);
-    //     exception_catch(&e,*temp_e);
-    //     free_exception(temp_e);
     // #   endif
     // 初始化
     if (self->_inter->init){
@@ -172,8 +168,7 @@ void sqlist_print(sqlist self){
     printf("顺序表元素:\n");
     if (self->_inter->print){
         for (size_t i = 0; i < self->_size; i++){
-            any curItem = sqlist_at(self, i);
-            self->_inter->print(curItem);
+            self->_inter->print(sqlist_at(self,i));
             putchar('\n');
         }
     }
@@ -196,6 +191,27 @@ any sqlist_c_data(sqlist self){
     return self->_data;
 }
 
+// 查找表 check 返回 1满足条件 0不满足,找到第一个满足条件的
+any sqlist_find(sqlist self, any dest, bool (*check)(any, any)){
+    sqlist_pointer(self) p = self->_data;
+    int l = -1, r = self->_size;
+
+    while (l + 1 < r){
+        int mid = (l + r) / 2;
+        if (check(p[mid], dest)) l = mid;
+        else r = mid;
+    }
+    // 找不到返回 sqlist_end
+    return (l != -1) ? p[l] : p[self->_size];
+}
+
+any sqlist_sort(sqlist self, cmp_func cmp){
+    if (self == NULL) return NULL;
+    size_t size = self->_size;
+    qsort(self->_data, size, sqlist_get_itemsize(self), cmp);
+    return self;
+}
+
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e = sqlist_clear(self);
@@ -207,10 +223,10 @@ Exception free_sqlist(sqlist self){
 sqlist_iterator new_sqlist_iterator(sqlist self, int index){
     if (self == NULL) return NULL;
     sqlist_iterator res = malloc(sizeof(SqList_Iterator));
-    sqlist_pointer(self) curItem = self->_data + index;
+    sqlist_pointer(self) pdata = self->_data ;
     res->_list = self;
     res->_index = index;
-    res->_curItem = curItem;
+    res->_curItem = pdata[index];
     res->back = sqlist_iterator_back;
     res->next = sqlist_iterator_next;
     return res;
