@@ -68,7 +68,7 @@ pair new_pair(any first, any second, pairinter pinter){
 
 any pair_init(pair self, interface inter){
     if (self == NULL) return NULL;
-    self->_pinter = inter;
+    self->_pinter = NULL;
     self->first=NULL;
     self->second=NULL;
     return self;
@@ -88,7 +88,7 @@ any pair_copy(pair self, pair other){
     // 重新分配内存
     self->first=realloc(self->first,pinter->first->_itemSize);
     self->second=realloc(self->second,pinter->second->_itemSize);
-    // 判断是否是静态变量 
+    // 判断是否是静态变量
     // first
     if(pinter->first->copy) pinter->first->copy(self->first,other->first);
     else memcpy(self->first,other->first,pinter->first->_itemSize);

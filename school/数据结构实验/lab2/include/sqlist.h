@@ -39,7 +39,6 @@ struct SqList_Iterator{
     sqlist_iterator (*next)(sqlist_iterator self);
 }; // SqList_Iterator
 
-
 // 初始化顺序表
 sqlist new_sqlist(interface inter);
 Exception sqlist_init(sqlist self,interface inter);
@@ -61,7 +60,7 @@ any sqlist_c_data(sqlist self);
 // 查找表 check 返回 1满足条件 0不满足,找到第一个满足条件的
 any sqlist_find(sqlist self, any dest, bool (*check)(any, any));
 // 排序函数
-any sqlist_sort(sqlist self, cmp_func cmp);
+any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any));
 Exception free_sqlist(sqlist self);
 
 // 初始化迭代器

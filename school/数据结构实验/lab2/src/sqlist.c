@@ -205,7 +205,7 @@ any sqlist_find(sqlist self, any dest, bool (*check)(any, any)){
     return (l != -1) ? p[l] : p[self->_size];
 }
 
-any sqlist_sort(sqlist self, cmp_func cmp){
+any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any)){
     if (self == NULL) return NULL;
     size_t size = self->_size;
     qsort(self->_data, size, sqlist_get_itemsize(self), cmp);

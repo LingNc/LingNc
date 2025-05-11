@@ -25,6 +25,7 @@ bool sswap(const any a,const any b,size_t size){
     memcpy(a, b, size);
     memcpy(b, temp, size);
     free(temp);
+    return true;
 }
 // 深拷贝交换函数
 bool dswap(const any a,const any b,interface inter){

@@ -7,21 +7,21 @@
 
 // 节点
 typedef struct HuffNode HuffNode;
-typedef HuffNode *huffnode;
+// 定义节点指针和树指针
+typedef HuffNode *huffnode,*hufftree;
 struct HuffNode{
     huffnode left,right;
     utf8 word;
     size_t freq;
 };
-// 树结构
-typedef huffnode hufftree;
 
 huffnode new_huffnode(utf8 word);
 huffnode huffnode_init(huffnode self,interface inter);
 huffnode huffnode_clear(huffnode self);
 // 递归删除
 huffnode free_huffnode(huffnode self);
-
+// 兼容函数
+any free_hufftree(hufftree self);
 // 哈夫曼树
 struct Huffman{
     huffnode _tree;
