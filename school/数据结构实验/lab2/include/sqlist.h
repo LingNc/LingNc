@@ -58,7 +58,7 @@ sqlist_iterator sqlist_end(sqlist self);
 // 返回c风格的指针 表示数组
 any sqlist_c_data(sqlist self);
 // 查找表 check 返回 1满足条件 0不满足,找到第一个满足条件的
-any sqlist_find(sqlist self, any dest, bool (*check)(any, any));
+any sqlist_bsearchf(sqlist self, any key, bool (*check)(any, any));
 // 排序函数
 any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any));
 Exception free_sqlist(sqlist self);

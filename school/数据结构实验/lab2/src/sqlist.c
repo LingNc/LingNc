@@ -192,17 +192,8 @@ any sqlist_c_data(sqlist self){
 }
 
 // 查找表 check 返回 1满足条件 0不满足,找到第一个满足条件的
-any sqlist_find(sqlist self, any dest, bool (*check)(any, any)){
-    sqlist_pointer(self) p = self->_data;
-    int l = -1, r = self->_size;
-
-    while (l + 1 < r){
-        int mid = (l + r) / 2;
-        if (check(p[mid], dest)) l = mid;
-        else r = mid;
-    }
-    // 找不到返回 sqlist_end
-    return (l != -1) ? p[l] : p[self->_size];
+any sqlist_bsearchf(sqlist self, any key, bool (*check)(any, any)){
+    return bsearchf(key, self->_data, self->_size, sqlist_get_itemsize(self), check);
 }
 
 any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any)){

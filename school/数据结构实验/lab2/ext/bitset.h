@@ -6,8 +6,8 @@
 #include "interface.h"
 #include <stdbool.h>
 
-// 防止分配巨量内存
-#define BITSET_MAX_SIZE 8*MB(1)
+// 防止分配巨量内存 64 8字节即可满足全部哈夫曼要求
+#define BITSET_MAX_SIZE 8
 
 // Bitset
 struct Bitset{

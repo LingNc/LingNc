@@ -3,7 +3,7 @@
 
 !src/*.c
 !include/*.h
-!ext/*.h
+!ext/*.*
 !tests/*.c
 !main.c
 !README.md

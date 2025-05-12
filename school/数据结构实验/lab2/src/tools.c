@@ -47,6 +47,19 @@ bool dswap(const any a,const any b,interface inter){
     }
     return true;
 }
+
+// 二分查找函数
+any bsearchf(any key,any base,size_t nmemb,size_t size,bool(*check)(any,any)){
+    if(key==NULL||base==NULL||check==NULL) return NULL;
+    pointer(size) p=base;
+    size_t l=0,r=nmemb;
+    while (l < r) {
+        size_t mid = l + (r - l)>>1;
+        if(cmp(key,p[mid])) r=mid;
+        else l=mid+1;
+    }
+    return (l==nmemb)?NULL:p[l];
+}
 // utf8 读取
 int read_utf8(utf8* res, byte buffer, size_t pos, size_t max){
     if (buffer == NULL || pos >= max) return 0;

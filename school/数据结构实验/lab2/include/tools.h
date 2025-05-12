@@ -23,6 +23,10 @@ bool pswap(any* a, any* b);
 bool sswap(const any a,const any b,size_t size);
 // 深拷贝交换
 bool dswap(const any a,const any b,interface inter);
+
+// 二分查找，找到有序数组中第一个满足条件的,没找到返回NULL
+any bsearchf(any key,any base,size_t nmemb,size_t size,bool(*check)(any,any));
+
 // 数据转换
 #define KB(x) ((x)*1024)
 #define MB(x) (KB(x)*1024)

@@ -43,15 +43,14 @@ status status_down(status *self,status new_status){
 
 Exception new_exception(status status,string msg){
     Exception self;
-    Status t=status;
 #   ifndef STRING_H
     string temp_str=nstrcat(to_str(status)," ");
     temp_str=strapp(temp_str,msg);
     // 不能free字面量
     // status_down(&t, sfree(&msg));
+    self.msg=temp_str;
 #   endif
-    self.msg=msg;
-    self.status=t;
+    self.status=status;
     return self;
 }
 
