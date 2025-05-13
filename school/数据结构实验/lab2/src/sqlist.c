@@ -37,26 +37,28 @@ Exception shrink(sqlist self){
 // 空指针错误函数
 #define empty_ptr_error(msg) if(self==NULL) return new_exception(ERROR,msg)
 
+
 // 公开函数
 
-sqlist new_sqlist(interface inter){
+sqlist new_sqlist(interfaces inter){
     if (inter == NULL) return NULL;
     sqlist res = calloc(1,sizeof(SqList));
     sqlist_init(res, inter);
     return res;
 }
 
-Exception sqlist_init(sqlist self, interface inter){
+Exception sqlist_init(sqlist self, interfaces inter){
     empty_ptr_error("sqlist_init: 传入self指针为空!");
     self->_inter = inter;
     self->_size = 0;
     // 初始容量大小
     self->_capacity = SQLIST_INIT_SIZE;
-    self->_data = calloc(self->_capacity, inter->_itemSize);
+    self->_data = calloc(self->_capacity, inter_size(inter));
     if (self->_data == NULL) return new_exception(ERROR, "sqlist init: 内存分配失败!");
     sqlist_pointer(self) pdata = self->_data;
     for (size_t i = 0; i < self->_capacity; i++){
-        if (inter->init) inter->init( pdata[i], inter->_subinter);
+        if(inter_sub(inter)->init)
+            inter_sub(inter)->init(pdata[i],inter_sub(inter)->_subInters);
     }
     return new_exception(SUCCESS, "");
 }
@@ -70,7 +72,8 @@ Exception sqlist_resize(sqlist self, size_t newSize){
         sqlist_pointer(self) pItem = self->_data;
         for (size_t i = newSize; i < self->_size; i++){
             any curItem = pItem[i];
-            if (self->_inter->clear) self->_inter->clear(curItem);
+            if(sqlist_inter(self)->clear)
+                sqlist_inter(self)->clear(curItem);
         }
         self->_data = realloc(self->_data, newSize);
         if (self->_data == NULL) return new_exception(ERROR, "sqlist resize: 收缩失败!");
@@ -99,11 +102,11 @@ any sqlist_modify(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
     any item=pitem[index];
-    if (self->_inter->copy){
-        self->_inter->copy(item, newItem);
+    if (sqlist_inter(self)->copy){
+        sqlist_inter(self)->copy(item, newItem);
     }
     else{
-        memcpy(item, newItem, sqlist_get_itemsize(self));
+        memcpy(item, newItem, inter_size(self->_inter));
     }
     return item;
 }
@@ -115,15 +118,16 @@ bool sqlist_empty(sqlist self){
 
 Exception sqlist_clear(sqlist self){
     empty_ptr_error("sqlist_clear: 传入self指针为空!");
-    // if(self==NULL) return new_exception(ERROR,"sqlist_clear: 传入self指针为空!");
-    self->_size = 0;
     sqlist_pointer(self) pdata = self->_data;
     // 清空数据
     for (size_t i = 0; i < self->_size; i++){
         any curItem = pdata[i];
-        if (self->_inter->clear) self->_inter->clear(curItem);
+        if(sqlist_inter(self)->clear)
+            sqlist_inter(self)->clear(curItem);
+        else
+            memset(curItem, 0, inter_size(self->_inter));
     }
-    // 收缩
+    self->_size = 0;
     return new_exception(SUCCESS, "");
 }
 
@@ -139,12 +143,12 @@ Exception sqlist_push_back(sqlist self, any item){
     // #   ifdef CAP_INTER_ERROR
     // #   endif
     // 初始化
-    if (self->_inter->init){
-        self->_inter->init(newItem, self->_inter->_subinter);
+    if (sqlist_inter(self)->init){
+        sqlist_inter(self)->init(newItem, sqlist_inter(self)->_subInters);
     }
     // 拷贝构造
-    if (self->_inter->copy){
-        self->_inter->copy(newItem, item);
+    if (sqlist_inter(self)->copy){
+        sqlist_inter(self)->copy(newItem, item);
     }
     else{
         memcpy(newItem, item, sqlist_get_itemsize(self));
@@ -166,9 +170,9 @@ Exception sqlist_pop_back(sqlist self){
 void sqlist_print(sqlist self){
     if (self == NULL) return;
     printf("顺序表元素:\n");
-    if (self->_inter->print){
+    if (sqlist_inter(self)->print){
         for (size_t i = 0; i < self->_size; i++){
-            self->_inter->print(sqlist_at(self,i));
+            sqlist_inter(self)->print(sqlist_at(self,i));
             putchar('\n');
         }
     }
@@ -203,11 +207,51 @@ any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any)){
     return self;
 }
 
+any sqlist_copy(sqlist self,sqlist other){
+    if(other==NULL) return NULL;
+    // 清除原有数据
+    sqlist_clear(self);
+    // 设置大小
+    self->_size=other->_size;
+    // 设置容量
+    self->_capacity=other->_capacity;
+    // 重分配空间
+    self->_data=realloc(self->_data,self->_capacity*inter_size(other->_inter));
+    if(self->_data==NULL) return NULL;
+    // 拷贝数据
+    sqlist_pointer(self) spdata=self->_data;
+    sqlist_pointer(other) opdata=other->_data;
+    for(size_t i=0;i<self->_size;i++){
+        // 拷贝
+        if(sqlist_inter(other)->copy)
+            sqlist_inter(other)->copy(spdata[i],opdata[i]);
+        else
+            memcpy(spdata[i],opdata[i],inter_size(other->_inter));
+    }
+    // 复制接口
+    interfaces_copy(self->_inter,other->_inter);
+    return self;
+}
+
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e = sqlist_clear(self);
-    exception_down(&e, sfree(&self));
+    exception_down(&e, sfree(self));
     return e;
+}
+interfaces sqlist_create_inter(interfaces subinters){
+    return new_interfaces(
+        1,
+        new_interface(
+            sizeof(SqList),
+            subinters,
+            "iclf",
+            sqlist_init,
+            sqlist_copy,
+            sqlist_clear,
+            free_sqlist
+            )
+    );
 }
 
 // 迭代器
@@ -244,5 +288,5 @@ any sqlist_iterator_visit(sqlist_iterator self){
 }
 
 Exception free_sqlist_iterator(sqlist_iterator self){
-    return new_exception(sfree(&self), "");
+    return new_exception(sfree(self), "");
 }

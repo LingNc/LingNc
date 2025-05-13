@@ -7,7 +7,7 @@
 // 设置初始化顺序表容量
 #define SQLIST_INIT_SIZE 10
 // 顺序表表指针 传入顺序表指针
-#define sqlist_pointer(self) pointer(sqlist_get_itemsize(self))
+#define sqlist_pointer(self) pointer(inter_size(self->_inter))
 
 // 顺序表
 struct SqList{
@@ -17,7 +17,7 @@ struct SqList{
     size_t _size;
     // 容量（当前的最大大小）
     size_t _capacity;
-    interface _inter;
+    interfaces _inter;
 }; // SqList
 
 typedef struct SqList SqList;
@@ -40,8 +40,8 @@ struct SqList_Iterator{
 }; // SqList_Iterator
 
 // 初始化顺序表
-sqlist new_sqlist(interface inter);
-Exception sqlist_init(sqlist self,interface inter);
+sqlist new_sqlist(interfaces inter);
+Exception sqlist_init(sqlist self,interfaces inter);
 Exception sqlist_resize(sqlist self,size_t newSize);
 // sqlist sqlist_insert(sqlist self,size_t pos,any item);
 size_t sqlist_size(sqlist self);
@@ -61,7 +61,12 @@ any sqlist_c_data(sqlist self);
 any sqlist_bsearchf(sqlist self, any key, bool (*check)(any, any));
 // 排序函数
 any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any));
+// 深拷贝构造函数
+any sqlist_copy(sqlist self,sqlist other);
 Exception free_sqlist(sqlist self);
+interfaces sqlist_create_inter(interfaces subinters);
+// inter 提取宏
+#define sqlist_inter(self) inter_sub(self->_inter)
 
 // 初始化迭代器
 sqlist_iterator new_sqlist_iterator(sqlist dest,int index);

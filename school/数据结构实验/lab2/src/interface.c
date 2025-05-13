@@ -19,18 +19,23 @@ interfaces new_interfaces(Byte subnums,...){
     va_end(args);
     return res;
 }
-// 获取元素大小
-// size_t inters_size(interfaces self,Byte index){
-//     if (self == NULL) return 0;
-//     if (index >= self->count) return 0;
-//     return self->inters[index]->_itemSize;
-// }
-// 获取子接口
-// interface inters_sub(interfaces self,Byte index){
-//     if (self == NULL) return NULL;
-//     if (index >= self->count) return NULL;
-//     return self->inters[index];
-// }
+
+any interfaces_copy(interfaces self,interfaces other){
+    if(other==NULL) return NULL;
+    // 计算容量
+    size_t maxSize=other->count;
+    // 存在则扩容，不存在初始化
+    if(self) self=realloc(self,sizeof(InterFaces)+maxSize*sizeof(interface));
+    else self=new_interfaces(maxSize);
+    // 递归复制接口
+    for(Byte i=0;i<maxSize;i++){
+        if(self->inters[i]->copy)
+            self->inters[i]->copy(self->inters[i],other->inters[i]);
+        else // 这个分支应该不会被调用
+            memcpy(self->inters[i],other->inters[i],inters_size(other,i));
+    }
+}
+
 Exception free_interfaces(interfaces self){
     if(self==NULL) return new_exception(WARRING,"free_interfaces: 传入self指针为空!");
     Exception e=new_exception(SUCCESS,"");
