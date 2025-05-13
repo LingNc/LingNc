@@ -3,12 +3,51 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-interface new_interface(size_t itemSize, any subinter, string format, ...) {
+// 初始化接口列表
+interfaces new_interfaces(Byte subnums,...){
+    // 第一个字节存储数量，后面存储接口表
+    interfaces res=(interfaces)malloc(sizeof(InterFaces)+subnums*sizeof(interface));
+    if(res==NULL) return NULL;
+    // 设置数量
+    res->count=subnums;
+    // 设置接口
+    va_list args;
+    va_start(args,subnums);
+    for(Byte i=0;i<subnums;i++){
+        res->inters[i]=va_arg(args,interface);
+    }
+    va_end(args);
+    return res;
+}
+// 获取元素大小
+// size_t inters_size(interfaces self,Byte index){
+//     if (self == NULL) return 0;
+//     if (index >= self->count) return 0;
+//     return self->inters[index]->_itemSize;
+// }
+// 获取子接口
+// interface inters_sub(interfaces self,Byte index){
+//     if (self == NULL) return NULL;
+//     if (index >= self->count) return NULL;
+//     return self->inters[index];
+// }
+Exception free_interfaces(interfaces self){
+    if(self==NULL) return new_exception(WARRING,"free_interfaces: 传入self指针为空!");
+    Exception e=new_exception(SUCCESS,"");
+    // 释放接口列表
+    for(Byte i=0;i<self->count;i++){
+        exception_pass(&e,free_interface(self->inters[i]));
+    }
+    free(self);
+    return e;
+}
+
+interface new_interface(size_t itemSize,interfaces subinters,string format,...){
     interface self = (interface)malloc(sizeof(struct InterFace));
     if (self == NULL) return NULL;
     self->_itemSize = itemSize;
-    self->_subinter = subinter;
-
+    self->_subInters=subinters;
+    // self->_subNums=visitp_cast(byte,subinters)[-1];
     va_list args;
     va_start(args, format);
 
@@ -44,19 +83,13 @@ Exception free_interface(interface self){
         return new_exception(res,"free_interface: 传入self指针为空!");
     }
     Exception e=new_exception(res,"");
-    if(self->_subinter!=NULL) exception_pass(&e,free_interface(self->_subinter));
+    if(self->_subInters!=NULL) exception_pass(&e,free_interfaces(self->_subInters));
     // status_down(&res,nfree((any *)&self));
-    exception_down(&e,sfree(&self));
-    free(self);
+    exception_down(&e,sfree(self));
     return e;
 }
 
-size_t inter_size(interface self){
-    if (self == NULL) return 0;
-    return self->_itemSize;
-}
-
-interface inter_subinter(interface self){
-    if (self == NULL) return NULL;
-    return self->_subinter;
-}
+// size_t inter_size(interface self){
+//     if (self == NULL) return 0;
+//     return self->_itemSize;
+// }

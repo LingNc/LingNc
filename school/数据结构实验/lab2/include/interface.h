@@ -13,8 +13,9 @@
 // 函数类型预先定义
 typedef struct InterFace InterFace;
 typedef InterFace *interface;
+
 // 初始化函数
-typedef any (*init_func)(self,interface);
+typedef any (*init_func)(self,interfaces);
 // 拷贝构造函数
 typedef any (*copy_func)(self,any);
 // 清理函数
@@ -26,11 +27,21 @@ typedef any(*free_func)(self);
 // 打印函数
 typedef void (*print_func)(self);
 
+struct InterFaces{
+    // 接口数量
+    Byte count;
+    // 柔性数组
+    interface inters[];
+}; // InterFaces
+
+typedef struct InterFaces InterFaces;
+typedef InterFaces *interfaces;
+
 struct InterFace{
     // 元素大小
     size_t _itemSize;
-    // 接口的接口
-    any _subinter;
+    // 接口的接口列表
+    interfaces _subInters;
     // 函数接口
     init_func init;
     copy_func copy;
@@ -40,16 +51,28 @@ struct InterFace{
     print_func print;
 }; // InterFace
 
+
+// 初始化接口列表
+// 先传入接口个数，后面传入 interface 接口
+interfaces new_interfaces(Byte subnums,...);
+// 获取元素大小
+// size_t inters_size(interfaces self,Byte index);
+#define inters_size(self, index) ((self)->inters[index]->_itemSize)
+// 获取子接口
+// interface inters_sub(interfaces self,Byte index);
+#define inters_sub(self, index) ((self)->inters[index])
+Exception free_interfaces(interfaces self);
+
 // 初始化接口
 // 码表 i:init c:copy l:clear m:cmp f:free p:print
-interface new_interface(size_t itemSize,any subinter,string format,...);
+interface new_interface(size_t itemSize,interfaces subinters,string format,...);
 // 获取元素大小
-size_t inter_size(interface self);
+// size_t inter_size(interface self);
+#define inter_size(self) ((self)->_itemSize)
 // 获取子接口
-interface inter_subinter(interface self);
+// interface inter_sub(interface self,Byte index);
+#define inter_sub(self, index) ((self)->_subInters->inters[index])
 // 释放接口
 Exception free_interface(interface slef);
-// 获取元素大小
-size_t inter_item_size(interface self);
 
 #endif //INTERFACE_H
