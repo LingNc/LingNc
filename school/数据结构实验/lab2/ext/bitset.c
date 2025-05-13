@@ -112,8 +112,8 @@ void bitset_print(bitset self){
 
 any free_bitset(bitset self){
     if(self==NULL) return NULL;
-    sfree(&self->_data);
-    sfree(&self);
+    sfree(self->_data);
+    sfree(self);
     return NULL;
 } // free_bitset
 

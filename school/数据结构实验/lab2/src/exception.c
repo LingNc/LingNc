@@ -47,7 +47,7 @@ Exception new_exception(status status,string msg){
     string temp_str=nstrcat(to_str(status)," ");
     temp_str=strapp(temp_str,msg);
     // 不能free字面量
-    // status_down(&t, sfree(&msg));
+    // status_down(&t, sfree(msg));
     self.msg=temp_str;
 #   endif
     self.status=status;
@@ -123,7 +123,7 @@ Exception exception_down(exception self,status new_status){
 status free_exception(exception self){
     status res=SUCCESS;
     if(self==NULL) status_down(&res,WARRING);
-    else status_down(&res,sfree(&self->msg));
-    status_down(&res,sfree(&self));
+    else status_down(&res,sfree(self->msg));
+    status_down(&res,sfree(self));
     return res;
 }

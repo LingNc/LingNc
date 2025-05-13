@@ -15,7 +15,7 @@
 status pfree(any* _ptr);
 // 增加安全的函数
 // status nfree(any *_ptr)
-#define sfree(_ptr) pfree((any*)(_ptr))
+#define sfree(_ptr) pfree((any*)(&_ptr))
 
 // 指针交换函数
 bool pswap(any* a, any* b);
