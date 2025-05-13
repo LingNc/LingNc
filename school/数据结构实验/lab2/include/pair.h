@@ -5,36 +5,22 @@
 #include "exception.h"
 #include "interface.h"
 
-// 对 inter
-struct PiarInter{
-    interface first,second;
-}; // Pair_inter
-typedef struct PiarInter PairInter;
-typedef PairInter *pairinter;
-
-// new
-pairinter new_pairinter(interface first,interface second);
-any pairinter_init(pairinter sel,interface inter);
-any pairinter_clear(pairinter self);
-any free_pairinter(pairinter self);
-// interface pairinter_create_inter();
-
 // 对
 struct Pair{
     any first,second;
-    pairinter _pinter;
+    interfaces _inters;
 }; // Pair
 
 typedef struct Pair Pair;
 typedef Pair *pair;
 
 // new 接受 pair_inter
-pair new_pair(any first,any second, pairinter pinter);
-any pair_init(pair self,interface inter);
+pair new_pair(any first,any second,interfaces inters);
+any pair_init(pair self,interfaces inters);
 any pair_clear(pair self);
 any pair_copy(pair slef,pair other);
 void pair_print(pair self);
 any free_pair(pair self);
-interface pair_create_inter();
+interfaces pair_create_inters();
 
 #endif //PAIR_H

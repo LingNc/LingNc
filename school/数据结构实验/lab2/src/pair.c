@@ -4,71 +4,38 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// pairinter
-pairinter new_pairinter(interface first, interface second){
-    if (first == NULL || second == NULL) return NULL;
-    pairinter res = malloc(sizeof(PairInter));
-    if (res == NULL) return NULL;
-    res->first = first;
-    res->second = second;
-    return res;
-}
-any pairinter_init(pairinter self, interface inter){
-    if (self == NULL) return NULL;
-    self->first = NULL;
-    self->second = NULL;
-    return self;
-}
-any pairinter_clear(pairinter self){
-    if (self == NULL) return NULL;
-    self->first = NULL;
-    self->second = NULL;
-    return self;
-}
-any free_pairinter(pairinter self){
-    if (self == NULL) return NULL;
-    free_interface(self->first);
-    free_interface(self->second);
-    // 释放结构体
-    sfree(&self);
-    return NULL;
-}
-// interface pairinter_create_inter(){
-//     return new_interface(sizeof(PairInter), NULL, pairinter_init, NULL, pairinter_clear, NULL);
-// }
-
 // pair
-pair new_pair(any first, any second, pairinter pinter){
+pair new_pair(any first, any second, interfaces inters){
     pair res = malloc(sizeof(Pair));
     if (res == NULL) return NULL;
     // 初始化
     pair_init(res, NULL);
-    res->first = malloc(pinter->first->_itemSize);
-    res->second = malloc(pinter->second->_itemSize);
+    res->first = malloc(inters_size(inters, 0));
+    res->second = malloc(inters_size(inters, 1));
     if (res->first == NULL || res->second == NULL){
-        sfree(&res);
+        sfree(res);
         return NULL;
     }
-    res->_pinter = pinter;
+    res->_inters = inters;
     // 拷贝构造
-    if (pinter->first->copy){
-        pinter->first->copy(res->first, first);
+    if (inters_sub(inters,0)->copy){
+        inters_sub(inters,0)->copy(res->first, first);
     }
     else{
-        memcpy(res->first, first, pinter->first->_itemSize);
+        memcpy(res->first, first, inters_sub(inters,0)->_itemSize);
     }
-    if (pinter->second->copy){
-        pinter->second->copy(res->second, second);
+    if (inters_sub(inters,1)->copy){
+        inters_sub(inters,1)->copy(res->second, second);
     }
     else{
-        memcpy(res->second, second, pinter->second->_itemSize);
+        memcpy(res->second, second, inters_size(inters,1));
     }
     return res;
 } // new_pair
 
-any pair_init(pair self, interface inter){
+any pair_init(pair self, interfaces inters){
     if (self == NULL) return NULL;
-    self->_pinter = NULL;
+    self->_inters=NULL;
     self->first=NULL;
     self->second=NULL;
     return self;
@@ -78,48 +45,61 @@ any pair_copy(pair self, pair other){
     if (other == NULL) return NULL;
     // 如果self为空就重分配self内存
     if(self==NULL){
-        self=new_pair(NULL,NULL,other->_pinter);
+        self=new_pair(NULL,NULL,other->_inters);
         if(self==NULL){
             return NULL;
         }
     }
-    pairinter pinter = other->_pinter;
-    if(self->_pinter==NULL) self->_pinter=pinter;
+    interfaces inters = other->_inters;
+    if(self->_inters==NULL) self->_inters=inters;
     // 重新分配内存
-    self->first=realloc(self->first,pinter->first->_itemSize);
-    self->second=realloc(self->second,pinter->second->_itemSize);
+    self->first=realloc(self->first,inters_size(inters, 0));
+    self->second=realloc(self->second,inters_size(inters, 1));
     // 判断是否是静态变量
     // first
-    if(pinter->first->copy) pinter->first->copy(self->first,other->first);
-    else memcpy(self->first,other->first,pinter->first->_itemSize);
+    if(inters_sub(inters, 0)->copy)
+        inters_sub(inters, 0)->copy(self->first, other->first);
+    else
+        memcpy(self->first, other->first, inters_size(inters, 0));
     // second
-    if(pinter->second->copy) pinter->second->copy(self->second,other->second);
-    else memcpy(self->second,other->second,pinter->second->_itemSize);
-    self->_pinter = pinter;
+    if(inters_sub(inters, 1)->copy)
+        inters_sub(inters, 1)->copy(self->second, other->second);
+    else
+        memcpy(self->second, other->second, inters_size(inters, 1));
+    self->_inters = inters;
     return self;
 } // pair_copy
 
 any pair_clear(pair self){
     if (self == NULL) return NULL;
-    sfree(&self->first);
-    sfree(&self->second);
+    if(self->_inters==NULL) return self;
+    // 清除数据
+    if(inters_sub(self->_inters, 0)->clear)
+        inters_sub(self->_inters, 0)->clear(self->first);
+    else
+        sfree(self->first);
+    if(inters_sub(self->_inters,1)->clear)
+        inters_sub(self->_inters,1)->clear(self->second);
+    else
+        sfree(self->second);
     return self;
 }
 
 void pair_print(pair self){
     if (self == NULL) return;
     printf("piar( ");
-    if (self->_pinter->first->print){
-        self->_pinter->first->print(self->first);
+    if (inters_sub(self->_inters, 0)->print){
+        inters_sub(self->_inters, 0)->print(self->first);
     }
     else{
-        printf("%p ,", self->first);
+        printf("%p, ", self->first);
     }
-    if (self->_pinter->second->print){
-        self->_pinter->second->print(self->second);
+    printf(" ");
+    if (inters_sub(self->_inters, 1)->print){
+        inters_sub(self->_inters, 1)->print(self->second);
     }
     else{
-        printf(" %p", self->second);
+        printf("%p", self->second);
     }
     printf(" )\n");
 }
@@ -127,11 +107,13 @@ void pair_print(pair self){
 any free_pair(pair self){
     if (self == NULL) return NULL;
     pair_clear(self);
-    sfree(&self);
+    sfree(self);
     return NULL;
 }
 
-interface pair_create_inter(){
+interfaces pair_create_inters(){
     // 码表 i:init c:copy l:clear m:cmp f:free
-    return new_interface(sizeof(Pair), NULL, "iclp",pair_init, pair_copy, pair_clear, pair_print);
+    return new_interfaces(1,
+        new_interface(sizeof(Pair),NULL,"iclp",pair_init,pair_copy,pair_clear,pair_print)
+        );
 }
