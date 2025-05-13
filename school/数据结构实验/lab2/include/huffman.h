@@ -30,12 +30,15 @@ struct Huffman{
     // 频率表
     // sqlist<pair<utf8,size_t>>
     sqlist _frequeTable;
+    // pairinter _fre_inter;
     // 字长表
     // sqlist<pair<utf8,size_t>>
-    sqlist _lenthTalbe;
+    sqlist _lengthTable;
+    // pairinter _length_inter;
     // 编码表
-    // sqlist<pair<utf8,string>>
+    // sqlist<pair<utf8,huffcode>>
     sqlist _codeTable;
+    // pairinter _code_inter;
 }; // Huffman
 typedef struct Huffman Huffman;
 typedef Huffman *huffman;
