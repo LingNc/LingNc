@@ -158,7 +158,12 @@
 			"*.h": "c",
 			"string": "c",
 			"tuple": "cpp",
-			"random": "c"
+			"random": "c",
+			"array": "c",
+			"compare": "c",
+			"functional": "c",
+			"type_traits": "c",
+			"utility": "c"
 		}
 	}
 }
