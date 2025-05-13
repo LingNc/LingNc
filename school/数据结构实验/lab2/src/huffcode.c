@@ -44,6 +44,8 @@ void huffcode_rshift(huffcode self,size_t nums){
     self->_code>>=nums;
     self->_size-=nums;
 }
-interface huffcode_create_inter(){
-    return new_interface(sizeof(HuffCode), NULL, "ip",huffcode_init,huffcode_print);
+interfaces huffcode_create_inters(){
+    return new_interfaces(1,
+        new_interface(sizeof(HuffCode),NULL,"ip",huffcode_init,huffcode_print)
+    );
 }

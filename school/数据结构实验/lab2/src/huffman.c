@@ -47,14 +47,14 @@ any free_hufftree(hufftree self){
 
 // 小顶堆 频率
 // any = huffnode*
-static bool min_heap(any a, any b){
-    return (*(huffnode*)a)->freq < (*(huffnode*)b)->freq;
+static bool min_heap(any a,any b){
+    return cast(huffnode,a)->freq < cast(huffnode,b)->freq;
 }
 
 // 从频率表构建树
-static hufftree create_tree_from_freq(sqlist table){
-    if (table == NULL) return NULL;
-    size_t size = sqlist_size(table);
+static hufftree create_tree_from_freq(sqlist freq_t){
+    if (freq_t == NULL) return NULL;
+    size_t size = sqlist_size(freq_t);
     if (size == 0) return NULL;
 
     // 根据频率表预构建储存节点的堆的列表 O(n)
@@ -63,24 +63,25 @@ static hufftree create_tree_from_freq(sqlist table){
     sqlist node_list = new_sqlist(pnode_inter);
     for (int i = 0; i < size; i++){
         // 取出频率表中的元素
-        pair p = sqlist_at(table, i);
+        pair p = sqlist_at(freq_t, i);
         // 创建节点
-        huffnode node = new_huffnode(*(utf8*)p->first);
-        node->freq = *(size_t*)p->second;
+        // huffnode node = new_huffnode(*(utf8*)p->first);
+        huffnode node=new_huffnode(visitp_cast(utf8,p->first));
+        node->freq=visitp_cast(size_t,p->second);
         // 插入到列表中 注意值应该传值的指针
         sqlist_push_back(node_list, &node);
     }
     // 建堆 根据频率 小顶堆 O(logn) 但是之后每次索引表构建 是 O(nlogn) 目前不采用
     // heap h=new_heap_from(table,min_heap);
     // 建堆 根据频率 小顶堆 heap<huffnode*>
-    heap h = new_heap_from(table, min_heap);
+    heap h = new_heap_from(freq_t, min_heap);
     // 构建哈夫曼树
     hufftree tree = NULL;
     while (heap_size(h) > 1){
         // 取出两个最小的节点
-        huffnode left = *(huffnode*)heap_top(h);
+        huffnode left = heap_top(h);
         heap_pop(h);
-        huffnode right = *(huffnode*)heap_top(h);
+        huffnode right = heap_top(h);
         heap_pop(h);
         // 创建新的节点
         huffnode node = new_huffnode(0);
@@ -91,7 +92,7 @@ static hufftree create_tree_from_freq(sqlist table){
         heap_push(h, &node);
     }
     // 获取构建的树根
-    hufftree root = *(huffnode*)heap_top(h);
+    hufftree root = heap_top(h);
     heap_pop(h);
     // 释放堆
     free_heap(h);
@@ -117,23 +118,22 @@ static void create_length(hufftree node, size_t depth){
 }
 
 // 从树构造字长表
-static sqlist create_length_from_tree(huffman hfm){
-    if (hfm == NULL) return NULL;
-    hufftree tree = hfm->_tree;
+static sqlist create_length_from_tree(hufftree tree){
     if (tree == NULL) return NULL;
     sqlist table = new_sqlist(pair_create_inter());
     // 遍历树
     // 计算字长
-    // 由递归函数创建，初始化静态全局变量
-    g_sqlist_table = table;
     // pair<utf8,size_t> 单词 和 长度
     pairinter inter=new_pairinter(
         new_interface(sizeof(utf8), NULL, ""),
         new_interface(sizeof(size_t), NULL, "")
     );
+    // 初始化静态全局变量
     g_pair_inter=inter;
-    create_length(tree, 0);
-    hfm->_lengthTable = table;
+    g_sqlist_table = table;
+    // 递归函数创建
+    create_length(tree,0);
+    // hfm->_leng_t = table;
     // 保存 pairinter
     // hfm->_length_inter=inter;
     // 清空全局变量
@@ -154,10 +154,10 @@ static bool length_asc_cmp(c_any a,c_any b){
 }
 
 // 从字长表构建范式哈夫曼编码表
-static sqlist create_canonical_from_length(sqlist length){
-    if (length == NULL) return NULL;
+static sqlist create_canonical_from_length(sqlist leng_t){
+    if (leng_t == NULL) return NULL;
     // 升序排序字长表
-    sqlist_sort(length,length_asc_cmp);
+    sqlist_sort(leng_t,length_asc_cmp);
     // 创建pairinter
     pairinter pinter=new_pairinter(
         // utf8 inter
@@ -166,14 +166,14 @@ static sqlist create_canonical_from_length(sqlist length){
         huffcode_create_inter()
     );
     // 计算范式哈夫曼编码表
-    size_t l_size=sqlist_size(length);
+    size_t l_size=sqlist_size(leng_t);
     // 缓存 huffcode
     HuffCode cache;
     // 初始化 huffcode 为0
     huffcode_init(&cache);
     // 从第一个对 获取起始数据
     // pair<utf8,size_t>
-    pair p=sqlist_at(length,0);
+    pair p=sqlist_at(leng_t,0);
     // 创建第一个编码条目
     // pair<utf8,huffcode>
     pair code_pair=new_pair(p->first,p->second,pinter);
@@ -185,7 +185,7 @@ static sqlist create_canonical_from_length(sqlist length){
     size_t last_len=1;
     // 处理剩余的每个词
     for(size_t i=0;i<l_size;i++){
-        p=sqlist_at(length,i);
+        p=sqlist_at(leng_t,i);
         // 增加编码值
         huffcode_inc(&cache);
         size_t new_len=visitp_cast(size_t,p->second);
@@ -204,14 +204,46 @@ static sqlist create_canonical_from_length(sqlist length){
     return table;
 }
 
+// 临时使用的全局变量
+static hufftree g_hufftree;
+// 从编码表递归创建树
+static void create_tree(huffnode node,uint64_t code,Byte size){
+
+}
+
+Exception hufftree_insert(hufftree self,huffnode node){
+    if (self == NULL || node == NULL) return new_exception(ERROR, "hufftree_insert: 传入self或node指针为空!");
+
+}
+
+// 从范式哈夫曼编码构造范式哈夫曼树
+hufftree create_tree_from_canonical(sqlist code_t){
+    if (code_t == NULL) return NULL;
+    // 创建树
+    hufftree tree = new_huffnode(0);
+    // 遍历编码表
+    size_t size = sqlist_size(code_t);
+    for (int i = 0; i < size; i++){
+        // pair<utf8,huffcode>
+        pair p = sqlist_at(code_t, i);
+        // 取出编码
+        huffcode code = visitp_cast(huffcode,p->second);
+        // 取出字节
+        utf8 word = visitp_cast(utf8,p->first);
+        // 插入到树中
+        hufftree_insert(tree, code, word);
+    }
+    return tree;
+}
+
 // 树操作
 huffman new_huffman(){
     huffman self = malloc(sizeof(Huffman));
     self->_tree = NULL;
     self->_nodes = 0;
-    self->_frequeTable = NULL;
-    self->_lengthTable = NULL;
-    self->_codeTable = NULL;
+    self->_freq_t = NULL;
+    self->_leng_t = NULL;
+    self->_code_t = NULL;
     return self;
 }
 // Exception huffman_init(huffman self);
@@ -222,13 +254,13 @@ Exception huffman_load(huffman self, Table type, sqlist table){
     Exception e = new_exception(SUCCESS, "");
     switch (type){
     case Freque:
-        self->_frequeTable = table;
+        self->_freq_t = table;
         break;
     case Length:
-        self->_lengthTable = table;
+        self->_leng_t = table;
         break;
     case Code:
-        self->_codeTable = table;
+        self->_code_t = table;
         break;
     default:
         e.status = ERROR;
@@ -240,7 +272,29 @@ Exception huffman_load(huffman self, Table type, sqlist table){
 
 // 构建树
 hufftree huffman_build(huffman self){
+    // 根据不同的表是否存在来构建树
+    // 表均不存在
+    if(self->_freq_t==NULL&&
+       self->_leng_t==NULL&&
+       self->_code_t==NULL){
+        return NULL;
+    }
+    // 频率表存在
+    if(self->_freq_t!=NULL){
+        // 从频率表构建树来统计字长
+        hufftree tree_t=create_tree_from_freq(self->_freq_t);
+        if(tree_t==NULL){
+            // 异常报错
+            return NULL;
+        }
+        // 从临时树构建字长表
+        sqlist l_table=create_length_from_tree(tree_t);
+        if(l_table==NULL){
+            // 异常报错
+            return NULL;
+        }
 
+    }
 }
 
 // 获得指定表
@@ -249,13 +303,13 @@ sqlist huffman_table(huffman self, Table type){
     sqlist table = NULL;
     switch (type){
     case Freque:
-        table = self->_frequeTable;
+        table = self->_freq_t;
         break;
     case Length:
-        table = self->_lengthTable;
+        table = self->_leng_t;
         break;
     case Code:
-        table = self->_codeTable;
+        table = self->_code_t;
         break;
     default:
         break;

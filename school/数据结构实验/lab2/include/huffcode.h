@@ -25,6 +25,6 @@ void huffcode_inc(huffcode self);
 void huffcode_lshift(huffcode self,size_t nums);
 // 右移
 void huffcode_rshift(huffcode self,size_t nums);
-interface huffcode_create_inter();
+interfaces huffcode_create_inters();
 
 #endif
