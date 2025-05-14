@@ -13,19 +13,8 @@
 // 函数类型预先定义
 typedef struct InterFace InterFace;
 typedef InterFace *interface;
-
-// 初始化函数
-typedef any  (*init_func) (self,interfaces);
-// 拷贝构造函数
-typedef any  (*copy_func) (self,any);
-// 清理函数
-typedef any  (*clear_func)(self);
-// 比较函数
-typedef bool (*cmp_func)  (any,any);
-// 释放函数
-typedef any  (*free_func) (self);
-// 打印函数
-typedef void (*print_func)(self);
+typedef struct InterFaces InterFaces;
+typedef InterFaces *interfaces;
 
 struct InterFaces{
     // 接口数量
@@ -34,9 +23,20 @@ struct InterFaces{
     interface inters[];
 }; // InterFaces
 
-typedef struct InterFaces InterFaces;
-typedef InterFaces *interfaces;
-
+// 初始化函数
+typedef any  (*init_func) (self,interfaces);
+// 拷贝构造函数
+typedef any  (*copy_func) (self,any);
+// 移动构造函数
+typedef any  (*move_func) (self,any);
+// 清理函数
+typedef any  (*clear_func)(self);
+// 比较函数
+typedef bool (*cmp_func)  (any,any);
+// 释放函数
+typedef any  (*free_func) (self);
+// 打印函数
+typedef void (*print_func)(self);
 struct InterFace{
     // 元素大小
     size_t     _itemSize;
@@ -45,29 +45,34 @@ struct InterFace{
     // 函数接口
     init_func  init;
     copy_func  copy;
+    move_func  move;
     clear_func clear;
     cmp_func   cmp;
     free_func  free;
     print_func print;
 }; // InterFace
 
-
-// 获取元素大小
-#define    inters_size(self, index) ((self)->inters[index]->_itemSize)
-// 获取默认元素大小
-#define    inter_size(self) inters_size(self,0)
-// 获取子接口
-#define    inters_sub(self, index) ((self)->inters[index])
+// 获取接口
+#define    inters_inter(self,index) ((self)->inters[index])
 // 获取默认接口
-#define    inter_sub(self) inters_sub(self,0)
+#define    inters_dinter(self) inters_inter(self,0)
+// 获取元素大小
+#define    inters_size(self, index) inters_inter(self,index)->_itemSize
+// 获取默认元素大小
+#define    inters_dsize(self) inters_size(self,0)
+// 获取子接口
+#define    inters_sub(self, index) inters_inter(self,index)->_subInters
+// 获取默认子接口
+#define    inters_dsub(self) inters_sub(self,0)
+
 // 初始化接口列表
 // 先传入接口个数，后面传入 interface 接口
 interfaces new_interfaces(Byte subnums,...);
-any        interfaces_copy(interfaces self,interfaces other);
+// any        interfaces_copy(interfaces self,interfaces other);
 Exception  free_interfaces(interfaces self);
 
 // 初始化接口
-// 码表 i:init c:copy l:clear m:cmp f:free p:print
+// 码表 i:init c:copy v:move l:clear m:cmp f:free p:print
 interface new_interface(size_t itemSize,interfaces subinters,string format,...);
 // 释放接口
 Exception free_interface(interface slef);

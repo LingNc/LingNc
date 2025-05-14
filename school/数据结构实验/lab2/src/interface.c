@@ -2,6 +2,30 @@
 #include "tools.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
+
+// 默认空实现
+static any default_init(self,interfaces){
+    /* 无操作 */
+}
+static any default_copy(self,any){
+    /* 无操作 */
+}
+static any default_move(self,any){
+    /* 无操作 */
+}
+static any default_clear(self){
+    /* 无操作 */
+}
+static bool default_cmp(any,any){
+    return false;
+}
+static any default_free(self self){
+    sfree(self);
+}
+static void default_print(self self){
+    printf("default_print: %p\n",self);
+}
 
 // 初始化接口列表
 interfaces new_interfaces(Byte subnums,...){
@@ -29,11 +53,12 @@ any interfaces_copy(interfaces self,interfaces other){
     else self=new_interfaces(maxSize);
     // 递归复制接口
     for(Byte i=0;i<maxSize;i++){
-        if(self->inters[i]->copy)
-            self->inters[i]->copy(self->inters[i],other->inters[i]);
-        else // 这个分支应该不会被调用
-            memcpy(self->inters[i],other->inters[i],inters_size(other,i));
+        // 浅拷贝每一个 interface 数据
+        memcpy(self->inters[i],other->inters[i],sizeof(InterFace));
+        //递归拷贝 subinters
+        interfaces_copy(self->inters[i]->_subInters,other->inters[i]->_subInters);
     }
+    return self;
 }
 
 Exception free_interfaces(interfaces self){
@@ -56,12 +81,13 @@ interface new_interface(size_t itemSize,interfaces subinters,string format,...){
     va_list args;
     va_start(args, format);
 
-    // 初始化所有函数指针为 NULL
-    self->init = NULL;
-    self->copy = NULL;
-    self->clear = NULL;
-    self->cmp = NULL;
-    self->free = NULL;
+    // 初始化所有函数指针为 default
+    self->init = default_init;
+    self->copy=  default_copy;
+    self->move=  default_move;
+    self->clear= default_clear;
+    self->cmp =  default_cmp;
+    self->free = default_free;
 
     // 按 format 字符串顺序设置函数指针
     for (const char *p = format; p && *p; ++p) {
@@ -88,8 +114,8 @@ Exception free_interface(interface self){
         return new_exception(res,"free_interface: 传入self指针为空!");
     }
     Exception e=new_exception(res,"");
-    if(self->_subInters!=NULL) exception_pass(&e,free_interfaces(self->_subInters));
-    // status_down(&res,nfree((any *)&self));
+    // interfaces的生命周期由外部管理
+    // if(self->_subInters!=NULL) exception_pass(&e,free_interfaces(self->_subInters));
     exception_down(&e,sfree(self));
     return e;
 }
