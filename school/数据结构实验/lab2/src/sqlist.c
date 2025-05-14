@@ -18,7 +18,7 @@
 Exception expand(sqlist self){
     if (self == NULL) return new_exception(ERROR, "sqlist expand: 传入self指针为空!");
     size_t newSize = self->_capacity * 2;
-    self->_data = realloc(self->_data, newSize * sqlist_get_itemsize(self));
+    self->_data = realloc(self->_data, newSize * sqlist_itemsize(self));
     if (self->_data == NULL) return new_exception(ERROR, "sqlist expand: 扩容失败!");
     self->_capacity = newSize;
     return new_exception(SUCCESS, "");
@@ -28,7 +28,7 @@ Exception expand(sqlist self){
 Exception shrink(sqlist self){
     if (self == NULL) return new_exception(ERROR, "sqlist expand: 传入self指针为空!");
     size_t newSize = self->_capacity / 2;
-    self->_data = realloc(self->_data, newSize * sqlist_get_itemsize(self));
+    self->_data = realloc(self->_data, newSize * sqlist_itemsize(self));
     if (self->_data == NULL) return new_exception(ERROR, "sqlist expand: 收缩失败!");
     self->_capacity = newSize;
     return new_exception(SUCCESS, "");
@@ -53,17 +53,33 @@ Exception sqlist_init(sqlist self, interfaces inter){
     self->_size = 0;
     // 初始容量大小
     self->_capacity = SQLIST_INIT_SIZE;
-    self->_data = calloc(self->_capacity, inter_size(inter));
+    self->_data = calloc(self->_capacity, inters_dsize(inter));
     if (self->_data == NULL) return new_exception(ERROR, "sqlist init: 内存分配失败!");
     sqlist_pointer(self) pdata = self->_data;
     for (size_t i = 0; i < self->_capacity; i++){
-        if(inter_sub(inter)->init)
-            inter_sub(inter)->init(pdata[i],inter_sub(inter)->_subInters);
+        if(sqlist_inter(self)->init)
+        sqlist_inter(self)->init(pdata[i],sqlist_inter(self)->_subInters);
     }
     return new_exception(SUCCESS, "");
 }
 
-Exception sqlist_resize(sqlist self, size_t newSize){
+any sqlist_move(sqlist dest,sqlist src){
+    if (src == NULL) return NULL;
+    if(dest==NULL){
+        dest=new_sqlist(src->_inter);
+        if(dest==NULL) return NULL;
+    }
+    // 移动数据
+    smove(&dest->_data,&src->_data,sizeof(src->_data));
+    // 移动大小
+    smove(&dest->_size,&src->_size,sizeof(src->_size));
+    // 移动容量
+    smove(&dest->_capacity,&src->_capacity,sizeof(src->_capacity));
+    dest->_inter=src->_inter;
+    return dest;
+}
+
+Exception sqlist_resize(sqlist self,size_t newSize){
     if (newSize >= self->_size){
         self->_data = realloc(self->_data, newSize);
         if (self->_data == NULL) return new_exception(ERROR, "sqlist resize: 扩容失败!");
@@ -87,9 +103,9 @@ size_t sqlist_size(sqlist self){
     return self->_size;
 }
 
-size_t sqlist_get_itemsize(sqlist self){
-    return inter_size(self->_inter);
-}
+// size_t sqlist_itemsize(sqlist self){
+//     return inters_dsize(self->_inter);
+// }
 
 any sqlist_at(sqlist self, int index){
     if (index > (int)self->_size || index < 0){
@@ -98,7 +114,7 @@ any sqlist_at(sqlist self, int index){
     return ((sqlist_pointer(self))self->_data)[index];
 }
 
-any sqlist_modify(sqlist self,int index, any newItem){
+any sqlist_set(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
     any item=pitem[index];
@@ -106,9 +122,15 @@ any sqlist_modify(sqlist self,int index, any newItem){
         sqlist_inter(self)->copy(item, newItem);
     }
     else{
-        memcpy(item, newItem, inter_size(self->_inter));
+        memcpy(item, newItem, inters_dsize(self->_inter));
     }
     return item;
+}
+any sqlist_set_ref(sqlist self,int index, any newItem){
+    if (self == NULL) return NULL;
+    sqlist_pointer(self) pitem=self->_data;
+    memcpy(pitem[index],newItem,inters_dsize(self->_inter));
+    return pitem[index];
 }
 
 bool sqlist_empty(sqlist self){
@@ -125,7 +147,7 @@ Exception sqlist_clear(sqlist self){
         if(sqlist_inter(self)->clear)
             sqlist_inter(self)->clear(curItem);
         else
-            memset(curItem, 0, inter_size(self->_inter));
+            memset(curItem, 0, inters_dsize(self->_inter));
     }
     self->_size = 0;
     return new_exception(SUCCESS, "");
@@ -138,21 +160,34 @@ Exception sqlist_push_back(sqlist self, any item){
         e = expand(self);
     }
     sqlist_pointer(self) pdata = self->_data;
-    // any newItem=(byte)self->_data+(self->_size-1)*sqlist_get_itemsize(self);
+    // any newItem=(byte)self->_data+(self->_size-1)*sqlist_itemsize(self);
     any newItem = pdata[self->_size - 1];
     // #   ifdef CAP_INTER_ERROR
     // #   endif
     // 初始化
-    if (sqlist_inter(self)->init){
-        sqlist_inter(self)->init(newItem, sqlist_inter(self)->_subInters);
-    }
+    // if (sqlist_inter(self)->init){
+    //     sqlist_inter(self)->init(newItem, sqlist_sinter(self));
+    // }
     // 拷贝构造
     if (sqlist_inter(self)->copy){
         sqlist_inter(self)->copy(newItem, item);
     }
     else{
-        memcpy(newItem, item, sqlist_get_itemsize(self));
+        memcpy(newItem, item, sqlist_itemsize(self));
     }
+    return e;
+}
+
+// 浅拷贝传入
+Exception sqlist_push_back_ref(sqlist self, any item){
+    Exception e = new_exception(SUCCESS, "");
+    self->_size++;
+    if (self->_size > self->_capacity){
+        e = expand(self);
+    }
+    sqlist_pointer(self) pdata = self->_data;
+    any newItem = pdata[self->_size - 1];
+    memcpy(newItem, item, inters_dsize(self->_inter));
     return e;
 }
 
@@ -197,13 +232,13 @@ any sqlist_c_data(sqlist self){
 
 // 查找表 check 返回 1满足条件 0不满足,找到第一个满足条件的
 any sqlist_bsearchf(sqlist self, any key, bool (*check)(any, any)){
-    return bsearchf(key, self->_data, self->_size, sqlist_get_itemsize(self), check);
+    return bsearchf(key, self->_data, self->_size, sqlist_itemsize(self), check);
 }
 
 any sqlist_sort(sqlist self, int (*cmp)(c_any,c_any)){
     if (self == NULL) return NULL;
     size_t size = self->_size;
-    qsort(self->_data, size, sqlist_get_itemsize(self), cmp);
+    qsort(self->_data, size, sqlist_itemsize(self), cmp);
     return self;
 }
 
@@ -216,7 +251,7 @@ any sqlist_copy(sqlist self,sqlist other){
     // 设置容量
     self->_capacity=other->_capacity;
     // 重分配空间
-    self->_data=realloc(self->_data,self->_capacity*inter_size(other->_inter));
+    self->_data=realloc(self->_data,self->_capacity*inters_dsize(other->_inter));
     if(self->_data==NULL) return NULL;
     // 拷贝数据
     sqlist_pointer(self) spdata=self->_data;
@@ -226,10 +261,10 @@ any sqlist_copy(sqlist self,sqlist other){
         if(sqlist_inter(other)->copy)
             sqlist_inter(other)->copy(spdata[i],opdata[i]);
         else
-            memcpy(spdata[i],opdata[i],inter_size(other->_inter));
+            memcpy(spdata[i],opdata[i],inters_dsize(other->_inter));
     }
-    // 复制接口
-    interfaces_copy(self->_inter,other->_inter);
+    // 接口传递
+    self->_inter=other->_inter;
     return self;
 }
 
@@ -245,9 +280,10 @@ interfaces sqlist_create_inter(interfaces subinters){
         new_interface(
             sizeof(SqList),
             subinters,
-            "iclf",
+            "icvlf",
             sqlist_init,
             sqlist_copy,
+            sqlist_move,
             sqlist_clear,
             free_sqlist
             )
