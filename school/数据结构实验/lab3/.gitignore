@@ -11,5 +11,7 @@
 
 # 文件夹
 !include/*.h
+!ext/include/*.h
+!ext/src/*.c
 !src/*.c
 !tests/*.c
