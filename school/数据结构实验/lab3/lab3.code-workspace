@@ -9,7 +9,7 @@
         "tasks": [
             {
                 "label": "make main",
-                "command": "make main",
+                "command": "make",
                 "type": "shell",
                 "args": [
                     "main"
