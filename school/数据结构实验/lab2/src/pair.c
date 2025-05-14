@@ -67,7 +67,7 @@ any pair_copy(pair self, pair other){
     else
         memcpy(self->second, other->second, inters_size(inters, 1));
     // 复制接口
-    interfaces_copy(self->_inters,other->_inters);
+    self->_inters=inters;
     return self;
 } // pair_copy
 

@@ -98,6 +98,51 @@ Exception sqlist_resize(sqlist self,size_t newSize){
     return new_exception(SUCCESS, "");
 }
 
+sqlist sqlist_insert(sqlist self,int index,any item){
+    if(self==NULL || item==NULL) return NULL;
+    if(index<0||index>cast(int,self->_size)){
+        perror("sqlist_insert: 下标越界!");
+    }
+    // 扩容
+    if(self->_size>=self->_capacity){
+        expand(self);
+    }
+    sqlist_pointer(self) pdata=self->_data;
+    // 向后移动一个数据
+    memmove(pdata+index+1,pdata+index,(self->_size-index)*sqlist_itemsize(self));
+    // 插入数据
+    any newItem=pdata[index];
+    // 移动数据
+    mmove(newItem,item,sqlist_inter(self));
+    // 增加大小
+    self->_size++;
+    return self;
+}
+
+sqlist sqlist_insert_c(sqlist self,int index,any item){
+    if(self==NULL || item==NULL) return NULL;
+    if(index<0||index>cast(int,self->_size)){
+        perror("sqlist_insert: 下标越界!");
+    }
+    // 扩容
+    if(self->_size>=self->_capacity){
+        expand(self);
+    }
+    sqlist_pointer(self) pdata=self->_data;
+    // 向后移动一个数据
+    memmove(pdata+index+1,pdata+index,(self->_size-index)*sqlist_itemsize(self));
+    // 插入数据
+    any newItem=pdata[index];
+    // 拷贝数据
+    if(sqlist_inter(self)->copy)
+        sqlist_inter(self)->copy(newItem,item);
+    else
+        memcpy(newItem,item,sqlist_itemsize(self));
+    // 增加大小
+    self->_size++;
+    return self;
+}
+
 size_t sqlist_size(sqlist self){
     if (self == NULL) return 0;
     return self->_size;
@@ -118,18 +163,16 @@ any sqlist_set(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
     any item=pitem[index];
-    if (sqlist_inter(self)->copy){
-        sqlist_inter(self)->copy(item, newItem);
-    }
-    else{
-        memcpy(item, newItem, inters_dsize(self->_inter));
-    }
+    mmove(item,newItem,sqlist_inter(self));
     return item;
 }
-any sqlist_set_ref(sqlist self,int index, any newItem){
+any sqlist_set_c(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
-    memcpy(pitem[index],newItem,inters_dsize(self->_inter));
+    if(sqlist_inter(self)->copy)
+        sqlist_inter(self)->copy(pitem[index],newItem);
+    else
+        memcpy(pitem[index],newItem,inters_dsize(self->_inter));
     return pitem[index];
 }
 
@@ -168,18 +211,12 @@ Exception sqlist_push_back(sqlist self, any item){
     // if (sqlist_inter(self)->init){
     //     sqlist_inter(self)->init(newItem, sqlist_sinter(self));
     // }
-    // 拷贝构造
-    if (sqlist_inter(self)->copy){
-        sqlist_inter(self)->copy(newItem, item);
-    }
-    else{
-        memcpy(newItem, item, sqlist_itemsize(self));
-    }
+    mmove(newItem, item, sqlist_inter(self));
     return e;
 }
 
-// 浅拷贝传入
-Exception sqlist_push_back_ref(sqlist self, any item){
+// 拷贝传入
+Exception sqlist_push_back_c(sqlist self, any item){
     Exception e = new_exception(SUCCESS, "");
     self->_size++;
     if (self->_size > self->_capacity){
@@ -187,7 +224,12 @@ Exception sqlist_push_back_ref(sqlist self, any item){
     }
     sqlist_pointer(self) pdata = self->_data;
     any newItem = pdata[self->_size - 1];
-    memcpy(newItem, item, inters_dsize(self->_inter));
+    if(sqlist_inter(self)->copy){
+        sqlist_inter(self)->copy(newItem, item);
+    }
+    else{
+        memcpy(newItem, item, inters_dsize(self->_inter));
+    }
     return e;
 }
 

@@ -7,8 +7,8 @@
 
 // 对
 struct Pair{
-    any first,second;
     interfaces _inters;
+    any first,second;
 }; // Pair
 
 typedef struct Pair Pair;

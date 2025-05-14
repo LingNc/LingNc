@@ -16,13 +16,14 @@
 
 // 顺序表
 struct SqList{
+    // 接口表
+    interfaces _inter;
     // 数据
     any _data;
     // 当前的实际大小
     size_t _size;
     // 容量（当前的最大大小）
     size_t _capacity;
-    interfaces _inter;
 }; // SqList
 
 typedef struct SqList SqList;
@@ -57,7 +58,9 @@ interfaces sqlist_create_inter(interfaces subinters);
 // 初始化顺序表
 sqlist new_sqlist(interfaces inter);
 Exception sqlist_resize(sqlist self,size_t newSize);
-// sqlist sqlist_insert(sqlist self,size_t pos,any item);
+sqlist sqlist_insert(sqlist self,int index,any item);
+// 深拷贝插入
+sqlist sqlist_intert_c(sqlist self,int index,any item);
 size_t sqlist_size(sqlist self);
 // inline size_t sqlist_itemsize(sqlist self);
 any sqlist_at(sqlist self,int index);
