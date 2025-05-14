@@ -1,0 +1,15 @@
+*
+!*/
+
+# 文件
+!*workspace
+!.gitignore
+!LICENSE
+!Makefile
+!README.md
+!main.c
+
+# 文件夹
+!include/*.h
+!src/*.c
+!tests/*.c
