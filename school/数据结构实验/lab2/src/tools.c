@@ -9,6 +9,45 @@ status pfree(any* _ptr){
     *_ptr = NULL;
     return SUCCESS;
 }
+
+// 移动函数
+inline bool mmove(c_any _dest,c_any _src,interface _inter){
+    if(_dest==NULL||_src==NULL||_inter==NULL) return false;
+    if(_inter->move)
+        _inter->move(_dest,_src);
+    else if(_inter->copy){
+        _inter->copy(_dest,_src);
+        if(_inter->clear) _inter->clear(_src);
+    }
+    else{
+        smove(_dest,_src,_inter->_itemSize);
+    }
+    return true;
+}
+// 值移动函数
+inline bool smove(c_any _dest,c_any _src,size_t _size){
+    if(_dest==NULL||_src==NULL) return false;
+    memcpy(_dest,_src,_size);
+    memset(_src,0,_size);
+    return true;
+}
+// 移动转换函数
+inline any move(c_any _src,interface _inter){
+    if(_src==NULL||_inter==NULL) return NULL;
+    any res=malloc(_inter->_itemSize);
+    if(res==NULL) return NULL;
+    if(_inter->move)
+        _inter->move(res,_src);
+    else if(_inter->copy){
+        _inter->copy(res,_src);
+        if(_inter->clear) _inter->clear(_src);
+    }
+    else{
+        memcpy(res,_src,_inter->_itemSize);
+        memset(_src,0,_inter->_itemSize);
+    }
+    return res;
+}
 // 指针交换函数
 bool pswap(any *a, any *b){
     any temp = *a;
@@ -16,8 +55,22 @@ bool pswap(any *a, any *b){
     *b = temp;
     return true;
 }
+// 移动交换
+inline bool mswap(c_any a,c_any b,interface inter){
+    if(a==NULL||b==NULL||inter==NULL) return false;
+    if(inter->move){
+        any t=malloc(inter->_itemSize);
+        if(t==NULL) return false;
+        inter->move(t,a);
+        inter->move(a,b);
+        inter->move(b,t);
+        return true;
+    }
+    else
+        return sswap(a,b,inter_size(inter));
+}
 // 浅拷贝交换函数
-bool sswap(const any a,const any b,size_t size){
+bool sswap(c_any a,c_any b,size_t size){
     if (a == NULL || b == NULL || size == 0) return false;
     any temp = malloc(size);
     if (temp == NULL) return false;
@@ -28,7 +81,7 @@ bool sswap(const any a,const any b,size_t size){
     return true;
 }
 // 深拷贝交换函数
-bool dswap(const any a,const any b,interface inter){
+bool dswap(c_any a,c_any b,interface inter){
     if (a == NULL || b == NULL) return false;
     if (inter == NULL) return false;
     if (inter->copy == NULL){
