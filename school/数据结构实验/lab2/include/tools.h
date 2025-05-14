@@ -18,19 +18,19 @@ status pfree(any* _ptr);
 #define sfree(_ptr) pfree((any*)(&_ptr))
 
 // 移动函数
-inline bool mmove(c_any _dest,c_any _src,interface _inter);
+bool mmove(any _dest,any _src,interface _inter);
 // 值移动
-inline bool smove(c_any _dest,c_any _src,size_t _size);
+bool smove(any _dest,any _src,size_t _size);
 // 移动转换函数
-inline any  move(c_any _src,interface _inter);
+any  move(any _src,interface _inter);
 // 指针交换函数
-inline bool pswap(any *a,any *b);
+bool pswap(any *a,any *b);
 // 值交换
-inline bool sswap(c_any a,c_any b,size_t size);
+bool sswap(any a,any b,size_t size);
 // 移动交换
-inline bool mswap(c_any a,c_any b,interface inter);
+bool mswap(any a,any b,interface inter);
 // 深拷贝交换
-inline bool dswap(c_any a,c_any b,interface inter);
+bool dswap(any a,any b,interface inter);
 
 // 二分查找，找到有序数组中第一个满足条件的,没找到返回NULL
 any bsearchf(any key,any base,size_t nmemb,size_t size,bool(*check)(any,any));

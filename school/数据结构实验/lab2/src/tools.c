@@ -11,7 +11,7 @@ status pfree(any* _ptr){
 }
 
 // 移动函数
-inline bool mmove(c_any _dest,c_any _src,interface _inter){
+bool mmove(any _dest,any _src,interface _inter){
     if(_dest==NULL||_src==NULL||_inter==NULL) return false;
     if(_inter->move)
         _inter->move(_dest,_src);
@@ -25,14 +25,14 @@ inline bool mmove(c_any _dest,c_any _src,interface _inter){
     return true;
 }
 // 值移动函数
-inline bool smove(c_any _dest,c_any _src,size_t _size){
+bool smove(any _dest,any _src,size_t _size){
     if(_dest==NULL||_src==NULL) return false;
     memcpy(_dest,_src,_size);
     memset(_src,0,_size);
     return true;
 }
 // 移动转换函数
-inline any move(c_any _src,interface _inter){
+any move(any _src,interface _inter){
     if(_src==NULL||_inter==NULL) return NULL;
     any res=malloc(_inter->_itemSize);
     if(res==NULL) return NULL;
@@ -56,7 +56,7 @@ bool pswap(any *a, any *b){
     return true;
 }
 // 移动交换
-inline bool mswap(c_any a,c_any b,interface inter){
+bool mswap(any a,any b,interface inter){
     if(a==NULL||b==NULL||inter==NULL) return false;
     if(inter->move){
         any t=malloc(inter->_itemSize);
@@ -70,7 +70,7 @@ inline bool mswap(c_any a,c_any b,interface inter){
         return sswap(a,b,inter_size(inter));
 }
 // 浅拷贝交换函数
-bool sswap(c_any a,c_any b,size_t size){
+bool sswap(any a,any b,size_t size){
     if (a == NULL || b == NULL || size == 0) return false;
     any temp = malloc(size);
     if (temp == NULL) return false;
@@ -81,7 +81,7 @@ bool sswap(c_any a,c_any b,size_t size){
     return true;
 }
 // 深拷贝交换函数
-bool dswap(c_any a,c_any b,interface inter){
+bool dswap(any a,any b,interface inter){
     if (a == NULL || b == NULL) return false;
     if (inter == NULL) return false;
     if (inter->copy == NULL){
@@ -107,8 +107,8 @@ any bsearchf(any key,any base,size_t nmemb,size_t size,bool(*check)(any,any)){
     pointer(size) p=base;
     size_t l=0,r=nmemb;
     while (l < r) {
-        size_t mid = l + (r - l)>>1;
-        if(cmp(key,p[mid])) r=mid;
+        size_t mid = l + ((r - l)>>1);
+        if(check(key,p[mid])) r=mid;
         else l=mid+1;
     }
     return (l==nmemb)?NULL:p[l];
