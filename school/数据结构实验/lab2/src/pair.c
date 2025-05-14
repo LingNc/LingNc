@@ -125,7 +125,9 @@ any free_pair(pair self){
 
 interfaces pair_create_inters(){
     // 码表 i:init c:copy l:clear m:cmp f:free
-    return new_interfaces(1,
+    return new_interfaces(
+        NULL,
+        1,
         new_interface(sizeof(Pair),NULL,"iclp",pair_init,pair_copy,pair_clear,pair_print)
         );
 }

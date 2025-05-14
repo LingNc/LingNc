@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 // 初始化接口列表
-interfaces new_interfaces(Byte subnums,...){
+interfaces new_interfaces(any _g_reginter,Byte subnums,...){
     // 第一个字节存储数量，后面存储接口表
     interfaces res=(interfaces)malloc(sizeof(InterFaces)+subnums*sizeof(interface));
     if(res==NULL) return NULL;
@@ -22,22 +22,22 @@ interfaces new_interfaces(Byte subnums,...){
     return res;
 }
 
-any interfaces_copy(interfaces self,interfaces other){
-    if(other==NULL) return NULL;
-    // 计算容量
-    size_t maxSize=other->count;
-    // 存在则扩容，不存在初始化
-    if(self) self=realloc(self,sizeof(InterFaces)+maxSize*sizeof(interface));
-    else self=new_interfaces(maxSize);
-    // 递归复制接口
-    for(Byte i=0;i<maxSize;i++){
-        // 浅拷贝每一个 interface 数据
-        memcpy(self->inters[i],other->inters[i],sizeof(InterFace));
-        //递归拷贝 subinters
-        interfaces_copy(self->inters[i]->_subInters,other->inters[i]->_subInters);
-    }
-    return self;
-}
+// any interfaces_copy(interfaces self,interfaces other){
+//     if(other==NULL) return NULL;
+//     // 计算容量
+//     size_t maxSize=other->count;
+//     // 存在则扩容，不存在初始化
+//     if(self) self=realloc(self,sizeof(InterFaces)+maxSize*sizeof(interface));
+//     else self=new_interfaces(maxSize);
+//     // 递归复制接口
+//     for(Byte i=0;i<maxSize;i++){
+//         // 浅拷贝每一个 interface 数据
+//         memcpy(self->inters[i],other->inters[i],sizeof(InterFace));
+//         //递归拷贝 subinters
+//         interfaces_copy(self->inters[i]->_subInters,other->inters[i]->_subInters);
+//     }
+//     return self;
+// }
 
 Exception free_interfaces(interfaces self){
     if(self==NULL) return new_exception(WARRING,"free_interfaces: 传入self指针为空!");

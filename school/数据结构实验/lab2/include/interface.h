@@ -32,7 +32,7 @@ typedef any  (*move_func) (self,any);
 // 清理函数
 typedef any  (*clear_func)(c_self);
 // 比较函数
-typedef bool (*cmp_func)  (any,any);
+typedef bool (*cmp_func)  (c_any,c_any);
 // 释放函数
 typedef any  (*free_func) (self);
 // 打印函数
@@ -67,7 +67,7 @@ struct InterFace{
 
 // 初始化接口列表
 // 先传入接口个数，后面传入 interface 接口
-interfaces new_interfaces(Byte subnums,...);
+interfaces new_interfaces(any _g_reginter,Byte subnums,...);
 // any        interfaces_copy(interfaces self,interfaces other);
 Exception  free_interfaces(interfaces self);
 
@@ -79,6 +79,7 @@ Exception  free_interfaces(interfaces self);
 // 初始化接口
 // 码表 i:init c:copy v:move l:clear m:cmp f:free p:print
 interface new_interface(size_t itemSize,interfaces subinters,string format,...);
+// interface new_interface(any _g_reginter,size_t itemSize,string format,...);
 // 释放接口
 Exception free_interface(interface self);
 

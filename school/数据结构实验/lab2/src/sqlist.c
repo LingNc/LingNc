@@ -113,7 +113,13 @@ sqlist sqlist_insert(sqlist self,int index,any item){
     // 插入数据
     any newItem=pdata[index];
     // 移动数据
-    mmove(newItem,item,sqlist_inter(self));
+    if(sqlist_inter(self)->copy||sqlist_inter(self)->move){
+        mmove(newItem,item,sqlist_inter(self));
+    }
+    // 退化为拷贝数据
+    else{
+        memcpy(newItem,item,sqlist_itemsize(self));
+    }
     // 增加大小
     self->_size++;
     return self;
@@ -163,7 +169,14 @@ any sqlist_set(sqlist self,int index, any newItem){
     if (self == NULL) return NULL;
     sqlist_pointer(self) pitem=self->_data;
     any item=pitem[index];
-    mmove(item,newItem,sqlist_inter(self));
+    // 移动构造
+    if(sqlist_inter(self)->copy||sqlist_inter(self)->move){
+        mmove(item,newItem,sqlist_inter(self));
+    }
+    // 退化为拷贝构造
+    else{
+        memcpy(item,newItem,sqlist_itemsize(self));
+    }
     return item;
 }
 any sqlist_set_c(sqlist self,int index, any newItem){
@@ -211,7 +224,14 @@ Exception sqlist_push_back(sqlist self, any item){
     // if (sqlist_inter(self)->init){
     //     sqlist_inter(self)->init(newItem, sqlist_sinter(self));
     // }
-    mmove(newItem, item, sqlist_inter(self));
+    // 移动添加
+    if(sqlist_inter(self)->copy||sqlist_inter(self)->move){
+        mmove(newItem, item, sqlist_inter(self));
+    }
+    // 退化为拷贝添加
+    else{
+        memcpy(newItem, item, sqlist_itemsize(self));
+    }
     return e;
 }
 
@@ -318,6 +338,7 @@ Exception free_sqlist(sqlist self){
 }
 interfaces sqlist_create_inter(interfaces subinters){
     return new_interfaces(
+        NULL,
         1,
         new_interface(
             sizeof(SqList),
