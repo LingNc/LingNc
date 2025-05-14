@@ -5,28 +5,32 @@
 
 // 内部函数
 // 获取父节点下标
-size_t father(size_t index){
-    return (index-1)/2;
-}
+#define father(index) ((index-1)/2)
+// size_t father(size_t index){
+//     return (index-1)/2;
+// }
 // 获取左节点下标
-size_t left(size_t index){
-    return 2*index+1;
-}
+#define left(index) (2*index+1)
+// size_t left(size_t index){
+//     return 2*index+1;
+// }
 // 获取右节点下标
-size_t right(size_t index){
-    return 2*index+2;
-}
+#define right(index) (2*index+2)
+// size_t right(size_t index){
+//     return 2*index+2;
+// }
 // 获取元素大小
-static size_t itemsize(heap self){
-    return sqlist_get_itemsize(self->_heap);
-}
+#define heap_itemsize(self) sqlist_itemsize(self->_heap)
+// static size_t itemsize(heap self){
+//     return sqlist_get_itemsize(self->_heap);
+// }
 // 比较元素大小
 bool heap_cmp(heap self,size_t ia,size_t ib){
     return self->cmp(sqlist_at(self->_heap,ia),sqlist_at(self->_heap,ib));
 }
 // 交换两元素
 void heap_swap(heap self,size_t ia,size_t ib){
-    dswap(sqlist_at(self->_heap,ia),sqlist_at(self->_heap,ib),self->_heap->_inter);
+    mswap(sqlist_at(self->_heap,ia),sqlist_at(self->_heap,ib),heap_inter(self));
 }
 // 向上调整
 void heap_up(heap self,size_t index){
@@ -54,7 +58,7 @@ void heap_down(heap self,size_t index){
 }
 
 // 外部函数
-heap new_heap(interface inter,cmp_func cmp){
+heap new_heap(interfaces inter,cmp_func cmp){
     if(inter==NULL) return NULL;
     if(cmp==NULL) return NULL;
     heap res=malloc(sizeof(Heap));
