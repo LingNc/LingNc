@@ -26,11 +26,11 @@ struct InterFaces{
 // 初始化函数
 typedef any  (*init_func) (self,interfaces);
 // 拷贝构造函数
-typedef any  (*copy_func) (self,any);
+typedef any  (*copy_func) (self,c_any);
 // 移动构造函数
 typedef any  (*move_func) (self,any);
 // 清理函数
-typedef any  (*clear_func)(self);
+typedef any  (*clear_func)(c_self);
 // 比较函数
 typedef bool (*cmp_func)  (any,any);
 // 释放函数
@@ -71,10 +71,15 @@ interfaces new_interfaces(Byte subnums,...);
 // any        interfaces_copy(interfaces self,interfaces other);
 Exception  free_interfaces(interfaces self);
 
+// 获取元素大小
+#define inter_size(self) (self->_itemSize)
+// 获取子接口
+#define inter_sub(self) (self->_subInters)
+
 // 初始化接口
 // 码表 i:init c:copy v:move l:clear m:cmp f:free p:print
 interface new_interface(size_t itemSize,interfaces subinters,string format,...);
 // 释放接口
-Exception free_interface(interface slef);
+Exception free_interface(interface self);
 
 #endif //INTERFACE_H

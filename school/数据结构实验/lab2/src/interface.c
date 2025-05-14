@@ -3,29 +3,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-
-// 默认空实现
-static any default_init(self,interfaces){
-    /* 无操作 */
-}
-static any default_copy(self,any){
-    /* 无操作 */
-}
-static any default_move(self,any){
-    /* 无操作 */
-}
-static any default_clear(self){
-    /* 无操作 */
-}
-static bool default_cmp(any,any){
-    return false;
-}
-static any default_free(self self){
-    sfree(self);
-}
-static void default_print(self self){
-    printf("default_print: %p\n",self);
-}
+#include <stdio.h>
 
 // 初始化接口列表
 interfaces new_interfaces(Byte subnums,...){
@@ -82,23 +60,25 @@ interface new_interface(size_t itemSize,interfaces subinters,string format,...){
     va_start(args, format);
 
     // 初始化所有函数指针为 default
-    self->init = default_init;
-    self->copy=  default_copy;
-    self->move=  default_move;
-    self->clear= default_clear;
-    self->cmp =  default_cmp;
-    self->free = default_free;
+    self->init = NULL;
+    self->copy=  NULL;
+    self->move=  NULL;
+    self->clear= NULL;
+    self->cmp =  NULL;
+    self->free=  NULL;
+    self->print= NULL;
 
     // 按 format 字符串顺序设置函数指针
     for (const char *p = format; p && *p; ++p) {
         any func = va_arg(args, any);
         switch (*p) {
-            case 'i': self->init = func; break;
-            case 'c': self->copy = func; break;
+            case 'i': self->init  = func; break;
+            case 'c': self->copy  = func; break;
             case 'l': self->clear = func; break;
-            case 'm': self->cmp = func; break;
-            case 'f': self->free = func; break;
+            case 'm': self->cmp   = func; break;
+            case 'f': self->free  = func; break;
             case 'p': self->print = func; break;
+            case 'v': self->move  = func; break;
             default: break; // 未知字符忽略
         }
     }
