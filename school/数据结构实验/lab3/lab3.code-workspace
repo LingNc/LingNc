@@ -49,6 +49,16 @@
 				"miDebuggerPath": "/usr/bin/gdb"
 			},
         ],
+    },
+    "settings": {
+        "files.associations": {
+            "*.vue": "vue",
+            ".clangd": "yaml",
+            "*.cfg": "ini",
+            "*.c": "c",
+            "*.h": "c",
+            "random": "c"
+        }
     }
 
 }
