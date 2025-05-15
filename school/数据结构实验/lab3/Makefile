@@ -25,7 +25,7 @@ $(Main): $(Ext_obj_files) $(Obj_files) build/main.o
 	$(C) $(Cflags) $(Include) -o $@ $^
 	@echo "链接成功"
 
-build/src/%.o: src/%.c ext/src/%.c
+build/src/%.o: src/%.c
 	@mkdir -p build/src
 	$(C) $(Cflags) $(Include) -c $< -o $@
 	@echo "编译项目链接文件成功"

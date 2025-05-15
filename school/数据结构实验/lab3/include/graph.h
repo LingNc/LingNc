@@ -64,9 +64,9 @@ Exception algraph_init(algraph self,int vexnum,int arcnum,GraphKind kind);
 // 清空图
 any algraph_clear(algraph self);
 // 释放图
-any free_algraph(algraph *self);
+void free_algraph(algraph *self);
 // 带权加边
-void algraph_add(algraph self,int i,int j,int weight);
+void algraph_add(algraph self,int i,int j,double weight);
 // 访问第node个节点的邻接表
 sqlist algraph_visit(algraph self,int node);
 

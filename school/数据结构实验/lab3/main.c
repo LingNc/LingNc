@@ -1,98 +1,138 @@
-#include "sqlist.h"
+#include "graph.h"
+#include "heap.h"
 #include "pair.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include <limits.h>
+#include <math.h>
 
-//表结点
-typedef struct ArcNode ArcNode;
-typedef ArcNode *arcnode;
-struct ArcNode{
-    int adjvex;
-    //边的权值
-    int weight;
-}; // ArcNode
+// 静态管理pair接口
+// pair<double,int>
+static interfaces g_pair_inter=NULL;
+#define pair_r(_first,_second) new_pair_r(_first,_second,g_pair_inter)
 
-// 创建一个表结点
-arcnode new_arcnode(int adjvex,int weight){
-    arcnode self=malloc(sizeof(ArcNode));
-    if(!self) return NULL;
-    self->adjvex=adjvex;
-    self->weight=weight;
-    return self;
-}
-#define new_ArcNode(a,b) ((ArcNode){ \
-    .adjvex=a,\
-    .weight=b\
-})
-// 销毁节点
-void destroy_arcnode(arcnode self){
-    if(!self) return;
-    free(self);
-}
-
-static interfaces g_arcnode_inter;
-
-// 邻接表
-typedef SqList AdjList;
-typedef AdjList *adjlist;
-
-// 图
-struct ALGraph{
-    // 数据类型: SqList<SqList<ArcNode>>
-    AdjList _list;
-    // 记录是否访问过
-    bool *st;
-    // 记录权最小值
-    int *dist;
-    //顶点的实际数，边的实际数
-    int vexnum,arcnum;
-    int kind;
-}; // ALGraph
-typedef struct ALGraph ALGraph;
-typedef ALGraph *algraph;
-
-// 初始化图
-algraph new_algraph(int vexnum,int arcnum){
-    algraph self=malloc(sizeof(ALGraph));
-    if(!self) return NULL;
-    self->vexnum=vexnum;
-    self->arcnum=arcnum;
-    self->kind=0;
-    self->st=malloc(sizeof(bool)*(vexnum+1));
-    self->dist=malloc(sizeof(int)*(vexnum+1));
-    // 初始化
-    for(int i=0;i<=vexnum;i++){
-        self->st[i]=false;
-        self->dist[i]=0;
+// 初始化接口
+void init_pair_inter(){
+    if(!g_pair_inter){
+        g_pair_inter=new_interfaces(NULL,2,
+            new_interface(sizeof(double),NULL,""),
+            new_interface(sizeof(int),NULL,"")
+        );
     }
-    // 创建节点的 interfaces
-    g_arcnode_inter=new_interfaces(NULL,1,
-        new_interface(sizeof(ArcNode),NULL,""));
-    // 初始化邻接表
-    Exception e=sqlist_init(&self->_list,g_arcnode_inter);
-    if(e.status!=SUCCESS) {
-        free(self);
-        fprintf(stderr,"new_algraph: init ");
-        perror(e.msg);
-        return NULL;
-    }
-    return self;
 }
-
-// 带权加边
-void algraph_add(algraph self,int i,int j,int weight){
-    // 添加节点
-    sqlist_push_back(sqlist_at(self,i),&new_ArcNode(j,weight));
+// 释放接口
+void free_pair_inter(){
+    if(g_pair_inter){
+        free_interfaces(g_pair_inter);
+        g_pair_inter=NULL;
+    }
 }
 
 // 优先队列排序函数,按照距离小顶堆
-// 数据类型: pair<int,int>
+// 数据类型: pair<double,int>
 // pair<距离,节点编号>
 bool min_cmp(c_any a,c_any b){
-    return cast(pair,a)->first < cast(pair,b)->first;
+    return cast(pair,a)->first<cast(pair,b)->first;
+}
+
+// 浮点数的相等
+#define double_eq(a,b) (fabs(a-b)<1e-6)
+
+// Dijkstra算法
+double Dijkstra(algraph graph,int start,int end){
+    // 初始化堆 pair<double,int> pair<距离，节点编号>
+    priority_queue h=new_heap(g_pair_inter,min_cmp);
+    // 插入第一个元素
+    heap_push(h,&pair_r(0,start));
+    double *dist=graph->dist;
+    bool *st=graph->st;
+    dist[start]=0;
+
+    // pair t=new_pair(NULL,NULL,g_pair_inter);
+    while(!heap_empty(h)){
+        // 取出节点
+        int now=visitp_cast(int,cast(pair,heap_top(h))->second);
+        heap_pop(h);
+        // 检查是否访问过
+        if(st[now]) continue;
+        st[now]=true;
+        // 遍历从这个节点可达的节点更新最小距离
+        sqlist lp=algraph_visit(graph,now);
+        int size=sqlist_size(lp);
+        for(int i=0;i<size;i++){
+            // arcnode
+            arcnode it=sqlist_at(lp,i);
+            // 更新最小距离
+            if(dist[it->adjvex]>dist[now]+it->weight){
+                dist[it->adjvex]=dist[now]+it->weight;
+                heap_push(h,&pair_r(dist[it->adjvex],it->adjvex));
+            }
+        }
+    }
+    // 返回最小距离
+    return (double_eq(dist[end],1e9))?-1:dist[end];
 }
 
 int main(){
-
+    // 初始化接口
+    init_pair_inter();
+    // 节点数量，边数量
+    int vex,arc;
+    printf("请输入节点数量和边数量:\n");
+    scanf("%d%d",&vex,&arc);
+    // 创建路程最短
+    algraph disGraph=new_algraph(vex,arc,UDN);
+    // 时间最短
+    algraph timeGraph=new_algraph(vex,arc,UDN);
+    // a和b节点间的一条边，s是长度，v是速度
+    int a,b;
+    double s,v;
+    printf("请输入边的信息 a:节点1 b:节点2 c:长度 d:平均速度:\n");
+    for(int i=0;i<arc;i++){
+        scanf("%d%d%lf%lf",&a,&b,&s,&v);
+        if(a>vex||b>vex){
+            Exception e=new_exception(WARRING,"输入的图节点超出范围,请重新输入");
+            printf("%s\n",e.msg);
+            i--;
+            continue;
+        }
+        // 路程图
+        algraph_add(disGraph,a,b,s);
+        // 将时间作为权，求时间图
+        algraph_add(timeGraph,a,b,s/v);
+    }
+    // 起点和终点
+    int start,end;
+    bool exit=true;
+    // 根据用户输入出发点和结束点来找到最短的路程和用时
+    while(exit){
+        printf("请输入起点和终点:\n");
+        scanf("%d%d",&start,&end);
+        if(start>vex||end>vex){
+            Exception e=new_exception(WARRING,"输入的图节点超出范围,请重新输入");
+            printf("%s\n",e.msg);
+            continue;
+        }
+        // 计算最短路程
+        int dis=Dijkstra(disGraph,start,end);
+        // 计算最短时间
+        int time=Dijkstra(timeGraph,start,end);
+        if(dis==-1||time==-1)
+            printf("从%d到%d没有路径!\n",start,end);
+        else{
+            printf("从%d到%d的最短路程为:%d\n",start,end,dis);
+            printf("从%d到%d的最短时间为:%d\n",start,end,time);
+        }
+        printf("是否继续计算?(y/n)[default=y]\n");
+        char c;
+        scanf(" %c",&c);
+        if(c=='n'||c=='N'){
+            exit=false;
+            printf("退出计算!\n");
+        }
+    }
+    // 释放资源
+    free_algraph(&disGraph);
+    free_algraph(&timeGraph);
+    free_pair_inter();
     return 0;
 }

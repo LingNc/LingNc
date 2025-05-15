@@ -1,12 +1,15 @@
 #include "graph.h"
+#include "tools.h"
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // 静态管理接口
 static interfaces g_arcnode_inter=NULL;
+static interfaces g_sqlist_inter=NULL;
 
 // 创建一个图结点
-arcnode new_arcnode(int adjvex,int weight){
+arcnode new_arcnode(int adjvex,double weight){
     arcnode self=malloc(sizeof(ArcNode));
     if(!self) return NULL;
     self->adjvex=adjvex;
@@ -33,9 +36,18 @@ Exception algraph_init(algraph self,int vexnum,int arcnum,GraphKind kind){
         g_arcnode_inter=new_interfaces(NULL,1,
             new_interface(sizeof(ArcNode),NULL,""));
     }
+    // 初始化sqlist接口
+    if(!g_sqlist_inter){
+        g_sqlist_inter=sqlist_create_inter(NULL);
+    }
     // 初始化邻接表
-    Exception e=sqlist_init(&self->_list,g_arcnode_inter);
-    return new_exception(SUCCESS,"");
+    Exception e=sqlist_init(&self->_list,g_sqlist_inter);
+    // 初始化邻接表每个表
+    sqlist_resize(&self->_list,vexnum+1);
+    for(int i=0;i<vexnum;i++){
+        sqlist_init(sqlist_at(&self->_list,i),g_arcnode_inter);
+    }
+    return e;
 }
 
 // 新建图
@@ -68,13 +80,15 @@ any algraph_clear(algraph self){
 }
 
 // 释放图
-any free_algraph(algraph *self){
-    if(self==NULL) return NULL;
+void free_algraph(algraph *self){
+    if(*self==NULL) return;
     // 清空图
-    algraph_clear(self);
+    algraph_clear(*self);
     // 释放静态接口
     if(g_arcnode_inter) free_interfaces(g_arcnode_inter);
     g_arcnode_inter=NULL;
+    if(g_sqlist_inter) free_interfaces(g_sqlist_inter);
+    g_sqlist_inter=NULL;
     // 释放图
     sfree(self);
 }
@@ -83,10 +97,10 @@ any free_algraph(algraph *self){
 void algraph_add(algraph self,int i,int j,double weight){
     // 添加节点 有向图
     // 添加边 从 i -> j
-    sqlist_push_back(sqlist_at(self,i),&arcnode_r(j,weight));
+    sqlist_push_back(sqlist_at(&self->_list,i),&arcnode_r(j,weight));
     // 如果是无向图,添加边 从 j -> i
     if(self->kind==UDN||self->kind==UDG){
-        sqlist_push_back(sqlist_at(self,j),&arcnode_r(i,weight));
+        sqlist_push_back(sqlist_at(&self->_list,j),&arcnode_r(i,weight));
     }
 }
 
