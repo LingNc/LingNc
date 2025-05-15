@@ -19,6 +19,7 @@ interfaces new_interfaces(any _g_reginter,Byte subnums,...){
         res->inters[i]=va_arg(args,interface);
     }
     va_end(args);
+
     return res;
 }
 

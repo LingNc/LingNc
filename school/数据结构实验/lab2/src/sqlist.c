@@ -209,8 +209,10 @@ Exception sqlist_clear(sqlist self){
     return new_exception(SUCCESS, "");
 }
 
-Exception sqlist_push_back(sqlist self, any item){
-    Exception e = new_exception(SUCCESS, "");
+Exception sqlist_push_back(sqlist self,any item){
+    empty_ptr_error("sqlist_push_back: 传入self指针为空!");
+    if(self->_inter==NULL) return new_exception(ERROR,"sqlist_push_back: sqlist未初始化,接口为空!");
+    Exception e=new_exception(SUCCESS,"");
     self->_size++;
     if (self->_size > self->_capacity){
         e = expand(self);

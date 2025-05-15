@@ -83,4 +83,73 @@ interface new_interface(size_t itemSize,interfaces subinters,string format,...);
 // 释放接口
 Exception free_interface(interface self);
 
+/* 接口设计风格
+// 初始化接口
+        //  1     2       3    4       5      6      7     8
+// init-> pair< sqlist<sqlist<int>> , pair<sqlist<double>,int>> >
+pair_1 = new_interfaces(NULL,2,
+    new_interface(sizeof(SqList),
+        "iclp",init_func,cmp_func,clear_func,copy_func
+    ),
+    new_interface(sizeof(SqList),
+        "icpl",init_func,cmp_func,clear_func,copy_func),
+)
+sqlist_2 = new_interfaces(NULL,1
+    new_interface(sizeof(SqList),
+        "icpl",init_func,cmp_func,clear_func,copy_func
+    )
+)
+
+sqlist_3 = new_interfaces(NULL,1,
+    new_interface(sizeof(int),"")
+)
+
+// int_4 = NULL
+
+pair_5 = new_interfaces(NULL,2
+    new_interface(sizeof(int),"")
+    new_interface(sizeof(SqList),
+        "icpl",init_func,cmp_func,clear_func,copy_func
+    )
+)
+
+sqlist_6 = new_interfaces(NULL,1,
+    new_interface(sizeof(double),"")
+)
+
+// double_7 = NULL
+
+// int_8 = NULL
+
+// 初始化函数
+        //  1     2       3    4       5      6      7     8
+// init-> pair< sqlist<sqlist<int>> , pair<sqlist<double>,int> >
+// pair_1<sqlist,sqlist>
+new_initlist(2,
+    arglist(pair_1,"%a%a",first,first),
+    // sqlist_2<sqlist>
+    new_initlist(1,
+        arglist(sqlist_2,"%d",size),
+        // sqlist_3<int>
+        new_initlist(1,
+            arglist(sqlist_3,"%d",int),
+            // int_4
+            NULL
+        )
+    ),
+    // pair_5<sqlist,int>
+    new_initlist(2,
+        arglist(pair_5,"%d",int),
+        // sqlist_6<double>
+        new_initlist(1,
+            arglist(sqlist_6,"%lf",double),
+            // double_7
+            NULL
+        ),
+        // int_8
+        NULL
+    )
+)
+*/
+
 #endif //INTERFACE_H
