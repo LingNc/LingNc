@@ -78,24 +78,43 @@ any sqlist_move(sqlist dest,sqlist src){
     dest->_inter=src->_inter;
     return dest;
 }
-
+// 重设大小
 Exception sqlist_resize(sqlist self,size_t newSize){
-    if (newSize >= self->_size){
-        self->_data = realloc(self->_data, newSize);
-        if (self->_data == NULL) return new_exception(ERROR, "sqlist resize: 扩容失败!");
-    }
-    else{
-        sqlist_pointer(self) pItem = self->_data;
-        for (size_t i = newSize; i < self->_size; i++){
-            any curItem = pItem[i];
-            if(sqlist_inter(self)->clear)
-                sqlist_inter(self)->clear(curItem);
+    sqlist_pointer(self) pItem=self->_data;
+    if(newSize<self->_size){
+        if(sqlist_inter(self)->clear){
+            for(size_t i=newSize;i<self->_size;i++){
+                sqlist_inter(self)->clear(pItem[i]);
+            }
         }
-        self->_data = realloc(self->_data, newSize);
-        if (self->_data == NULL) return new_exception(ERROR, "sqlist resize: 收缩失败!");
     }
-    self->_capacity = newSize;
-    return new_exception(SUCCESS, "");
+    // 在可以容纳的范围内
+    else if(newSize>=self->_size&&newSize<=self->_capacity){
+        // 进行新元素的初始化
+        if(sqlist_inter(self)->init){
+            for(size_t i=self->_size;i<newSize;i++){
+                sqlist_inter(self)->init(pItem[i],sqlist_inter(self)->_subInters);
+            }
+        }
+    }
+    // 触发扩容
+    else{
+        expand(self);
+        return sqlist_resize(self,newSize);
+    }
+    self->_size=newSize;
+    return new_exception(SUCCESS,"");
+}
+
+// 重设容量
+Exception sqlist_reserve(sqlist self,size_t newCap){
+    empty_ptr_error("sqlist_reserve: 传入self指针为空!");
+    if(newCap<=self->_capacity) return new_exception(SUCCESS,"");
+    // 扩容
+    self->_data=realloc(self->_data,newCap*sqlist_itemsize(self));
+    if(self->_data==NULL) return new_exception(ERROR,"sqlist reserve: 扩容失败!");
+    self->_capacity=newCap;
+    return new_exception(SUCCESS,"");
 }
 
 sqlist sqlist_insert(sqlist self,int index,any item){
@@ -152,6 +171,11 @@ sqlist sqlist_insert_c(sqlist self,int index,any item){
 size_t sqlist_size(sqlist self){
     if (self == NULL) return 0;
     return self->_size;
+}
+
+size_t sqlist_capacity(sqlist self){
+    if (self == NULL) return 0;
+    return self->_capacity;
 }
 
 // size_t sqlist_itemsize(sqlist self){
@@ -260,9 +284,9 @@ Exception sqlist_pop_back(sqlist self){
     if (self->_size == 0) return new_exception(ERROR, "sqlist_pop_back: 空顺序表!");
     Exception e = new_exception(SUCCESS, "");
     self->_size--;
-    if (self->_size < self->_capacity / 4){
-        e = shrink(self);
-    }
+    // if (self->_size < self->_capacity / 4){
+    //     e = shrink(self);
+    // }
     return e;
 }
 

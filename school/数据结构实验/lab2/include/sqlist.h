@@ -57,11 +57,17 @@ interfaces sqlist_create_inter(interfaces subinters);
 
 // 初始化顺序表
 sqlist new_sqlist(interfaces inter);
+// 重设大小
 Exception sqlist_resize(sqlist self,size_t newSize);
+// 重设容量
+Exception sqlist_reserve(sqlist self,size_t newCap);
 sqlist sqlist_insert(sqlist self,int index,any item);
 // 深拷贝插入
 sqlist sqlist_intert_c(sqlist self,int index,any item);
+// 获取大小
 size_t sqlist_size(sqlist self);
+// 获取容量
+size_t sqlist_capacity(sqlist self);
 // inline size_t sqlist_itemsize(sqlist self);
 
 //获取第 index 个数据指针

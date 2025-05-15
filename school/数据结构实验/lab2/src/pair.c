@@ -79,6 +79,7 @@ any pair_move(pair dest, pair src){
     }
     smove(&dest->first,&src->first,8);
     smove(&dest->second,&src->second,8);
+    smove(&dest->_inters,&src->_inters,sizeof(src->_inters));
     return dest;
 } // pair_move
 
@@ -128,6 +129,6 @@ interfaces pair_create_inters(){
     return new_interfaces(
         NULL,
         1,
-        new_interface(sizeof(Pair),NULL,"iclp",pair_init,pair_copy,pair_clear,pair_print)
+        new_interface(sizeof(Pair),NULL,"icvlp",pair_init,pair_copy,pair_move,pair_clear,pair_print)
         );
 }
