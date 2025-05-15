@@ -8,15 +8,19 @@
 // 静态管理pair接口
 // pair<double,int>
 static interfaces g_pair_inter=NULL;
-#define pair_r(_first,_second) new_pair_r(_first,_second,g_pair_inter)
+static interfaces g_in_pair_inter=NULL;
+#define pair_r(_first,_second) new_pair_r(_first,_second,g_in_pair_inter)
 
 // 初始化接口
 void init_pair_inter(){
-    if(!g_pair_inter){
-        g_pair_inter=new_interfaces(NULL,2,
+    if(!g_in_pair_inter){
+        g_in_pair_inter=new_interfaces(NULL,2,
             new_interface(sizeof(double),NULL,""),
             new_interface(sizeof(int),NULL,"")
         );
+    }
+    if(!g_pair_inter){
+        g_pair_inter=pair_create_inters();
     }
 }
 // 释放接口
@@ -113,14 +117,14 @@ int main(){
             continue;
         }
         // 计算最短路程
-        int dis=Dijkstra(disGraph,start,end);
+        double dis=Dijkstra(disGraph,start,end);
         // 计算最短时间
-        int time=Dijkstra(timeGraph,start,end);
-        if(dis==-1||time==-1)
+        double time=Dijkstra(timeGraph,start,end);
+        if(double_eq(dis,-1)||double_eq(dis,-1))
             printf("从%d到%d没有路径!\n",start,end);
         else{
-            printf("从%d到%d的最短路程为:%d\n",start,end,dis);
-            printf("从%d到%d的最短时间为:%d\n",start,end,time);
+            printf("从%d到%d的最短路程为:%.2lf\n",start,end,dis);
+            printf("从%d到%d的最短时间为:%.2lf\n",start,end,time);
         }
         printf("是否继续计算?(y/n)[default=y]\n");
         char c;

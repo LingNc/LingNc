@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 // 静态管理接口
-static interfaces g_arcnode_inter=NULL;
-static interfaces g_sqlist_inter=NULL;
+// static interfaces g_arcnode_inter=NULL;
+// static interfaces g_sqlist_inter=NULL;
 
 // 创建一个图结点
 arcnode new_arcnode(int adjvex,double weight){
@@ -32,21 +32,13 @@ Exception algraph_init(algraph self,int vexnum,int arcnum,GraphKind kind){
         self->dist[i]=1e9;
     }
     // 初始化arcnode接口
-    if(!g_arcnode_inter){
-        g_arcnode_inter=new_interfaces(NULL,1,
-            new_interface(sizeof(ArcNode),NULL,""));
-    }
-    // 初始化sqlist接口
-    if(!g_sqlist_inter){
-        g_sqlist_inter=sqlist_create_inter(NULL);
-    }
+    self->_arcnode_inter=new_interfaces(NULL,1,
+        new_interface(sizeof(ArcNode),NULL,""));
+    self->_sqlist_inter=sqlist_create_inter(self->_arcnode_inter);
     // 初始化邻接表
-    Exception e=sqlist_init(&self->_list,g_sqlist_inter);
+    Exception e=sqlist_init(&self->_list,self->_sqlist_inter);
     // 初始化邻接表每个表
     sqlist_resize(&self->_list,vexnum+1);
-    for(int i=0;i<vexnum;i++){
-        sqlist_init(sqlist_at(&self->_list,i),g_arcnode_inter);
-    }
     return e;
 }
 
@@ -85,10 +77,8 @@ void free_algraph(algraph *self){
     // 清空图
     algraph_clear(*self);
     // 释放静态接口
-    if(g_arcnode_inter) free_interfaces(g_arcnode_inter);
-    g_arcnode_inter=NULL;
-    if(g_sqlist_inter) free_interfaces(g_sqlist_inter);
-    g_sqlist_inter=NULL;
+    free_interfaces((*self)->_arcnode_inter);
+    free_interfaces((*self)->_sqlist_inter);
     // 释放图
     sfree(self);
 }

@@ -53,6 +53,9 @@ struct ALGraph{
     // 3:无向无权图
     // 4:无向带权图
     GraphKind kind;
+    // 自行管理 interfaces
+    interfaces _arcnode_inter;
+    interfaces _sqlist_inter;
 }; // ALGraph
 typedef struct ALGraph ALGraph;
 typedef ALGraph *algraph;
