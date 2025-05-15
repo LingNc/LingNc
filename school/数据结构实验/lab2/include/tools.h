@@ -12,10 +12,9 @@
 #define max(a,b) ((a)>(b)?(a):(b))
 
 // 防止 double free 的free函数
-status pfree(any* _ptr);
+status pfree(any *_ptr);
 // 增加安全的函数
-// status nfree(any *_ptr)
-#define sfree(_ptr) pfree((any*)(&_ptr))
+#define sfree(_ptr) pfree((any*)(_ptr))
 
 // 移动函数
 bool mmove(any _dest,any _src,interface _inter);

@@ -123,7 +123,7 @@ Exception exception_down(exception self,status new_status){
 status free_exception(exception self){
     status res=SUCCESS;
     if(self==NULL) status_down(&res,WARRING);
-    else status_down(&res,sfree(self->msg));
-    status_down(&res,sfree(self));
+    else status_down(&res,sfree(&self->msg));
+    status_down(&res,sfree(&self));
     return res;
 }

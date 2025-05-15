@@ -13,7 +13,7 @@ pair new_pair(any first, any second, interfaces inters){
     res->first = malloc(inters_size(inters, 0));
     res->second = malloc(inters_size(inters, 1));
     if (res->first == NULL || res->second == NULL){
-        sfree(res);
+        sfree(&res);
         return NULL;
     }
     res->_inters=inters;
@@ -89,11 +89,11 @@ any pair_clear(pair self){
     if(inters_inter(self->_inters, 0)->clear)
         inters_inter(self->_inters, 0)->clear(self->first);
     else
-        sfree(self->first);
+        sfree(&self->first);
     if(inters_inter(self->_inters,1)->clear)
         inters_inter(self->_inters,1)->clear(self->second);
     else
-        sfree(self->second);
+        sfree(&self->second);
     return self;
 }
 
@@ -119,7 +119,7 @@ void pair_print(pair self){
 any free_pair(pair self){
     if (self == NULL) return NULL;
     pair_clear(self);
-    sfree(self);
+    sfree(&self);
     return NULL;
 }
 

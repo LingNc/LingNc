@@ -2,10 +2,14 @@ C = gcc
 # 只能使用 gcc 编译器 使用了typeof
 Cflags = -Wall -Wextra -std=gnu99 -g
 
-Include = -I./include
+Include = -I./include -I./ext/include
+
 # 收集源文件
 Src_files = $(wildcard src/*.c)
+Ext_src_files = $(wildcard ext/src/*.c)
 Obj_files = $(patsubst src/%.c, build/src/%.o, $(Src_files))
+Ext_obj_files = $(patsubst ext/src/%.c, build/ext/src/%.o, $(Ext_src_files))
+
 # 收集测试文件
 Test_src = $(wildcard tests/*.c)
 Test_obj = $(patsubst tests/%.c, build/tests/%.o, $(Test_src))
@@ -16,15 +20,20 @@ Main = main
 all : $(Main)
 	@echo "构建main成功,在 main"
 
-$(Main): $(Obj_files) build/main.o
+$(Main): $(Ext_obj_files) $(Obj_files) build/main.o
 	@echo "正在链接"
-	$(C) $(CFLAGS) $(INCLUDE) -o $@ $^
+	$(C) $(Cflags) $(Include) -o $@ $^
 	@echo "链接成功"
 
-build/src/%.o: src/%.c
+build/src/%.o: src/%.c ext/src/%.c
 	@mkdir -p build/src
 	$(C) $(Cflags) $(Include) -c $< -o $@
-	@echo "编译链接文件成功"
+	@echo "编译项目链接文件成功"
+
+build/ext/src/%.o: ext/src/%.c
+	@mkdir -p build/ext/src
+	$(C) $(Cflags) $(Include) -c $< -o $@
+	@echo "编译扩展链接文件成功"
 
 build/main.o : main.c
 	@mkdir -p build

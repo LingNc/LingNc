@@ -333,7 +333,7 @@ any sqlist_copy(sqlist self,sqlist other){
 Exception free_sqlist(sqlist self){
     empty_ptr_error("free_sqlist: 传入self指针为空!");
     Exception e = sqlist_clear(self);
-    exception_down(&e, sfree(self));
+    exception_down(&e, sfree(&self));
     return e;
 }
 interfaces sqlist_create_inter(interfaces subinters){
@@ -387,5 +387,5 @@ any sqlist_iterator_visit(sqlist_iterator self){
 }
 
 Exception free_sqlist_iterator(sqlist_iterator self){
-    return new_exception(sfree(self), "");
+    return new_exception(sfree(&self), "");
 }
