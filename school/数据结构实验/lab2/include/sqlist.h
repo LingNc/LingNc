@@ -63,6 +63,8 @@ sqlist sqlist_insert(sqlist self,int index,any item);
 sqlist sqlist_intert_c(sqlist self,int index,any item);
 size_t sqlist_size(sqlist self);
 // inline size_t sqlist_itemsize(sqlist self);
+
+//获取第 index 个数据指针
 any sqlist_at(sqlist self,int index);
 // 移动构造修改
 any sqlist_set(sqlist self,int index,any newItem);

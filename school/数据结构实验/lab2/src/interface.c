@@ -96,7 +96,7 @@ Exception free_interface(interface self){
     Exception e=new_exception(res,"");
     // interfaces的生命周期由外部管理
     // if(self->_subInters!=NULL) exception_pass(&e,free_interfaces(self->_subInters));
-    exception_down(&e,sfree(self));
+    exception_down(&e,sfree(&self));
     return e;
 }
 
