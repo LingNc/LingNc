@@ -170,7 +170,8 @@ void create_traffic_network(algraph *disGraph,algraph *timeGraph){
 
         // 验证输入
         if(a<=0||b<=0||a>vex||b>vex){
-            printf("错误: 节点编号必须在1到%d之间，请重新输入\n",vex);
+            printf("错误: 节点编号必须在1到%d之间，请重新输入",vex);
+            print_gap(1);
             i--;
             continue;
         }
@@ -218,7 +219,7 @@ void query_shortest_distance_path(algraph disGraph){
     scanf("%d",&start);
 
     if(start<=0||start>disGraph->vexnum){
-        printf("错误: 起点编号必须在1到%d之间！\n",disGraph->vexnum);
+        printf("错误: 起点编号必须在1到%d之间！",disGraph->vexnum);
         print_gap(1);
         print("按任意键继续...");
         getchar();
@@ -231,7 +232,7 @@ void query_shortest_distance_path(algraph disGraph){
     scanf("%d",&end);
 
     if(end<=0||end>disGraph->vexnum){
-        printf("错误: 终点编号必须在1到%d之间！\n",disGraph->vexnum);
+        printf("错误: 终点编号必须在1到%d之间！",disGraph->vexnum);
         print_gap(1);
         print("按任意键继续...");
         getchar();
@@ -244,7 +245,8 @@ void query_shortest_distance_path(algraph disGraph){
     path path=dijkstra_with_path(disGraph,start,end,&minDist);
 
     if(double_eq(minDist,-1)){
-        printf("\n从节点 %d 到节点 %d 没有可行路径！\n",start,end);
+        printf("从节点 %d 到节点 %d 没有可行路径！",start,end);
+        print_gap(1);
     }
     else{
         print_path(path,"最短路程(km)",minDist);
@@ -276,7 +278,7 @@ void query_shortest_time_path(algraph timeGraph){
     scanf("%d",&start);
 
     if(start<=0||start>timeGraph->vexnum){
-        printf("错误: 起点编号必须在1到%d之间！\n",timeGraph->vexnum);
+        printf("错误: 起点编号必须在1到%d之间！",timeGraph->vexnum);
         print_gap(1);
         print("按任意键继续...");
         getchar();
@@ -289,7 +291,7 @@ void query_shortest_time_path(algraph timeGraph){
     scanf("%d",&end);
 
     if(end<=0||end>timeGraph->vexnum){
-        printf("错误: 终点编号必须在1到%d之间！\n",timeGraph->vexnum);
+        printf("错误: 终点编号必须在1到%d之间！",timeGraph->vexnum);
         print_gap(1);
         print("按任意键继续...");
         getchar();
@@ -302,7 +304,8 @@ void query_shortest_time_path(algraph timeGraph){
     path path=dijkstra_with_path(timeGraph,start,end,&minTime);
 
     if(double_eq(minTime,-1)){
-        printf("\n从节点 %d 到节点 %d 没有可行路径！\n",start,end);
+        printf("从节点 %d 到节点 %d 没有可行路径！",start,end);
+        print_gap(1);
     }
     else{
         print_path(path,"最短时间(小时)",minTime);

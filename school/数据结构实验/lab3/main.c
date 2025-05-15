@@ -51,3 +51,13 @@ int main(){
     run_traffic_system();
     return 0;
 }
+
+/*
+4
+5
+1 2 2 1
+1 3 5 2
+2 3 1 1
+2 4 3 1
+3 4 2 2
+*/

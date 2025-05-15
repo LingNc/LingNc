@@ -15,7 +15,7 @@ path new_path(int size){
 void free_path(path *path){
     if(*path){
         if((*path)->path){
-            sfree((*path)->path);
+            sfree(&(*path)->path);
         }
         sfree(path);
     }
