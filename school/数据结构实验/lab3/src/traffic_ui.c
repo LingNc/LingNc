@@ -10,7 +10,7 @@
 // pair<double,int>
 static interfaces g_pair_inter=NULL;
 static interfaces g_in_pair_inter=NULL;
-#define pair_r(_first, _second) new_pair_r(_first, _second, g_in_pair_inter)
+#define pair_r(_first, _second) pair(_first, _second, g_in_pair_inter)
 
 // 初始化接口
 void init_pair_inter(){

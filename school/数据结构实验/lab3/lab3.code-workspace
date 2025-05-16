@@ -57,7 +57,22 @@
             "*.cfg": "ini",
             "*.c": "c",
             "*.h": "c",
-            "random": "c"
+            "random": "c",
+            "array": "c",
+            "atomic": "c",
+            "deque": "c",
+            "string": "c",
+            "unordered_map": "c",
+            "vector": "c",
+            "iterator": "c",
+            "memory": "c",
+            "memory_resource": "c",
+            "string_view": "c",
+            "functional": "c",
+            "ostream": "c",
+            "streambuf": "c",
+            "type_traits": "c",
+            "typeinfo": "c"
         }
     }
 
