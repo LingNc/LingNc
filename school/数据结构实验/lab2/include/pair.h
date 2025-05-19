@@ -19,9 +19,9 @@ pair new_pair(any first,any second,interfaces inters);
 //  pair 右值构建
 Pair pair_r();
 #define pair(_first,_second,_p_inters) ((Pair){\
-    cast(any,(int[]){_first}),\
-    cast(any,(int[]){_second}),\
-    _p_inters}\
+    .first=cast(any,(int[]){_first}),\
+    .second=cast(any,(int[]){_second}),\
+    ._inters=_p_inters}\
 )
 any pair_init(pair self,interfaces inters);
 any pair_clear(pair self);
