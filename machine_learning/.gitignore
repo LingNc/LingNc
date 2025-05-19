@@ -1,0 +1,6 @@
+*
+!*/
+
+!pandas/*
+!.gitignore
+!*workspace
