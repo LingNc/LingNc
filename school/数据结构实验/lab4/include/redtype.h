@@ -7,10 +7,16 @@ typedef int InfoType; /*其他信息类型*/
 
 struct RedType{
     KeyType  key;
-    InfoType  otherinfo;  // 其他字段（自行设计）
+    InfoType  otherinfo;  // 用于验证稳定性的原始位置信息
 };
 
 typedef struct RedType RedType;
 typedef RedType *redtype;
+
+// 排序统计信息
+typedef struct {
+    int compare_count;  // 比较次数
+    int move_count;     // 移动次数
+} SortStats;
 
 #endif // REDTYPE_H

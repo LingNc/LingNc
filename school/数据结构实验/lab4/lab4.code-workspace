@@ -4,5 +4,82 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+		"files.associations": {
+			"*.h": "c",
+			"*.c": "c"
+		}
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "调试排序算法模拟系统",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder}/bin/sort_system",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}",
+				"environment": [],
+				"externalConsole": false,
+				"MIMode": "gdb",
+				"setupCommands": [
+					{
+						"description": "为 gdb 启用整齐打印",
+						"text": "-enable-pretty-printing",
+						"ignoreFailures": true
+					}
+				],
+				"preLaunchTask": "build",
+				"miDebuggerPath": "/usr/bin/gdb",
+				"logging": {
+					"engineLogging": false
+				}
+			}
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build",
+				"type": "shell",
+				"command": "make",
+				"args": ["all"],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"detail": "使用Makefile编译排序算法模拟系统",
+				"problemMatcher": ["$gcc"]
+			},
+			{
+				"label": "run",
+				"type": "shell",
+				"command": "make",
+				"args": ["run"],
+				"group": "test",
+				"dependsOn": "build",
+				"detail": "编译并运行排序算法模拟系统"
+			},
+			{
+				"label": "clean",
+				"type": "shell",
+				"command": "make",
+				"args": ["clean"],
+				"group": "build",
+				"detail": "清理生成的文件"
+			},
+			{
+				"label": "rebuild",
+				"type": "shell",
+				"command": "make",
+				"args": ["rebuild"],
+				"group": "build",
+				"detail": "重新编译整个项目"
+			}
+		]
+	}
 }
