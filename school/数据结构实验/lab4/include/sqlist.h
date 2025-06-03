@@ -38,9 +38,4 @@ int binary_search(SqList *L, RedType elem, int low, int high, SortStats *stats);
 void heapify(SqList *L, int start, int end, SortStats *stats);
 void build_max_heap(SqList *L, SortStats *stats);
 
-// 菜单相关
-void display_menu();
-void test_sort_algorithm(int choice);
-void performance_test();
-
 #endif //SQLIST_H

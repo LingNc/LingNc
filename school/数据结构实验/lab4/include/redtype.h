@@ -14,9 +14,11 @@ typedef struct RedType RedType;
 typedef RedType *redtype;
 
 // 排序统计信息
-typedef struct {
+struct SortStats{
     int compare_count;  // 比较次数
     int move_count;     // 移动次数
-} SortStats;
+};
+typedef struct SortStats SortStats;
+typedef SortStats *sortstats;
 
 #endif // REDTYPE_H
