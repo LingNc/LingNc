@@ -4,7 +4,7 @@
 #include <time.h>
 
 // 生成随机数据
-void generate_random_data(SqList *L, int count) {
+void generate_random_data(sqlist L, int count) {
     L->length = count;
     srand((unsigned int)time(NULL));
 
@@ -15,7 +15,7 @@ void generate_random_data(SqList *L, int count) {
 }
 
 // 生成有序数据
-void generate_sorted_data(SqList *L, int count, int ascending) {
+void generate_sorted_data(sqlist L, int count, int ascending) {
     L->length = count;
 
     for (int i = 1; i <= count; i++) {
@@ -29,12 +29,12 @@ void generate_sorted_data(SqList *L, int count, int ascending) {
 }
 
 // 生成逆序数据
-void generate_reverse_data(SqList *L, int count) {
+void generate_reverse_data(sqlist L, int count) {
     generate_sorted_data(L, count, 0); // 生成降序数据
 }
 
 // 生成含重复元素的数据
-void generate_duplicate_data(SqList *L, int count) {
+void generate_duplicate_data(sqlist L, int count) {
     L->length = count;
     srand((unsigned int)time(NULL));
 
@@ -62,7 +62,7 @@ int get_data_input_choice() {
 }
 
 // 根据选择获取数据
-void get_data_by_choice(SqList *L) {
+void get_data_by_choice(sqlist L) {
     int choice = get_data_input_choice();
     int count;
 

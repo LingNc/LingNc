@@ -14,28 +14,36 @@ struct SqList{
 typedef struct SqList SqList;
 typedef SqList *sqlist;
 
+// 栈结构用于非递归快速排序
+struct Stack{
+    int data[MAXSIZE * 2];
+    int top;
+};
+typedef struct Stack Stack;
+typedef Stack *stack;
+
 // 函数声明
-void init_list(SqList *L);
-void input_data(SqList *L);
-void print_list(SqList *L, const char *title);
-void copy_list(SqList *src, SqList *dest);
-int check_stability(SqList *original, SqList *sorted);
+sqlist new_sqlist();
+void sqlist_input_data(sqlist L);
+void sqlist_print(sqlist L,const char *title);
+void sqlist_copy(sqlist src,sqlist dest);
+int check_stability(sqlist original, sqlist sorted);
 
 // 排序算法函数声明
-void simple_selection_sort(SqList *L, SortStats *stats);
-void direct_insertion_sort(SqList *L, SortStats *stats);
-void bubble_sort(SqList *L, SortStats *stats);
-void binary_insertion_sort(SqList *L, SortStats *stats);
-void shell_sort(SqList *L, SortStats *stats);
-void quick_sort(SqList *L, SortStats *stats);
-void quick_sort_recursive(SqList *L, int low, int high, SortStats *stats);
-void quick_sort_non_recursive(SqList *L, SortStats *stats);
-void heap_sort(SqList *L, SortStats *stats);
+void simple_selection_sort(sqlist L, sortstats stats);
+void direct_insertion_sort(sqlist L, sortstats stats);
+void bubble_sort(sqlist L, sortstats stats);
+void binary_insertion_sort(sqlist L, sortstats stats);
+void shell_sort(sqlist L, sortstats stats);
+void quick_sort(sqlist L, sortstats stats);
+void quick_sort_recursive(sqlist L, int low, int high, sortstats stats);
+void quick_sort_non_recursive(sqlist L, sortstats stats);
+void heap_sort(sqlist L, sortstats stats);
 
 // 辅助函数
-void swap(RedType *a, RedType *b, SortStats *stats);
-int binary_search(SqList *L, RedType elem, int low, int high, SortStats *stats);
-void heapify(SqList *L, int start, int end, SortStats *stats);
-void build_max_heap(SqList *L, SortStats *stats);
+void swap(redtype a, redtype b, sortstats stats);
+int binary_search(sqlist L, RedType elem, int low, int high, sortstats stats);
+void heapify(sqlist L, int start, int end, sortstats stats);
+void build_max_heap(sqlist L, sortstats stats);
 
 #endif //SQLIST_H

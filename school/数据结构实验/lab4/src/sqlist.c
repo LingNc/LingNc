@@ -1,13 +1,19 @@
 #include "sqlist.h"
 
-// 初始化顺序表
-void init_list(SqList *L) {
+// 创建新的顺序表，返回指针
+sqlist new_sqlist() {
+    sqlist L = (sqlist)malloc(sizeof(SqList));
+    if (L == NULL) {
+        printf("内存分配失败!\n");
+        exit(1);
+    }
     L->length = 0;
     memset(L->r, 0, sizeof(L->r));
+    return L;
 }
 
-// 手动输入数据（保留用于兼容性）
-void input_data(SqList *L) {
+// 输入数据
+void sqlist_input_data(sqlist L) {
     printf("请输入要排序的元素个数 (1-%d): ", MAXSIZE);
     scanf("%d", &L->length);
 
@@ -25,7 +31,7 @@ void input_data(SqList *L) {
 }
 
 // 打印顺序表
-void print_list(SqList *L, const char *title) {
+void sqlist_print(sqlist L, const char *title) {
     printf("%s", title);
     if (strlen(title) > 0) printf(": ");
     for (int i = 1; i <= L->length; i++) {
@@ -35,7 +41,7 @@ void print_list(SqList *L, const char *title) {
 }
 
 // 复制顺序表
-void copy_list(SqList *src, SqList *dest) {
+void sqlist_copy(sqlist src, sqlist dest) {
     dest->length = src->length;
     for (int i = 0; i <= src->length; i++) {
         dest->r[i] = src->r[i];
@@ -43,7 +49,7 @@ void copy_list(SqList *src, SqList *dest) {
 }
 
 // 检查排序稳定性
-int check_stability(SqList *original, SqList *sorted) {
+int check_stability(sqlist original, sqlist sorted) {
     (void)original; // 避免未使用参数警告
     for (int i = 1; i < sorted->length; i++) {
         for (int j = i + 1; j <= sorted->length; j++) {
@@ -58,7 +64,7 @@ int check_stability(SqList *original, SqList *sorted) {
 }
 
 // 交换两个元素
-void swap(RedType *a, RedType *b, SortStats *stats) {
+void swap(redtype a, redtype b, sortstats stats) {
     if (a != b) {
         RedType temp = *a;
         *a = *b;
@@ -68,12 +74,12 @@ void swap(RedType *a, RedType *b, SortStats *stats) {
 }
 
 // 1. 简单选择排序
-void simple_selection_sort(SqList *L, SortStats *stats) {
+void simple_selection_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n简单选择排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     for (int i = 1; i < L->length; i++) {
         int min_idx = i;
@@ -87,17 +93,17 @@ void simple_selection_sort(SqList *L, SortStats *stats) {
             swap(&L->r[i], &L->r[min_idx], stats);
         }
         printf("第%d趟", i);
-        print_list(L, "");
+        sqlist_print(L, "");
     }
 }
 
 // 2. 直接插入排序
-void direct_insertion_sort(SqList *L, SortStats *stats) {
+void direct_insertion_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n直接插入排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     for (int i = 2; i <= L->length; i++) {
         L->r[0] = L->r[i]; // 哨兵
@@ -116,17 +122,17 @@ void direct_insertion_sort(SqList *L, SortStats *stats) {
         stats->move_count++;
 
         printf("第%d趟", i - 1);
-        print_list(L, "");
+        sqlist_print(L, "");
     }
 }
 
 // 3. 冒泡排序
-void bubble_sort(SqList *L, SortStats *stats) {
+void bubble_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n冒泡排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     for (int i = 1; i < L->length; i++) {
         int flag = 0; // 标记是否发生交换
@@ -138,13 +144,13 @@ void bubble_sort(SqList *L, SortStats *stats) {
             }
         }
         printf("第%d趟", i);
-        print_list(L, "");
+        sqlist_print(L, "");
         if (!flag) break; // 如果没有交换，说明已经有序
     }
 }
 
 // 二分查找插入位置
-int binary_search(SqList *L, RedType elem, int low, int high, SortStats *stats) {
+int binary_search(sqlist L, RedType elem, int low, int high, sortstats stats) {
     while (low <= high) {
         stats->compare_count++;
         int mid = (low + high) / 2;
@@ -158,12 +164,12 @@ int binary_search(SqList *L, RedType elem, int low, int high, SortStats *stats) 
 }
 
 // 4. 折半插入排序
-void binary_insertion_sort(SqList *L, SortStats *stats) {
+void binary_insertion_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n折半插入排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     for (int i = 2; i <= L->length; i++) {
         L->r[0] = L->r[i]; // 哨兵
@@ -180,17 +186,17 @@ void binary_insertion_sort(SqList *L, SortStats *stats) {
         stats->move_count++;
 
         printf("第%d趟", i - 1);
-        print_list(L, "");
+        sqlist_print(L, "");
     }
 }
 
 // 5. 希尔排序
-void shell_sort(SqList *L, SortStats *stats) {
+void shell_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n希尔排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     int gap = L->length / 2;
     int round = 1;
@@ -216,13 +222,13 @@ void shell_sort(SqList *L, SortStats *stats) {
         }
 
         printf("第%d轮", round++);
-        print_list(L, "");
+        sqlist_print(L, "");
         gap /= 2;
     }
 }
 
 // 快速排序的分割函数
-int partition(SqList *L, int low, int high, SortStats *stats) {
+int partition(sqlist L, int low, int high, sortstats stats) {
     RedType pivot = L->r[low];
     stats->move_count++;
 
@@ -253,52 +259,46 @@ int partition(SqList *L, int low, int high, SortStats *stats) {
 }
 
 // 6. 快速排序（递归）
-void quick_sort_recursive(SqList *L, int low, int high, SortStats *stats) {
+void quick_sort_recursive(sqlist L, int low, int high, sortstats stats) {
     if (low < high) {
         int pivot_pos = partition(L, low, high, stats);
         printf("划分结果");
-        print_list(L, "");
+        sqlist_print(L, "");
 
         quick_sort_recursive(L, low, pivot_pos - 1, stats);
         quick_sort_recursive(L, pivot_pos + 1, high, stats);
     }
 }
 
-void quick_sort(SqList *L, SortStats *stats) {
+void quick_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n快速排序（递归）过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     quick_sort_recursive(L, 1, L->length, stats);
 }
 
-// 栈结构用于非递归快速排序
-typedef struct {
-    int data[MAXSIZE * 2];
-    int top;
-} Stack;
-
-void push(Stack *s, int value) {
+void push(stack s, int value) {
     s->data[++s->top] = value;
 }
 
-int pop(Stack *s) {
+int pop(stack s) {
     return s->data[s->top--];
 }
 
-int is_empty(Stack *s) {
+int is_empty(stack s) {
     return s->top == -1;
 }
 
 // 7. 快速排序（非递归）
-void quick_sort_non_recursive(SqList *L, SortStats *stats) {
+void quick_sort_non_recursive(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n快速排序（非递归）过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     Stack s;
     s.top = -1;
@@ -313,7 +313,7 @@ void quick_sort_non_recursive(SqList *L, SortStats *stats) {
         if (low < high) {
             int pivot_pos = partition(L, low, high, stats);
             printf("划分结果");
-            print_list(L, "");
+            sqlist_print(L, "");
 
             push(&s, low);
             push(&s, pivot_pos - 1);
@@ -324,7 +324,7 @@ void quick_sort_non_recursive(SqList *L, SortStats *stats) {
 }
 
 // 堆调整
-void heapify(SqList *L, int start, int end, SortStats *stats) {
+void heapify(sqlist L, int start, int end, sortstats stats) {
     int parent = start;
     int child = 2 * parent;
 
@@ -346,30 +346,30 @@ void heapify(SqList *L, int start, int end, SortStats *stats) {
 }
 
 // 建立最大堆
-void build_max_heap(SqList *L, SortStats *stats) {
+void build_max_heap(sqlist L, sortstats stats) {
     for (int i = L->length / 2; i >= 1; i--) {
         heapify(L, i, L->length, stats);
     }
 }
 
 // 8. 堆排序
-void heap_sort(SqList *L, SortStats *stats) {
+void heap_sort(sqlist L, sortstats stats) {
     stats->compare_count = 0;
     stats->move_count = 0;
 
     printf("\n堆排序过程:\n");
-    print_list(L, "初始状态");
+    sqlist_print(L, "初始状态");
 
     // 建立最大堆
     build_max_heap(L, stats);
     printf("建堆后");
-    print_list(L, "");
+    sqlist_print(L, "");
 
     // 排序
     for (int i = L->length; i >= 2; i--) {
         swap(&L->r[1], &L->r[i], stats);
         heapify(L, 1, i - 1, stats);
         printf("第%d趟", L->length - i + 1);
-        print_list(L, "");
+        sqlist_print(L, "");
     }
 }
