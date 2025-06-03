@@ -17,7 +17,7 @@ typedef SqList *sqlist;
 // 栈结构用于非递归快速排序
 struct Stack{
     int data[MAXSIZE * 2];
-    int top;
+    KeyType top;
 };
 typedef struct Stack Stack;
 typedef Stack *stack;
