@@ -16,12 +16,13 @@
 
 // 扩容函数
 Exception expand(sqlist self){
-    if (self == NULL) return new_exception(ERROR, "sqlist expand: 传入self指针为空!");
+    // if (self == NULL) return new_exception(ERROR, "sqlist expand: 传入self指针为空!");
     size_t newSize = self->_capacity * 2;
     self->_data = realloc(self->_data, newSize * sqlist_itemsize(self));
-    if (self->_data == NULL) return new_exception(ERROR, "sqlist expand: 扩容失败!");
+    // if (self->_data == NULL) return new_exception(ERROR, "sqlist expand: 扩容失败!");
     self->_capacity = newSize;
-    return new_exception(SUCCESS, "");
+    // return new_exception(SUCCESS, "");
+    return ;
 }
 
 // 收缩函数
@@ -234,12 +235,12 @@ Exception sqlist_clear(sqlist self){
 }
 
 Exception sqlist_push_back(sqlist self,any item){
-    empty_ptr_error("sqlist_push_back: 传入self指针为空!");
-    if(self->_inter==NULL) return new_exception(ERROR,"sqlist_push_back: sqlist未初始化,接口为空!");
-    Exception e=new_exception(SUCCESS,"");
+    // empty_ptr_error("sqlist_push_back: 传入self指针为空!");
+    // if(self->_inter==NULL) return new_exception(ERROR,"sqlist_push_back: sqlist未初始化,接口为空!");
+    // Exception e=new_exception(SUCCESS,"");
     self->_size++;
     if (self->_size > self->_capacity){
-        e = expand(self);
+         expand(self);
     }
     sqlist_pointer(self) pdata = self->_data;
     // any newItem=(byte)self->_data+(self->_size-1)*sqlist_itemsize(self);
@@ -258,7 +259,7 @@ Exception sqlist_push_back(sqlist self,any item){
     else{
         memcpy(newItem, item, sqlist_itemsize(self));
     }
-    return e;
+    return ;
 }
 
 // 拷贝传入

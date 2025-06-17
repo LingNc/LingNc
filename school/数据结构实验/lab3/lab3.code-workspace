@@ -52,8 +52,6 @@
     },
     "settings": {
         "files.associations": {
-            "*.vue": "vue",
-            ".clangd": "yaml",
             "*.cfg": "ini",
             "*.c": "c",
             "*.h": "c",
