@@ -1,4 +1,6 @@
 #include "huffcode.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 huffcode new_huffcode(){
     huffcode res = malloc(sizeof(HuffCode));
@@ -16,7 +18,7 @@ huffcode huffcode_init(huffcode self){
 
 void huffcode_print(huffcode self){
     if (self == NULL) return;
-    printf("HuffCode: %X %u\n", self->_code, self->_size);
+    printf("HuffCode: %lX %u\n", self->_code, self->_size);
 }
 bool huffcode_get(huffcode self,Byte index){
     // 超出索引范围
@@ -31,16 +33,16 @@ any huffcode_set(huffcode self,Byte index,bool value){
     return self;
 }
 void huffcode_inc(huffcode self){
-    if(self==NULL) return NULL;
+    if(self==NULL) return;
     self->_code+=1;
 }
 void huffcode_lshift(huffcode self,size_t nums){
-    if(self==NULL) return NULL;
+    if(self==NULL) return;
     self->_code<<=nums;
     self->_size+=nums;
 }
 void huffcode_rshift(huffcode self,size_t nums){
-    if(self==NULL) return NULL;
+    if(self==NULL) return;
     self->_code>>=nums;
     self->_size-=nums;
 }

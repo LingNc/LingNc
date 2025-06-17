@@ -2,6 +2,7 @@
 #include "tools.h"
 #include "heap.h"
 #include "huffcode.h"
+#include "pair.h"
 #include <stdlib.h>
 // 树节点
 huffnode new_huffnode(utf8 word){
@@ -10,7 +11,7 @@ huffnode new_huffnode(utf8 word){
     huffnode_init(res, NULL);
     return res;
 }
-huffnode huffnode_init(huffnode self, interface inter){
+huffnode huffnode_init(huffnode self, interfaces inter){
     if (self == NULL) return NULL;
     self->left = NULL;
     self->right = NULL;
@@ -103,14 +104,14 @@ static hufftree create_tree_from_freq(sqlist freq_t){
 
 // 静态临时全局变量
 static sqlist g_sqlist_table;
-static pairinter g_pair_inter;
+static interfaces g_pair_inters;
 
 // 递归创建字长表
 static void create_length(hufftree node, size_t depth){
     if (node == NULL) return;
     // 叶子节点
     if (node->left == NULL && node->right == NULL){
-        pair p = new_pair(node->word, depth,g_pair_inter);
+        pair p = new_pair(node->word, depth,inter sqlist_inter(g_sqlist_table));
         sqlist_push_back(g_sqlist_table, &p);
     }
     create_length(node->left, depth + 1);
@@ -120,16 +121,17 @@ static void create_length(hufftree node, size_t depth){
 // 从树构造字长表
 static sqlist create_length_from_tree(hufftree tree){
     if (tree == NULL) return NULL;
-    sqlist table = new_sqlist(pair_create_inter());
+    sqlist table = new_sqlist(pair_create_inters());
     // 遍历树
     // 计算字长
     // pair<utf8,size_t> 单词 和 长度
-    pairinter inter=new_pairinter(
-        new_interface(sizeof(utf8), NULL, ""),
+    interfaces inters=new_interfaces(
+        2,
+        new_interface(sizeof(utf8),NULL,""),
         new_interface(sizeof(size_t), NULL, "")
     );
     // 初始化静态全局变量
-    g_pair_inter=inter;
+    g_pair_inters=inters;
     g_sqlist_table = table;
     // 递归函数创建
     create_length(tree,0);
@@ -137,7 +139,7 @@ static sqlist create_length_from_tree(hufftree tree){
     // 保存 pairinter
     // hfm->_length_inter=inter;
     // 清空全局变量
-    g_pair_inter=NULL;
+    g_pair_inters=NULL;
     g_sqlist_table = NULL;
     return table;
 }
@@ -179,7 +181,7 @@ static sqlist create_canonical_from_length(sqlist leng_t){
     pair code_pair=new_pair(p->first,p->second,pinter);
     // 创建编码表
     // sqlist<pair<utf8,huffcode>>
-    sqlist table=new_sqlist(pair_create_inter());
+    sqlist table=new_sqlist(pair_create_inters());
     sqlist_push_back(table,code_pair);
     free_pair(code_pair);
     size_t last_len=1;

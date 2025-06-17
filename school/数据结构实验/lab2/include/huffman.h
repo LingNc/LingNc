@@ -3,6 +3,7 @@
 
 #include "sqlist.h"
 #include "pair.h"
+#include "huffcode.h"
 #include <stdint.h>
 
 // 节点
@@ -16,7 +17,7 @@ struct HuffNode{
 };
 
 huffnode new_huffnode(utf8 word);
-huffnode huffnode_init(huffnode self,interface inter);
+huffnode huffnode_init(huffnode self,interfaces inter);
 huffnode huffnode_clear(huffnode self);
 // 递归删除
 huffnode free_huffnode(huffnode self);

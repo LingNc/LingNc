@@ -122,6 +122,8 @@ sqlist_6 = new_interfaces(NULL,1,
 // int_8 = NULL
 
 // 初始化函数
+// vector<vector<int>> a(n,vector<int>(m,(int)0))
+//        pair< vector<vector<int>> , pair<vector<double>,int> >
         //  1     2       3    4       5      6      7     8
 // init-> pair< sqlist<sqlist<int>> , pair<sqlist<double>,int> >
 // pair_1<sqlist,sqlist>
@@ -153,3 +155,4 @@ new_initlist(2,
 */
 
 #endif //INTERFACE_H
+
