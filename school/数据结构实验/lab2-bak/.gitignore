@@ -1,0 +1,13 @@
+*
+!*/
+
+!src/*.c
+!include/*.h
+!ext/*.*
+!tests/*.c
+!main.c
+!README.md
+!LICENSE
+!Makefile
+!.gitignore
+!*workspace
