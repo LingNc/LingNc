@@ -21,10 +21,10 @@ void huffcode_print(huffcode self){
     printf("HuffCode: %lX %u\n", self->_code, self->_size);
 }
 bool huffcode_get(huffcode self,Byte index){
-    // 超出索引范围
-    if(index>64) return false;
-    index=64-self->_size+index;
-    return (self->_code>>index)&1;
+    if(self == NULL || index >= self->_size) return false;
+    // 从最高有效位开始读取（位0是最高位）
+    Byte bit_pos = self->_size - 1 - index;
+    return (self->_code >> bit_pos) & 1;
 }
 any huffcode_set(huffcode self,Byte index,bool value){
     if(self==NULL||index>64) return NULL;

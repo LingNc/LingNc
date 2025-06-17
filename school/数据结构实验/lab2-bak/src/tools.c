@@ -122,30 +122,29 @@ int read_utf8(utf8* res, byte buffer, size_t pos, size_t max){
     int len = 0;
     if ((b & 0b10000000) == 0){
         len = 1;
+        *res = b;
     }
     else if ((b & 0b11100000) == 0b11000000){
         len = 2;
+        if (pos + len > max) return (int)(pos - max);
+        *res = ((b & 0x1F) << 6) | (buffer[pos + 1] & 0x3F);
     }
     else if ((b & 0b11110000) == 0b11100000){
         len = 3;
+        if (pos + len > max) return (int)(pos - max);
+        *res = ((b & 0x0F) << 12) | ((buffer[pos + 1] & 0x3F) << 6) | (buffer[pos + 2] & 0x3F);
     }
     else if ((b & 0b11111000) == 0b11110000){
         len = 4;
+        if (pos + len > max) return (int)(pos - max);
+        *res = ((b & 0x07) << 18) | ((buffer[pos + 1] & 0x3F) << 12) |
+               ((buffer[pos + 2] & 0x3F) << 6) | (buffer[pos + 3] & 0x3F);
     }
     else{
         // 非法编码 替换为 U+FFFD 替换字符
         *res = 0xFFFD;
         return 1;
     }
-    // 检查缓冲区是否足够
-    if (pos + len > max){
-        // 需要回退到pos，重新读取缓冲区
-        return (int)(pos - max);
-    }
-    *res = 0;
-    for (int i = 0; i < len; i++){
-        *res <<= 8;
-        *res |= buffer[pos + i];
-    }
+
     return len;
 }

@@ -30,5 +30,6 @@ any pair_move(pair dest,pair src);
 void pair_print(pair self);
 any free_pair(pair self);
 interfaces pair_create_inters();
+interfaces pair_ptr_create_inters();
 
 #endif //PAIR_H

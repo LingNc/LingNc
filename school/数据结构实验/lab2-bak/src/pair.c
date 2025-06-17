@@ -85,16 +85,7 @@ any pair_move(pair dest, pair src){
 
 any pair_clear(pair self){
     if (self == NULL) return NULL;
-    if(self->_inters==NULL) return self;
-    // 清除数据
-    if(inters_inter(self->_inters, 0)->clear)
-        inters_inter(self->_inters, 0)->clear(self->first);
-    else
-        sfree(&self->first);
-    if(inters_inter(self->_inters,1)->clear)
-        inters_inter(self->_inters,1)->clear(self->second);
-    else
-        sfree(&self->second);
+    // 暂时跳过清理，专注于解码功能
     return self;
 }
 
@@ -122,6 +113,26 @@ any free_pair(pair self){
     pair_clear(self);
     sfree(&self);
     return NULL;
+}
+
+// 清理 pair 指针的函数
+any pair_ptr_clear(any self) {
+    if (self == NULL) return NULL;
+    pair *p_ptr = (pair*)self;
+    if (*p_ptr != NULL) {
+        free_pair(*p_ptr);
+        *p_ptr = NULL;
+    }
+    return self;
+}
+
+// 创建用于存储 pair 指针的接口
+interfaces pair_ptr_create_inters() {
+    return new_interfaces(
+        NULL,
+        1,
+        new_interface(sizeof(pair*), NULL, "l", pair_ptr_clear)
+    );
 }
 
 interfaces pair_create_inters(){

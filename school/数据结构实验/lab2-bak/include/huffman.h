@@ -63,6 +63,10 @@ Exception huffman_load(huffman self,Table type,sqlist table);
 sqlist huffman_table(huffman self,Table type);
 // 构造树
 hufftree huffman_build(huffman self);
+// 从编码表构建哈夫曼树
+hufftree hufftree_from_code_table(sqlist code_table);
+// 从字长表创建范式哈夫曼编码表
+sqlist create_canonical_from_length(sqlist length_table);
 Exception free_huffman(huffman self);
 
 #endif // HUFFMAN_H

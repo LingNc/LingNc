@@ -58,101 +58,54 @@ static bool min_heap(any a,any b){
 
 // 从频率表构建树
 static hufftree create_tree_from_freq(sqlist freq_t){
-    printf("DEBUG: create_tree_from_freq - 开始\n");
     if (freq_t == NULL) return NULL;
     size_t size = sqlist_size(freq_t);
     if (size == 0) return NULL;
-    printf("DEBUG: 频率表大小: %zu\n", size);
 
     // 根据频率表预构建储存节点的堆的列表 O(n)
-    // 储存节点指针值 sqlist<huffnode*>
-    printf("DEBUG: 准备创建interface\n");
     interface pnode_inter = new_interface(sizeof(huffnode*), NULL, "");
-    printf("DEBUG: interface创建成功\n");
     interfaces pnode_inters = new_interfaces(NULL, 1, pnode_inter);
-    printf("DEBUG: interfaces创建成功\n");
-    printf("DEBUG: 准备创建sqlist，pnode_inters=%p\n", pnode_inters);
-    if (pnode_inters) {
-        printf("DEBUG: interfaces count=%d\n", pnode_inters->count);
-        if (pnode_inters->count > 0 && pnode_inters->inters[0]) {
-            printf("DEBUG: interface[0]->_itemSize=%zu\n", pnode_inters->inters[0]->_itemSize);
-        }
-    }
     sqlist node_list = new_sqlist(pnode_inters);
-    printf("DEBUG: sqlist创建成功\n");
-    printf("DEBUG: 开始填充node_list，总共%zu个字符\n", size);
+
     for (size_t i = 0; i < size; i++){
-        printf("DEBUG: 处理第%zu个字符\n", i);
         // 取出频率表中的元素
         pair p = *(pair*)sqlist_at(freq_t, i);
-        printf("DEBUG: 获取pair成功\n");
-        // 创建节点
         utf8 ch = *(utf8*)p->first;
-        printf("DEBUG: 获取字符: %lu\n", ch);
         huffnode node = new_huffnode(ch);
-        printf("DEBUG: 创建huffnode成功\n");
         node->freq = *(size_t*)p->second;
-        printf("DEBUG: 设置频率: %zu\n", node->freq);
-        // 插入到列表中 注意值应该传值的指针
         sqlist_push_back(node_list, &node);
-        printf("DEBUG: 插入到列表成功\n");
     }
-    printf("DEBUG: 循环结束，准备创建堆\n");
-    // 建堆 根据频率 小顶堆 O(logn) 但是之后每次索引表构建 是 O(nlogn) 目前不采用
-    // heap h=new_heap_from(table,min_heap);
-    // 建堆 根据频率 小顶堆 heap<huffnode*>
-    printf("DEBUG: 调用new_heap_from\n");
-    heap h = new_heap_from(node_list, (cmp_func)min_heap);
-    printf("DEBUG: 堆创建成功\n");
 
-    printf("DEBUG: 检查堆是否为空\n");
+    // 建堆
+    heap h = new_heap_from(node_list, (cmp_func)min_heap);
     if (h == NULL) {
-        printf("DEBUG: 堆为空，返回NULL\n");
         return NULL;
     }
-    printf("DEBUG: 堆不为空，继续处理\n");
+
     // 构建哈夫曼树
-    printf("DEBUG: 开始构建哈夫曼树，堆大小: %zu\n", heap_size(h));
     while (heap_size(h) > 1){
-        printf("DEBUG: 堆大小: %zu，继续合并节点\n", heap_size(h));
-        // 取出两个最小的节点
-        printf("DEBUG: 获取第一个节点\n");
         huffnode *left_ptr = (huffnode*)heap_top(h);
         huffnode left = *left_ptr;
-        printf("DEBUG: 弹出第一个节点，频率: %zu\n", left->freq);
         heap_pop(h);
-        printf("DEBUG: 获取第二个节点\n");
         huffnode *right_ptr = (huffnode*)heap_top(h);
         huffnode right = *right_ptr;
-        printf("DEBUG: 弹出第二个节点，频率: %zu\n", right->freq);
         heap_pop(h);
-        // 创建新的节点
-        printf("DEBUG: 创建新的内部节点\n");
+
         huffnode node = new_huffnode(0);
         node->left = left;
         node->right = right;
         node->freq = left->freq + right->freq;
-        printf("DEBUG: 新节点频率: %zu\n", node->freq);
-        // 插入到堆中
-        printf("DEBUG: 将新节点插入堆\n");
         heap_push(h, &node);
-        printf("DEBUG: 插入成功\n");
     }
+
     // 获取构建的树根
-    printf("DEBUG: 构建完成，准备获取根节点\n");
-    printf("DEBUG: 最终堆大小: %zu\n", heap_size(h));
     huffnode *root_ptr = (huffnode*)heap_top(h);
-    printf("DEBUG: 获取到堆顶指针\n");
     hufftree root = *root_ptr;
-    printf("DEBUG: 获取到根节点，频率: %zu\n", root->freq);
     heap_pop(h);
-    printf("DEBUG: 弹出根节点成功\n");
-    // 释放堆
+
+    // 释放堆和节点列表
     free_heap(h);
-    printf("DEBUG: 释放堆成功\n");
-    // 释放节点列表
     free_sqlist(node_list);
-    printf("DEBUG: 释放节点列表成功\n");
     return root;
 }
 
@@ -162,46 +115,75 @@ static interfaces g_pair_inters;
 
 // 递归创建字长表
 static void create_length(hufftree node, size_t depth){
-    if (node == NULL) return;
+    if (node == NULL) {
+        return;
+    }
+
+    // 检查递归深度，防止栈溢出
+    // if (depth > 64) {
+    //     printf("ERROR: 递归深度过深\n");
+    //     return;
+    // }
+
     // 叶子节点
     if (node->left == NULL && node->right == NULL){
+        if (g_pair_inters == NULL) {
+            printf("ERROR: g_pair_inters为空！\n");
+            return;
+        }
         pair p = new_pair(&(node->word), &depth, g_pair_inters);
-        sqlist_push_back(g_sqlist_table, &p);
+        if (p != NULL) {
+            Exception ex = sqlist_push_back(g_sqlist_table, &p);
+            if (ex.status != SUCCESS) {
+                printf("ERROR: sqlist_push_back失败: %s\n", ex.msg);
+            }
+        } else {
+            printf("ERROR: new_pair失败！\n");
+        }
+        return;
     }
-    create_length(node->left, depth + 1);
-    create_length(node->right, depth + 1);
+
+    // 先处理左子树
+    if (node->left != NULL) {
+        create_length(node->left, depth + 1);
+    }
+
+    // 再处理右子树
+    if (node->right != NULL) {
+        create_length(node->right, depth + 1);
+    }
 }
 
 // 从树构造字长表
 static sqlist create_length_from_tree(hufftree tree){
-    printf("DEBUG: create_length_from_tree - 开始\n");
     if (tree == NULL) return NULL;
-    printf("DEBUG: 创建pair_create_inters\n");
-    sqlist table = new_sqlist(pair_create_inters());
-    printf("DEBUG: 字长表sqlist创建成功\n");
-    // 遍历树
-    // 计算字长
-    // pair<utf8,size_t> 单词 和 长度
-    printf("DEBUG: 创建interfaces\n");
-    interfaces inters=new_interfaces(
-        NULL, 2,
-        new_interface(sizeof(utf8),NULL,""),
+
+    // 创建字长表接口 - pair<utf8, size_t>
+    interfaces length_pair_inters = new_interfaces(NULL, 2,
+        new_interface(sizeof(utf8), NULL, ""),
         new_interface(sizeof(size_t), NULL, "")
     );
-    printf("DEBUG: interfaces创建成功\n");
-    // 初始化静态全局变量
-    g_pair_inters=inters;
+
+    // 为字长表创建pair指针接口 - 存储pair*
+    interfaces pair_ptr_inters = pair_ptr_create_inters();
+
+    // 创建字长表
+    sqlist table = new_sqlist(pair_ptr_inters);
+    if (table == NULL) {
+        return NULL;
+    }
+
+    // 设置全局变量，供递归函数使用
     g_sqlist_table = table;
-    printf("DEBUG: 开始递归遍历树，根节点频率: %zu\n", tree->freq);
-    // 递归函数创建
-    create_length(tree,0);
-    printf("DEBUG: 递归遍历完成\n");
-    // hfm->_leng_t = table;
-    // 保存 pairinter
-    // hfm->_length_inter=inter;
+    g_pair_inters = length_pair_inters;
+
+    // 递归遍历树构建字长表
+    create_length(tree, 0);
+
     // 清空全局变量
-    g_pair_inters=NULL;
+    g_pair_inters = NULL;
     g_sqlist_table = NULL;
+
     return table;
 }
 
@@ -229,80 +211,150 @@ static int length_cmp_wrapper(c_any a, c_any b) {
 }
 
 // 从字长表构建范式哈夫曼编码表
-static sqlist create_canonical_from_length(sqlist leng_t){
-    if (leng_t == NULL) return NULL;
+sqlist create_canonical_from_length(sqlist leng_t){
+    if (leng_t == NULL) return NULL;    printf("DEBUG: 开始创建范式霍夫曼编码表\n");
+
+    // 计算范式哈夫曼编码表
+    size_t l_size=sqlist_size(leng_t);
+
+    // 如果字长表为空，返回空的编码表
+    if (l_size == 0) {
+        return new_sqlist(pair_create_inters());
+    }
+
     // 升序排序字长表
     sqlist_sort(leng_t, length_cmp_wrapper);
+
+    // 获取huffcode接口
+    interfaces huffcode_inters = huffcode_create_inters();
+    interface huffcode_inter = huffcode_inters->inters[0]; // 取出第一个接口
+
     // 创建编码表接口
-    interfaces pinter=new_interfaces(NULL, 2,
+    interfaces pinter = new_interfaces(NULL, 2,
         // utf8 inter
         new_interface(sizeof(utf8),NULL,""),
         // huffcode inter
-        huffcode_create_inters()
+        huffcode_inter
     );
-    // 计算范式哈夫曼编码表
-    size_t l_size=sqlist_size(leng_t);
-    // 缓存 huffcode
-    HuffCode cache;
-    // 初始化 huffcode 为0
-    huffcode_init(&cache);
+
+    // 创建pair接口（用于sqlist存储）
+    interfaces pair_inters = pair_create_inters();    // 缓存 huffcode - 使用简单的整数值而不是HuffCode结构
+    uint64_t code_value = 0;
+
     // 从第一个对 获取起始数据
-    // pair<utf8,size_t>
     pair p = *(pair*)sqlist_at(leng_t,0);
-    // 设置第一个编码的长度
     size_t first_len = *(size_t*)p->second;
-    cache._size = (Byte)first_len;
+    printf("DEBUG: 第一个字符 %lu, 长度 %zu, 编码值 %lu\n",
+           *(utf8*)p->first, first_len, code_value);
+
     // 创建第一个编码条目
-    // pair<utf8,huffcode>
-    pair code_pair = new_pair(p->first, &cache, pinter);
-    // 创建编码表
-    // sqlist<pair<utf8,huffcode>>
-    sqlist table = new_sqlist(pair_create_inters());
+    HuffCode first_code;
+    huffcode_init(&first_code);
+    first_code._code = code_value;
+    first_code._size = (Byte)first_len;
+
+    pair code_pair = new_pair(p->first, &first_code, pinter);
+    sqlist table = new_sqlist(pair_inters);
+
     sqlist_push_back(table, &code_pair);
     free_pair(code_pair);
-    size_t last_len = *(size_t*)p->second;
+
+    size_t last_len = first_len;
+
     // 处理剩余的每个词
     for(size_t i = 1; i < l_size; i++){
         p = *(pair*)sqlist_at(leng_t, i);
+
         // 增加编码值
-        huffcode_inc(&cache);
+        code_value++;
         size_t new_len = *(size_t*)p->second;
+        printf("DEBUG: 处理字符 %lu, 新长度 %zu, 旧长度 %zu, 增加后编码值 %lu\n",
+               *(utf8*)p->first, new_len, last_len, code_value);
+
         // 如果长度增加，左移差值位
-        // 左移编码 (newWordlen - len) 次
         if(new_len > last_len){
-            huffcode_lshift(&cache, new_len - last_len);
+            code_value <<= (new_len - last_len);
+            printf("DEBUG: 左移 %zu 位后编码值 %lu\n", new_len - last_len, code_value);
             last_len = new_len;
         }
-        // 设置编码长度（需要手动设置 _size 字段）
-        cache._size = (Byte)new_len;
+
+        printf("DEBUG: 最终编码值 %lu, 长度 %zu\n", code_value, new_len);
+
+        // 创建新的HuffCode
+        HuffCode current_code;
+        huffcode_init(&current_code);
+        current_code._code = code_value;
+        current_code._size = (Byte)new_len;
+
         // 为新的字符创建编码
-        code_pair = new_pair(p->first, &cache, pinter);
-        // 添加条目到编码表
+        code_pair = new_pair(p->first, &current_code, pinter);
         sqlist_push_back(table, &code_pair);
         free_pair(code_pair);
     }
     return table;
 }
 
+// 辅助函数：向树中插入一个节点（基于编码）
+static void hufftree_insert_by_code(hufftree tree, utf8 word, huffcode code) {
+    if (tree == NULL || code == NULL) return;
+
+    huffnode current = tree;
+
+    // 如果编码长度为0，说明是根节点的字符
+    if (code->_size == 0) {
+        current->word = word;
+        return;
+    }
+
+    // 从最高位开始遍历
+    for (int i = code->_size - 1; i >= 0; i--) {
+        // 检查第i位是否为1
+        bool bit = (code->_code >> i) & 1;
+
+        if (bit == 0) {
+            // 向左走
+            if (current->left == NULL) {
+                current->left = new_huffnode(0);
+            }
+            current = current->left;
+        } else {
+            // 向右走
+            if (current->right == NULL) {
+                current->right = new_huffnode(0);
+            }
+            current = current->right;
+        }
+    }
+
+    // 在叶子节点设置字符
+    current->word = word;
+}
+
 // 从范式哈夫曼编码构造范式哈夫曼树
 hufftree create_tree_from_canonical(sqlist code_t){
     if (code_t == NULL) return NULL;
-    // 创建树
-    hufftree tree = new_huffnode(0);
-    // 遍历编码表
+
     size_t size = sqlist_size(code_t);
+    if (size == 0) return NULL;
+
+    // 创建根节点
+    hufftree tree = new_huffnode(0);
+
+    // 遍历编码表
     for (size_t i = 0; i < size; i++){
         // pair<utf8,huffcode>
         pair p = *(pair*)sqlist_at(code_t, i);
-        // 取出字节
+
+        // 取出字符
         utf8 word = *(utf8*)p->first;
-        // 取出编码 - 这里需要正确处理huffcode
-        // huffcode code = (huffcode)p->second;
-        // 创建新节点插入到树中 - 暂时简单处理
-        (void)word; // 消除未使用变量警告
-        // TODO: 实现正确的树插入逻辑
-        // hufftree_insert(tree, new_node);
+
+        // 取出编码 - p->second 指向 huffcode 结构体
+        huffcode code = (huffcode)p->second;
+
+        // 插入到树中
+        hufftree_insert_by_code(tree, word, code);
     }
+
     return tree;
 }
 
@@ -352,24 +404,15 @@ hufftree huffman_build(huffman self){
     // 频率表存在
     if(self->_freq_t!=NULL){
         // 从频率表构建树来统计字长
-        printf("DEBUG: 准备从频率表构建树\n");
         hufftree tree_t=create_tree_from_freq(self->_freq_t);
-        printf("DEBUG: create_tree_from_freq 返回成功\n");
         if(tree_t==NULL){
-            // 异常报错
-            printf("DEBUG: tree_t 为空，返回NULL\n");
             return NULL;
         }
-        printf("DEBUG: tree_t 不为空，准备创建字长表\n");
         // 从临时树构建字长表
         sqlist l_table=create_length_from_tree(tree_t);
-        printf("DEBUG: create_length_from_tree 返回成功\n");
         if(l_table==NULL){
-            // 异常报错
-            printf("DEBUG: l_table 为空，返回NULL\n");
             return NULL;
         }
-        printf("DEBUG: l_table 不为空，继续处理\n");
         self->_leng_t = l_table;
         // 从字长表构建编码表
         self->_code_t = create_canonical_from_length(l_table);
@@ -406,6 +449,11 @@ sqlist huffman_table(huffman self, Table type){
         break;
     }
     return table;
+}
+
+// 从编码表构建哈夫曼树（公开接口）
+hufftree hufftree_from_code_table(sqlist code_table) {
+    return create_tree_from_canonical(code_table);
 }
 
 Exception free_huffman(huffman self) {
