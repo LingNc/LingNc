@@ -302,7 +302,14 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
         for (size_t i = 0; i < bytes_read; ) {
             utf8 ch;
             int utf8_bytes = read_utf8(&ch, read_buffer, i, bytes_read);
-            if (utf8_bytes <= 0) {
+
+            if (utf8_bytes < 0) {
+                // UTF-8字符跨越缓冲区边界
+                // 将文件指针回退到当前位置，重新以更大缓冲区读取
+                long current_pos = ftell(self->_indata);
+                fseek(self->_indata, current_pos - bytes_read + i, SEEK_SET);
+                break;  // 退出当前缓冲区处理，重新读取
+            } else if (utf8_bytes == 0) {
                 i++;
                 continue;
             }
@@ -376,8 +383,12 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
 
     // 写入剩余的缓冲区
     if (buffer_pos > 0 || bit_pos > 0) {
-        if (bit_pos > 0) buffer_pos++;
-        fwrite(write_buffer, 1, buffer_pos, self->_outdata);
+        // 如果有未满8位的数据，需要包含当前字节
+        size_t bytes_to_write = buffer_pos;
+        if (bit_pos > 0) {
+            bytes_to_write = buffer_pos + 1;
+        }
+        fwrite(write_buffer, 1, bytes_to_write, self->_outdata);
     }
 
     // 写入总位数
