@@ -53,7 +53,9 @@ any free_hufftree(hufftree self){
 // 小顶堆 频率
 // any = huffnode*
 static bool min_heap(any a,any b){
-    return cast(huffnode,a)->freq < cast(huffnode,b)->freq;
+    huffnode node_a = *(huffnode*)a;
+    huffnode node_b = *(huffnode*)b;
+    return node_a->freq < node_b->freq;
 }
 
 // 从频率表构建树
@@ -212,7 +214,8 @@ static int length_cmp_wrapper(c_any a, c_any b) {
 
 // 从字长表构建范式哈夫曼编码表
 sqlist create_canonical_from_length(sqlist leng_t){
-    if (leng_t == NULL) return NULL;    printf("DEBUG: 开始创建范式霍夫曼编码表\n");
+    if (leng_t == NULL) return NULL;
+    // printf("DEBUG: 开始创建范式霍夫曼编码表\n");
 
     // 计算范式哈夫曼编码表
     size_t l_size=sqlist_size(leng_t);
@@ -244,8 +247,8 @@ sqlist create_canonical_from_length(sqlist leng_t){
     // 从第一个对 获取起始数据
     pair p = *(pair*)sqlist_at(leng_t,0);
     size_t first_len = *(size_t*)p->second;
-    printf("DEBUG: 第一个字符 %lu, 长度 %zu, 编码值 %lu\n",
-           *(utf8*)p->first, first_len, code_value);
+    // printf("DEBUG: 第一个字符 %lu, 长度 %zu, 编码值 %lu\n",
+    //        *(utf8*)p->first, first_len, code_value);
 
     // 创建第一个编码条目
     HuffCode first_code;
@@ -268,17 +271,17 @@ sqlist create_canonical_from_length(sqlist leng_t){
         // 增加编码值
         code_value++;
         size_t new_len = *(size_t*)p->second;
-        printf("DEBUG: 处理字符 %lu, 新长度 %zu, 旧长度 %zu, 增加后编码值 %lu\n",
-               *(utf8*)p->first, new_len, last_len, code_value);
+        // printf("DEBUG: 处理字符 %lu, 新长度 %zu, 旧长度 %zu, 增加后编码值 %lu\n",
+        //        *(utf8*)p->first, new_len, last_len, code_value);
 
         // 如果长度增加，左移差值位
         if(new_len > last_len){
             code_value <<= (new_len - last_len);
-            printf("DEBUG: 左移 %zu 位后编码值 %lu\n", new_len - last_len, code_value);
+            // printf("DEBUG: 左移 %zu 位后编码值 %lu\n", new_len - last_len, code_value);
             last_len = new_len;
         }
 
-        printf("DEBUG: 最终编码值 %lu, 长度 %zu\n", code_value, new_len);
+        // printf("DEBUG: 最终编码值 %lu, 长度 %zu\n", code_value, new_len);
 
         // 创建新的HuffCode
         HuffCode current_code;

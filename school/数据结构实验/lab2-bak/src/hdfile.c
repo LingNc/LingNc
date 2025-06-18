@@ -101,22 +101,22 @@ sqlist hdfile_count_frequency(hdfile self) {
     // 创建频率表
     sqlist freq_table = new_sqlist(pair_create_inters());
     if (freq_table == NULL) {
-        printf("DEBUG: 创建频率表失败\n");
+        // printf("DEBUG: 创建频率表失败\n");
         return NULL;
     }
 
-    printf("DEBUG: 创建频率表成功\n");
+    // printf("DEBUG: 创建频率表成功\n");
 
     // 读取文件并统计频率
     rewind(self->_indata);
 
-    printf("DEBUG: 开始读取文件\n");
+    // printf("DEBUG: 开始读取文件\n");
     // 读取整个文件到缓冲区
     while (!feof(self->_indata)) {
         size_t bytes_read = fread(self->buffer, 1, self->size, self->_indata);
         if (bytes_read == 0) break;
 
-        printf("DEBUG: 读取了 %zu 字节\n", bytes_read);
+        // printf("DEBUG: 读取了 %zu 字节\n", bytes_read);
 
         // 处理每个UTF8字符 - 使用正确的UTF8解析
         for (size_t i = 0; i < bytes_read; ) {
@@ -128,9 +128,9 @@ sqlist hdfile_count_frequency(hdfile self) {
                 continue;
             }
 
-            if (i < 50) printf("DEBUG: 处理UTF8字符 %lu (占%d字节)\n", ch, utf8_bytes);
+            // if (i < 50) printf("DEBUG: 处理UTF8字符 %lu (占%d字节)\n", ch, utf8_bytes);
 
-            // 在频率表中查找字符
+            // 在频率表中查找字符（简化版本，不按顺序插入）
             bool found = false;
             for (size_t j = 0; j < sqlist_size(freq_table); j++) {
                 pair p = *(pair*)sqlist_at(freq_table, j);
@@ -142,26 +142,15 @@ sqlist hdfile_count_frequency(hdfile self) {
                     (*freq_ptr)++;
                     found = true;
                     break;
-                } else if (existing_ch > ch) {
-                    // 找到插入位置，插入新字符
-                    size_t freq = 1;
-                    pair new_p = new_pair(&ch, &freq, pair_inters);
-                    if (new_p == NULL) {
-                        printf("DEBUG: new_pair 失败\n");
-                        return NULL;
-                    }
-                    sqlist_insert(freq_table, j, &new_p);
-                    found = true;
-                    break;
                 }
             }
 
             if (!found) {
-                // 字符不存在且应该插入到末尾
+                // 字符不存在，直接添加到末尾
                 size_t freq = 1;
                 pair new_p = new_pair(&ch, &freq, pair_inters);
                 if (new_p == NULL) {
-                    printf("DEBUG: new_pair 失败\n");
+                    // printf("DEBUG: new_pair 失败\n");
                     return NULL;
                 }
                 sqlist_push_back(freq_table, &new_p);
@@ -171,7 +160,38 @@ sqlist hdfile_count_frequency(hdfile self) {
         }
     }
 
-    printf("DEBUG: 统计完成，总字符种类: %zu\n", sqlist_size(freq_table));
+    // 按频率降序排序 - 使用简单的选择排序
+    size_t table_size = sqlist_size(freq_table);
+    for (size_t i = 0; i < table_size - 1; i++) {
+        size_t max_idx = i;
+        pair p_max = *(pair*)sqlist_at(freq_table, i);
+        size_t max_freq = visitp_cast(size_t, p_max->second);
+
+        // 找到最大频率的位置
+        for (size_t j = i + 1; j < table_size; j++) {
+            pair p_j = *(pair*)sqlist_at(freq_table, j);
+            size_t freq_j = visitp_cast(size_t, p_j->second);
+            if (freq_j > max_freq) {
+                max_freq = freq_j;
+                max_idx = j;
+            }
+        }
+
+        // 交换位置i和max_idx的元素
+        if (max_idx != i) {
+            pair p_i = *(pair*)sqlist_at(freq_table, i);
+            pair p_max_new = *(pair*)sqlist_at(freq_table, max_idx);
+
+            // 临时保存
+            pair temp = p_i;
+
+            // 交换
+            sqlist_set(freq_table, i, &p_max_new);
+            sqlist_set(freq_table, max_idx, &temp);
+        }
+    }
+
+    // printf("DEBUG: 统计完成，总字符种类: %zu\n", sqlist_size(freq_table));
     return freq_table;
 }
 
@@ -289,7 +309,7 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
 
             // 在编码表中使用二分查找字符
             huffcode code = NULL;
-            printf("DEBUG: 在编码表中查找字符 %lu\n", ch);
+            // printf("DEBUG: 在编码表中查找字符 %lu\n", ch);
 
             // 先尝试线性查找，看看字符是否在表中
             bool found_linear = false;
@@ -299,31 +319,31 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
                 if (table_ch == ch) {
                     code = (huffcode)p->second;
                     found_linear = true;
-                    printf("DEBUG: 线性查找找到字符 %lu\n", ch);
+                    // printf("DEBUG: 线性查找找到字符 %lu\n", ch);
                     break;
                 }
             }
 
             if (!found_linear) {
-                printf("DEBUG: 线性查找未找到字符 %lu\n", ch);
+                // printf("DEBUG: 线性查找未找到字符 %lu\n", ch);
                 // 打印编码表中的所有字符
-                printf("DEBUG: 编码表包含的字符：");
+                // printf("DEBUG: 编码表包含的字符：");
                 for (size_t j = 0; j < sqlist_size(code_table); j++) {
                     pair p = *(pair*)sqlist_at(code_table, j);
                     utf8 table_ch = visitp_cast(utf8, p->first);
-                    printf(" %lu", table_ch);
+                    // printf(" %lu", table_ch);
                 }
-                printf("\n");
+                // printf("\n");
             }
 
             if (code != NULL) {
-                printf("DEBUG: 编码字符 %lu, 编码长度: %u, 编码值: %lu\n",
-                       ch, code->_size, code->_code);
+                // printf("DEBUG: 编码字符 %lu, 编码长度: %u, 编码值: %lu\n",
+                //        ch, code->_size, code->_code);
 
                 // 写入编码位
                 for (Byte bit = 0; bit < code->_size; bit++) {
                     bool bit_value = huffcode_get(code, bit);
-                    printf("DEBUG: 写入位 %u: %d\n", bit, bit_value ? 1 : 0);
+                    // printf("DEBUG: 写入位 %u: %d\n", bit, bit_value ? 1 : 0);
 
                     if (bit_value) {
                         // 写入1
@@ -345,9 +365,9 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
                         }
                     }
                 }
-                printf("DEBUG: 字符编码完成，当前总位数: %zu\n", total_bits);
+                // printf("DEBUG: 字符编码完成，当前总位数: %zu\n", total_bits);
             } else {
-                printf("DEBUG: 警告 - 字符 %lu 在编码表中未找到\n", ch);
+                // printf("DEBUG: 警告 - 字符 %lu 在编码表中未找到\n", ch);
             }
 
             i += utf8_bytes;
@@ -376,27 +396,27 @@ Exception hdfile_decode(hdfile self, hufftree tree) {
         return new_exception(ERROR, "参数错误");
     }
 
-    printf("DEBUG: 开始解码\n");
+    // printf("DEBUG: 开始解码\n");
 
     // 如果没有提供树，从字长表重建
     bool need_free_tree = false;
     if (tree == NULL) {
-        printf("DEBUG: 没有提供哈夫曼树，从文件中重建\n");
+        // printf("DEBUG: 没有提供哈夫曼树，从文件中重建\n");
 
         // 读取字长表
         rewind(self->_indata);
         sqlist length_table = hdfile_read_length_table(self);
         if (length_table == NULL) {
-            printf("DEBUG: 读取字长表失败\n");
+            // printf("DEBUG: 读取字长表失败\n");
             return new_exception(ERROR, "无法读取字长表");
         }
 
-        printf("DEBUG: 字长表读取成功，开始重建哈夫曼树\n");
+        // printf("DEBUG: 字长表读取成功，开始重建哈夫曼树\n");
 
         // 从字长表创建编码表
         sqlist code_table = create_canonical_from_length(length_table);
         if (code_table == NULL) {
-            printf("DEBUG: 创建编码表失败\n");
+            // printf("DEBUG: 创建编码表失败\n");
             free_sqlist(length_table);
             return new_exception(ERROR, "无法创建编码表");
         }
@@ -404,7 +424,7 @@ Exception hdfile_decode(hdfile self, hufftree tree) {
         // 从编码表构建哈夫曼树
         tree = hufftree_from_code_table(code_table);
         if (tree == NULL) {
-            printf("DEBUG: 构建哈夫曼树失败\n");
+            // printf("DEBUG: 构建哈夫曼树失败\n");
             free_sqlist(length_table);
             free_sqlist(code_table);
             return new_exception(ERROR, "无法构建哈夫曼树");
@@ -414,56 +434,56 @@ Exception hdfile_decode(hdfile self, hufftree tree) {
         free_sqlist(length_table);
         free_sqlist(code_table);
 
-        printf("DEBUG: 哈夫曼树重建成功\n");
+        // printf("DEBUG: 哈夫曼树重建成功\n");
     } else {
-        printf("DEBUG: 使用提供的哈夫曼树\n");
+        // printf("DEBUG: 使用提供的哈夫曼树\n");
         // 跳过字长表
         rewind(self->_indata);
         sqlist temp_table = hdfile_read_length_table(self);
         if (temp_table) {
-            printf("DEBUG: 字长表读取成功，释放临时表\n");
+            // printf("DEBUG: 字长表读取成功，释放临时表\n");
             free_sqlist(temp_table);
         } else {
-            printf("DEBUG: 字长表读取失败\n");
+            // printf("DEBUG: 字长表读取失败\n");
             return new_exception(ERROR, "无法读取字长表");
         }
     }
 
-    printf("DEBUG: 检查树指针: %p\n", (void*)tree);
+    // printf("DEBUG: 检查树指针: %p\n", (void*)tree);
 
     // 验证树结构
     if (tree->left == NULL && tree->right == NULL) {
-        printf("DEBUG: 根节点是叶子节点，字符: %lu\n", tree->word);
+        // printf("DEBUG: 根节点是叶子节点，字符: %lu\n", tree->word);
     } else {
-        printf("DEBUG: 根节点有子节点，左子树: %p，右子树: %p\n", (void*)tree->left, (void*)tree->right);
+        // printf("DEBUG: 根节点有子节点，左子树: %p，右子树: %p\n", (void*)tree->left, (void*)tree->right);
     }
 
     // 读取总位数
-    printf("DEBUG: 准备读取总位数\n");
+    // printf("DEBUG: 准备读取总位数\n");
     fseek(self->_indata, -sizeof(size_t), SEEK_END);
     size_t total_bits;
     if (fread(&total_bits, sizeof(size_t), 1, self->_indata) != 1) {
-        printf("DEBUG: 读取总位数失败\n");
+        // printf("DEBUG: 读取总位数失败\n");
         if (need_free_tree) free_hufftree(tree);
         return new_exception(ERROR, "无法读取总位数");
     }
 
-    printf("DEBUG: 读取到总位数: %zu\n", total_bits);
+    // printf("DEBUG: 读取到总位数: %zu\n", total_bits);
 
     // 回到编码数据开始位置（跳过字长表）
-    printf("DEBUG: 准备读取字长表\n");
+    // printf("DEBUG: 准备读取字长表\n");
     rewind(self->_indata);
     sqlist temp_table = hdfile_read_length_table(self);
     if (temp_table) {
-        printf("DEBUG: 字长表读取成功，释放临时表\n");
+        // printf("DEBUG: 字长表读取成功，释放临时表\n");
         free_sqlist(temp_table);
     } else {
-        printf("DEBUG: 字长表读取失败\n");
+        // printf("DEBUG: 字长表读取失败\n");
         if (need_free_tree) free_hufftree(tree);
         return new_exception(ERROR, "无法读取字长表");
     }
 
-    printf("DEBUG: 开始解码位数据\n");
+    // printf("DEBUG: 开始解码位数据\n");
     // 解码
     huffnode current = tree;
     size_t decoded_bits = 0;
