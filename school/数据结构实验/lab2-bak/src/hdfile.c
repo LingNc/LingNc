@@ -6,6 +6,7 @@
 
 // 用于二分查找的比较函数
 // 注意：bsearchf调用check(key, p[mid])，所以第一个参数是key，第二个是item
+static bool utf8_check(any key, any item) __attribute__((unused));
 static bool utf8_check(any key, any item) {
     utf8 target = *(utf8*)key;
     pair p = *(pair*)item;
@@ -337,7 +338,7 @@ Exception hdfile_encode(hdfile self, sqlist code_table) {
                 // printf("DEBUG: 编码表包含的字符：");
                 for (size_t j = 0; j < sqlist_size(code_table); j++) {
                     pair p = *(pair*)sqlist_at(code_table, j);
-                    utf8 table_ch = visitp_cast(utf8, p->first);
+                    utf8 table_ch __attribute__((unused)) = visitp_cast(utf8, p->first);
                     // printf(" %lu", table_ch);
                 }
                 // printf("\n");

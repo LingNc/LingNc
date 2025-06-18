@@ -35,41 +35,6 @@ build/main.o : main.c
 tests: $(Test_bin)
 	@echo "构建测试成功"
 
-# 调试频率统计程序
-debug_freq: build/tests/debug_freq
-	@echo "构建debug_freq成功"
-	@echo "运行: ./build/tests/debug_freq"
-
-# 分析大文件程序
-analyze_large: build/tests/analyze_large
-	@echo "构建analyze_large成功"
-	@echo "运行: ./build/tests/analyze_large"
-
-# 效率分析程序
-efficiency_analysis: build/tests/efficiency_analysis
-	@echo "构建efficiency_analysis成功"
-	@echo "运行: ./build/tests/efficiency_analysis"
-
-# 简单分析程序
-simple_analysis: build/tests/simple_analysis
-	@echo "构建simple_analysis成功"
-	@echo "运行: ./build/tests/simple_analysis"
-
-# 分析大文件total.txt
-analyze_total: build/tests/analyze_total
-	@echo "构建analyze_total成功"
-	@echo "运行: ./build/tests/analyze_total"
-
-# 调试字长表程序
-debug_length_table: build/tests/debug_length_table
-	@echo "构建debug_length_table成功"
-	@echo "运行: ./build/tests/debug_length_table"
-
-# 简化分析程序
-simple_analysis: build/tests/simple_analysis
-	@echo "构建simple_analysis成功"
-	@echo "运行: ./build/tests/simple_analysis"
-
 build/tests/%: build/tests/%.o $(Obj_files)
 	@echo "正在链接测试程序 $@"
 	$(C) $(Cflags) $(Include) -o $@ $^ -lm

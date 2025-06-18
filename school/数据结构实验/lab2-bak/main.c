@@ -7,21 +7,56 @@
 #include "tools.h"
 #include "pair.h"
 
+// 将UTF-8码点转换为UTF-8字节序列
+void utf8_to_bytes(utf8 ch, char *utf8_str) {
+    if (ch <= 0x7F) {
+        // 单字节字符 (ASCII)
+        utf8_str[0] = (char)ch;
+        utf8_str[1] = '\0';
+    } else if (ch <= 0x7FF) {
+        // 双字节字符
+        utf8_str[0] = (char)(0xC0 | (ch >> 6));
+        utf8_str[1] = (char)(0x80 | (ch & 0x3F));
+        utf8_str[2] = '\0';
+    } else if (ch <= 0xFFFF) {
+        // 三字节字符
+        utf8_str[0] = (char)(0xE0 | (ch >> 12));
+        utf8_str[1] = (char)(0x80 | ((ch >> 6) & 0x3F));
+        utf8_str[2] = (char)(0x80 | (ch & 0x3F));
+        utf8_str[3] = '\0';
+    } else {
+        // 四字节字符
+        utf8_str[0] = (char)(0xF0 | (ch >> 18));
+        utf8_str[1] = (char)(0x80 | ((ch >> 12) & 0x3F));
+        utf8_str[2] = (char)(0x80 | ((ch >> 6) & 0x3F));
+        utf8_str[3] = (char)(0x80 | (ch & 0x3F));
+        utf8_str[4] = '\0';
+    }
+}
+
 // 显示UTF8字符信息
 void display_utf8_info(utf8 ch, huffcode code) {
     printf("U+%04lX\t", ch);
 
-    // 显示字符本身（如果可打印）
+    // 显示字符本身
     if (ch >= 32 && ch <= 126) {
-        printf("%c\t", (char)ch);
+        // ASCII可打印字符
+        printf("%c\t\t", (char)ch);
     } else if (ch == 10) {
-        printf("\\n\t");
+        printf("\\n\t\t");
     } else if (ch == 13) {
-        printf("\\r\t");
+        printf("\\r\t\t");
     } else if (ch == 9) {
-        printf("\\t\t");
+        printf("\\t\t\t");
+    } else if (ch == 32) {
+        printf("空格\t\t");
+    } else if (ch < 32) {
+        printf("控制字符\t");
     } else {
-        printf("?\t");
+        // UTF-8字符，转换并输出
+        char utf8_str[5];
+        utf8_to_bytes(ch, utf8_str);
+        printf("%s\t\t", utf8_str);
     }
 
     // 显示编码
@@ -113,23 +148,9 @@ void output_frequency_table(sqlist freq_table, const char *filename) {
         } else if (ch < 32) {
             fprintf(fp, "控制字符\t");
         } else {
-            // UTF-8字符，尝试输出
-            char utf8_str[5] = {0};
-            if (ch <= 0x7F) {
-                utf8_str[0] = (char)ch;
-            } else if (ch <= 0x7FF) {
-                utf8_str[0] = (char)(0xC0 | (ch >> 6));
-                utf8_str[1] = (char)(0x80 | (ch & 0x3F));
-            } else if (ch <= 0xFFFF) {
-                utf8_str[0] = (char)(0xE0 | (ch >> 12));
-                utf8_str[1] = (char)(0x80 | ((ch >> 6) & 0x3F));
-                utf8_str[2] = (char)(0x80 | (ch & 0x3F));
-            } else {
-                utf8_str[0] = (char)(0xF0 | (ch >> 18));
-                utf8_str[1] = (char)(0x80 | ((ch >> 12) & 0x3F));
-                utf8_str[2] = (char)(0x80 | ((ch >> 6) & 0x3F));
-                utf8_str[3] = (char)(0x80 | (ch & 0x3F));
-            }
+            // UTF-8字符，使用统一函数转换输出
+            char utf8_str[5];
+            utf8_to_bytes(ch, utf8_str);
             fprintf(fp, "%s\t\t", utf8_str);
         }
 
@@ -180,23 +201,9 @@ void output_encoding_table(sqlist code_table, const char *filename) {
         } else if (ch < 32) {
             fprintf(fp, "控制字符\t");
         } else {
-            // UTF-8字符，尝试输出
-            char utf8_str[5] = {0};
-            if (ch <= 0x7F) {
-                utf8_str[0] = (char)ch;
-            } else if (ch <= 0x7FF) {
-                utf8_str[0] = (char)(0xC0 | (ch >> 6));
-                utf8_str[1] = (char)(0x80 | (ch & 0x3F));
-            } else if (ch <= 0xFFFF) {
-                utf8_str[0] = (char)(0xE0 | (ch >> 12));
-                utf8_str[1] = (char)(0x80 | ((ch >> 6) & 0x3F));
-                utf8_str[2] = (char)(0x80 | (ch & 0x3F));
-            } else {
-                utf8_str[0] = (char)(0xF0 | (ch >> 18));
-                utf8_str[1] = (char)(0x80 | ((ch >> 12) & 0x3F));
-                utf8_str[2] = (char)(0x80 | ((ch >> 6) & 0x3F));
-                utf8_str[3] = (char)(0x80 | (ch & 0x3F));
-            }
+            // UTF-8字符，使用统一函数转换输出
+            char utf8_str[5];
+            utf8_to_bytes(ch, utf8_str);
             fprintf(fp, "%s\t\t", utf8_str);
         }
 
