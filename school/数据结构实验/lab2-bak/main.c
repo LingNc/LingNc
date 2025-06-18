@@ -243,7 +243,7 @@ void output_encoding_table(sqlist code_table, const char *filename) {
 }
 
 int main(int argc, char *argv[]) {
-    printf("=== 基于现有库的赫夫曼编码实验 ===\n\n");
+    printf("=== 赫夫曼编码实验 ===\n\n");
 
     // 检查命令行参数
     if (argc < 3) {
