@@ -69,6 +69,172 @@ int compare_files(const char *file1, const char *file2) {
     return (ch1 == ch2);
 }
 
+// 输出频率表到文件
+void output_frequency_table(sqlist freq_table, const char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        printf("警告：无法创建频率表文件 %s\n", filename);
+        return;
+    }
+
+    fprintf(fp, "字符频率统计表\n");
+    fprintf(fp, "================\n");
+    fprintf(fp, "总字符数: %zu\n\n", sqlist_size(freq_table));
+    fprintf(fp, "Unicode码\t字符\t\t频率\t\t百分比\n");
+    fprintf(fp, "--------\t----\t\t----\t\t------\n");
+
+    // 计算总频率
+    size_t total_freq = 0;
+    for (size_t i = 0; i < sqlist_size(freq_table); i++) {
+        pair p = *(pair*)sqlist_at(freq_table, i);
+        size_t freq = *(size_t*)p->second;
+        total_freq += freq;
+    }
+
+    for (size_t i = 0; i < sqlist_size(freq_table); i++) {
+        pair p = *(pair*)sqlist_at(freq_table, i);
+        utf8 ch = visitp_cast(utf8, p->first);
+        size_t freq = *(size_t*)p->second;
+        double percentage = (double)freq / total_freq * 100.0;
+
+        fprintf(fp, "U+%04lX\t\t", ch);
+
+        // 显示字符本身（如果可打印）
+        if (ch >= 32 && ch <= 126) {
+            fprintf(fp, "%c\t\t", (char)ch);
+        } else if (ch == 10) {
+            fprintf(fp, "\\n\t\t");
+        } else if (ch == 13) {
+            fprintf(fp, "\\r\t\t");
+        } else if (ch == 9) {
+            fprintf(fp, "\\t\t\t");
+        } else if (ch == 32) {
+            fprintf(fp, "空格\t\t");
+        } else if (ch < 32) {
+            fprintf(fp, "控制字符\t");
+        } else {
+            // UTF-8字符，尝试输出
+            char utf8_str[5] = {0};
+            if (ch <= 0x7F) {
+                utf8_str[0] = (char)ch;
+            } else if (ch <= 0x7FF) {
+                utf8_str[0] = (char)(0xC0 | (ch >> 6));
+                utf8_str[1] = (char)(0x80 | (ch & 0x3F));
+            } else if (ch <= 0xFFFF) {
+                utf8_str[0] = (char)(0xE0 | (ch >> 12));
+                utf8_str[1] = (char)(0x80 | ((ch >> 6) & 0x3F));
+                utf8_str[2] = (char)(0x80 | (ch & 0x3F));
+            } else {
+                utf8_str[0] = (char)(0xF0 | (ch >> 18));
+                utf8_str[1] = (char)(0x80 | ((ch >> 12) & 0x3F));
+                utf8_str[2] = (char)(0x80 | ((ch >> 6) & 0x3F));
+                utf8_str[3] = (char)(0x80 | (ch & 0x3F));
+            }
+            fprintf(fp, "%s\t\t", utf8_str);
+        }
+
+        fprintf(fp, "%zu\t\t%.3f%%\n", freq, percentage);
+    }
+
+    fprintf(fp, "\n总计:\t\t\t%zu\t\t100.000%%\n", total_freq);
+    fclose(fp);
+    printf("✓ 频率表已保存到: %s\n", filename);
+}
+
+// 输出编码表到文件
+void output_encoding_table(sqlist code_table, const char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        printf("警告：无法创建编码表文件 %s\n", filename);
+        return;
+    }
+
+    fprintf(fp, "哈夫曼编码表\n");
+    fprintf(fp, "============\n");
+    fprintf(fp, "编码字符数: %zu\n\n", sqlist_size(code_table));
+    fprintf(fp, "Unicode码\t字符\t\t编码\t\t\t长度\n");
+    fprintf(fp, "--------\t----\t\t----\t\t\t----\n");
+
+    // 统计编码长度分布
+    size_t length_dist[65] = {0}; // 最多64位编码
+    size_t total_bits = 0;
+
+    for (size_t i = 0; i < sqlist_size(code_table); i++) {
+        pair p = *(pair*)sqlist_at(code_table, i);
+        utf8 ch = visitp_cast(utf8, p->first);
+        huffcode code = (huffcode)p->second;
+
+        fprintf(fp, "U+%04lX\t\t", ch);
+
+        // 显示字符本身（如果可打印）
+        if (ch >= 32 && ch <= 126) {
+            fprintf(fp, "%c\t\t", (char)ch);
+        } else if (ch == 10) {
+            fprintf(fp, "\\n\t\t");
+        } else if (ch == 13) {
+            fprintf(fp, "\\r\t\t");
+        } else if (ch == 9) {
+            fprintf(fp, "\\t\t\t");
+        } else if (ch == 32) {
+            fprintf(fp, "空格\t\t");
+        } else if (ch < 32) {
+            fprintf(fp, "控制字符\t");
+        } else {
+            // UTF-8字符，尝试输出
+            char utf8_str[5] = {0};
+            if (ch <= 0x7F) {
+                utf8_str[0] = (char)ch;
+            } else if (ch <= 0x7FF) {
+                utf8_str[0] = (char)(0xC0 | (ch >> 6));
+                utf8_str[1] = (char)(0x80 | (ch & 0x3F));
+            } else if (ch <= 0xFFFF) {
+                utf8_str[0] = (char)(0xE0 | (ch >> 12));
+                utf8_str[1] = (char)(0x80 | ((ch >> 6) & 0x3F));
+                utf8_str[2] = (char)(0x80 | (ch & 0x3F));
+            } else {
+                utf8_str[0] = (char)(0xF0 | (ch >> 18));
+                utf8_str[1] = (char)(0x80 | ((ch >> 12) & 0x3F));
+                utf8_str[2] = (char)(0x80 | ((ch >> 6) & 0x3F));
+                utf8_str[3] = (char)(0x80 | (ch & 0x3F));
+            }
+            fprintf(fp, "%s\t\t", utf8_str);
+        }
+
+        // 显示编码
+        for (Byte j = 0; j < code->_size; j++) {
+            Byte bit_pos = code->_size - 1 - j;
+            bool bit = (code->_code >> bit_pos) & 1;
+            fprintf(fp, "%d", bit ? 1 : 0);
+        }
+
+        // 填充空格使对齐
+        for (Byte j = code->_size; j < 16; j++) {
+            fprintf(fp, " ");
+        }
+
+        fprintf(fp, "\t%d\n", code->_size);
+
+        // 统计长度分布
+        length_dist[code->_size]++;
+        total_bits += code->_size;
+    }
+
+    // 输出编码长度统计
+    fprintf(fp, "\n编码长度分布:\n");
+    fprintf(fp, "长度\t字符数\n");
+    fprintf(fp, "----\t------\n");
+    for (int len = 1; len <= 64; len++) {
+        if (length_dist[len] > 0) {
+            fprintf(fp, "%d\t%zu\n", len, length_dist[len]);
+        }
+    }
+
+    fprintf(fp, "\n平均编码长度: %.3f 位\n", (double)total_bits / sqlist_size(code_table));
+
+    fclose(fp);
+    printf("✓ 编码表已保存到: %s\n", filename);
+}
+
 int main(int argc, char *argv[]) {
     printf("=== 基于现有库的赫夫曼编码实验 ===\n\n");
 
@@ -224,6 +390,15 @@ int main(int argc, char *argv[]) {
         if (sqlist_size(code_table) > 20) {
             printf("... (共 %zu 个字符)\n", sqlist_size(code_table));
         }
+
+        // 输出频率表和编码表到文件
+        char freq_table_file[512];
+        char encoding_table_file[512];
+        snprintf(freq_table_file, sizeof(freq_table_file), "%s_frequency_table.txt", input_file);
+        snprintf(encoding_table_file, sizeof(encoding_table_file), "%s_encoding_table.txt", input_file);
+
+        output_frequency_table(freq_table, freq_table_file);
+        output_encoding_table(code_table, encoding_table_file);
 
         // 5. 编码文件
         printf("\n5. 编码文件...\n");
